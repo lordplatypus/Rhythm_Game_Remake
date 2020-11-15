@@ -1,0 +1,5 @@
+set(SOURCES
+${SOURCES}
+${Game_SOURCE_DIR}/Map/Map.cpp
+PARENT_SCOPE
+)

@@ -11,7 +11,7 @@ public:
     //Add a gameobject to the list of gameobjects
     void Add(GameObject* gameObject);
     //Update all gameobjects in the list
-    void Update(float delta_time);
+    void Update(float delta_time, float beat_time);
     //Draw all gameobjects in the list
     void Draw() const;
     //Checks ONLY collision between gameobjects

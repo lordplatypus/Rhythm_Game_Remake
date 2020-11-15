@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include "GameObjectManager.h"
 
 GameObjectManager::GameObjectManager()
@@ -14,11 +13,11 @@ void GameObjectManager::Add(GameObject* gameObject)
     gameObjects_.push_back(gameObject);
 }
 
-void GameObjectManager::Update(float delta_time)
+void GameObjectManager::Update(float delta_time, float beat_time)
 {
     for (auto gameObject : gameObjects_)
     {
-        gameObject->Update(delta_time);
+        gameObject->Update(delta_time, beat_time);
     }
 }
 

@@ -1,0 +1,5 @@
+set(SOURCES
+${SOURCES}
+${Game_SOURCE_DIR}/BPMScene/BPMScene.cpp
+PARENT_SCOPE
+)

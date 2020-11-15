@@ -1,7 +1,7 @@
 #ifndef GAME_OBJECT_H_
 #define GAME_OBJECT_H_
 #include <SFML/Graphics.hpp>
-#include "Scene.h"
+#include "../Scene/Scene.h"
 
 class Scene;
 
@@ -12,7 +12,7 @@ public:
     virtual ~GameObject();
 
     //Update
-    virtual void Update(float delta_time);
+    virtual void Update(float delta_time, float beat_time);
     //Draw
     virtual void Draw();
 

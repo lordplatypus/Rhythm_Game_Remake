@@ -1,8 +1,8 @@
 #ifndef GAME_H_
 #define GAME_H_
 #include <unordered_map>
-#include "Scene.h"
-#include "LoadAssets.h"
+#include "../Scene/Scene.h"
+#include "../Assets/LoadAssets.h"
 #include "Camera.h"
 
 class Game
@@ -11,7 +11,7 @@ public:
     Game(Camera* camera);
     ~Game();
     //Update Game
-    void Update(float delta_time);
+    void Update(float delta_time, float beat_time);
     //Draw Game
     void Draw();
     //Add a Scene to the scene map
@@ -23,12 +23,6 @@ public:
     Camera* GetCamera();
     //Called on program shutdown, delete scenes here
     void Clear();
-
-    //For MiniGames
-    //need to save win status so that the minigame scene has access to the info
-    void SetWin(const bool win);
-    //but this must be reset everytime manually before starting the next minigame
-    bool GetWin() const;
 
     Game(const Game& other) = delete;
     Game& operator = (const Game& other) = delete;

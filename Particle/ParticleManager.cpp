@@ -1,11 +1,11 @@
-#include <SFML/Graphics.hpp>
-#include "LP.h"
 #include "ParticleManager.h"
-#include "ID.h"
-#include "Math.h"
+#include "../Engine/LP.h"
+#include "../Engine/Math.h"
+#include "../Assets/ID.h"
 
 ParticleManager::ParticleManager()
-{}
+{
+}
 
 ParticleManager::~ParticleManager()
 {

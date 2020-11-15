@@ -1,7 +1,7 @@
 #ifndef SCENE_H_
 #define SCENE_H_
 #include <string>
-#include "GameObject.h"
+#include "../Gameobjects/GameObject.h"
 
 class GameObject;
 
@@ -12,7 +12,7 @@ public:
     //This is called everytime this scene is loaded
     virtual void Init() = 0;
     //Scene Update
-    virtual void Update(float delta_time) = 0;
+    virtual void Update(float delta_time, float beat_time) = 0;
     //Scene Draw
     virtual void Draw() = 0;
     //Add gameobject to the list of gameobjects
@@ -21,8 +21,6 @@ public:
     virtual GameObject* FindGameObject(const std::string& string, const bool byTag = true, const bool byID = false) = 0;
     //Move a gameobject to a new position within the list of GameObjects
     virtual void ChangeGameObjectOrder(const std::string& name, const std::string& newPos) = 0;
-    //Call "SetWin()" in the "Game" class, also trigger win screen/animation/transition/etc here
-    virtual void OnWin() = 0;
     //Change to a different scene
     virtual void ChangeScene(const std::string& sceneName) = 0;
     //This is called when switching to a different scene, delete unneeded pointers and sprites here

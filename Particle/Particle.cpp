@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include "LP.h"
 #include "Particle.h"
-#include "Math.h"
+#include "../Engine/LP.h"
+#include "../Engine/Math.h"
 
 Particle::Particle(int imageHandle_, float x_, float y_, float vx_, float vy_, float damp_, float lifespan_, float forceX_, float forceY_,
     float angle_, float angularVelocity_, float startScale_, float endScale_, int red_, int green_, int blue_, int startAlpha_, int endAlpha_) :

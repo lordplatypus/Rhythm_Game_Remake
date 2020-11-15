@@ -1,18 +1,22 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Game.h"
-#include "SceneNull.h"
-#include "SceneGame.h"
+#include "MP.h"
+#include "../Scene/SceneNull.h"
+#include "../BPMScene/BPMScene.h"
+#include "../TitleScene/TitleScene.h"
 
 static SceneNull nullScene;
 
 Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
 {
     loadAssets_.Load();
+    MP::ImportBPM();
 
-    AddScene("Game", new SceneGame(this));
+    AddScene("Title", new TitleScene(this));
+    AddScene("BPM", new BPMScene(this));
 
-    scene_ = scenes_["Game"];
+    scene_ = scenes_["Title"];
     scene_->Init();
 }
 
@@ -21,9 +25,9 @@ Game::~Game()
     Clear();
 }
 
-void Game::Update(float delta_time)
+void Game::Update(float delta_time, float beat_time)
 {
-    scene_->Update(delta_time);
+    scene_->Update(delta_time, beat_time);
 }
 
 void Game::Draw()
@@ -63,17 +67,4 @@ void Game::Clear()
         delete pair.second;
     }
     scenes_.clear();
-}
-
-
-//For MiniGames
-
-void Game::SetWin(const bool win)
-{
-    win_ = win;
-}
-
-bool Game::GetWin() const
-{
-    return win_;
 }

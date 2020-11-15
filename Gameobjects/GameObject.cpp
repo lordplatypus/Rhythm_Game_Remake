@@ -1,13 +1,10 @@
-#include <SFML/Graphics.hpp>
 #include "GameObject.h"
-using namespace std;
-using namespace sf;
 
 GameObject::GameObject() {}
 
 GameObject::~GameObject() {}
 
-void GameObject::Update(float delta_time)
+void GameObject::Update(float delta_time, float beat_time)
 {}
 
 void GameObject::Draw()
@@ -126,12 +123,12 @@ void GameObject::Kill()
     isDead_ = true;
 }
 
-Vector2f GameObject::GetPosition() const
+sf::Vector2f GameObject::GetPosition() const
 {
     return position_;
 }
 
-Vector2f GameObject::GetPrevPosition() const
+sf::Vector2f GameObject::GetPrevPosition() const
 {
     return prevPosition_;
 }
@@ -141,12 +138,12 @@ bool GameObject::IsDead() const
     return isDead_;
 }
 
-const string& GameObject::GetTag() const
+const std::string& GameObject::GetTag() const
 {
     return tag_;
 }
 
-const string& GameObject::GetName() const
+const std::string& GameObject::GetName() const
 {
     return name_;
 }

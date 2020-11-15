@@ -1,15 +1,13 @@
 #include "LP.h"
-using namespace std;
-using namespace sf;
 
 int LP::key = 0; //creates keys to use in the below maps
-queue<int> LP::thingsToDraw; //list of ints (keys) used to know what to draw
-unordered_map<int, RectangleShape> LP::rectangleMap; //map of rectangles
-unordered_map<int, CircleShape> LP::circleMap; //map of circles
-unordered_map<int, Texture> LP::textureMap;
-unordered_map<int, Sprite> LP::spriteMap;
-Font LP::font;
-unordered_map<int, Text> LP::textMap;
+std::queue<int> LP::thingsToDraw; //list of ints (keys) used to know what to draw
+std::unordered_map<int, sf::RectangleShape> LP::rectangleMap; //map of rectangles
+std::unordered_map<int, sf::CircleShape> LP::circleMap; //map of circles
+std::unordered_map<int, sf::Texture> LP::textureMap;
+std::unordered_map<int, sf::Sprite> LP::spriteMap;
+sf::Font LP::font;
+std::unordered_map<int, sf::Text> LP::textMap;
 
 LP::LP(){}
 
@@ -20,7 +18,7 @@ int LP::SetCircle(const sf::Vector2f position, const float radius)
     key++;
     circleMap[key].setPosition(position);
     circleMap[key].setRadius(radius);
-    circleMap[key].setFillColor(Color::White);
+    circleMap[key].setFillColor(sf::Color::White);
     return key;
 }
 
@@ -37,7 +35,7 @@ void LP::DrawCircle(const int key, const sf::Vector2f position)
 
 void LP::SetCircleColor(const int key, const int red, const int green, const int blue, const int alpha)
 {
-    circleMap[key].setFillColor(Color(red, green, blue, alpha));
+    circleMap[key].setFillColor(sf::Color(red, green, blue, alpha));
 }
 
 void LP::SetCircleRadius(const int key, const float radius)
@@ -51,8 +49,8 @@ int LP::SetRectangle(const sf::Vector2f position, const float width, const float
 {
     key++;
     rectangleMap[key].setPosition(position);
-    rectangleMap[key].setSize(Vector2f(width, height));
-    rectangleMap[key].setFillColor(Color::White);
+    rectangleMap[key].setSize(sf::Vector2f(width, height));
+    rectangleMap[key].setFillColor(sf::Color::White);
     return key;
 }
 
@@ -69,25 +67,25 @@ void LP::DrawRectangle(const int key, const sf::Vector2f position)
 
 void LP::SetRectangleColor(const int key, const int red, const int green, const int blue, const int alpha)
 {
-    rectangleMap[key].setFillColor(Color(red, green, blue, alpha));
+    rectangleMap[key].setFillColor(sf::Color(red, green, blue, alpha));
 }
 
 void LP::SetRectangleSize(const int key, const float width, const float height)
 {
-    rectangleMap[key].setSize(Vector2f(width, height));
+    rectangleMap[key].setSize(sf::Vector2f(width, height));
 }
 
 //Drawing sprites
 int LP::SetTexture(const std::string& filePath, int width, int height)
 {
     key++;
-    textureMap[key].loadFromFile(filePath, IntRect(0, 0, width, height));
+    textureMap[key].loadFromFile(filePath, sf::IntRect(0, 0, width, height));
     return key;
 }
 
 void LP::SetTexture(const int key, const std::string& filePath, int width, int height)
 {
-    textureMap[key].loadFromFile(filePath, IntRect(0, 0, width, height));
+    textureMap[key].loadFromFile(filePath, sf::IntRect(0, 0, width, height));
 }
 
 int LP::SetSprite(const int textureKey)
@@ -105,26 +103,26 @@ int LP::SetSprite(const int textureKey, const sf::Vector2f position)
     return key;
 }
 
-int LP::SetSprite(const int textureKey, const Vector2f position, const int cellWidth, const int cellHeight, const int cellID)
+int LP::SetSprite(const int textureKey, const sf::Vector2f position, const int cellWidth, const int cellHeight, const int cellID)
 {
     key++;
     spriteMap[key].setTexture(textureMap[textureKey]);
-    Vector2u textureSize = textureMap[textureKey].getSize();
-    spriteMap[key].setTextureRect(IntRect(cellID % (textureSize.x / cellWidth) * cellWidth, cellID / (textureSize.x / cellWidth) * cellWidth, cellWidth, cellHeight));
+    sf::Vector2u textureSize = textureMap[textureKey].getSize();
+    spriteMap[key].setTextureRect(sf::IntRect(cellID % (textureSize.x / cellWidth) * cellWidth, cellID / (textureSize.x / cellWidth) * cellWidth, cellWidth, cellHeight));
     spriteMap[key].setPosition(position);
     return key;
 }
 
 std::vector<int> LP::SetSprite(const int textureKey, const int cellWidth, const int cellHeight, const int numOfColumns, const int numOfRows)
 {
-    vector<int> spriteArray;
+    std::vector<int> spriteArray;
     for (int i = 0; i < numOfRows; i++)
     {
         for (int j = 0; j < numOfColumns; j++)
         {
             key++;
             spriteMap[key].setTexture(textureMap[textureKey]);
-            spriteMap[key].setTextureRect(IntRect(cellWidth * j, cellHeight * i, cellWidth, cellHeight));
+            spriteMap[key].setTextureRect(sf::IntRect(cellWidth * j, cellHeight * i, cellWidth, cellHeight));
             spriteArray.push_back(key);
         }
     }
@@ -144,7 +142,7 @@ void LP::DrawSprite(const int key, sf::Vector2f position)
 
 void LP::SetSpriteColor(const int key, const int red, const int green, const int blue, const int alpha)
 {
-    spriteMap[key].setColor(Color(red, green, blue, alpha));
+    spriteMap[key].setColor(sf::Color(red, green, blue, alpha));
 }
 
 void LP::SetSpritePosition(const int key, const sf::Vector2f position)
@@ -188,12 +186,12 @@ void LP::SetSpriteHorizontalFlip(const int key, const bool flip)
 
 
 //Drawing Text
-void LP::SetFont(const string& filePath)
+void LP::SetFont(const std::string& filePath)
 {
     font.loadFromFile(filePath);
 }
 
-int LP::SetText(const string& text, const Vector2f position, int textSize)
+int LP::SetText(const std::string& text, const sf::Vector2f position, int textSize)
 {
     key++;
     textMap[key].setFont(font);
@@ -227,7 +225,7 @@ void LP::SetTextColor(const int key, const sf::Color color)
 
 void LP::SetTextColor(const int key, const int red, const int green, const int blue, const int alpha)
 {
-    textMap[key].setFillColor(Color(red, green, blue, alpha));
+    textMap[key].setFillColor(sf::Color(red, green, blue, alpha));
 }
 
 void LP::SetTextOrigin(const int key, const sf::Vector2f newOrigin)
@@ -255,7 +253,7 @@ void LP::DrawText(int key)
     thingsToDraw.push(key);
 }
 
-void LP::DrawText(const int key, const string& text)
+void LP::DrawText(const int key, const std::string& text)
 {
     textMap[key].setString(text);
     thingsToDraw.push(key);
@@ -263,7 +261,7 @@ void LP::DrawText(const int key, const string& text)
 
 
 //Draw
-void LP::Draw(RenderWindow *window)
+void LP::Draw(sf::RenderWindow *window)
 {
     if(thingsToDraw.size() > 0)
     {//as long as there are things to draw, run the below code

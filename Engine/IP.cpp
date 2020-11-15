@@ -149,6 +149,34 @@ bool IP::PressD()
     return false;
 }
 
+bool pressedZ_{true};
+bool IP::PressZ()
+{
+    if (!pressedZ_ && sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    {
+        pressedZ_ = true;
+        return true;
+    }
+    
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) pressedZ_ = false;
+
+    return false;
+}
+
+bool pressedX_{true};
+bool IP::PressX()
+{
+    if (!pressedX_ && sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+    {
+        pressedX_ = true;
+        return true;
+    }
+    
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::X)) pressedX_ = false;
+
+    return false;
+}
+
 
 //Mouse
 

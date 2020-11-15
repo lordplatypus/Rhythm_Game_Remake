@@ -1,0 +1,10 @@
+set(SOURCES
+${SOURCES}
+${Game_SOURCE_DIR}/Engine/main.cpp 
+${Game_SOURCE_DIR}/Engine/LP.cpp 
+${Game_SOURCE_DIR}/Engine/Game.cpp
+${Game_SOURCE_DIR}/Engine/MP.cpp 
+${Game_SOURCE_DIR}/Engine/Camera.cpp 
+${Game_SOURCE_DIR}/Engine/IP.cpp
+PARENT_SCOPE
+)
