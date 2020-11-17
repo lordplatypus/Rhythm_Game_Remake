@@ -2,6 +2,11 @@
 #define MAP_H_
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "../Scene/Scene.h"
+#include "../Engine/Camera.h"
+#include "../Managers/PlayerManager.h"
+#include "../Managers/TransitionManager.h"
+#include "../Particle/ParticleManager.h"
 
 class Map
 {
@@ -10,13 +15,22 @@ public:
     virtual ~Map();
     virtual void CreateMap();
     virtual void PlaceObjects();
+    virtual void PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap);
     //virtual void Update();
     virtual void Draw();
-    virtual int GetLocation(float worldX, float worldY);
-    virtual bool IsWall(float worldX, float worldY);
+    virtual int GetLocation(sf::Vector2f worldCoordinate);
+    virtual bool IsWall(sf::Vector2f worldCoordinate);
     virtual bool IsStair(sf::Vector2f worldCoordinate);
 
+private:
+    void PlaceTransition(int num, sf::Vector2f position);
+
 protected:
+    Scene* scene_{nullptr};
+    Camera* camera_{nullptr};
+    PlayerManager* playerManager_{nullptr};
+    ParticleManager* particleManager_{nullptr};
+    TransitionManager* transitionManager_{nullptr};
     const int CellSize = 32;
     int MapSize_ = 30;
     int mapWidth_ = 0;

@@ -1,5 +1,5 @@
-#ifndef SCENE_TITLE_H_
-#define SCENE_TITLE_H_
+#ifndef TITLE_SCENE_H_
+#define TITLE_SCENE_H_
 #include <vector>
 #include "../Scene/Scene.h"
 #include "../Engine/Game.h"

@@ -12,8 +12,12 @@ public:
     void Add(GameObject* gameObject);
     //Update all gameobjects in the list
     void Update(float delta_time, float beat_time);
+    //Delayed Update
+    void DelayedUpdate(float delta_time, float beat_time);
     //Draw all gameobjects in the list
     void Draw() const;
+    //Delayed Draw
+    void DelayedDraw() const;
     //Checks ONLY collision between gameobjects
     void Collision();
     //Checks collision between gameobjects but starts from the last created object
@@ -28,6 +32,7 @@ public:
     void ReverseInteraction();
     void OneWayInteraction();
     void OneWayReverseInteraction();
+    void Perception();
     //Remove "dead" gameobjects
     void Remove();
     //Find a specific gameobject by tag

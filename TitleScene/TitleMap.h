@@ -1,5 +1,5 @@
-#ifndef MAP_TITLE_H_
-#define MAP_TITLE_H_
+#ifndef TITLE_MAP_H_
+#define TITLE_MAP_H_
 #include "../Map/Map.h"
 #include "../Scene/Scene.h"
 

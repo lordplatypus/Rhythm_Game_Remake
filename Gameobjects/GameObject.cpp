@@ -7,13 +7,25 @@ GameObject::~GameObject() {}
 void GameObject::Update(float delta_time, float beat_time)
 {}
 
+void GameObject::DelayedUpdate(float delta_time, float beat_time)
+{}
+
 void GameObject::Draw()
+{}
+
+void GameObject::DelayedDraw()
 {}
 
 void GameObject::ReactOnCollision(GameObject& other)
 {}
 
 void GameObject::ReactOnMissedCollision(GameObject& other)
+{}
+
+void GameObject::ReactInRange(GameObject& other)
+{}
+
+void GameObject::ReactNotInRange(GameObject& other)
 {}
 
 void GameObject::StorePosition()
@@ -108,6 +120,39 @@ void GameObject::OnMissedOneWayCollision(GameObject& other)
     ReactOnMissedCollision(other);
 }
 
+bool GameObject::Perception(GameObject& other)
+{
+    std::vector<sf::Vector2f> otherHitBox = other.GetHitBox();
+    for (int i = 0; i < otherHitBox.size(); i++)
+    {
+        if (otherHitBox[i].x > GetLeft() - GetPerception() && otherHitBox[i].x < GetRight() + GetPerception() && otherHitBox[i].y > GetTop() - GetPerception() && otherHitBox[i].y < GetBottom() + GetPerception())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void GameObject::InRange(GameObject& other)
+{
+    ReactInRange(other);
+}
+
+void GameObject::NotInRange(GameObject& other)
+{
+    ReactNotInRange(other);
+}
+
+void GameObject::SetPerception(const float perception)
+{
+    perception_ = perception;
+}
+
+float GameObject::GetPerception() const
+{
+    return perception_;
+}
+
 bool GameObject::GetActive() const
 {
     return isActive_;
@@ -122,6 +167,7 @@ void GameObject::Kill()
 {
     isDead_ = true;
 }
+
 
 sf::Vector2f GameObject::GetPosition() const
 {

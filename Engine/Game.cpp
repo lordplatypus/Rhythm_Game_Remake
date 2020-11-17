@@ -5,6 +5,7 @@
 #include "../Scene/SceneNull.h"
 #include "../BPMScene/BPMScene.h"
 #include "../TitleScene/TitleScene.h"
+#include "../LobbyScene/LobbyScene.h"
 
 static SceneNull nullScene;
 
@@ -14,6 +15,7 @@ Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
     MP::ImportBPM();
 
     AddScene("Title", new TitleScene(this));
+    AddScene("Lobby", new LobbyScene(this));
     AddScene("BPM", new BPMScene(this));
 
     scene_ = scenes_["Title"];
@@ -56,6 +58,16 @@ void Game::EndScene()
 Camera* Game::GetCamera()
 {
     return camera_;
+}
+
+PlayerManager* Game::GetPlayerManager()
+{
+    return &playerManager_;
+}
+
+TransitionManager* Game::GetTransitionManager()
+{
+    return &transitionManager_;
 }
 
 void Game::Clear()

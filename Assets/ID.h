@@ -7,7 +7,7 @@ enum
 {
     bps_scene_texture,
     roboko_texture,
-    heart_texture,
+    hearts_texture,
 
     //TileMap Texture(タイルマップテクスチャ)
     tile_map,
@@ -15,6 +15,12 @@ enum
 
     //Title Sceen(タイトルの画像)
     title_scene_texture,
+
+    //UI
+    heart_texture,
+    heart_small_texture,
+    grey_heart_texture,
+    grey_heart_small_texture,
 };
 
 enum

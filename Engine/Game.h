@@ -4,6 +4,8 @@
 #include "../Scene/Scene.h"
 #include "../Assets/LoadAssets.h"
 #include "Camera.h"
+#include "../Managers/PlayerManager.h"
+#include "../Managers/TransitionManager.h"
 
 class Game
 {
@@ -21,6 +23,8 @@ public:
     //End a scene
     void EndScene();
     Camera* GetCamera();
+    PlayerManager* GetPlayerManager();
+    TransitionManager* GetTransitionManager();
     //Called on program shutdown, delete scenes here
     void Clear();
 
@@ -33,6 +37,8 @@ private:
     //Current loaded scene
     Scene* scene_ {nullptr};
     Camera* camera_{nullptr};
+    PlayerManager playerManager_;
+    TransitionManager transitionManager_;
     //load assets
     LoadAssets loadAssets_;
 

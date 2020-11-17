@@ -13,13 +13,19 @@ public:
 
     //Update
     virtual void Update(float delta_time, float beat_time);
+    //Update - to be calculated right after Update 
+    virtual void DelayedUpdate(float delta_time, float beat_time);
     //Draw
     virtual void Draw();
+    //Draw - to be drawn on screen after objects drawn in "Draw" - helpful for UI
+    virtual void DelayedDraw();
 
     //This is called when colliding with another gameobject, write reaction logic here
     virtual void ReactOnCollision(GameObject& other);
     //This is called if "Iteraction" is used instead of "Collision" - meaning that if 2 objects DON'T collide this is called
     virtual void ReactOnMissedCollision(GameObject& other);
+    virtual void ReactInRange(GameObject& other);
+    virtual void ReactNotInRange(GameObject& other);
     //Marks the gameobject as "dead" so that it can be removed
     virtual void Kill();
 
@@ -39,6 +45,7 @@ public:
     //Return a vector of points that make up the hitbox
     const std::vector<sf::Vector2f> GetHitBox();
 
+
     //Collision
     //Check if collision happened between this gameobject and "other"
     bool IsCollision(GameObject& other);
@@ -54,6 +61,15 @@ public:
     bool GetActive() const;
     //Set whether or not an object is "active" in collision calculations
     void SetActive(const bool isActive);
+
+
+    //Range
+    bool Perception(GameObject& other);
+    void InRange(GameObject& other);
+    void NotInRange(GameObject& other);
+    virtual void SetPerception(const float perception);
+    virtual float GetPerception() const;
+
 
     //Data
     //Store position
@@ -80,6 +96,7 @@ private:
     int top_{0}; //Top edge of the hitbox
     int bottom_{0}; //Bottom edge of the hitbox
     sf::Vector2f prevPosition_{0.0f, 0.0f}; //store prev position
+    float perception_{0.0f};
     bool isActive_{true}; //included in collision calculations?
 
 protected:

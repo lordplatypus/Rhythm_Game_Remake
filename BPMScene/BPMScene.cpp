@@ -70,7 +70,7 @@ void BPMScene::Init()
     background = LP::SetSprite(bps_scene_texture, sf::Vector2f(0, 0));
 
     //setup sprites used for timing (スプライトを設定する)
-    heartSprite = LP::SetSprite(heart_texture, 16, 16, 2, 1); //heart sprite (ハートのスプライト)
+    heartSprite = LP::SetSprite(hearts_texture, 16, 16, 2, 1); //heart sprite (ハートのスプライト)
     for (auto i : heartSprite) 
     {
         LP::SetSpriteScale(i, 8, 8); //set heart sprite scale ()
@@ -139,6 +139,12 @@ void BPMScene::Update(float delta_time, float beat_time)
     //UI update
     menu_->Update(delta_time, beat_time);
     musicMenu_->Update(delta_time, beat_time);
+
+    if (IP::PressX())
+    {
+        game_->ChangeScene("Lobby");
+        pressedX = true;
+    }
 }
 
 void BPMScene::MainMenu()
@@ -169,11 +175,6 @@ void BPMScene::MainMenu()
         if (selectedOption == 3) state = Save;
         if (selectedOption == 4) game_->ChangeScene("Lobby");
         pressedZ = true;
-    }
-    if (IP::PressX())
-    {
-        game_->ChangeScene("Lobby");
-        pressedX = true;
     }
 }
 

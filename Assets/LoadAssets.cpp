@@ -29,9 +29,15 @@ void LoadAssets::LoadImage()
     //Title Scene(タイトルの画像)
     LP::SetTexture(title_scene_texture, "./Resources/Images/Title_Sceen_Background.png", 180, 120);
 
-    LP::SetTexture(heart_texture, "./Resources/Images/Player/Hearts.png", 64, 16);
+    LP::SetTexture(hearts_texture, "./Resources/Images/Player/Hearts.png", 64, 16);
     LP::SetTexture(bps_scene_texture, "./Resources/Images/BPMScene.png", 1080, 720);
     LP::SetTexture(roboko_texture, "./Resources/Images/Player/Player_Roboko.png", 256, 320);
+
+    //Player hearts(プレーヤーのハート)
+    LP::SetTexture(heart_texture, "./Resources/Images/Player/Heart.png", 16, 16);
+    LP::SetTexture(heart_small_texture, "./Resources/Images/Player/HeartSmall.png", 16, 16);
+    LP::SetTexture(grey_heart_texture, "./Resources/Images/Player/GreyHeart.png", 16, 16);
+    LP::SetTexture(grey_heart_small_texture, "./Resources/Images/Player/GreyHeartSmall.png", 16, 16);
 }
 
 void LoadAssets::LoadSound()

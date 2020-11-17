@@ -21,11 +21,27 @@ void GameObjectManager::Update(float delta_time, float beat_time)
     }
 }
 
+void GameObjectManager::DelayedUpdate(float delta_time, float beat_time)
+{
+    for (auto gameObject : gameObjects_)
+    {
+        gameObject->DelayedUpdate(delta_time, beat_time);
+    }
+}
+
 void GameObjectManager::Draw() const
 {
     for (auto gameObject : gameObjects_)
     {
         gameObject->Draw();
+    }
+}
+
+void GameObjectManager::DelayedDraw() const
+{
+    for (auto gameObject : gameObjects_)
+    {
+        gameObject->DelayedDraw();
     }
 }
 
@@ -138,6 +154,21 @@ void GameObjectManager::OneWayReverseInteraction()
             if (!(*j)->GetActive()) continue;
             if ((*i)->IsCollision(**j)) (*i)->OnOneWayCollision(**j);
             else (*i)->OnMissedOneWayCollision(**j);
+        }
+    }
+}
+
+void GameObjectManager::Perception()
+{
+    for (auto i = gameObjects_.begin(); i != gameObjects_.end(); i++)
+    {
+        if (!(*i)->GetActive()) continue;
+        for (auto j = gameObjects_.begin(); j != gameObjects_.end(); j++)
+        {
+            if (i == j) continue;
+            if (!(*j)->GetActive()) continue;
+            if ((*i)->Perception(**j)) (*i)->InRange(**j);
+            else (*i)->NotInRange(**j);
         }
     }
 }
