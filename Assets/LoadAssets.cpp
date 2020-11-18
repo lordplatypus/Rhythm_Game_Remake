@@ -38,6 +38,9 @@ void LoadAssets::LoadImage()
     LP::SetTexture(heart_small_texture, "./Resources/Images/Player/HeartSmall.png", 16, 16);
     LP::SetTexture(grey_heart_texture, "./Resources/Images/Player/GreyHeart.png", 16, 16);
     LP::SetTexture(grey_heart_small_texture, "./Resources/Images/Player/GreyHeartSmall.png", 16, 16);
+
+    //Particle
+    LP::SetTexture(white_texture, "./Resources/Images/Particle/Particle_White.png", 1080, 720);
 }
 
 void LoadAssets::LoadSound()

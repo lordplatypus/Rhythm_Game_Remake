@@ -140,11 +140,7 @@ void BPMScene::Update(float delta_time, float beat_time)
     menu_->Update(delta_time, beat_time);
     musicMenu_->Update(delta_time, beat_time);
 
-    if (IP::PressX())
-    {
-        game_->ChangeScene("Lobby");
-        pressedX = true;
-    }
+    if (IP::PressX()) game_->ChangeScene("Lobby");
 }
 
 void BPMScene::MainMenu()
@@ -154,14 +150,12 @@ void BPMScene::MainMenu()
         selectedOption--;
         if (selectedOption < 0) selectedOption = menuText_.size() - 1;
         menu_->ScrollUp();
-        pressedUp = true;
     }
     if (IP::PressDown())
     {
         selectedOption++;
         if (selectedOption > menuText_.size() - 1) selectedOption = 0;
         menu_->ScrollDown();
-        pressedDown = true;
     }
     if (IP::PressZ())
     {
@@ -174,7 +168,6 @@ void BPMScene::MainMenu()
         if (selectedOption == 2) state = PlayBack;
         if (selectedOption == 3) state = Save;
         if (selectedOption == 4) game_->ChangeScene("Lobby");
-        pressedZ = true;
     }
 }
 
@@ -185,14 +178,12 @@ void BPMScene::MusicSelectMenu()
         musicID--;
         if (musicID < 0) musicID = musicTitles_.size() - 1;
         musicMenu_->ScrollUp();
-        pressedUp = true;
     }
     if (IP::PressDown())
     {
         musicID++;
         if (musicID > musicTitles_.size() - 1) musicID = 0;
         musicMenu_->ScrollDown();
-        pressedDown = true;
     }
     if (IP::PressZ())
     {
@@ -206,14 +197,12 @@ void BPMScene::MusicSelectMenu()
 
         state = Menu;
         musicMenu_->SetDisplay(false);
-        pressedZ = true;
     }
     if (IP::PressX())
     {
         musicID = selectedMusicID;
         state = Menu;
         musicMenu_->SetDisplay(false);
-        pressedX = true;
     }
 }
 
@@ -222,7 +211,6 @@ void BPMScene::BPMSetUp()
     if (IP::PressZ())
     {//reset variables
         MP::PlayMusic(musicID, false);
-        pressedZ = true;
         secPerBeat = 0;
         beatsPerMin = 0;
         beatTimer = 0;
@@ -259,8 +247,6 @@ void BPMScene::BPMSetUp()
                 LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(secPerBeat));
             }
         }
-
-        pressedDown = true;
         count++; //for beat count
     }
 
@@ -268,7 +254,6 @@ void BPMScene::BPMSetUp()
     {
         firstTime = true;
         state = Menu;
-        pressedX = true;
     }
 }
 
@@ -282,7 +267,6 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         timeInbetweenFrames = musicSPBMap[musicID] / 10;
         LP::SetTextString(displayBeatsPerMin, "Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
         LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
-        pressedUp = true;
     }
     if (IP::PressDown())
     {
@@ -292,7 +276,6 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         timeInbetweenFrames = musicSPBMap[musicID] / 10;
         LP::SetTextString(displayBeatsPerMin, "Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
         LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
-        pressedDown = true;
     }
 
     if (firstTime)
@@ -337,24 +320,11 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         LP::SetTextString(displayBeatCount, "Beat Count: 0");
         firstTime = true;
         state = Menu;
-        pressedX = true;
     }
 }
 
 void BPMScene::SaveBPMForSelectedSong()
 {
-    // secPerBeat = 0;
-    // if (listOfBeats.size() != 0)
-    // {
-    //     for (auto i : listOfBeats) secPerBeat += i;
-    //     secPerBeat /= listOfBeats.size(); //average time inbetween beats
-    // }
-    // if (secPerBeat != 0)
-    // {
-    //     MP::SetBPMForSelectedMusic(musicID, secPerBeat);
-    //     alpha = 255; //for 'saved' text fade out
-    // }
-
     if (musicSPBMap[musicID] != 0)
     {
         MP::SetBPM(musicID, musicSPBMap[musicID]);

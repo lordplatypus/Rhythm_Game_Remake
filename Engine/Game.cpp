@@ -2,6 +2,7 @@
 #include <string>
 #include "Game.h"
 #include "MP.h"
+#include "IP.h"
 #include "../Scene/SceneNull.h"
 #include "../BPMScene/BPMScene.h"
 #include "../TitleScene/TitleScene.h"
@@ -30,6 +31,7 @@ Game::~Game()
 void Game::Update(float delta_time, float beat_time)
 {
     scene_->Update(delta_time, beat_time);
+    IP::Reset();
 }
 
 void Game::Draw()

@@ -21,6 +21,9 @@ enum
     heart_small_texture,
     grey_heart_texture,
     grey_heart_small_texture,
+
+    //Particle
+    white_texture,
 };
 
 enum

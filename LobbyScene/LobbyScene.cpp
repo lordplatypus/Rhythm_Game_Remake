@@ -12,7 +12,7 @@ LobbyScene::~LobbyScene()
 
 void LobbyScene::Init()
 {
-    //GetTransitionManager()->SetCurrentScene("Lobby");
+    game_->GetTransitionManager()->SetCurrentScene("Lobby");
     game_->GetPlayerManager()->Init();
     //GetEnemyManagerGlobal()->Clear();
     map_ = new LobbyMap(this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_);
@@ -20,6 +20,7 @@ void LobbyScene::Init()
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
     // game_->GetPlayerManager()->Init(gameObjects_.Find("Player")->GetID(), gameObjects_.Find("Player")->GetHP(), gameObjects_.Find("Player")->GetHP(),
     //     gameObjects_.Find("Player")->GetPerception(), 5, 0);
+    game_->GetPlayerManager()->Init();
     pm_.FadeFromBlack(gameObjects_.Find("Player")->GetPosition().x, gameObjects_.Find("Player")->GetPosition().y);
     transitionTo_ = "";
 }
@@ -75,6 +76,6 @@ void LobbyScene::End()
 {
     delete map_;
     gameObjects_.Clear();
-    //GetTransitionManager()->Clear();
+    game_->GetTransitionManager()->Clear();
     pm_.Clear();
 }

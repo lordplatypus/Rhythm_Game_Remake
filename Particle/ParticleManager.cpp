@@ -95,16 +95,16 @@ void ParticleManager::WhiteOut(float x_, float y_)
 
 void ParticleManager::FadeToBlack(float x_, float y_)
 {
-    // int key = LP::SetSprite(white, sf::Vector2f(x_, y_));
-    // LP::SetSpriteOriginCenter(key);
-    // particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 1.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 255));
+    int key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
+    LP::SetSpriteOriginCenter(key);
+    particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 1.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 255));
 }
 
 void ParticleManager::FadeFromBlack(float x_, float y_)
 {
-    // int key = LP::SetSprite(white, sf::Vector2f(x_, y_));
-    // LP::SetSpriteOriginCenter(key);
-    // particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 1.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 255, 0));
+    int key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
+    LP::SetSpriteOriginCenter(key);
+    particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 1.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 255, 0));
 }
 
 void ParticleManager::SmokeScreen(float x_, float y_)

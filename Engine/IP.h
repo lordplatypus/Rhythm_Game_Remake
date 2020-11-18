@@ -29,6 +29,9 @@ public:
     static bool PressZ();
     static bool PressX();
 
+    //Required to reset bools, place at the end of the Update, in classes that use imput
+    static void Reset();
+
     //Mouse Stuff
 
     static bool GetMouseClick(sf::Mouse::Button buttonID);

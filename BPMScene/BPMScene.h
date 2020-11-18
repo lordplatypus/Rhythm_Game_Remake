@@ -80,13 +80,6 @@ private:
     int heartCount{0};
     bool oneTime{false};
 
-    bool pressedUp = false;
-    bool pressedDown = false;
-    bool pressedRight = false;
-    bool pressedLeft = false;
-    bool pressedZ = true;
-    bool pressedX = true;
-
     bool firstTime = true;
 
     Game* game_ {nullptr};

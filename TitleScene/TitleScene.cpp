@@ -52,7 +52,7 @@ void TitleScene::Init()
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 10;
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
 
-    //pm_.FadeFromBlack(position_.x, position_.y);
+    pm_.FadeFromBlack(position_.x, position_.y);
 }
 
 void TitleScene::Update(float delta_time, float beat_time)
