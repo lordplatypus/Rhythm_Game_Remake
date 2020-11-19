@@ -69,8 +69,12 @@ void Map::PlaceTransition(int num, sf::Vector2f position)
         transitionTo = "Lobby";
         break;
 
-        case 202:
+        case 203:
         transitionTo = "BPM";
+        break;
+
+        case 206:
+        transitionTo = "Test";
         break;
 
         default:

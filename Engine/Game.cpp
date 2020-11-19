@@ -7,6 +7,7 @@
 #include "../BPMScene/BPMScene.h"
 #include "../TitleScene/TitleScene.h"
 #include "../LobbyScene/LobbyScene.h"
+#include "../TestScene/TestScene.h"
 
 static SceneNull nullScene;
 
@@ -18,6 +19,7 @@ Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
     AddScene("Title", new TitleScene(this));
     AddScene("Lobby", new LobbyScene(this));
     AddScene("BPM", new BPMScene(this));
+    AddScene("Test", new TestScene(this));
 
     scene_ = scenes_["Title"];
     scene_->Init();
