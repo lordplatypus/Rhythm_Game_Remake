@@ -18,6 +18,10 @@ public:
     void FadeFromBlack(float x, float y);
     void SmokeScreen(float x, float y);
     void Sparkle(float x, float y);
+    void UpArrowSlash(float x, float y);
+    void DownArrowSlash(float x, float y);
+    void LeftArrowSlash(float x, float y);
+    void RightArrowSlash(float x, float y);
 
     void Clear();
 

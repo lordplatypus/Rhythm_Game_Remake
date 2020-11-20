@@ -54,6 +54,7 @@ void Roboko::Update(float delta_time, float beat_time)
         AnimationHandle(delta_time, beat_time);
         velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
         uiHeart_->Update(delta_time, beat_time);
+        LP::SetTextPosition(playerManager_->GetWalletText(), sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraBottomEdge() - 16));
     }
 }
 
@@ -71,6 +72,7 @@ void Roboko::DelayedDraw()
     if (!IsDead())
     {
         uiHeart_->Draw();
+        LP::DrawText(playerManager_->GetWalletText());
     }
 }
 
@@ -281,7 +283,10 @@ void Roboko::ReactOnCollision(GameObject& other)
 
 void Roboko::ReactInRange(GameObject& other)
 {
-
+    if (other.GetTag() == "Item")
+    {
+        other.TakeDamage(attackType_);
+    }
 }
 
 void Roboko::ReactNotInRange(GameObject& other)

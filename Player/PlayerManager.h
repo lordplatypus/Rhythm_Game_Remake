@@ -20,6 +20,8 @@ public:
     int GetWallet() const;
     void AddMoney(const int money);
     void SubMoney(const int money);
+    void SetWalletText();
+    int GetWalletText() const;
     void SetPerception(const int newPerception);
     int GetPerception() const;
     void SetSpecialCooldown(const int newCooldown);
@@ -29,9 +31,12 @@ public:
     void AddKillToCount();
     void SubKillToCount();
 
+    void Reset();
+
 private:
     //Player Parameters
     int wallet_{0};
+    int walletText_{0};
     int perception_{0};
     int HP_{0};
     int maxHP_{0};

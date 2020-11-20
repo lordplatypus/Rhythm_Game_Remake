@@ -4,8 +4,8 @@
 #include "../Scene/Scene.h"
 #include "../Assets/LoadAssets.h"
 #include "Camera.h"
-#include "../Managers/PlayerManager.h"
-#include "../Managers/TransitionManager.h"
+#include "../Player/PlayerManager.h"
+#include "../Transition/TransitionManager.h"
 
 class Game
 {

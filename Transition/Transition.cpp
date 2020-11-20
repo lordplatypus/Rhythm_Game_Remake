@@ -1,5 +1,4 @@
 #include "Transition.h"
-//#include "../Engine/LP.h"
 
 Transition::Transition(TransitionManager* tm, const std::string& transitionTo, const sf::Vector2f position, const bool locked, Scene* scene, ParticleManager* particleManager) :
     tm_{tm}, particleManager_{particleManager}

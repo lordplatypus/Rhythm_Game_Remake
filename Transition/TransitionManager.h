@@ -18,7 +18,7 @@ public:
     void SetPrevScene(const std::string& name);
     const std::string& GetPrevScene();
 
-    //int GetSceneID(const std::string& name) const;
+    int GetSceneID(const std::string& name) const;
 
     void Clear();
 

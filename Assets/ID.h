@@ -24,6 +24,36 @@ enum
 
     //Particle
     white_texture,
+    slash_texture,
+    up_arrow_L_texture,
+    up_arrow_R_texture,
+    down_arrow_L_texture,
+    down_arrow_R_texture,
+    left_arrow_L_texture,
+    left_arrow_R_texture,
+    right_arrow_L_texture,
+    right_arrow_R_texture,
+
+    //Arrow
+    up_arrow_texture,
+    up_arrow_grey_texture,
+    down_arrow_texture,
+    down_arrow_grey_texture,
+    left_arrow_texture,
+    left_arrow_grey_texture,
+    right_arrow_texture,
+    right_arrow_grey_texture, 
+
+    //Item
+    part_screw_texture,
+    part_nut_texture,
+    part_battery_texture,
+    part_spring_texture,
+    part_dark_spring_texture,
+    item_heal_texture,
+    item_maxHP_texture,
+    item_range_texture,
+    item_special_cooldown_texture,
 };
 
 enum

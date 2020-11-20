@@ -1,7 +1,7 @@
 #ifndef TRANSITION_H_
 #define TRANSITION_H_
-#include "GameObject.h"
-#include "../Managers/TransitionManager.h"
+#include "../Gameobjects/GameObject.h"
+#include "TransitionManager.h"
 #include "../Particle/ParticleManager.h"
 
 class Transition : public GameObject

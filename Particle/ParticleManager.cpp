@@ -132,6 +132,62 @@ void ParticleManager::Sparkle(float x_, float y_)
     // particles.push_back(new Particle(sparkleKey, x_, y_, 0, 0, 1, lifespan, 0, 0, 0, 0, .05f, .1f, 255, 255, 255, 255, 255));
 }
 
+void ParticleManager::UpArrowSlash(float x_, float y_)
+{
+    float speed = 5.0f;
+    float vx = -(rand() % 6 + 3) * speed;
+    float vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(up_arrow_L_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, -20, 1, 1, 255, 255, 255, 255, 0));
+
+    vx = (rand() % 6 + 3) * speed;
+    vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(up_arrow_R_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, 20, 1, 1, 255, 255, 255, 255, 0));
+
+    particles.push_back(new Particle(LP::SetSprite(slash_texture, sf::Vector2f(x_, y_)), x_ - 8, y_ + 4, 0, 0, 1, .5f, 0, 0, -45, 0, .5f, .5f, 255, 255, 255, 255, 0));
+}
+
+void ParticleManager::DownArrowSlash(float x_, float y_)
+{
+    float speed = 5.0f;
+    float vx = -(rand() % 6 + 3) * speed;
+    float vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(down_arrow_L_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, -20, 1, 1, 255, 255, 255, 255, 0));
+
+    vx = (rand() % 6 + 3) * speed;
+    vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(down_arrow_R_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, 20, 1, 1, 255, 255, 255, 255, 0));
+
+    particles.push_back(new Particle(LP::SetSprite(slash_texture, sf::Vector2f(x_, y_)), x_ - 8, y_ + 4, 0, 0, 1, .5f, 0, 0, -45, 0, .5f, .5f, 255, 255, 255, 255, 0));
+}
+
+void ParticleManager::LeftArrowSlash(float x_, float y_)
+{
+    float speed = 5.0f;
+    float vx = -(rand() % 6 + 3) * speed;
+    float vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(left_arrow_L_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, -20, 1, 1, 255, 255, 255, 255, 0));
+
+    vx = (rand() % 6 + 3) * speed;
+    vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(left_arrow_R_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, 20, 1, 1, 255, 255, 255, 255, 0));
+
+    particles.push_back(new Particle(LP::SetSprite(slash_texture, sf::Vector2f(x_, y_)), x_ - 8, y_ + 4, 0, 0, 1, .5f, 0, 0, -45, 0, .5f, .5f, 255, 255, 255, 255, 0));
+}
+
+void ParticleManager::RightArrowSlash(float x_, float y_)
+{
+    float speed = 5.0f;
+    float vx = -(rand() % 6 + 3) * speed;
+    float vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(right_arrow_L_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, -20, 1, 1, 255, 255, 255, 255, 0));
+
+    vx = (rand() % 6 + 3) * speed;
+    vy = (rand() % 10) * speed;
+    particles.push_back(new Particle(LP::SetSprite(right_arrow_R_texture, sf::Vector2f(x_, y_)), x_, y_, vx, vy, 1, 1, 0, 0, 0, 20, 1, 1, 255, 255, 255, 255, 0));
+
+    particles.push_back(new Particle(LP::SetSprite(slash_texture, sf::Vector2f(x_, y_)), x_ - 8, y_ + 4, 0, 0, 1, .5f, 0, 0, -45, 0, .5f, .5f, 255, 255, 255, 255, 0));
+}
+
 
 void ParticleManager::Clear()
 {

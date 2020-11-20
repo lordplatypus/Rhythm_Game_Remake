@@ -71,6 +71,10 @@ public:
     virtual float GetPerception() const;
 
 
+    //Damage
+    virtual void TakeDamage(const int damage);
+
+
     //Data
     //Store position
     void StorePosition();

@@ -49,22 +49,22 @@ const std::string& TransitionManager::GetPrevScene()
     return prevScene_;
 }
 
-// int TransitionManager::GetSceneID(const std::string& name) const
-// {
-//     if (name == "Title") return 200;
-//     else if (name == "Lobby") return 201;
-//     else if (name == "ClassSelect") return 202;
-//     else if (name == "SetBPM") return 203;
-//     else if (name == "MusicSelect") return 204;
-//     else if (name == "Tutorial") return 205;
-//     else if (name == "Test") return 206;
-//     else if (name == "JunkYard") return 207;
-//     else if (name == "Stage1_1") return 208;
-//     else if (name == "Stage1_2") return 209;
-//     else if (name == "Stage1_3") return 210;
+int TransitionManager::GetSceneID(const std::string& name) const
+{
+    if (name == "Title") return 200;
+    else if (name == "Lobby") return 201;
+    else if (name == "ClassSelect") return 202;
+    else if (name == "BPM") return 203;
+    else if (name == "MusicSelect") return 204;
+    else if (name == "Tutorial") return 205;
+    else if (name == "Test") return 206;
+    else if (name == "JunkYard") return 207;
+    else if (name == "Stage1_1") return 208;
+    else if (name == "Stage1_2") return 209;
+    else if (name == "Stage1_3") return 210;
 
-//     return 200; //if the name provided dosen't exist - go to the Title
-// }
+    return 200; //if the name provided dosen't exist - go to the Title
+}
 
 
 

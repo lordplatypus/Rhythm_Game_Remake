@@ -4,8 +4,8 @@
 #include <vector>
 #include "../Scene/Scene.h"
 #include "../Engine/Camera.h"
-#include "../Managers/PlayerManager.h"
-#include "../Managers/TransitionManager.h"
+#include "../Player/PlayerManager.h"
+#include "../Transition/TransitionManager.h"
 #include "../Particle/ParticleManager.h"
 
 class Map
@@ -23,6 +23,7 @@ public:
     virtual bool IsStair(sf::Vector2f worldCoordinate);
 
 private:
+    void PlaceItem(int num, sf::Vector2f position);
     void PlaceTransition(int num, sf::Vector2f position);
 
 protected:

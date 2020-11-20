@@ -1,8 +1,8 @@
 #ifndef ROBOKO_H_
 #define ROBOKO_H_
-#include "GameObject.h"
-#include "../Managers/PlayerManager.h"
-#include "../Managers/TransitionManager.h"
+#include "../Gameobjects/GameObject.h"
+#include "PlayerManager.h"
+#include "../Transition/TransitionManager.h"
 #include "../Map/Map.h"
 #include "../Engine/Camera.h"
 #include "../UI/UIHeart.h"
@@ -45,6 +45,7 @@ private:
     int animCount_{0};
     float timer_{0.0f};
 
+    //UI
     //HP
     UIHeart* uiHeart_{nullptr};
 

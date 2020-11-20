@@ -41,6 +41,36 @@ void LoadAssets::LoadImage()
 
     //Particle
     LP::SetTexture(white_texture, "./Resources/Images/Particle/Particle_White.png", 1080, 720);
+    LP::SetTexture(slash_texture, "./Resources/Images/Particle/Particle_Line32x32.png", 32, 32);
+    LP::SetTexture(up_arrow_L_texture, "./Resources/Images/Particle/Particle_UpArrowL.png", 8, 8);
+    LP::SetTexture(up_arrow_R_texture, "./Resources/Images/Particle/Particle_UpArrowR.png", 8, 8);
+    LP::SetTexture(down_arrow_L_texture, "./Resources/Images/Particle/Particle_DownArrowL.png", 8, 8);
+    LP::SetTexture(down_arrow_R_texture, "./Resources/Images/Particle/Particle_DownArrowR.png", 8, 8);
+    LP::SetTexture(left_arrow_L_texture, "./Resources/Images/Particle/Particle_LeftArrowL.png", 8, 8);
+    LP::SetTexture(left_arrow_R_texture, "./Resources/Images/Particle/Particle_LeftArrowR.png", 8, 8);
+    LP::SetTexture(right_arrow_L_texture, "./Resources/Images/Particle/Particle_RightArrowL.png", 8, 8);
+    LP::SetTexture(right_arrow_R_texture, "./Resources/Images/Particle/Particle_RightArrowR.png", 8, 8);
+
+    //Arrow
+    LP::SetTexture(up_arrow_texture, "./Resources/Images/Arrow/UpArrow.png", 8, 8);
+    LP::SetTexture(up_arrow_grey_texture, "./Resources/Images/Arrow/UpArrowGrey.png", 8, 8);
+    LP::SetTexture(down_arrow_texture, "./Resources/Images/Arrow/DownArrow.png", 8, 8);
+    LP::SetTexture(down_arrow_grey_texture, "./Resources/Images/Arrow/DownArrowGrey.png", 8, 8);
+    LP::SetTexture(left_arrow_texture, "./Resources/Images/Arrow/LeftArrow.png", 8, 8);
+    LP::SetTexture(left_arrow_grey_texture, "./Resources/Images/Arrow/LeftArrowGrey.png", 8, 8);
+    LP::SetTexture(right_arrow_texture, "./Resources/Images/Arrow/RightArrow.png", 8, 8);
+    LP::SetTexture(right_arrow_grey_texture, "./Resources/Images/Arrow/RightArrowGrey.png", 8, 8);
+
+    //Item(アイテム)
+    LP::SetTexture(part_screw_texture, "./Resources/Images/Item/Part_Screw.png", 7, 7);
+    LP::SetTexture(part_nut_texture, "./Resources/Images/Item/Part_Nut.png", 8, 8);
+    LP::SetTexture(part_battery_texture, "./Resources/Images/Item/Part_Battery.png", 8, 8);
+    LP::SetTexture(part_spring_texture, "./Resources/Images/Item/Part_Spring.png", 15, 5);
+    LP::SetTexture(part_dark_spring_texture, "./Resources/Images/Item/Part_Dark_Spring.png", 15, 5);
+    LP::SetTexture(item_heal_texture, "./Resources/Images/Item/Item_Heal.png", 32, 32);
+    LP::SetTexture(item_maxHP_texture, "./Resources/Images/Item/Item_MaxHP.png", 32, 32);
+    LP::SetTexture(item_range_texture, "./Resources/Images/Item/Item_Range.png", 32, 32);
+    LP::SetTexture(item_special_cooldown_texture, "./Resources/Images/Item/Item_Special.png", 32, 32);
 }
 
 void LoadAssets::LoadSound()

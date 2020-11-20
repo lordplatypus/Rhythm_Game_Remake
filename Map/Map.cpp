@@ -1,7 +1,8 @@
 #include "Map.h"
 #include <fstream>
-#include "../Gameobjects/Roboko.h"
-#include "../Gameobjects/Transition.h"
+#include "../Player/Roboko.h"
+#include "../Item/Money.h"
+#include "../Transition/Transition.h"
 
 Map::Map()
 {}
@@ -17,12 +18,13 @@ void Map::PlaceObjects()
 
 void Map::PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap)
 {
-    for (int y = 0; y < MapSize_; y++)
+    for (int y = 0; y < mapHeight_; y++)
     {
-        for (int x = 0; x < MapSize_; x++)
+        for (int x = 0; x < mapWidth_; x++)
         {
             if (objectMap_[x][y] == -1) continue;
             else if (objectMap_[x][y] == 0) scene_->AddGameObject(new Roboko(sf::Vector2f(CellSize * x, CellSize * y), scene_, camera_, playerManager_, transitionManager_, this));
+            else if (objectMap_[x][y] < 200) PlaceItem(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
             else if (objectMap_[x][y] < 300) PlaceTransition(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
         }
     }
@@ -56,6 +58,19 @@ bool Map::IsStair(sf::Vector2f worldCoordinate)
     return false;
 }
 
+void Map::PlaceItem(int num, sf::Vector2f position)
+{
+    switch (num)
+    {
+        case 100:
+        scene_->AddGameObject(new Money(position, playerManager_, particleManager_));
+        break;
+
+        default:
+        break;
+    }
+}
+
 void Map::PlaceTransition(int num, sf::Vector2f position)
 {
     std::string transitionTo = "";
@@ -75,6 +90,10 @@ void Map::PlaceTransition(int num, sf::Vector2f position)
 
         case 206:
         transitionTo = "Test";
+        break;
+
+        case 207:
+        transitionTo = "JunkYard";
         break;
 
         default:

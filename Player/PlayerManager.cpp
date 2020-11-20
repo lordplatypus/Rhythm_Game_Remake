@@ -1,4 +1,5 @@
 #include "PlayerManager.h"
+#include "../Engine/LP.h"
 
 PlayerManager::PlayerManager()
 {}
@@ -18,6 +19,8 @@ void PlayerManager::Init(const int ID, const int HP, const int maxHP, const int 
 
 void PlayerManager::Init()
 {
+    Reset();
+
     SetHP(3);
     SetMaxHP(3);
     SetPerception(64);
@@ -78,6 +81,9 @@ void PlayerManager::SubHP(const int HP)
 void PlayerManager::SetWallet(const int money)
 {
     wallet_ = money;
+    walletText_ = LP::SetText(std::to_string(wallet_), sf::Vector2f(0, 0), 64);
+    LP::SetTextScale(walletText_, 0.1f, 0.1f);
+    LP::SetTextOriginCenter(walletText_);
 }
 
 int PlayerManager::GetWallet() const
@@ -88,11 +94,23 @@ int PlayerManager::GetWallet() const
 void PlayerManager::AddMoney(const int money)
 {
     wallet_ += money;
+    SetWalletText();
 }
 
 void PlayerManager::SubMoney(const int money)
 {
     wallet_ -= money;
+    SetWalletText();
+}
+
+void PlayerManager::SetWalletText()
+{
+    LP::SetTextString(walletText_, std::to_string(wallet_));
+}
+
+int PlayerManager::GetWalletText() const
+{
+    return walletText_;
 }
 
 void PlayerManager::SetPerception(const int perception)
@@ -133,4 +151,16 @@ void PlayerManager::AddKillToCount()
 void PlayerManager::SubKillToCount()
 {
     killCount_--;
+}
+
+void PlayerManager::Reset()
+{
+    wallet_ = 0;
+    LP::DeleteText(walletText_);
+    perception_ = 0;
+    HP_ = 0;
+    maxHP_ = 0;
+    ID_ = 0;
+    specialCooldown_ = 0;
+    killCount_ = 0;
 }
