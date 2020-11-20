@@ -9,6 +9,7 @@ public:
     ~Money() override;
     void Update(float delta_time, float beat_time) override;
     void Draw() override;
+    void DelayedDraw() override;
     
 private:
     void Effect();

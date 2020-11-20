@@ -93,8 +93,7 @@ int JunkYardMap::GenerateItem()
     do
     {
         cont = true;
-        randItem = rand() % 5 + 100;
-        if (randItem == 102) cont = false; //don't place money in the shop
+        randItem = rand() % 4 + 101;
         for (auto i : itemIDs_)
         {
             if (i == randItem) cont = false;

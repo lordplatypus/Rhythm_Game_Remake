@@ -5,7 +5,6 @@
 #include "../Transition/TransitionManager.h"
 #include "../Map/Map.h"
 #include "../Engine/Camera.h"
-#include "../UI/UIHeart.h"
 
 class Roboko : public GameObject
 {
@@ -44,10 +43,6 @@ private:
     float timeInbetweenFrames_{0.0f};
     int animCount_{0};
     float timer_{0.0f};
-
-    //UI
-    //HP
-    UIHeart* uiHeart_{nullptr};
 
     //movement
     const int CellSize{32};

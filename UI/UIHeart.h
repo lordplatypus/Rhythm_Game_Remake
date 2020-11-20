@@ -6,7 +6,7 @@
 class UIHeart
 {
 public:
-    UIHeart(Camera* camera, int numOfHearts, float bpm, int heartPosition = 0);
+    UIHeart(Camera* camera, int numOfHearts, int heartPosition = 0);
     ~UIHeart();
     void Update(float delta_time, float beat_time);
     void Draw() const;
@@ -22,6 +22,8 @@ public:
     void SetNumOfHeart(const int numOfHeart);
     int GetDamage(int count = 0) const;
     void SetDamage(const int damage);
+
+    void SetBPM(float bpm);
 
 private:
     Camera* camera_{nullptr};

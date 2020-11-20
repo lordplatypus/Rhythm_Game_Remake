@@ -16,6 +16,7 @@ Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
 {
     loadAssets_.Load();
     MP::ImportBPM();
+    playerManager_ = new PlayerManager(camera_);
 
     AddScene("Title", new TitleScene(this));
     AddScene("Lobby", new LobbyScene(this));
@@ -68,7 +69,7 @@ Camera* Game::GetCamera()
 
 PlayerManager* Game::GetPlayerManager()
 {
-    return &playerManager_;
+    return playerManager_;
 }
 
 TransitionManager* Game::GetTransitionManager()

@@ -2,6 +2,10 @@
 #include <fstream>
 #include "../Player/Roboko.h"
 #include "../Item/Money.h"
+#include "../Item/MaxHPUp.h"
+#include "../Item/ReduceCooldown.h"
+#include "../Item/Heal1.h"
+#include "../Item/PerceptionUp.h"
 #include "../Transition/Transition.h"
 
 Map::Map()
@@ -64,6 +68,22 @@ void Map::PlaceItem(int num, sf::Vector2f position)
     {
         case 100:
         scene_->AddGameObject(new Money(position, playerManager_, particleManager_));
+        break;
+
+        case 101:
+        scene_->AddGameObject(new MaxHPUp(position, playerManager_, particleManager_));
+        break;
+
+        case 102:
+        scene_->AddGameObject(new ReduceCooldown(position, playerManager_, particleManager_));
+        break;
+
+        case 103:
+        scene_->AddGameObject(new Heal1(position, playerManager_, particleManager_));
+        break;
+
+        case 104:
+        scene_->AddGameObject(new PerceptionUp(position, playerManager_, particleManager_));
         break;
 
         default:

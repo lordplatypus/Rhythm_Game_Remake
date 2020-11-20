@@ -26,8 +26,9 @@ Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManage
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 10;
 
-    uiHeart_ = new UIHeart(camera_, playerManager_->GetMaxHP(), MP::GetBPM(MP::GetPlayingMusic()));
-    uiHeart_->SetDamage(playerManager_->GetMaxHP() - playerManager_->GetHP());
+    //uiHeart_ = new UIHeart(camera_, playerManager_->GetMaxHP(), MP::GetBPM(MP::GetPlayingMusic()));
+    //uiHeart_->SetDamage(playerManager_->GetMaxHP() - playerManager_->GetHP());
+    playerManager_->GetHPUI()->SetBPM(MP::GetBPM(MP::GetPlayingMusic()));
 
     // scene_->GetUI()->AddUIHeart(scene_->GetCamera(), ID, pm->GetMaxHP(), scene_->GetMP()->GetBPMForSelectedMusic(scene_->GetMP()->GetPlayingMusicID()));
     // scene_->GetUI()->FindUIHeart(ID_)->SetDamage(playerManager_->GetMaxHP() - playerManager_->GetHP());
@@ -43,7 +44,7 @@ Roboko::~Roboko()
         LP::DeleteSprite(i);
     }
     sprites_.clear();
-    delete uiHeart_;
+    //delete uiHeart_;
 }
 
 void Roboko::Update(float delta_time, float beat_time)
@@ -53,7 +54,7 @@ void Roboko::Update(float delta_time, float beat_time)
         InputHandle(delta_time, beat_time);
         AnimationHandle(delta_time, beat_time);
         velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
-        uiHeart_->Update(delta_time, beat_time);
+        playerManager_->GetHPUI()->Update(delta_time, beat_time);
         LP::SetTextPosition(playerManager_->GetWalletText(), sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraBottomEdge() - 16));
     }
 }
@@ -71,7 +72,7 @@ void Roboko::DelayedDraw()
 {
     if (!IsDead())
     {
-        uiHeart_->Draw();
+        playerManager_->GetHPUI()->Draw();
         LP::DrawText(playerManager_->GetWalletText());
     }
 }

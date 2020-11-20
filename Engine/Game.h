@@ -37,7 +37,7 @@ private:
     //Current loaded scene
     Scene* scene_ {nullptr};
     Camera* camera_{nullptr};
-    PlayerManager playerManager_;
+    PlayerManager* playerManager_{nullptr};
     TransitionManager transitionManager_;
     //load assets
     LoadAssets loadAssets_;

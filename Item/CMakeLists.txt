@@ -2,5 +2,9 @@ set(SOURCES
 ${SOURCES}
 ${Game_SOURCE_DIR}/Item/Item.cpp 
 ${Game_SOURCE_DIR}/Item/Money.cpp
+${Game_SOURCE_DIR}/Item/MaxHPUp.cpp
+${Game_SOURCE_DIR}/Item/ReduceCooldown.cpp
+${Game_SOURCE_DIR}/Item/Heal1.cpp
+${Game_SOURCE_DIR}/Item/PerceptionUp.cpp
 PARENT_SCOPE
 )

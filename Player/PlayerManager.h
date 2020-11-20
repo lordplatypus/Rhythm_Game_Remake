@@ -1,19 +1,24 @@
 #ifndef PLAYER_MANAGER_H_
 #define PLAYER_MANAGER_H_
+#include "../Engine/Camera.h"
+#include "../UI/UIHeart.h"
 
 class PlayerManager
 {
 public:
-    PlayerManager();
+    PlayerManager(Camera* camera);
     ~PlayerManager();
     void Init(const int ID, const int HP, const int maxHP, const int range, const int specialCooldown, const int wallet);
     void Init();
     void SetID(const int ID);
     int GetID();
-    void SetHP(const int newHP);
-    int GetHP() const;
+    void SetHPUI();
+    UIHeart* GetHPUI();
     void SetMaxHP(const int maxHP);
     int GetMaxHP() const;
+    void AddMaxHP(const int numToAdd);
+    void SetHP(const int newHP);
+    int GetHP() const;
     void AddHP(const int HP);
     void SubHP(const int HP);
     void SetWallet(const int money);
@@ -34,10 +39,13 @@ public:
     void Reset();
 
 private:
+    Camera* camera_{nullptr};
+
     //Player Parameters
     int wallet_{0};
     int walletText_{0};
     int perception_{0};
+    UIHeart* uiHeart_{nullptr};
     int HP_{0};
     int maxHP_{0};
     int ID_{0};

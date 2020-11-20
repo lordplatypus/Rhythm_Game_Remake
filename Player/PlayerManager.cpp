@@ -1,7 +1,7 @@
 #include "PlayerManager.h"
 #include "../Engine/LP.h"
 
-PlayerManager::PlayerManager()
+PlayerManager::PlayerManager(Camera* camera) : camera_{camera}
 {}
 
 PlayerManager::~PlayerManager()
@@ -23,6 +23,7 @@ void PlayerManager::Init()
 
     SetHP(3);
     SetMaxHP(3);
+    SetHPUI();
     SetPerception(64);
     SetWallet(1000);
     SetSpecialCooldown(5);
@@ -38,9 +39,14 @@ int PlayerManager::GetID()
     return ID_;
 }
 
-void PlayerManager::SetHP(const int newHP)
+void PlayerManager::SetHPUI()
 {
-    HP_ = newHP;
+    uiHeart_ = new UIHeart(camera_, GetHP());
+}
+
+UIHeart* PlayerManager::GetHPUI()
+{
+    return uiHeart_;
 }
 
 void PlayerManager::SetMaxHP(const int maxHP)
@@ -51,6 +57,18 @@ void PlayerManager::SetMaxHP(const int maxHP)
 int PlayerManager::GetMaxHP() const
 {
     return maxHP_;
+}
+
+void PlayerManager::AddMaxHP(const int numToAdd)
+{
+    uiHeart_->AddHeart(numToAdd);
+    uiHeart_->TakeDamage(numToAdd);
+    maxHP_ += numToAdd;
+}
+
+void PlayerManager::SetHP(const int newHP)
+{
+    HP_ = newHP;
 }
 
 int PlayerManager::GetHP() const
@@ -71,11 +89,13 @@ void PlayerManager::AddHP(const int HP)
             SetHP(GetHP() + HP);
         }
     }
+    uiHeart_->Heal(HP);
 }
 
 void PlayerManager::SubHP(const int HP)
 {
     HP_ -= HP;
+    uiHeart_->TakeDamage(HP);
 }
 
 void PlayerManager::SetWallet(const int money)
@@ -158,6 +178,7 @@ void PlayerManager::Reset()
     wallet_ = 0;
     LP::DeleteText(walletText_);
     perception_ = 0;
+    delete uiHeart_;
     HP_ = 0;
     maxHP_ = 0;
     ID_ = 0;

@@ -1,10 +1,11 @@
 #include "UIHeart.h"
 #include "../Engine/LP.h"
+#include "../Engine/MP.h"
 #include "../Assets/ID.h"
 
-UIHeart::UIHeart(Camera* camera, int numOfHearts, float bpm, int heartPosition) : camera_{camera}
+UIHeart::UIHeart(Camera* camera, int numOfHearts, int heartPosition) : camera_{camera}
 {
-    bpm_ = bpm;
+    bpm_ = MP::GetBPM(MP::GetPlayingMusic());
     heart_ = LP::SetSprite(heart_texture);
     heartSmall_ = LP::SetSprite(heart_small_texture);
     greyHeart_ = LP::SetSprite(grey_heart_texture);
@@ -17,7 +18,7 @@ UIHeart::UIHeart(Camera* camera, int numOfHearts, float bpm, int heartPosition) 
     heartPosition_ = heartPosition + 1;
     if (heartPosition_ != numOfHearts_)
     {
-        nextHeart_ = new UIHeart(camera_, numOfHearts_, bpm_,  heartPosition_);
+        nextHeart_ = new UIHeart(camera_, numOfHearts_, heartPosition_);
     }
 }
 
@@ -93,7 +94,7 @@ void UIHeart::AddHeart(int numOfNewHearts)
         numOfHearts_ += numOfNewHearts;
         if (nextHeart_ == nullptr) //if the heart is in the last position
         {
-            nextHeart_ = new UIHeart(camera_, numOfHearts_, bpm_, heartPosition_);
+            nextHeart_ = new UIHeart(camera_, numOfHearts_, heartPosition_);
             nextHeart_->AddHeart(0);
         }
         else nextHeart_->AddHeart(numOfNewHearts);
@@ -141,4 +142,10 @@ void UIHeart::SetDamage(const int damage)
     {
         Heal(GetDamage() - damage);
     }
+}
+
+void UIHeart::SetBPM(float bpm)
+{
+    bpm_ = bpm;
+    if (numOfHearts_ != heartPosition_) nextHeart_->SetBPM(bpm);
 }

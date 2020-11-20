@@ -31,8 +31,6 @@ Money::~Money()
 {
     for (auto i : sprites_) LP::DeleteSprite(i);
     sprites_.clear();
-    // scene_->GetUI()->RemoveUIArrow(ID_);
-    // scene_->GetUI()->RemoveUIText(ID_);
 }
 
 void Money::Update(float delta_time, float beat_time)
@@ -43,13 +41,16 @@ void Money::Update(float delta_time, float beat_time)
 void Money::Draw()
 {
     for (auto i : sprites_) LP::DrawSprite(i);
+}
+
+void Money::DelayedDraw()
+{
     arrow_->Draw();
 }
 
 void Money::Effect()
 {
     playerManager_->AddMoney(value_);
-    //scene_->GetUI()->FindUITextCamera("Wallet")->SetText("Spare Parts: " + std::to_string(scene_->GetPlayerManager()->GetWallet()));
 }
 
 void Money::SpriteSetUp()
