@@ -4,6 +4,7 @@
 #include "../Gameobjects/GameObjectManager.h"
 #include "../Engine/Game.h"
 #include "../Particle/ParticleManager.h"
+#include "../Enemy/LocalEnemyManager.h"
 #include "../Map/Map.h"
 
 class TestScene : public Scene
@@ -27,6 +28,7 @@ private:
     ParticleManager pm_;
     Map* map_ {nullptr};
     Game* game_ {nullptr};
+    LocalEnemyManager* lem_{nullptr};
 
     bool saveState_{false};
 };

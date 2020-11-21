@@ -40,7 +40,7 @@ void ReduceCooldown::Draw()
 
 void ReduceCooldown::DelayedDraw()
 {
-    arrow_->Draw();
+    if (ifSeesPlayer_) arrow_->Draw();
 }
 
 void ReduceCooldown::Effect()

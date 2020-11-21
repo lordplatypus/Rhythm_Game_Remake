@@ -9,7 +9,7 @@
 class Roboko : public GameObject
 {
 public:
-    Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManager* pm, TransitionManager* transitionManager, Map* map);
+    Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManager* playerManager, TransitionManager* transitionManager, ParticleManager* particleManager, Map* map);
     ~Roboko() override;
     void Update(float delta_time, float beat_time) override;
     void Draw() override;
@@ -19,6 +19,7 @@ public:
     void ReactNotInRange(GameObject& other) override;
     void SetPerception(const float perception) override;
     float GetPerception() const override;
+    void TakeDamage(const int damage) override;
 
 private:
     void InputHandle(float delta_time, float beat_time);
@@ -31,6 +32,7 @@ private:
     PlayerManager* playerManager_{nullptr};
     TransitionManager* transitionManager_{nullptr};
     Map* map_{nullptr};
+    ParticleManager* pm_{nullptr};
 
     //sprite
     std::vector<int> sprites_;

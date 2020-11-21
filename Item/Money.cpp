@@ -45,7 +45,7 @@ void Money::Draw()
 
 void Money::DelayedDraw()
 {
-    arrow_->Draw();
+    if (ifSeesPlayer_) arrow_->Draw();
 }
 
 void Money::Effect()

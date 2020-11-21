@@ -40,7 +40,7 @@ void PerceptionUp::Draw()
 
 void PerceptionUp::DelayedDraw()
 {
-    arrow_->Draw();
+    if (ifSeesPlayer_) arrow_->Draw();
 }
 
 void PerceptionUp::Effect()

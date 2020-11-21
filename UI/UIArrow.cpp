@@ -48,7 +48,9 @@ void UIArrow::Init()
 }
 
 void UIArrow::Update(float delta_time, float beat_time)
-{}
+{
+    HPBarManager();
+}
 
 void UIArrow::Draw() const
 {
@@ -78,17 +80,6 @@ void UIArrow::UpdatePosition(const sf::Vector2f position)
     if (numOfArrows_ != arrowPosition_) nextArrow_->UpdatePosition(sf::Vector2f(x, position_.y));
 }
 
-void UIArrow::UpdateVisiblity(const bool isVisible)
-{
-    if (!isVisible) 
-    {
-        isVisible_ = isVisible;
-        if (numOfArrows_ != arrowPosition_) nextArrow_->UpdateVisiblity(isVisible);
-    }
-    //else IndividualArrowVisibilty(true);
-    else HPBarManager(true, false, false);
-}
-
 void UIArrow::TakeDamage()
 {
     if (isDamaged_ && numOfArrows_ != arrowPosition_)
@@ -113,27 +104,6 @@ void UIArrow::Heal()
         isDamaged_ = false;
         nextArrow_->Heal();
     }
-}
-
-void UIArrow::IndividualArrowVisibilty(const bool isVisible)
-{
-    if (arrowPosition_ % 4 == 1)//arrowPosition starts with 1, not 0
-    {
-        int nextDamagedArrow = ReportNextNonDamagedArrow(0);
-        
-        if (nextDamagedArrow > 3) isVisible_ = false;//if 4 arrows are damaged in a row, hide them
-        else 
-        {
-            LP::SetSpriteScale(arrow_, 1.0f, 1.0f);
-            //if (isVisible) isVisible_ = false; //if the prev set of 4 arrows are visible, hide this next set
-            //else isVisible_ = true; //if the prev set of 4 are damaged and this set of 4 is not then make this set visible
-        }
-
-        if (isVisible) LP::SetSpriteScale(arrow_, 0.5f, 0.5f);
-    }
-    else isVisible_ = isVisible; //other arrows in the set follow what was set by the 1st arrow in the set
-
-    if (numOfArrows_ != arrowPosition_) nextArrow_->IndividualArrowVisibilty(isVisible_);
 }
 
 void UIArrow::HPBarManager(bool currentHPBar, bool nextHPBar, bool hiddenHPBar)

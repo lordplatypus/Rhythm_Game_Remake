@@ -72,6 +72,11 @@ PlayerManager* Game::GetPlayerManager()
     return playerManager_;
 }
 
+GlobalEnemyManager* Game::GetGlobalEnemyManager()
+{
+    return &gem_;
+}
+
 TransitionManager* Game::GetTransitionManager()
 {
     return &transitionManager_;

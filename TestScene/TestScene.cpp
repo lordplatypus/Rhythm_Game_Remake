@@ -22,14 +22,14 @@ void TestScene::Init()
         sf::Vector2f playerPos = FindGameObject("Player")->GetPosition();
         FindGameObject("Player")->Kill(); //this is to reset the player to update UI/etc
         FindGameObject("Player")->SetActive(false); //So the "new" player dosen't collide with the "old" player
-        AddGameObject(new Roboko(playerPos, this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), map_));
+        AddGameObject(new Roboko(playerPos, this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_, map_));
     }
     else
     {
-        map_ = new TestMap(this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_);
+        lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
+        map_ = new TestMap(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
         MP::PlayMusic(Gain_Therapy);
     }
-    //eml_ = new EnemyManagerLocal(GetEnemyManagerGlobal());
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
     pm_.FadeFromBlack(gameObjects_.Find("Player")->GetPosition().x, gameObjects_.Find("Player")->GetPosition().y);

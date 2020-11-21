@@ -5,6 +5,7 @@
 #include "../Assets/LoadAssets.h"
 #include "Camera.h"
 #include "../Player/PlayerManager.h"
+#include "../Enemy/GlobalEnemyManager.h"
 #include "../Transition/TransitionManager.h"
 
 class Game
@@ -24,6 +25,7 @@ public:
     void EndScene();
     Camera* GetCamera();
     PlayerManager* GetPlayerManager();
+    GlobalEnemyManager* GetGlobalEnemyManager();
     TransitionManager* GetTransitionManager();
     //Called on program shutdown, delete scenes here
     void Clear();
@@ -38,6 +40,7 @@ private:
     Scene* scene_ {nullptr};
     Camera* camera_{nullptr};
     PlayerManager* playerManager_{nullptr};
+    GlobalEnemyManager gem_;
     TransitionManager transitionManager_;
     //load assets
     LoadAssets loadAssets_;

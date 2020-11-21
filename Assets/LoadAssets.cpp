@@ -41,6 +41,10 @@ void LoadAssets::LoadImage()
 
     //Particle
     LP::SetTexture(white_texture, "./Resources/Images/Particle/Particle_White.png", 1080, 720);
+    LP::SetTexture(fire_texture, "./Resources/Images/Particle/particle_fire.png", 128, 128);
+    LP::SetTexture(square_texture, "./Resources/Images/Particle/particle_square8x8.png", 8, 8);
+    LP::SetTexture(smoke_texture, "./Resources/Images/Particle/particle_smoke.png", 128, 128);
+    LP::SetTexture(sparkle_texture, "./Resources/Images/Particle/particle_sparkle_1.png", 128, 128);
     LP::SetTexture(slash_texture, "./Resources/Images/Particle/Particle_Line32x32.png", 32, 32);
     LP::SetTexture(up_arrow_L_texture, "./Resources/Images/Particle/Particle_UpArrowL.png", 8, 8);
     LP::SetTexture(up_arrow_R_texture, "./Resources/Images/Particle/Particle_UpArrowR.png", 8, 8);
@@ -60,6 +64,12 @@ void LoadAssets::LoadImage()
     LP::SetTexture(left_arrow_grey_texture, "./Resources/Images/Arrow/LeftArrowGrey.png", 8, 8);
     LP::SetTexture(right_arrow_texture, "./Resources/Images/Arrow/RightArrow.png", 8, 8);
     LP::SetTexture(right_arrow_grey_texture, "./Resources/Images/Arrow/RightArrowGrey.png", 8, 8);
+
+    //Enemies(敵)
+    LP::SetTexture(companion_texture, "./Resources/Images/Enemy/Enemy_Robot_Companion.png", 256, 32);
+    LP::SetTexture(surveillance_texture, "./Resources/Images/Enemy/Enemy_Robot_Surveillance.png", 128, 64);
+    LP::SetTexture(ghost_texture, "./Resources/Images/Enemy/Enemy_Robot_Ghost.png", 128, 64);
+    LP::SetTexture(crawler_texture, "./Resources/Images/Enemy/Enemy_Robot_Crawler.png", 192, 64);
 
     //Item(アイテム)
     LP::SetTexture(part_screw_texture, "./Resources/Images/Item/Part_Screw.png", 7, 7);

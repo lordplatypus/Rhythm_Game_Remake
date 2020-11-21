@@ -6,8 +6,8 @@
 #include "../Engine/IP.h"
 #include "../Engine/Math.h"
 
-Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManager* pm, TransitionManager* transitionManager, Map* map) : 
-    camera_{camera}, playerManager_{pm}, transitionManager_{transitionManager}, map_{map}
+Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManager* playerManager, TransitionManager* transitionManager, ParticleManager* particleManager, Map* map) : 
+    camera_{camera}, playerManager_{playerManager}, transitionManager_{transitionManager}, pm_{particleManager}, map_{map}
 {
     scene_ = scene;
     position_ = position;
@@ -16,6 +16,11 @@ Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManage
     name_ = "Roboko";
     imageWidth_ = 32;
     imageHeight_ = 32;
+    SetLeft(0);
+    SetRight(imageWidth_);
+    SetTop(0);
+    SetBottom(imageHeight_);
+    SetPerception(64);
 
     sprites_ = LP::SetSprite(roboko_texture, 32, 32, 8, 9);
     for (auto i : sprites_)
@@ -284,7 +289,12 @@ void Roboko::ReactOnCollision(GameObject& other)
 
 void Roboko::ReactInRange(GameObject& other)
 {
-    if (other.GetTag() == "Item")
+    if (other.GetTag() == "Enemy")
+    {
+        other.SetInRangeOfPlayer(true);
+        other.TakeDamage(attackType_);
+    }
+    else if (other.GetTag() == "Item")
     {
         other.TakeDamage(attackType_);
     }
@@ -292,7 +302,10 @@ void Roboko::ReactInRange(GameObject& other)
 
 void Roboko::ReactNotInRange(GameObject& other)
 {
-
+    if (other.GetTag() == "Enemy")
+    {
+        other.SetInRangeOfPlayer(false);
+    }
 }
 
 void Roboko::SetPerception(const float perception)
@@ -303,6 +316,14 @@ void Roboko::SetPerception(const float perception)
 float Roboko::GetPerception() const
 {
     return playerManager_->GetPerception();
+}
+
+void Roboko::TakeDamage(const int damage)
+{
+    if (IsDead()) return;
+    pm_->WhiteOut(position_.x - 540, position_.y - 360);
+    playerManager_->SubHP(damage);
+    if (playerManager_->GetHP() <= 0) Kill();
 }
 
 void Roboko::CheckMoveLocation()

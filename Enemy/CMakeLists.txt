@@ -1,0 +1,14 @@
+set(SOURCES
+${SOURCES}
+${Game_SOURCE_DIR}/Enemy/Enemy.cpp 
+${Game_SOURCE_DIR}/Enemy/GlobalEnemyManager.cpp
+${Game_SOURCE_DIR}/Enemy/LocalEnemyManager.cpp
+${Game_SOURCE_DIR}/Enemy/EnemyData.cpp
+${Game_SOURCE_DIR}/Enemy/Enemy1.cpp
+${Game_SOURCE_DIR}/Enemy/Enemy2.cpp
+${Game_SOURCE_DIR}/Enemy/Enemy3.cpp
+${Game_SOURCE_DIR}/Enemy/Enemy4.cpp
+${Game_SOURCE_DIR}/Enemy/Enemy5.cpp
+${Game_SOURCE_DIR}/Enemy/Enemy6.cpp
+PARENT_SCOPE
+)

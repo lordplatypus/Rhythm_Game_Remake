@@ -44,7 +44,7 @@ void Item::ReactInRange(GameObject& other)
     if (other.GetTag() == "Player")
     {
         ifSeesPlayer_ = true;
-        arrow_->UpdateVisiblity(true);
+        //arrow_->UpdateVisiblity(true);
         //scene_->GetUI()->FindUIText(ID_)->SetTextVisiblity(isInRange);
     }
 }
@@ -54,7 +54,7 @@ void Item::ReactNotInRange(GameObject& other)
     if (other.GetTag() == "Player")
     {
         ifSeesPlayer_ = false;
-        arrow_->UpdateVisiblity(false);
+        //arrow_->UpdateVisiblity(false);
     }
 }
 

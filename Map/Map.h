@@ -5,6 +5,7 @@
 #include "../Scene/Scene.h"
 #include "../Engine/Camera.h"
 #include "../Player/PlayerManager.h"
+#include "../Enemy/LocalEnemyManager.h"
 #include "../Transition/TransitionManager.h"
 #include "../Particle/ParticleManager.h"
 
@@ -23,6 +24,7 @@ public:
     virtual bool IsStair(sf::Vector2f worldCoordinate);
 
 private:
+    void PlaceEnemy(int num, sf::Vector2f position);
     void PlaceItem(int num, sf::Vector2f position);
     void PlaceTransition(int num, sf::Vector2f position);
 
@@ -31,6 +33,7 @@ protected:
     Camera* camera_{nullptr};
     PlayerManager* playerManager_{nullptr};
     ParticleManager* particleManager_{nullptr};
+    LocalEnemyManager* localEnemyManager_{nullptr};
     TransitionManager* transitionManager_{nullptr};
     const int CellSize = 32;
     int MapSize_ = 30;

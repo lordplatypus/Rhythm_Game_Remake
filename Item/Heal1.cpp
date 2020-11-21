@@ -40,7 +40,7 @@ void Heal1::Draw()
 
 void Heal1::DelayedDraw()
 {
-    arrow_->Draw();
+    if (ifSeesPlayer_) arrow_->Draw();
 }
 
 void Heal1::Effect()

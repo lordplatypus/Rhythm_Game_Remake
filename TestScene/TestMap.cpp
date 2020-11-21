@@ -3,11 +3,12 @@
 #include "../Assets/ID.h"
 #include "../Engine/LP.h"
 
-TestMap::TestMap(Scene *scene, Camera* camera, PlayerManager* playerManager, TransitionManager* transitionManager, ParticleManager* particleManager)
+TestMap::TestMap(Scene *scene, Camera* camera, PlayerManager* playerManager, LocalEnemyManager* localEnemyManager, TransitionManager* transitionManager, ParticleManager* particleManager)
 {
     scene_ = scene;
     camera_ = camera;
     playerManager_ = playerManager;
+    localEnemyManager_ = localEnemyManager;
     transitionManager_ = transitionManager;
     particleManager_ = particleManager;
     MapSize_ = 10;

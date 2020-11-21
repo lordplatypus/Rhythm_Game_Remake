@@ -125,7 +125,7 @@ bool GameObject::Perception(GameObject& other)
     std::vector<sf::Vector2f> otherHitBox = other.GetHitBox();
     for (int i = 0; i < otherHitBox.size(); i++)
     {
-        if (otherHitBox[i].x >= GetLeft() - GetPerception() && otherHitBox[i].x < GetRight() + GetPerception() && otherHitBox[i].y >= GetTop() - GetPerception() && otherHitBox[i].y < GetBottom() + GetPerception())
+        if (otherHitBox[i].x > GetLeft() - GetPerception() && otherHitBox[i].x < GetRight() + GetPerception() && otherHitBox[i].y > GetTop() - GetPerception() && otherHitBox[i].y < GetBottom() + GetPerception())
         {
             return true;
         }
@@ -152,6 +152,12 @@ float GameObject::GetPerception() const
 {
     return perception_;
 }
+
+void GameObject::SetInRangeOfPlayer(const bool inRangeOfPlayer)
+{}
+
+bool GameObject::GetInRangeOfPlayer() const
+{}
 
 bool GameObject::GetActive() const
 {

@@ -11,19 +11,16 @@ public:
     void Update(float delta_time, float beat_time);
     void Draw() const;
 
-    int GetCurrentArrow() const;
     void UpdatePosition(const sf::Vector2f position);
-    void UpdateVisiblity(const bool isVisible);
+    int GetCurrentArrow() const;
     void TakeDamage();
     void Heal();
-
     void AddArrow(int numOfArrowsToAdd);
     void RemoveArrow(int numOfArrowsToRemove);
 
 private:
     void Init();
-    void IndividualArrowVisibilty(const bool isVisible);
-    void HPBarManager(bool currentHPBar, bool nextHPBar, bool hiddenHPBar);
+    void HPBarManager(bool currentHPBar = true, bool nextHPBar = false, bool hiddenHPBar = false);
     int ReportNextNonDamagedArrow(int arrowCount);
 
 private:
@@ -32,7 +29,7 @@ private:
     UIArrow* nextArrow_{nullptr};
     int numOfArrows_{0};
     int arrowPosition_{0};
-    bool isVisible_{false};
+    bool isVisible_{true};
     //0 = left, 1 = right, 2 = up, 3 = down
     int arrowDirection_{-1};
 

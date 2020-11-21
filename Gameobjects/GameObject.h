@@ -69,6 +69,8 @@ public:
     void NotInRange(GameObject& other);
     virtual void SetPerception(const float perception);
     virtual float GetPerception() const;
+    virtual void SetInRangeOfPlayer(const bool inRangeOfPlayer);
+    virtual bool GetInRangeOfPlayer() const;
 
 
     //Damage

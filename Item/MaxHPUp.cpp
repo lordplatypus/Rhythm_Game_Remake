@@ -40,7 +40,7 @@ void MaxHPUp::Draw()
 
 void MaxHPUp::DelayedDraw()
 {
-    arrow_->Draw();
+    if (ifSeesPlayer_) arrow_->Draw();
 }
 
 void MaxHPUp::Effect()

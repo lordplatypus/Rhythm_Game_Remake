@@ -5,7 +5,7 @@
 class TestMap : public Map
 {
 public:
-    TestMap(Scene *scene, Camera* camera, PlayerManager* playerManager, TransitionManager* transitionManager, ParticleManager* particleManager);
+    TestMap(Scene *scene, Camera* camera, PlayerManager* playerManager, LocalEnemyManager* localEnemyManager, TransitionManager* transitionManager, ParticleManager* particleManager);
     ~TestMap() override;
     void CreateMap() override;
     void DetailMap();

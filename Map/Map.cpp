@@ -1,6 +1,12 @@
 #include "Map.h"
 #include <fstream>
 #include "../Player/Roboko.h"
+#include "../Enemy/Enemy1.h"
+#include "../Enemy/Enemy2.h"
+#include "../Enemy/Enemy3.h"
+#include "../Enemy/Enemy4.h"
+#include "../Enemy/Enemy5.h"
+#include "../Enemy/Enemy6.h"
 #include "../Item/Money.h"
 #include "../Item/MaxHPUp.h"
 #include "../Item/ReduceCooldown.h"
@@ -27,7 +33,8 @@ void Map::PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap)
         for (int x = 0; x < mapWidth_; x++)
         {
             if (objectMap_[x][y] == -1) continue;
-            else if (objectMap_[x][y] == 0) scene_->AddGameObject(new Roboko(sf::Vector2f(CellSize * x, CellSize * y), scene_, camera_, playerManager_, transitionManager_, this));
+            else if (objectMap_[x][y] == 0) scene_->AddGameObject(new Roboko(sf::Vector2f(CellSize * x, CellSize * y), scene_, camera_, playerManager_, transitionManager_, particleManager_, this));
+            else if (objectMap_[x][y] < 100) PlaceEnemy(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
             else if (objectMap_[x][y] < 200) PlaceItem(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
             else if (objectMap_[x][y] < 300) PlaceTransition(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
         }
@@ -60,6 +67,39 @@ bool Map::IsStair(sf::Vector2f worldCoordinate)
     int terrainID = GetLocation(worldCoordinate);
     if (terrainID == 40) return true;
     return false;
+}
+
+void Map::PlaceEnemy(int num, sf::Vector2f position)
+{
+    switch (num)
+    {
+        case 1:
+        scene_->AddGameObject(new Enemy1(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
+        break;
+
+        case 2:
+        scene_->AddGameObject(new Enemy2(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
+        break;
+
+        case 3:
+        scene_->AddGameObject(new Enemy3(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
+        break;
+
+        case 4:
+        scene_->AddGameObject(new Enemy4(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
+        break;
+
+        case 5:
+        scene_->AddGameObject(new Enemy5(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
+        break;
+
+        case 6:
+        scene_->AddGameObject(new Enemy6(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
+        break;
+
+        default:
+        break;
+    }
 }
 
 void Map::PlaceItem(int num, sf::Vector2f position)

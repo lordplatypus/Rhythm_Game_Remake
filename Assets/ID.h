@@ -25,6 +25,10 @@ enum
     //Particle
     white_texture,
     slash_texture,
+    square_texture,
+    sparkle_texture,
+    smoke_texture,
+    fire_texture,
     up_arrow_L_texture,
     up_arrow_R_texture,
     down_arrow_L_texture,
@@ -43,6 +47,12 @@ enum
     left_arrow_grey_texture,
     right_arrow_texture,
     right_arrow_grey_texture, 
+
+    //Enemies(敵)
+    companion_texture,
+    surveillance_texture,
+    ghost_texture,
+    crawler_texture,
 
     //Item
     part_screw_texture,
