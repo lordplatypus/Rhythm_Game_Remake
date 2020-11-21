@@ -11,6 +11,7 @@ public:
 private:
     void LoadImage();
     void LoadSound();
+    void LoadStageMusic();
 };
 
 #endif

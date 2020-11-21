@@ -148,6 +148,10 @@ void Map::PlaceTransition(int num, sf::Vector2f position)
         transitionTo = "BPM";
         break;
 
+        case 204:
+        transitionTo = "MusicSelect";
+        break;
+
         case 206:
         transitionTo = "Test";
         break;

@@ -16,6 +16,9 @@ enum
     //Title Sceen(タイトルの画像)
     title_scene_texture,
 
+    //Select Music
+    music_select_scene_texture,
+
     //UI
     heart_texture,
     heart_small_texture,
@@ -88,6 +91,16 @@ enum
     DETROIT_BEAT,
     New_Gear,
     across_battle_result,
+};
+
+enum
+{
+    title_scene,
+    lobby_scene,
+    test_scene,
+    stage1_1,
+    stage1_2,
+    stage1_3
 };
 
 #endif

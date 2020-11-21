@@ -5,6 +5,7 @@
 #include "IP.h"
 #include "../Scene/SceneNull.h"
 #include "../BPMScene/BPMScene.h"
+#include "../MusicSelect/MusicSelect.h"
 #include "../TitleScene/TitleScene.h"
 #include "../LobbyScene/LobbyScene.h"
 #include "../TestScene/TestScene.h"
@@ -24,6 +25,7 @@ Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
     AddScene("Title", new TitleScene(this));
     AddScene("Lobby", new LobbyScene(this));
     AddScene("BPM", new BPMScene(this));
+    AddScene("MusicSelect", new MusicSelect(this));
     AddScene("Test", new TestScene(this));
     AddScene("JunkYard", new JunkYardScene(this));
     AddScene("Stage1_1", new Stage1_1(this));

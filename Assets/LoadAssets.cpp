@@ -14,6 +14,7 @@ void LoadAssets::Load()
 {
     LoadImage();
     LoadSound();
+    LoadStageMusic();
 }
 
 void LoadAssets::LoadImage()
@@ -32,6 +33,9 @@ void LoadAssets::LoadImage()
     LP::SetTexture(hearts_texture, "./Resources/Images/Player/Hearts.png", 64, 16);
     LP::SetTexture(bps_scene_texture, "./Resources/Images/BPMScene.png", 1080, 720);
     LP::SetTexture(roboko_texture, "./Resources/Images/Player/Player_Roboko.png", 256, 320);
+
+    //Music Select Scene
+    LP::SetTexture(music_select_scene_texture, "./Resources/Images/MusicSelectScene.png", 1080, 720);
 
     //Player hearts(プレーヤーのハート)
     LP::SetTexture(heart_texture, "./Resources/Images/Player/Heart.png", 16, 16);
@@ -107,4 +111,14 @@ void LoadAssets::LoadSound()
     MP::SetMusic(DETROIT_BEAT, "./Resources/Audio/05 DETROIT BEAT.ogg");
     MP::SetMusic(New_Gear, "./Resources/Audio/12 New Gear.ogg");
     MP::SetMusic(across_battle_result, "./Resources/Audio/24 across battle result.ogg");
+}
+
+void LoadAssets::LoadStageMusic()
+{
+    MP::SetStageMusic(title_scene, Gain_Therapy);
+    MP::SetStageMusic(lobby_scene, Gain_Therapy);
+    MP::SetStageMusic(test_scene, Gain_Therapy);
+    MP::SetStageMusic(stage1_1, Gain_Therapy);
+    MP::SetStageMusic(stage1_2, Gain_Therapy);
+    MP::SetStageMusic(stage1_3, Gain_Therapy);
 }

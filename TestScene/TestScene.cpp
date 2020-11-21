@@ -21,7 +21,8 @@ void TestScene::Init()
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
         map_ = new TestMap(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
-        MP::PlayMusic(Gain_Therapy);
+        //MP::PlayMusic(Gain_Therapy);
+        MP::PlayStageMusic(test_scene, true);
     }
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());

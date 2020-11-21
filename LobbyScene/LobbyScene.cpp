@@ -1,8 +1,9 @@
 #include "LobbyScene.h"
 #include "LobbyMap.h"
+#include "../Assets/ID.h"
 #include "../Engine/IP.h"
+#include "../Engine/MP.h"
 #include "../Engine/Math.h"
-//#include "../Headers/UIHeart.h"
 
 LobbyScene::LobbyScene(Game* game) : game_{game}
 {}
@@ -22,6 +23,7 @@ void LobbyScene::Init()
     //     gameObjects_.Find("Player")->GetPerception(), 5, 0);
     game_->GetPlayerManager()->Init();
     pm_.FadeFromBlack(gameObjects_.Find("Player")->GetPosition().x, gameObjects_.Find("Player")->GetPosition().y);
+    MP::PlayStageMusic(lobby_scene, true);
     transitionTo_ = "";
 }
 

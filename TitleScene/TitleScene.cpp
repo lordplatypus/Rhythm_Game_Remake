@@ -21,7 +21,8 @@ void TitleScene::Init()
     game_->GetCamera()->SetCameraViewSize(360.0f, 240.0f);
     //play music (lobby)
     //mp_->PlayMusicForStage(LobbyStage, true);
-    MP::PlayMusic(Gain_Therapy, true);
+    //MP::PlayMusic(Gain_Therapy, true);
+    MP::PlayStageMusic(title_scene, true);
     //set up ranom
     srand(time(NULL));
     //get the last selected char    

@@ -26,7 +26,9 @@ public:
     static float BeatTime();
     static void ImportBPM();
     static void SetBPM(const int key, const float BPM);
-    static float GetBPM(const int musicID);
+    static float GetBPM(const int key);
+    static void SetStageMusic(const int stageID, const int key);
+    static void PlayStageMusic(const int stageID, const bool loop = false);
 
     //Sound Effects
     static int SetSound(const int key, const std::string& filePath);

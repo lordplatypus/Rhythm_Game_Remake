@@ -10,6 +10,8 @@ std::unordered_map<int, sf::Sound> soundMap_;
 std::unordered_map<int, float> musicBPMMap_;
 int playingMusic_{-1};
 
+std::unordered_map<int, int> stageMusicMap_;
+
 MP::MP()
 {}
 
@@ -136,6 +138,16 @@ void MP::SetBPM(const int key, const float BPM)
 float MP::GetBPM(const int key)
 {
     return musicBPMMap_[key];
+}
+
+void MP::SetStageMusic(const int stageID, const int key)
+{
+    stageMusicMap_[stageID] = key;
+}
+
+void MP::PlayStageMusic(const int stageID, const bool loop)
+{
+    PlayMusic(stageMusicMap_[stageID], loop);
 }
 
 

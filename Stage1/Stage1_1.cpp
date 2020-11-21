@@ -14,13 +14,14 @@ Stage1_1::~Stage1_1()
 
 void Stage1_1::Init()
 {
-    game_->GetTransitionManager()->SetCurrentScene("Test");
+    game_->GetTransitionManager()->SetCurrentScene("Stage1_1");
     if (saveState_) saveState_ = false;
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
         map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
-        MP::PlayMusic(Gain_Therapy);
+        //MP::PlayMusic(Gain_Therapy);
+        MP::PlayStageMusic(stage1_1, true);
     }
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
