@@ -156,6 +156,18 @@ void Map::PlaceTransition(int num, sf::Vector2f position)
         transitionTo = "JunkYard";
         break;
 
+        case 208:
+        transitionTo = "Stage1_1";
+        break;
+
+        case 209:
+        transitionTo = "Stage1_2";
+        break;
+
+        case 210:
+        transitionTo = "Stage1_3";
+        break;
+
         default:
         transitionTo = "Title";
         break;

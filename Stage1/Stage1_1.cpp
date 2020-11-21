@@ -1,38 +1,34 @@
-#include "TestScene.h"
-#include "TestMap.h"
+#include "Stage1_1.h"
+#include "Map1_1.h"
 #include "../Assets/ID.h"
 #include "../Engine/LP.h"
 #include "../Engine/MP.h"
 #include "../Engine/IP.h"
 #include "../Engine/Math.h"
-#include "../Player/Roboko.h"
 
-TestScene::TestScene(Game* game) : game_{game}
+Stage1_1::Stage1_1(Game* game) : game_{game}
 {}
 
-TestScene::~TestScene()
+Stage1_1::~Stage1_1()
 {}
 
-void TestScene::Init()
+void Stage1_1::Init()
 {
     game_->GetTransitionManager()->SetCurrentScene("Test");
     if (saveState_) saveState_ = false;
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        map_ = new TestMap(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
+        map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
         MP::PlayMusic(Gain_Therapy);
     }
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
     pm_.FadeFromBlack(gameObjects_.Find("Player")->GetPosition().x, gameObjects_.Find("Player")->GetPosition().y);
     transitionTo_ = "";
-
-    //test
-    game_->GetTransitionManager()->Lock("Title");
 }
 
-void TestScene::Update(float delta_time, float beat_time)
+void Stage1_1::Update(float delta_time, float beat_time)
 {
     gameObjects_.Update(delta_time, beat_time);
     gameObjects_.Collision();
@@ -51,35 +47,35 @@ void TestScene::Update(float delta_time, float beat_time)
     }
 }
 
-void TestScene::Draw()
+void Stage1_1::Draw()
 {
     map_->Draw();
     gameObjects_.Draw();
     gameObjects_.DelayedDraw();
-    pm_.Draw(); 
+    pm_.Draw();
 }
 
-void TestScene::AddGameObject(GameObject* gameObject)
+void Stage1_1::AddGameObject(GameObject* gameObject)
 {
     gameObjects_.Add(gameObject);
 }
 
-GameObject* TestScene::FindGameObject(const std::string& string, const bool byTag, const bool byID)
+GameObject* Stage1_1::FindGameObject(const std::string& string, const bool byTag, const bool byID)
 {
     if (byID) return gameObjects_.Find(std::stoi(string));
     else return gameObjects_.Find(string, byTag);
 }
 
-void TestScene::ChangeGameObjectOrder(const std::string& name, const std::string& newPos)
+void Stage1_1::ChangeGameObjectOrder(const std::string& name, const std::string& newPos)
 {}
 
-void TestScene::ChangeScene(const std::string& sceneName)
+void Stage1_1::ChangeScene(const std::string& sceneName)
 {
     transitionTo_ = sceneName;
     if (transitionTo_ == "JunkYard") saveState_ = true;
 }
 
-void TestScene::End()
+void Stage1_1::End()
 {
     pm_.Clear();
     if (saveState_) return;
