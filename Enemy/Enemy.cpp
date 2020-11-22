@@ -61,5 +61,6 @@ bool Enemy::GetInRangeOfPlayer() const
 void Enemy::Kill()
 {
     isDead_ = true;
+    lem_->SetEnemyDeathCount(lem_->GetEnemyDeathCount() + 1);
     delete arrow_;
 }

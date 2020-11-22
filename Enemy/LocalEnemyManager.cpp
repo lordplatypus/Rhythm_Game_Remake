@@ -157,6 +157,25 @@ bool LocalEnemyManager::GetHealModifier() const
     return true;
 }
 
+
+//Enemy Count
+
+int LocalEnemyManager::GetEnemyCount() const
+{
+    return ed_.size();
+}
+
+void LocalEnemyManager::SetEnemyDeathCount(const int deathCount)
+{
+    deathCount_ = deathCount;
+}
+
+int LocalEnemyManager::GetEnemyDeathCount() const
+{
+    return deathCount_;
+}
+
+
 void LocalEnemyManager::Clear()
 {
     for (auto i : ed_) delete i;

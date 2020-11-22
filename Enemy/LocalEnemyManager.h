@@ -43,6 +43,11 @@ public:
     int GetRangeModifier() const;
     bool GetHealModifier() const;
 
+    //Enemy Count
+    int GetEnemyCount() const;
+    void SetEnemyDeathCount(const int deathCount);
+    int GetEnemyDeathCount() const;
+
     //
     void Remove(const int ID);
     void Clear();
@@ -58,6 +63,8 @@ private:
     int tempMaxHPModifier_{0};
     int tempRangeModifier_{0};
     bool tempHealModifier_{true};
+
+    int deathCount_{0};
 };
 
 #endif

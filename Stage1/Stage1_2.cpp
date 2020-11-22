@@ -5,6 +5,7 @@
 #include "../Engine/MP.h"
 #include "../Engine/IP.h"
 #include "../Engine/Math.h"
+#include "../Event/DefeatEnemies.h"
 
 Stage1_2::Stage1_2(Game* game) : game_{game}
 {}
@@ -20,8 +21,8 @@ void Stage1_2::Init()
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
         map_ = new Map1_2(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
-        //MP::PlayMusic(Gain_Therapy);
         MP::PlayStageMusic(stage1_2, true);
+        AddGameObject(new DefeatEnemies("Stage1_3", game_->GetCamera(), game_->GetTransitionManager(), lem_));
     }
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());

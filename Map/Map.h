@@ -1,6 +1,5 @@
 #ifndef MAP_H_
 #define MAP_H_
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include "../Scene/Scene.h"
 #include "../Engine/Camera.h"
@@ -17,7 +16,6 @@ public:
     virtual void CreateMap();
     virtual void PlaceObjects();
     virtual void PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap);
-    //virtual void Update();
     virtual void Draw();
     virtual int GetLocation(sf::Vector2f worldCoordinate);
     virtual bool IsWall(sf::Vector2f worldCoordinate);
