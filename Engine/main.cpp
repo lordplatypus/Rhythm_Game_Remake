@@ -24,8 +24,8 @@ int main()
         {//
             if (event.type == sf::Event::Resized)
             {
-                camera.SetCameraViewSize(sf::FloatRect(0, 0, event.size.width, event.size.height));
-                window.setView(*camera.GetCamera());   
+                //camera.SetCameraViewSize(sf::FloatRect(0, 0, event.size.width, event.size.height));
+                //window.setView(*camera.GetCamera());   
             }
             else if (event.type == sf::Event::Closed)
             {

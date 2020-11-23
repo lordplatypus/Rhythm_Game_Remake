@@ -49,7 +49,6 @@ Roboko::~Roboko()
         LP::DeleteSprite(i);
     }
     sprites_.clear();
-    //delete uiHeart_;
 }
 
 void Roboko::Update(float delta_time, float beat_time)
