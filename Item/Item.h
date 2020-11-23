@@ -33,6 +33,8 @@ protected:
     int priceTag_{0};
     bool ifSeesPlayer_{false};
     int HP_{0};
+
+    int text_{0};
 };
 
 #endif

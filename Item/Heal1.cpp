@@ -21,11 +21,14 @@ Heal1::Heal1(sf::Vector2f position, PlayerManager* playerManager, ParticleManage
     arrow_ = new UIArrow(pm_, position_, HP_);
 
     sprite_ = LP::SetSprite(item_heal_texture, position_);
+    text_ = LP::SetText("Heal 1 Heart: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
+    LP::SetTextScale(text_, 0.1f, 0.1f);
 }
 
 Heal1::~Heal1()
 {
     LP::DeleteSprite(sprite_);
+    LP::DeleteText(text_);
 }
 
 void Heal1::Update(float delta_time, float beat_time)
@@ -40,7 +43,11 @@ void Heal1::Draw()
 
 void Heal1::DelayedDraw()
 {
-    if (ifSeesPlayer_) arrow_->Draw();
+    if (ifSeesPlayer_) 
+    {
+        arrow_->Draw();
+        LP::DrawText(text_);
+    }
 }
 
 void Heal1::Effect()

@@ -21,11 +21,14 @@ PerceptionUp::PerceptionUp(sf::Vector2f position, PlayerManager* playerManager, 
     arrow_ = new UIArrow(pm_, position_, HP_);
 
     sprite_ = LP::SetSprite(item_range_texture, position_);
+    text_ = LP::SetText("Range +1: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
+    LP::SetTextScale(text_, 0.1f, 0.1f);
 }
 
 PerceptionUp::~PerceptionUp()
 {
     LP::DeleteSprite(sprite_);
+    LP::DeleteText(text_);
 }
 
 void PerceptionUp::Update(float delta_time, float beat_time)
@@ -40,7 +43,11 @@ void PerceptionUp::Draw()
 
 void PerceptionUp::DelayedDraw()
 {
-    if (ifSeesPlayer_) arrow_->Draw();
+    if (ifSeesPlayer_) 
+    {
+        arrow_->Draw();
+        LP::DrawText(text_);
+    }
 }
 
 void PerceptionUp::Effect()
