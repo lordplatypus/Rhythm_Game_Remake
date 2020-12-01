@@ -16,10 +16,10 @@ Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManage
     name_ = "Roboko";
     imageWidth_ = 32;
     imageHeight_ = 32;
-    SetLeft(0);
-    SetRight(imageWidth_);
-    SetTop(0);
-    SetBottom(imageHeight_);
+    // SetLeft(0);
+    // SetRight(imageWidth_);
+    // SetTop(0);
+    // SetBottom(imageHeight_);
     SetPerception(64);
 
     sprites_ = LP::SetSprite(roboko_texture, 32, 32, 8, 9);

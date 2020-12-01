@@ -19,10 +19,10 @@ Enemy3::Enemy3(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     name_ = "3";
     imageWidth_ = 32;
     imageHeight_ = 32;
-    SetLeft(0);
-    SetRight(imageWidth_);
-    SetTop(0);
-    SetBottom(imageHeight_);
+    // SetLeft(0);
+    // SetRight(imageWidth_);
+    // SetTop(0);
+    // SetBottom(imageHeight_);
     numOfBeatsBetweenAttacks_ = 4;
     flip_ = false;
 

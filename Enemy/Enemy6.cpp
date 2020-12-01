@@ -20,10 +20,10 @@ Enemy6::Enemy6(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     name_ = "6";
     imageWidth_ = 32;
     imageHeight_ = 32;
-    SetLeft(0);
-    SetRight(imageWidth_);
-    SetTop(0);
-    SetBottom(imageHeight_);
+    // SetLeft(0);
+    // SetRight(imageWidth_);
+    // SetTop(0);
+    // SetBottom(imageHeight_);
     numOfBeatsBetweenAttacks_ = 2;
     flip_ = false;
 

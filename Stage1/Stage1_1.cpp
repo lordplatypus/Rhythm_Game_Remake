@@ -8,6 +8,10 @@
 #include "../Event/DefeatEnemies.h"
 #include "../Event/Spawner.h"
 
+//TEST
+#include "MapTest.h"
+#include "../Player/Roboko.h"
+
 Stage1_1::Stage1_1(Game* game) : game_{game}
 {}
 
@@ -21,11 +25,14 @@ void Stage1_1::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
+        //map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
+        map_ = new MapTest(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_); //TEST
         MP::PlayStageMusic(stage1_1, true);
         //AddGameObject(new DefeatEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), lem_));
-        AddGameObject(new Spawner("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));
+        //AddGameObject(new Spawner("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));
     }
+    AddGameObject(new Roboko(sf::Vector2f(64, 64), this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_, map_)); //TEST
+
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
     pm_.FadeFromBlack(gameObjects_.Find("Player")->GetPosition().x, gameObjects_.Find("Player")->GetPosition().y);

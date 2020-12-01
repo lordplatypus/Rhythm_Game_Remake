@@ -30,20 +30,23 @@ public:
     virtual void Kill();
 
     //Hitbox
-    //Left edge of the hitbox
-    int GetLeft() const;
-    void SetLeft(const int left);
-    //Right edge of the hitbox
-    int GetRight() const;
-    void SetRight(const int right);
-    //Top edge of the hitbox
-    int GetTop() const;
-    void SetTop(const int top);
-    //Bottom edge of the hitbox
-    int GetBottom() const;
-    void SetBottom(const int bottom);
-    //Return a vector of points that make up the hitbox
-    const std::vector<sf::Vector2f> GetHitBox();
+    // //Left edge of the hitbox
+    // int GetLeft() const;
+    // void SetLeft(const int left);
+    // //Right edge of the hitbox
+    // int GetRight() const;
+    // void SetRight(const int right);
+    // //Top edge of the hitbox
+    // int GetTop() const;
+    // void SetTop(const int top);
+    // //Bottom edge of the hitbox
+    // int GetBottom() const;
+    // void SetBottom(const int bottom);
+    // //Return a vector of points that make up the hitbox
+    // const std::vector<sf::Vector2f> GetHitBox();
+
+    sf::IntRect GetHitBox() const;
+    sf::IntRect GetPerceptionHitBox() const;
 
 
     //Collision

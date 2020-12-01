@@ -18,10 +18,10 @@ Enemy2::Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     name_ = "2";
     imageWidth_ = 32;
     imageHeight_ = 32;
-    SetLeft(0);
-    SetRight(imageWidth_);
-    SetTop(0);
-    SetBottom(imageHeight_);
+    // SetLeft(0);
+    // SetRight(imageWidth_);
+    // SetTop(0);
+    // SetBottom(imageHeight_);
 
     ed_ = lem_->Add(HP_, HP_, 1, 0);
 

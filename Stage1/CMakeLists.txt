@@ -6,5 +6,6 @@ ${Game_SOURCE_DIR}/Stage1/Stage1_2.cpp
 ${Game_SOURCE_DIR}/Stage1/Map1_2.cpp
 ${Game_SOURCE_DIR}/Stage1/Stage1_3.cpp
 ${Game_SOURCE_DIR}/Stage1/Map1_3.cpp
+${Game_SOURCE_DIR}/Stage1/MapTest.cpp
 PARENT_SCOPE
 )

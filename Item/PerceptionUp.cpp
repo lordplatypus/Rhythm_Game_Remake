@@ -13,10 +13,10 @@ PerceptionUp::PerceptionUp(sf::Vector2f position, PlayerManager* playerManager, 
     priceTag_ = 200;
     imageWidth_ = 32;
     imageHeight_ = 32;
-    SetLeft(0);
-    SetRight(imageWidth_);
-    SetTop(0);
-    SetBottom(imageHeight_);
+    // SetLeft(0);
+    // SetRight(imageWidth_);
+    // SetTop(0);
+    // SetBottom(imageHeight_);
     SetPerception(32);
     arrow_ = new UIArrow(pm_, position_, HP_);
 
