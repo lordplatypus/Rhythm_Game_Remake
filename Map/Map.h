@@ -16,6 +16,7 @@ public:
     virtual void CreateMap();
     virtual void PlaceObjects();
     virtual void PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap);
+    virtual void PlaceObjectsInRoom(sf::IntRect roomArea, std::vector<std::vector<int> > objectMap);
     virtual void Draw();
     virtual int GetLocation(sf::Vector2f worldCoordinate);
     virtual bool IsWall(sf::Vector2f worldCoordinate);

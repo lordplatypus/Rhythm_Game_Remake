@@ -37,6 +37,8 @@ void MapTest::CreateMap()
     Room* prevRoom = new Room1(currentPosition);
     rooms_.push_back(prevRoom);
 
+    prevRoom->SetPlayerRand();
+
     for (int i = 1; i < 5; i++)
     {
         int temp = rand() % 3;
@@ -116,8 +118,6 @@ void MapTest::CreateMap()
         prevRoom = currentRoom;
     }
 
-
-
     for (auto i = rooms_.begin(); i != rooms_.end(); i++)
     {
         for (auto j = next(i); j != rooms_.end(); j++)
@@ -153,96 +153,17 @@ void MapTest::CreateMap()
         }
     }
 
-
+    rooms_.back()->SetStairRand(transitionManager_->GetSceneID("Stage1_2"));
 
     for (auto i : rooms_)
     {
         i->SetTiles();
+        i->SetEnemiesRand(rand() % 3);
+        PlaceObjectsInRoom(i->GetRoomArea(), i->GetRoomObjectMap());
     }
+
+    
 }
-
-// void MapTest::CreateMap()
-// {
-//     sf::Vector2i currentPosition(0, 0);
-//     //RandomRoom(currentPosition);
-//     Room1* prevRoom = new Room1(currentPosition);
-//     rooms_.push_back(prevRoom);
-
-//     for (int i = 1; i < 5; i++)
-//     {
-//         //RandomRoom(currentPosition);
-//         Room1* currentRoom = new Room1(currentPosition);
-//         rooms_.push_back(currentRoom);
-//         bool done = false;
-//         while (!done)
-//         {
-//             currentPosition = sf::Vector2i(prevRoom->GetRoomArea().left, prevRoom->GetRoomArea().top);
-//             int direction = rand() % 4;
-//             //int direction = 0;
-//             switch (direction)
-//             {
-//                 case 0:
-//                 currentPosition.x = prevRoom->GetRoomArea().left - currentRoom->GetRoomArea().width;
-//                 for (auto i : prevRoom->GetHallPoints())
-//                 {
-//                     for (auto j : currentRoom->GetHallPoints())
-//                     {
-//                         if (i.x + prevRoom->GetRoomArea().left == j.x + currentPosition.x && i.y + prevRoom->GetRoomArea().top == j.y - 10 + currentPosition.y) done = true;
-//                     }
-//                 }
-//                 break;
-
-//                 case 1:
-//                 currentPosition.x = prevRoom->GetRoomArea().left + prevRoom->GetRoomArea().width;
-//                 for (auto i : prevRoom->GetHallPoints())
-//                 {
-//                     for (auto j : currentRoom->GetHallPoints())
-//                     {
-//                         if (i.x + prevRoom->GetRoomArea().left == j.x + currentPosition.x && i.y + prevRoom->GetRoomArea().top == j.y + 10 + currentPosition.y) done = true;
-//                     }
-//                 }
-//                 break;
-
-//                 case 2:
-//                 currentPosition.y = prevRoom->GetRoomArea().top - currentRoom->GetRoomArea().height;
-//                 for (auto i : prevRoom->GetHallPoints())
-//                 {
-//                     for (auto j : currentRoom->GetHallPoints())
-//                     {
-//                         if (i.x + prevRoom->GetRoomArea().left == j.x + 10 + currentPosition.x && i.y + prevRoom->GetRoomArea().top == j.y + currentPosition.y) done = true;
-//                     }
-//                 }
-//                 break;
-
-//                 case 3:
-//                 currentPosition.y = prevRoom->GetRoomArea().top + prevRoom->GetRoomArea().height;
-//                 for (auto i : prevRoom->GetHallPoints())
-//                 {
-//                     for (auto j : currentRoom->GetHallPoints())
-//                     {
-//                         if (i.x + prevRoom->GetRoomArea().left == j.x - 10 + currentPosition.x && i.y + prevRoom->GetRoomArea().top == j.y + currentPosition.y) done = true;
-//                     }
-//                 }
-//                 break;
-
-//                 default:
-//                 break;
-//             }
-//             if (!done) continue;
-//             currentRoom->SetRoomPosition(currentPosition);
-//             for (int i = 0; i < rooms_.size() - 1; i++)
-//             {
-//                 if (currentRoom->GetRoomArea().intersects(rooms_[i]->GetRoomArea())) done = false;
-//             }
-//         }
-//         prevRoom = currentRoom;
-//     }
-
-//     for (auto i : rooms_)
-//     {
-//         i->SetRoomMap();
-//     }
-// }
 
 void MapTest::Draw()
 {
@@ -264,103 +185,3 @@ void MapTest::RandomRoom(sf::Vector2i position)
 {
     rooms_.push_back(new Room1(position));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void MapTest::PlacePlayer(sf::Vector2i position)
-// {
-//     for (int y = position.y; y < position.y + 10; y++)
-//     {
-//         for (int x = position.x; x < position.x + 10; x++)
-//         {
-//             objectMap_[x][y] = -1;
-//         }
-//     }
-//     int playerX;
-//     int playerY;
-//     int saftyNet = 0;
-//     bool placePlayer = false;
-//     while (!placePlayer && saftyNet < 100)
-//     {
-//         saftyNet++;
-//         int playerX = (rand() % 8) + 1 + position.x;
-//         int playerY = (rand() % 7) + 2 + position.y;
-//         if (map_[playerX][playerY] >= 41)
-//         {
-//             objectMap_[playerX][playerY] = 0;
-//             placePlayer = true;
-//         }
-//     }
-// }
-
-// void MapTest::PlaceEnemy(sf::Vector2i position)
-// {
-//     for (int y = position.y; y < position.y + 10; y++)
-//     {
-//         for (int x = position.x; x < position.x + 10; x++)
-//         {
-//             if (map_[x][y] == 40) continue;
-//             else if (objectMap_[x][y] >= 100) continue;
-//             else if (map_[x][y] < 40) 
-//             {
-//                 objectMap_[x][y] = -1;
-//                 continue;
-//             }
-
-//             if (rand() % 10 == 0) objectMap_[x][y] = rand() % 4 + 1;
-//             else objectMap_[x][y] = -1;
-//         }
-//     }
-// }
-
-// void MapTest::PlaceStaircase(sf::Vector2i position)
-// {
-//     int saftyNet = 0;
-//     while (saftyNet < 100)
-//     {
-//         saftyNet++;
-//         int x = (rand() % 8) + 1 + position.x;
-//         int y = (rand() % 7) + 2 + position.y;
-//         if (map_[x][y] >= 41)
-//         {
-//             map_[x][y] = 40;
-//             objectMap_[x][y] = transitionManager_->GetSceneID("Stage1_2");
-//             //scene_->AddEvent(sf::Vector2f(CellSize * x, CellSize * y), "Stage1_2", scene_);
-//             return;
-//         }
-//     }
-// }
-
-// void MapTest::PlaceJunkYard(sf::Vector2i position)
-// {
-//     int saftyNet = 0;
-//     while (saftyNet < 100)
-//     {
-//         saftyNet++;
-//         int x = (rand() % 8) + 1 + position.x;
-//         int y = (rand() % 7) + 2 + position.y;
-//         if (map_[x][y] >= 41)
-//         {
-//             objectMap_[x][y] = transitionManager_->GetSceneID("JunkYard");
-//             return;
-//         }
-//     }
-// }

@@ -32,11 +32,28 @@ void Map::PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap)
     {
         for (int x = 0; x < mapWidth_; x++)
         {
-            if (objectMap_[x][y] == -1) continue;
-            else if (objectMap_[x][y] == 0) scene_->AddGameObject(new Roboko(sf::Vector2f(CellSize * x, CellSize * y), scene_, camera_, playerManager_, transitionManager_, particleManager_, this));
-            else if (objectMap_[x][y] < 100) PlaceEnemy(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
-            else if (objectMap_[x][y] < 200) PlaceItem(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
-            else if (objectMap_[x][y] < 300) PlaceTransition(objectMap_[x][y], sf::Vector2f(CellSize * x, CellSize * y));
+            if (objectMap[x][y] == -1) continue;
+            else if (objectMap[x][y] == 0) scene_->AddGameObject(new Roboko(sf::Vector2f(CellSize * x, CellSize * y), scene_, camera_, playerManager_, transitionManager_, particleManager_, this));
+            else if (objectMap[x][y] < 100) PlaceEnemy(objectMap[x][y], sf::Vector2f(CellSize * x, CellSize * y));
+            else if (objectMap[x][y] < 200) PlaceItem(objectMap[x][y], sf::Vector2f(CellSize * x, CellSize * y));
+            else if (objectMap[x][y] < 300) PlaceTransition(objectMap[x][y], sf::Vector2f(CellSize * x, CellSize * y));
+        }
+    }
+}
+
+void Map::PlaceObjectsInRoom(sf::IntRect roomArea, std::vector<std::vector<int> > objectMap)
+{
+    for (int y = 0; y < roomArea.height; y++)
+    {
+        for (int x = 0; x < roomArea.width; x++)
+        {
+            if (objectMap[x][y] == -1) continue;
+            sf::Vector2f worldPosition = sf::Vector2f((x + roomArea.left) * CellSize, (y + roomArea.top) * CellSize);
+
+            if (objectMap[x][y] == 0) scene_->AddGameObject(new Roboko(worldPosition, scene_, camera_, playerManager_, transitionManager_, particleManager_, this));
+            else if (objectMap[x][y] < 100) PlaceEnemy(objectMap[x][y], worldPosition);
+            else if (objectMap[x][y] < 200) PlaceItem(objectMap[x][y], worldPosition);
+            else if (objectMap[x][y] < 300) PlaceTransition(objectMap[x][y], worldPosition);
         }
     }
 }

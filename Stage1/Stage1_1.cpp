@@ -28,10 +28,10 @@ void Stage1_1::Init()
         //map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
         map_ = new MapTest(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_); //TEST
         MP::PlayStageMusic(stage1_1, true);
-        //AddGameObject(new DefeatEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), lem_));
+        AddGameObject(new DefeatEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), lem_));
         //AddGameObject(new Spawner("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));
     }
-    AddGameObject(new Roboko(sf::Vector2f(64, 64), this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_, map_)); //TEST
+    //AddGameObject(new Roboko(sf::Vector2f(64, 64), this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_, map_)); //TEST
 
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());

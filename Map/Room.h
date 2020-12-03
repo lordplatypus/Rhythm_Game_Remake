@@ -30,21 +30,26 @@ public:
     void CreateDownHall(sf::Vector2i position);
     std::vector<std::vector<int>> GetRoomMap() const;
 
-    virtual void SetRoomObjectMap();
-    std::vector<std::vector<int>> GetRoomObjectMap() const;
-
-
     //Details
 
     void SetHallPoints(std::vector<sf::Vector2i> hallPoints);
     void SetHallPoint(sf::Vector2i hallPoint);
     std::vector<sf::Vector2i> GetHallPoints() const;
-    bool CheckForHallConnection(std::vector<sf::Vector2i> other);
-
+    void SetStair(sf::Vector2i stairPosition, int transitionLocID);
+    void SetStairRand(int transitionLocID);
 
     //Set Tiles
 
     void SetTiles();
+
+
+    //Objects
+    void SetRoomObjectMap(const std::string& roomObjectDataLocation);
+    void SetRoomObjectMapNull();
+    void SetObject(sf::Vector2i objectPosition, int objectID);
+    void SetPlayerRand();
+    void SetEnemiesRand(int numOfEnemies);
+    std::vector<std::vector<int>> GetRoomObjectMap() const;
 
 
 
