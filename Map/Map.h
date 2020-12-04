@@ -2,6 +2,7 @@
 #define MAP_H_
 #include <vector>
 #include "../Scene/Scene.h"
+#include "Room.h"
 #include "../Engine/Camera.h"
 #include "../Player/PlayerManager.h"
 #include "../Enemy/LocalEnemyManager.h"
@@ -13,11 +14,21 @@ class Map
 public:
     Map();
     virtual ~Map();
+    virtual void Draw();
     virtual void CreateMap();
     virtual void PlaceObjects();
     virtual void PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap);
-    virtual void PlaceObjectsInRoom(sf::IntRect roomArea, std::vector<std::vector<int> > objectMap);
-    virtual void Draw();
+    virtual void CreateMapWithRooms(int numOfRooms, const std::string& transitionTo);
+
+private:
+    void SetRooms(int numOfRooms);
+    Room* SetGetRandRoom(sf::Vector2i position, int roomBuildOrderNum, int maxRoomNum);
+    void SetHalls();
+    void SetTransition(const std::string& transitionTo);
+    void BuildMapBlueprint();
+    void PlaceObjectsInRoom(sf::IntRect roomArea, std::vector<std::vector<int> > objectMap); 
+
+public:
     virtual int GetLocation(sf::Vector2f worldCoordinate);
     virtual bool IsWall(sf::Vector2f worldCoordinate);
     virtual bool IsStair(sf::Vector2f worldCoordinate);
@@ -39,9 +50,13 @@ protected:
     int mapWidth_ = 0;
     int mapHeight_ = 0;
     
+    //Regular Map
     std::vector<std::vector<int> > map_;
     std::vector<std::vector<int> > objectMap_;
     std::vector<int> tileMapKeys_;
+
+    //For making a map with rooms
+    std::vector<Room*> rooms_;
 };
 
 #endif

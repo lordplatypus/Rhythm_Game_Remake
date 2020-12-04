@@ -57,8 +57,6 @@ public:
 
     int GetLocation(sf::Vector2i worldCoordinate);
     bool IsWall(sf::Vector2i worldCoordinate);
-    bool PlayerRoom() const;
-    bool StairRoom() const;
 
 
     //end
@@ -84,6 +82,7 @@ protected:
     //Bools
     bool playerRoom_{false};
     bool stairRoom_{false};
+    bool blockRandSpawn_{false};
 };
 
 #endif

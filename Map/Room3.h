@@ -5,7 +5,7 @@
 class Room3 : public Room
 {
 public:
-    Room3(sf::Vector2i position, bool playerRoom = false, bool stairRoom = false);
+    Room3(sf::Vector2i position, bool blockRandSpawn = false, bool playerRoom = false);
 };
 
 #endif

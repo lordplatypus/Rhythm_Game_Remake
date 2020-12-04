@@ -1,13 +1,13 @@
 #include "Room1.h"
 
-Room1::Room1(sf::Vector2i position, bool playerRoom, bool stairRoom)
+Room1::Room1(sf::Vector2i position, bool blockRandSpawn, bool playerRoom)
 {
-    roomDataLocation_ = "./Resources/Map/Test/Factory_Room1.csv";
+    roomDataLocation_ = "./Resources/Map/Room/Factory_Room_01.csv";
     position_ = position;
     roomWidth_ = 9;
     roomHeight_ = 9;
+    blockRandSpawn_ = blockRandSpawn;
     playerRoom_ = playerRoom;
-    stairRoom_ = stairRoom;
 
     SetRoomArea(position_.x, position_.y, roomWidth_, roomHeight_);
     
@@ -17,4 +17,7 @@ Room1::Room1(sf::Vector2i position, bool playerRoom, bool stairRoom)
     SetHallPoint(sf::Vector2i(4, 8)); //bottom anchor
 
     SetRoomMap();
+
+    if (playerRoom_) SetPlayerRand();
+    if (!blockRandSpawn_) SetEnemiesRand(rand() % 3);
 }

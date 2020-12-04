@@ -144,9 +144,6 @@ void Room::SetStair(sf::Vector2i stairPosition, int transitionLocID)
 
 void Room::SetStairRand(int transitionLocID)
 {
-    if (playerRoom_) return;
-    stairRoom_ = true;
-
     bool done = false;
     int failsafe = 0;
     while (!done)
@@ -214,9 +211,6 @@ void Room::SetObject(sf::Vector2i objectPosition, int objectID)
 
 void Room::SetPlayerRand()
 {
-    playerRoom_ = true;
-    stairRoom_ = false;
-
     bool done = false;
     int failsafe = 0;
     while (!done)
@@ -236,7 +230,7 @@ void Room::SetPlayerRand()
 
 void Room::SetEnemiesRand(int numOfEnemies)
 {
-    if (playerRoom_) return;
+    if (blockRandSpawn_) return;
 
     int done = 0;
     int failsafe = 0;
@@ -276,16 +270,6 @@ bool Room::IsWall(sf::Vector2i worldCoordinate)
     int terrainID = GetLocation(worldCoordinate);
     if (terrainID >= 40) return false;
     else return true;
-}
-
-bool Room::PlayerRoom() const
-{
-    return playerRoom_;
-}
-
-bool Room::StairRoom() const
-{
-    return stairRoom_;
 }
 
 void Room::End()

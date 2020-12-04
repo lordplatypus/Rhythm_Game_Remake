@@ -10,7 +10,7 @@ class MapTest : public Map
 public:
     MapTest(Scene *scene, Camera* camera, PlayerManager* playerManager, LocalEnemyManager* localEnemyManager, TransitionManager* transitionManager, ParticleManager* particleManager);
     ~MapTest() override;
-    void CreateMap() override;
+    //void CreateMap() override;
 
     // void PlacePlayer(sf::Vector2i position);
     // void PlaceEnemy(sf::Vector2i position);
@@ -20,10 +20,7 @@ public:
     bool IsWall(sf::Vector2f worldCoordinate) override;
 
 private:
-    void RandomRoom(sf::Vector2i position);
-
-private:
-    std::vector<Room*> rooms_;
+    //std::vector<Room*> rooms_;
 
     //
 
