@@ -11,17 +11,18 @@ LobbyMap::LobbyMap(Scene *scene, Camera* camera, PlayerManager* playerManager, T
     playerManager_ = playerManager;
     transitionManager_ = transitionManager;
     particleManager_ = particleManager;
-    MapSize_ = 11;
-    mapWidth_ = 11;
-    mapHeight_ = 11;
+    // MapSize_ = 11;
+    // mapWidth_ = 11;
+    // mapHeight_ = 11;
+    SetMapArea(11, 11);
 
-    std::vector<int> resize(MapSize_);
-    map_.resize(MapSize_, resize);
-    objectMap_.resize(MapSize_, resize);
+    LoadTilesFromCSC("./Resources/Map/Lobby_Map_Factory_Main.csv");
+    LoadDetailsFromCSC("./Resources/Map/Lobby_Map_Factory_Details.csv");
+    LoadObjectsFromCSC("./Resources/Map/Lobby_Map_Factory_Object.csv");
 
-    CreateMap();
-    DetailMap();
-    PlaceObjects();
+    //CreateMap();
+    //DetailMap();
+    //PlaceObjects();
 
     MenuText.push_back(LP::SetText("Tutorial", sf::Vector2f(CellSize * 1, CellSize * 2), 16));
     MenuText.push_back(LP::SetText("Stage 1", sf::Vector2f(CellSize * 3, CellSize * 2), 16));
@@ -43,75 +44,6 @@ LobbyMap::~LobbyMap()
     {
         LP::DeleteText(i);
     }
-}
-
-void LobbyMap::CreateMap()
-{
-    std::ifstream mapData("./Resources/Map/Lobby_Map_Factory_Main.csv");
-    int value;
-    char dummy;
-
-    for (int y = 0; y < MapSize_; y++)
-    {
-        for (int x = 0; x < MapSize_; x++)
-        {
-            mapData >> map_[x][y];
-            if (x < MapSize_ - 1) 
-            {
-                mapData >> dummy;
-            }
-            if (map_[x][y] == -1) continue;
-            if (map_[x][y] != -1) 
-            {
-                tileMapKeys_.push_back(LP::SetSprite(tile_map, sf::Vector2f(x*CellSize, y*CellSize), CellSize, CellSize, map_[x][y]));
-            }
-        }
-    }
-}
-
-void LobbyMap::DetailMap()
-{
-    std::ifstream mapData("./Resources/Map/Lobby_Map_Factory_Details.csv");
-    int value;
-    char dummy;
-
-    for (int y = 0; y < MapSize_; y++)
-    {
-        for (int x = 0; x < MapSize_; x++)
-        {
-            mapData >> value;
-            if (x < MapSize_ - 1) 
-            {
-                mapData >> dummy;
-            }
-            if (value == -1) continue;
-            if (value != -1) 
-            {
-                tileMapKeys_.push_back(LP::SetSprite(tile_map_details, sf::Vector2f(x*CellSize, y*CellSize), CellSize, CellSize, value));
-            }
-        }
-    }
-}
-
-void LobbyMap::PlaceObjects()
-{
-    std::ifstream objectData("./Resources/Map/Lobby_Map_Factory_Object.csv");
-    int value;
-    char dummy;
-
-    for (int y = 0; y < MapSize_; y++)
-    {
-        for (int x = 0; x < MapSize_; x++)
-        {
-            objectData >> objectMap_[x][y];
-            if (x < MapSize_ - 1) 
-            {
-                objectData >> dummy;
-            }
-        }
-    }
-
-    PlaceObjectsUsingObjectMap(objectMap_);
 }
 
 void LobbyMap::Draw()

@@ -6,5 +6,6 @@ ${Game_SOURCE_DIR}/Item/MaxHPUp.cpp
 ${Game_SOURCE_DIR}/Item/ReduceCooldown.cpp
 ${Game_SOURCE_DIR}/Item/Heal1.cpp
 ${Game_SOURCE_DIR}/Item/PerceptionUp.cpp
+${Game_SOURCE_DIR}/Item/Key.cpp
 PARENT_SCOPE
 )

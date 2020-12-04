@@ -1,15 +1,12 @@
 #ifndef Lobby_Map_H_
 #define Lobby_Map_H_
-#include "../Map/Map.h"
+#include "../Map/SingleRoomMap.h"
 
-class LobbyMap : public Map
+class LobbyMap : public SingleRoomMap
 {
 public:
     LobbyMap(Scene *scene, Camera* camera, PlayerManager* playerManager, TransitionManager* transitionManager, ParticleManager* particleManager);
     ~LobbyMap() override;
-    void CreateMap() override;
-    void DetailMap();
-    void PlaceObjects() override;
     void Draw() override;
 
 private:

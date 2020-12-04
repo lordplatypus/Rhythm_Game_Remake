@@ -12,51 +12,19 @@ JunkYardMap::JunkYardMap(Scene *scene, Camera* camera, PlayerManager* playerMana
     particleManager_ = particleManager;
     mapWidth_ = 9;
     mapHeight_ = 14;
+    SetMapArea(9, 14);
+    
+    LoadTilesFromCSC("./Resources/Map/Junk_Yard_Map_Factory_Main.csv");
+    LoadObjectsFromCSC("./Resources/Map/Junk_Yard_Map_Factory_Object.csv");
 
-    std::vector<int> resize(mapHeight_);
-    map_.resize(mapWidth_, resize);
-    objectMap_.resize(mapWidth_, resize);
 
-    CreateMap();
-    PlaceObjects();
+    //CreateMap();
+    //PlaceObjects();
 }
 
-JunkYardMap::~JunkYardMap()
+void JunkYardMap::LoadObjectsFromCSC(const std::string& CSCFilePath)
 {
-    int tileMapKeysLength = tileMapKeys_.size();
-    for (int i = 0; i < tileMapKeysLength; i++)
-    {
-        LP::DeleteSprite(tileMapKeys_[i]);
-    }
-}
-
-void JunkYardMap::CreateMap()
-{
-    std::ifstream mapData("./Resources/Map/Junk_Yard_Map_Factory_Main.csv");
-    int value;
-    char dummy;
-
-    for (int y = 0; y < mapHeight_; y++)
-    {
-        for (int x = 0; x < mapWidth_; x++)
-        {
-            mapData >> map_[x][y];
-            if (x < mapWidth_ - 1) 
-            {
-                mapData >> dummy;
-            }
-            if (map_[x][y] == -1) continue;
-            if (map_[x][y] != -1) 
-            {
-                tileMapKeys_.push_back(LP::SetSprite(tile_map, sf::Vector2f(x*CellSize, y*CellSize), CellSize, CellSize, map_[x][y]));
-            }
-        }
-    }
-}
-
-void JunkYardMap::PlaceObjects()
-{
-    std::ifstream objectData("./Resources/Map/Junk_Yard_Map_Factory_Object.csv");
+    std::ifstream objectData(CSCFilePath);
     int value;
     char dummy;
 
@@ -76,14 +44,6 @@ void JunkYardMap::PlaceObjects()
     }
 
     PlaceObjectsUsingObjectMap(objectMap_);
-}
-
-void JunkYardMap::Draw()
-{
-    for (int i = 0; i < tileMapKeys_.size(); i++)
-    {
-        LP::DrawSprite(tileMapKeys_[i]);
-    }
 }
 
 int JunkYardMap::GenerateItem()
