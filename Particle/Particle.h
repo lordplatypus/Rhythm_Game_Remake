@@ -5,7 +5,7 @@ class Particle
 {
 public:
     Particle(int imageHandle, float x, float y, float vx, float vy, float damp, float lifespan, float forceX, float forceY, float angle, float angularVelocity, 
-        float startScale, float endScale, int red, int green, int blue, int startAlpha, int endAlpha);
+        float startScale, float endScale, int red, int green, int blue, int startAlpha, int endAlpha, float progressSpeed = 1.0f);
     ~Particle();
     void Update(float delta_time);
     void Draw() const;
@@ -35,6 +35,7 @@ private:
     int alpha = 255; //alpha(アルファ)
     int startAlpha = 255; //particles starting alpha(開始のアルファ)
     int endAlpha = 255; //particles ending alpha(終了のアルファ)
+    float progressSpeed = 1.0f;
 };
 
 #endif

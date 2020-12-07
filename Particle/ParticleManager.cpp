@@ -90,14 +90,15 @@ void ParticleManager::SquareExplosion(float x_, float y_)
 
 void ParticleManager::WhiteOut(float x_, float y_)
 {
-    particles.push_back(new Particle(LP::SetSprite(white_texture, sf::Vector2f(x_, y_)), x_, y_, 0, 0, 1, .5f, 0, 0, 0, 0, 1, 1, 255, 255, 255, 255, 0));
+    int key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
+    particles.push_back(new Particle(key, x_, y_, 0, 0, 1, .5f, 0, 0, 0, 0, 1, 1, 255, 255, 255, 255, 0));
 }
 
 void ParticleManager::FadeToBlack(float x_, float y_)
 {
     int key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
     LP::SetSpriteOriginCenter(key);
-    particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 1.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 255));
+    particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 2.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 255, 2.0f));
 }
 
 void ParticleManager::FadeFromBlack(float x_, float y_)
