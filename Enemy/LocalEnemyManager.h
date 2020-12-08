@@ -11,7 +11,7 @@ public:
     ~LocalEnemyManager();
 
     //Individual - affects only the individual
-    EnemyData* Add(int hp, int maxhp, int damage, int range);
+    EnemyData* Add(int hp, int maxhp, int damage, int range, bool heal, int moneyDropRate);
     EnemyData* GetData(const int ID);
     void SetHP(const int ID, const int hp);
     int GetHP(const int ID);
@@ -23,6 +23,8 @@ public:
     int GetRange(const int ID);
     void SetHeal(const int ID, const bool heal);
     bool GetHeal(const int ID);
+    void SetMoneyDropRate(const int ID, const int moneyDropRate);
+    int GetMoneyDropRate(const int ID);
 
     //local only for the current scene
     void SetTempAtkModifier(const int atkModifier);
@@ -35,6 +37,10 @@ public:
     int GetTempRangeModifier() const;
     void SetTempHealModifier(const bool healModifier);
     bool GetTempHealModifier() const;
+    void SetTempMoneyModifier(const bool moneyDropRate);
+    bool GetTempMoneyModifier() const;
+
+    void EnemiesTakeDamage(const int damage);
 
     //Get All modifiers
     int GetAtkModifier() const;
@@ -42,6 +48,7 @@ public:
     int GetMaxHPModifier() const;
     int GetRangeModifier() const;
     bool GetHealModifier() const;
+    int GetMoneyModifier() const;
 
     //Enemy Count
     int GetEnemyCount() const;
@@ -63,6 +70,7 @@ private:
     int tempMaxHPModifier_{0};
     int tempRangeModifier_{0};
     bool tempHealModifier_{true};
+    int tempMoneyDropRate_{0};
 
     int deathCount_{0};
 };

@@ -53,6 +53,16 @@ bool GlobalEnemyManager::GetHealModifier() const
     return healModifier_;
 }
 
+void GlobalEnemyManager::SetMoneyModifier(const int moneyDropRate)
+{
+    moneyDropRate_ = moneyDropRate;
+}
+
+int GlobalEnemyManager::GetMoneyModifer() const
+{
+    return moneyDropRate_;
+}
+
 void GlobalEnemyManager::Clear()
 {
     atkModifier_ = 0;

@@ -23,7 +23,7 @@ Enemy2::Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     // SetTop(0);
     // SetBottom(imageHeight_);
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1);
 
     enemy2Rect_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
     LP::SetRectangleColor(enemy2Rect_, 0, 0, 255, 255);

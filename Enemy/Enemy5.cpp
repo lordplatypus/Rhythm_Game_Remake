@@ -28,7 +28,7 @@ Enemy5::Enemy5(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     numOfBeatsBetweenAttacks_ = 4;
     flip_ = false;
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1);
 
     enemyRectangle_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
     LP::SetRectangleColor(enemyRectangle_, 0, 255, 0, 255);
@@ -104,7 +104,7 @@ void Enemy5::TakeDamage(const int damage)
         if (ed_->hp_ <= 0)
         {
             pm_->EnemyDeath(position_.x+imageWidth_/2, position_.y+imageHeight_/2);
-            if (rand() % 10 == 0) scene_->AddGameObject(new Money(position_, playerManager_, pm_));
+            DropMoney();
             Kill();
         }
     }

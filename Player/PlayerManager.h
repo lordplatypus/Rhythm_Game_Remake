@@ -21,6 +21,8 @@ public:
     int GetHP() const;
     void AddHP(const int HP);
     void SubHP(const int HP);
+    void SetHeal(const bool heal);
+    bool GetHeal() const;
     void SetWallet(const int money);
     int GetWallet() const;
     void AddMoney(const int money);
@@ -48,6 +50,7 @@ private:
     UIHeart* uiHeart_{nullptr};
     int HP_{0};
     int maxHP_{0};
+    bool heal_{true};
     int ID_{0};
     int specialCooldown_{0};
     int killCount_{0};

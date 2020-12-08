@@ -22,7 +22,7 @@ void Enemy::TakeDamage(const int damage)
         if (ed_->hp_ <= 0)
         {
             pm_->EnemyDeath(position_.x+imageWidth_/2, position_.y+imageHeight_/2);
-            if (rand() % 10 == 0) scene_->AddGameObject(new Money(position_, playerManager_, pm_));
+            DropMoney();
             Kill();
         }
     }
@@ -63,4 +63,9 @@ void Enemy::Kill()
     isDead_ = true;
     lem_->SetEnemyDeathCount(lem_->GetEnemyDeathCount() + 1);
     delete arrow_;
+}
+
+void Enemy::DropMoney()
+{
+    if (rand() % 10 <= ed_->moneyDropRate_ + lem_->GetMoneyModifier()) scene_->AddGameObject(new Money(position_, playerManager_, pm_));
 }

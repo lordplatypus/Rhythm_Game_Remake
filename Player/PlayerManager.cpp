@@ -78,6 +78,8 @@ int PlayerManager::GetHP() const
 
 void PlayerManager::AddHP(const int HP)
 {
+    if (!GetHeal()) return;
+
     if (GetHP() < GetMaxHP())
     {
         if (HP + GetHP() > GetMaxHP()) 
@@ -96,6 +98,16 @@ void PlayerManager::SubHP(const int HP)
 {
     HP_ -= HP;
     uiHeart_->TakeDamage(HP);
+}
+
+void PlayerManager::SetHeal(const bool heal)
+{
+    heal_ = heal;
+}
+
+bool PlayerManager::GetHeal() const
+{
+    return heal_;
 }
 
 void PlayerManager::SetWallet(const int money)

@@ -16,6 +16,8 @@ public:
     int GetRangeModifier() const;
     void SetHealModifier(const bool healModifier);
     bool GetHealModifier() const;
+    void SetMoneyModifier(const int moneyDropRate);
+    int GetMoneyModifer() const;
 
     //
     void Clear();
@@ -25,6 +27,7 @@ private:
     int maxHPModifier_{0};
     int rangeModifier_{0};
     bool healModifier_{true};
+    int moneyDropRate_{0};
 };
 
 #endif

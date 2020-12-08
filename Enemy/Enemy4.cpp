@@ -26,7 +26,7 @@ Enemy4::Enemy4(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     numOfBeatsBetweenAttacks_ = 2;
     flip_ = false;
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1);
 
     enemySprite_ = LP::SetSprite(ghost_texture, 32, 32, 4, 2);
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 4 / 2;
@@ -170,7 +170,7 @@ void Enemy4::TakeDamage(const int damage)
         if (ed_->hp_ <= 0)
         {
             pm_->EnemyDeath(position_.x+imageWidth_/2, position_.y+imageHeight_/2);
-            if (rand() % 10 == 0) scene_->AddGameObject(new Money(position_, playerManager_, pm_));
+            DropMoney();
             Kill();
         }
         else TeleportToPlayer();

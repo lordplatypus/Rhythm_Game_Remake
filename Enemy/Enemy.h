@@ -23,6 +23,8 @@ public:
 
     void Kill() override;
 
+    void DropMoney();
+
 protected:
     UIArrow* arrow_{nullptr};
     LocalEnemyManager* lem_{nullptr};

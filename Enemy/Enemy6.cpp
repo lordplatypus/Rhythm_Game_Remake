@@ -27,7 +27,7 @@ Enemy6::Enemy6(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     numOfBeatsBetweenAttacks_ = 2;
     flip_ = false;
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 0);
 
     enemySprite_ = LP::SetSprite(crawler_texture, 32, 32, 6, 2);
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 4 / 2;

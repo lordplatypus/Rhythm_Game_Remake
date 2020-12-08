@@ -8,10 +8,10 @@ LocalEnemyManager::~LocalEnemyManager()
     Clear();
 }
 
-EnemyData* LocalEnemyManager::Add(int hp, int maxhp, int damage, int range)
+EnemyData* LocalEnemyManager::Add(int hp, int maxhp, int damage, int range, bool heal, int moneyDropRate)
 {
     ID_++;
-    EnemyData* temp = new EnemyData(ID_, hp, maxhp, damage, range, gem_->GetHealModifier());
+    EnemyData* temp = new EnemyData(ID_, hp, maxhp, damage, range, heal, moneyDropRate);
     ed_.push_back(temp);
     return temp;
 }
@@ -75,6 +75,16 @@ bool LocalEnemyManager::GetHeal(const int ID)
     return GetData(ID)->heal_;
 }
 
+void LocalEnemyManager::SetMoneyDropRate(const int ID, const int moneyDropRate)
+{
+    GetData(ID)->moneyDropRate_ = moneyDropRate;
+}
+
+int LocalEnemyManager::GetMoneyDropRate(const int ID)
+{
+    return GetData(ID)->moneyDropRate_;
+}
+
 
 //Local - applied only to existing enemies
 
@@ -127,6 +137,20 @@ bool LocalEnemyManager::GetTempHealModifier() const
     return tempHealModifier_;
 }
 
+void LocalEnemyManager::SetTempMoneyModifier(const bool moneyDropRate)
+{
+    tempMoneyDropRate_ = moneyDropRate;
+}
+
+bool LocalEnemyManager::GetTempMoneyModifier() const
+{
+    return tempMoneyDropRate_;
+}
+
+void LocalEnemyManager::EnemiesTakeDamage(const int damage)
+{
+}
+
 
 //Global + Local Modifiers
 
@@ -155,6 +179,11 @@ bool LocalEnemyManager::GetHealModifier() const
     if (!gem_->GetHealModifier()) return false;
     if (!GetTempHealModifier()) return false;
     return true;
+}
+
+int LocalEnemyManager::GetMoneyModifier() const
+{
+    return GetTempMoneyModifier() + gem_->GetMoneyModifer();
 }
 
 
