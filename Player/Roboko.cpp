@@ -16,10 +16,6 @@ Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManage
     name_ = "Roboko";
     imageWidth_ = 32;
     imageHeight_ = 32;
-    // SetLeft(0);
-    // SetRight(imageWidth_);
-    // SetTop(0);
-    // SetBottom(imageHeight_);
     SetPerception(64);
 
     sprites_ = LP::SetSprite(roboko_texture, 32, 32, 8, 9);
@@ -31,15 +27,7 @@ Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManage
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 10;
 
-    //uiHeart_ = new UIHeart(camera_, playerManager_->GetMaxHP(), MP::GetBPM(MP::GetPlayingMusic()));
-    //uiHeart_->SetDamage(playerManager_->GetMaxHP() - playerManager_->GetHP());
     playerManager_->GetHPUI()->SetBPM(MP::GetBPM(MP::GetPlayingMusic()));
-
-    // scene_->GetUI()->AddUIHeart(scene_->GetCamera(), ID, pm->GetMaxHP(), scene_->GetMP()->GetBPMForSelectedMusic(scene_->GetMP()->GetPlayingMusicID()));
-    // scene_->GetUI()->FindUIHeart(ID_)->SetDamage(playerManager_->GetMaxHP() - playerManager_->GetHP());
-    // scene_->GetUI()->AddUITextCamera("Wallet", LP::SetText("Spare Parts: " + std::to_string(playerManager_->GetWallet()), sf::Vector2f(0.0f, 0.0f), 32), sf::Vector2f(scene_->GetCamera()->GetCameraViewSize().x/2, scene_->GetCamera()->GetCameraViewSize().y - 16), scene_->GetCamera());
-    // scene_->GetUI()->FindUITextCamera("Wallet")->SetTextScale(0.1f);
-    // scene_->GetUI()->FindUITextCamera("Wallet")->SetTextOriginCenter();
 }
 
 Roboko::~Roboko()

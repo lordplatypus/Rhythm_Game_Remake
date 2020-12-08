@@ -125,8 +125,11 @@ void Enemy6::TakeDamage(const int damage)
     if (damage == -1) return;
     if (damage == arrow_->GetCurrentArrow())
     {
-        arrow_->TakeDamage();
-        ed_->hp_--;
+        for (int i = 0; i < playerManager_->GetAtk(); i++)
+        {
+            arrow_->TakeDamage();
+            ed_->hp_--;
+        }
         if (ed_->hp_ <= 0)
         {
             pm_->EnemyDeath(position_.x+imageWidth_/2, position_.y+imageHeight_/2);

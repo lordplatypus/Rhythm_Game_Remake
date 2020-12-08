@@ -5,7 +5,7 @@
 class Map1_2 : public MultiRoomMap
 {
 public:
-    Map1_2(Scene *scene, Camera* camera, PlayerManager* playerManager, LocalEnemyManager* localEnemyManager, TransitionManager* transitionManager, ParticleManager* particleManager);
+    Map1_2(Scene *scene, Camera* camera, PlayerManager* playerManager, LocalEnemyManager* localEnemyManager, GlobalEnemyManager* globalEnemyManager, TransitionManager* transitionManager, ParticleManager* particleManager);
 };
 
 #endif

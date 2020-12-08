@@ -6,6 +6,7 @@
 #include "../Engine/Camera.h"
 #include "../Player/PlayerManager.h"
 #include "../Enemy/LocalEnemyManager.h"
+#include "../Enemy/GlobalEnemyManager.h"
 #include "../Transition/TransitionManager.h"
 #include "../Particle/ParticleManager.h"
 
@@ -32,6 +33,7 @@ protected:
     PlayerManager* playerManager_{nullptr};
     ParticleManager* particleManager_{nullptr};
     LocalEnemyManager* localEnemyManager_{nullptr};
+    GlobalEnemyManager* globalEnemyManager_{nullptr};
     TransitionManager* transitionManager_{nullptr};
     const int CellSize = 32;
     int mapWidth_ = 0;

@@ -1,15 +1,16 @@
-#include "TempEnemyDamage.h"
+#include "EnemiesOnFloorTakeDamage.h"
 #include "../Engine/LP.h"
 #include "../Assets/ID.h"
 
-TempEnemyDamage::TempEnemyDamage(sf::Vector2f position, PlayerManager* playerManager, ParticleManager* pm, LocalEnemyManager* lem)
+EnemiesOnFloorTakeDamage::EnemiesOnFloorTakeDamage(sf::Vector2f position, PlayerManager* playerManager, ParticleManager* pm, LocalEnemyManager* lem, Scene* scene)
 {
     playerManager_ = playerManager;
     pm_ = pm;
     position_ = position;
     lem_ = lem;
+    scene_ = scene;
     tag_ = "Item";
-    name_ = "TempEnemyDamage";
+    name_ = "EnemiesOnFloorTakeDamage";
     HP_ = 1;
     priceTag_ = 50;
     imageWidth_ = 32;
@@ -22,23 +23,23 @@ TempEnemyDamage::TempEnemyDamage(sf::Vector2f position, PlayerManager* playerMan
     LP::SetTextScale(text_, 0.1f, 0.1f);
 }
 
-TempEnemyDamage::~TempEnemyDamage()
+EnemiesOnFloorTakeDamage::~EnemiesOnFloorTakeDamage()
 {
     LP::DeleteSprite(sprite_);
     LP::DeleteText(text_);
 }
 
-void TempEnemyDamage::Update(float delta_time, float beat_time)
+void EnemiesOnFloorTakeDamage::Update(float delta_time, float beat_time)
 {
     SparkleRandom(delta_time);
 }
 
-void TempEnemyDamage::Draw()
+void EnemiesOnFloorTakeDamage::Draw()
 {
     LP::DrawSprite(sprite_);
 }
 
-void TempEnemyDamage::DelayedDraw()
+void EnemiesOnFloorTakeDamage::DelayedDraw()
 {
     if (ifSeesPlayer_) 
     {
@@ -47,6 +48,12 @@ void TempEnemyDamage::DelayedDraw()
     }
 }
 
-void TempEnemyDamage::Effect()
+void EnemiesOnFloorTakeDamage::Effect()
 {
+    playerManager_->SubMoney(priceTag_);
+
+    for (auto i : lem_->GetEnemyData())
+    {
+        scene_->FindGameObject(std::to_string(i->ID_), false, true)->TakeDamage(1);
+    }
 }

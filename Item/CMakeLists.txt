@@ -7,5 +7,9 @@ ${Game_SOURCE_DIR}/Item/ReduceCooldown.cpp
 ${Game_SOURCE_DIR}/Item/Heal1.cpp
 ${Game_SOURCE_DIR}/Item/PerceptionUp.cpp
 ${Game_SOURCE_DIR}/Item/Key.cpp
+${Game_SOURCE_DIR}/Item/PlayerAtkUp.cpp
+${Game_SOURCE_DIR}/Item/RemoveEnemyHealingOnFloor.cpp
+${Game_SOURCE_DIR}/Item/RemoveHealing.cpp
+${Game_SOURCE_DIR}/Item/IncreaseMoneyDropRate.cpp
 PARENT_SCOPE
 )

@@ -19,7 +19,7 @@ void Stage1_3::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        map_ = new Map1_3(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
+        map_ = new Map1_3(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         //MP::PlayMusic(Gain_Therapy);
         MP::PlayStageMusic(stage1_3, true);
     }

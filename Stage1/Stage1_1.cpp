@@ -26,8 +26,8 @@ void Stage1_1::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        //map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
-        map_ = new MapTest(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_); //TEST
+        map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
+        //map_ = new MapTest(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_); //TEST
         MP::PlayStageMusic(stage1_1, true);
         //AddGameObject(new DefeatEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), lem_));
         //AddGameObject(new Spawner("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));

@@ -25,6 +25,11 @@ EnemyData* LocalEnemyManager::GetData(const int ID)
     return nullptr;
 }
 
+std::list<EnemyData*> LocalEnemyManager::GetEnemyData()
+{
+    return ed_;
+}
+
 void LocalEnemyManager::SetHP(const int ID, const int hp)
 {
     GetData(ID)->hp_ = hp;

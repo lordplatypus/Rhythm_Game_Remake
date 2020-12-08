@@ -8,7 +8,7 @@ class PlayerManager
 public:
     PlayerManager(Camera* camera);
     ~PlayerManager();
-    void Init(const int ID, const int HP, const int maxHP, const int range, const int specialCooldown, const int wallet);
+    void Init(const int ID, const int HP, const int maxHP, const int atk, const int range, const int specialCooldown, const int wallet);
     void Init();
     void SetID(const int ID);
     int GetID();
@@ -23,6 +23,8 @@ public:
     void SubHP(const int HP);
     void SetHeal(const bool heal);
     bool GetHeal() const;
+    void SetAtk(const int atk);
+    int GetAtk() const;
     void SetWallet(const int money);
     int GetWallet() const;
     void AddMoney(const int money);
@@ -51,6 +53,7 @@ private:
     int HP_{0};
     int maxHP_{0};
     bool heal_{true};
+    int atk_{1};
     int ID_{0};
     int specialCooldown_{0};
     int killCount_{0};

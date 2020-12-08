@@ -2,17 +2,24 @@
 #include <fstream>
 //Objects
 #include "../Player/Roboko.h"
+//Enemy
 #include "../Enemy/Enemy1.h"
 #include "../Enemy/Enemy2.h"
 #include "../Enemy/Enemy3.h"
 #include "../Enemy/Enemy4.h"
 #include "../Enemy/Enemy5.h"
 #include "../Enemy/Enemy6.h"
+//Item
 #include "../Item/Money.h"
 #include "../Item/MaxHPUp.h"
 #include "../Item/ReduceCooldown.h"
 #include "../Item/Heal1.h"
 #include "../Item/PerceptionUp.h"
+#include "../Item/IncreaseMoneyDropRate.h"
+#include "../Item/PlayerAtkUp.h"
+#include "../Item/RemoveEnemyHealingOnFloor.h"
+#include "../Item/RemoveHealing.h"
+//Transition
 #include "../Transition/Transition.h"
 
 Map::Map()
@@ -117,6 +124,22 @@ void Map::PlaceItem(int num, sf::Vector2f position)
 
         case 104:
         scene_->AddGameObject(new PerceptionUp(position, playerManager_, particleManager_));
+        break;
+
+        case 105:
+        scene_->AddGameObject(new IncreaseMoneyDropRate(position, playerManager_, particleManager_, globalEnemyManager_));
+        break;
+
+        case 106:
+        scene_->AddGameObject(new PlayerAtkUp(position, playerManager_, particleManager_));
+        break;
+
+        case 107:
+        scene_->AddGameObject(new RemoveEnemyHealingOnFloor(position, playerManager_, particleManager_, localEnemyManager_));
+        break;
+
+        case 108:
+        scene_->AddGameObject(new RemoveHealing(position, playerManager_, particleManager_, globalEnemyManager_));
         break;
 
         default:

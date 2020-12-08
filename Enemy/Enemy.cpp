@@ -17,8 +17,11 @@ void Enemy::TakeDamage(const int damage)
     if (damage == -1) return;
     if (damage == arrow_->GetCurrentArrow())
     {
-        arrow_->TakeDamage();
-        ed_->hp_--;
+        for (int i = 0; i < playerManager_->GetAtk(); i++)
+        {
+            arrow_->TakeDamage();
+            ed_->hp_--;
+        }
         if (ed_->hp_ <= 0)
         {
             pm_->EnemyDeath(position_.x+imageWidth_/2, position_.y+imageHeight_/2);
@@ -58,14 +61,19 @@ bool Enemy::GetInRangeOfPlayer() const
     return inRangeOfPlayer_;
 }
 
+void Enemy::DropMoney()
+{
+    if (rand() % 10 <= ed_->moneyDropRate_ + lem_->GetMoneyModifier()) scene_->AddGameObject(new Money(position_, playerManager_, pm_));
+}
+
+int Enemy::GetID() const
+{
+    return ed_->ID_;
+}
+
 void Enemy::Kill()
 {
     isDead_ = true;
     lem_->SetEnemyDeathCount(lem_->GetEnemyDeathCount() + 1);
     delete arrow_;
-}
-
-void Enemy::DropMoney()
-{
-    if (rand() % 10 <= ed_->moneyDropRate_ + lem_->GetMoneyModifier()) scene_->AddGameObject(new Money(position_, playerManager_, pm_));
 }

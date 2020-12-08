@@ -20,7 +20,7 @@ void Stage1_2::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        map_ = new Map1_2(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
+        map_ = new Map1_2(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         MP::PlayStageMusic(stage1_2, true);
         AddGameObject(new DefeatEnemies("Stage1_3", game_->GetCamera(), game_->GetTransitionManager(), lem_));
     }

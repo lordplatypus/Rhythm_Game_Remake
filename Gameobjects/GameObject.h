@@ -94,7 +94,7 @@ public:
     //Return name
     const std::string& GetName() const;
     //return ID
-    int GetID() const;
+    virtual int GetID() const;
 
     GameObject(const GameObject& other) = delete;
     GameObject& operator = (const GameObject& other) = delete;

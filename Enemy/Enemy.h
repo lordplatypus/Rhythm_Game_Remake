@@ -20,10 +20,10 @@ public:
     float GetPerception() const override;
     void SetInRangeOfPlayer(const bool inRangeOfPlayer) override;
     bool GetInRangeOfPlayer() const override;
+    void DropMoney();
+    int GetID() const override;
 
     void Kill() override;
-
-    void DropMoney();
 
 protected:
     UIArrow* arrow_{nullptr};

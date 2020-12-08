@@ -7,11 +7,12 @@ PlayerManager::PlayerManager(Camera* camera) : camera_{camera}
 PlayerManager::~PlayerManager()
 {}
 
-void PlayerManager::Init(const int ID, const int HP, const int maxHP, const int range, const int specialCooldown, const int wallet)
+void PlayerManager::Init(const int ID, const int HP, const int maxHP, const int atk, const int range, const int specialCooldown, const int wallet)
 {
     SetID(ID);
     SetHP(HP);
     SetMaxHP(maxHP);
+    SetAtk(atk);
     SetPerception(range);
     SetWallet(wallet);
     SetSpecialCooldown(specialCooldown);
@@ -24,6 +25,7 @@ void PlayerManager::Init()
     SetHP(3);
     SetMaxHP(3);
     SetHPUI();
+    SetAtk(1);
     SetPerception(64);
     SetWallet(1000);
     SetSpecialCooldown(5);
@@ -108,6 +110,16 @@ void PlayerManager::SetHeal(const bool heal)
 bool PlayerManager::GetHeal() const
 {
     return heal_;
+}
+
+void PlayerManager::SetAtk(const int atk)
+{
+    atk_ = atk;
+}
+
+int PlayerManager::GetAtk() const
+{
+    return atk_;
 }
 
 void PlayerManager::SetWallet(const int money)

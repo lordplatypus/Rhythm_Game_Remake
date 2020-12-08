@@ -13,6 +13,7 @@ public:
     //Individual - affects only the individual
     EnemyData* Add(int hp, int maxhp, int damage, int range, bool heal, int moneyDropRate);
     EnemyData* GetData(const int ID);
+    std::list<EnemyData*> GetEnemyData();
     void SetHP(const int ID, const int hp);
     int GetHP(const int ID);
     void SetMaxHP(const int ID, const int maxHP);

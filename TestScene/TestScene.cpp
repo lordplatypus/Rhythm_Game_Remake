@@ -20,7 +20,7 @@ void TestScene::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        map_ = new TestMap(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_);
+        map_ = new TestMap(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         //MP::PlayMusic(Gain_Therapy);
         MP::PlayStageMusic(test_scene, true);
     }

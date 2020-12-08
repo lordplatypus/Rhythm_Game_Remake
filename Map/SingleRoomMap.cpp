@@ -102,7 +102,7 @@ void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
 
 void SingleRoomMap::LoadObjectsFromCSC(const std::string& CSCFilePath)
 {
-    std::ifstream objectData("./Resources/Map/Lobby_Map_Factory_Object.csv");
+    std::ifstream objectData(CSCFilePath);
     char dummy;
 
     for (int y = 0; y < mapHeight_; y++)

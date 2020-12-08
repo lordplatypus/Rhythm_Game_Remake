@@ -28,7 +28,7 @@ void Junkyard::PlaceItem(sf::Vector2i position)
     while(!done)
     {
         done = true;
-        int randItemID = rand() % 4 + 101;
+        int randItemID = rand() % 8 + 101;
         for (auto i : placedItems_)
         {
             if (i == randItemID) done = false;
