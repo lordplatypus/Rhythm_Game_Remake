@@ -19,6 +19,10 @@
 #include "../Item/PlayerAtkUp.h"
 #include "../Item/RemoveEnemyHealingOnFloor.h"
 #include "../Item/RemoveHealing.h"
+#include "../Item/ExcessParts.h"
+#include "../Item/ReroutePower.h"
+#include "../Item/ReserveTank.h"
+#include "../Item/BlindLuck.h"
 //Transition
 #include "../Transition/Transition.h"
 
@@ -142,6 +146,22 @@ void Map::PlaceItem(int num, sf::Vector2f position)
         scene_->AddGameObject(new RemoveHealing(position, playerManager_, particleManager_, globalEnemyManager_));
         break;
 
+        case 109:
+        scene_->AddGameObject(new ExcessParts(position, playerManager_, particleManager_, globalEnemyManager_));
+        break;
+
+        case 110:
+        scene_->AddGameObject(new ReroutePower(position, playerManager_, particleManager_));
+        break;
+
+        case 111:
+        scene_->AddGameObject(new ReserveTank(position, playerManager_, particleManager_));
+        break;
+
+        case 112:
+        scene_->AddGameObject(new BlindLuck(position, playerManager_, particleManager_, globalEnemyManager_));
+        break;
+
         default:
         break;
     }
@@ -186,6 +206,10 @@ void Map::PlaceTransition(int num, sf::Vector2f position)
 
         case 210:
         transitionTo = "Stage1_3";
+        break;
+
+        case 211:
+        transitionTo = "Item";
         break;
 
         default:

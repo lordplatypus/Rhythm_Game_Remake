@@ -9,6 +9,7 @@
 #include "../TitleScene/TitleScene.h"
 #include "../LobbyScene/LobbyScene.h"
 #include "../TestScene/TestScene.h"
+#include "../StartingItemScene/StartingItemScene.h"
 #include "../JunkYardScene/JunkYardScene.h"
 #include "../Stage1/Stage1_1.h"
 #include "../Stage1/Stage1_2.h"
@@ -27,6 +28,7 @@ Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
     AddScene("BPM", new BPMScene(this));
     AddScene("MusicSelect", new MusicSelect(this));
     AddScene("Test", new TestScene(this));
+    AddScene("Item", new StartingItemScene(this));
     AddScene("JunkYard", new JunkYardScene(this));
     AddScene("Stage1_1", new Stage1_1(this));
     AddScene("Stage1_2", new Stage1_2(this));

@@ -6,6 +6,7 @@ GlobalEnemyManager::GlobalEnemyManager()
     SetMaxHPModifier(0);
     SetRangeModifier(0);
     SetHealModifier(true);
+    SetMoneyModifier(0);
 }
 
 GlobalEnemyManager::~GlobalEnemyManager()
@@ -69,4 +70,5 @@ void GlobalEnemyManager::Clear()
     maxHPModifier_ = 0;
     rangeModifier_ = 0;
     healModifier_ = true;
+    moneyDropRate_ = 0;
 }

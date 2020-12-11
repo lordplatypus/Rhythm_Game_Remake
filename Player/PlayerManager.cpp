@@ -22,6 +22,12 @@ void PlayerManager::Init()
 {
     Reset();
 
+    SetHeal(true);
+    SetMaxHPChangeBool(true);
+    SetWalletChangeBool(true);
+    SetAtkChangeBool(true);
+    SetPerceptionChangeBool(true);
+
     SetHP(3);
     SetMaxHP(3);
     SetHPUI();
@@ -63,9 +69,31 @@ int PlayerManager::GetMaxHP() const
 
 void PlayerManager::AddMaxHP(const int numToAdd)
 {
+    if (!GetMaxHPChangeBool()) return;
+
     uiHeart_->AddHeart(numToAdd);
     uiHeart_->TakeDamage(numToAdd);
     maxHP_ += numToAdd;
+}
+
+void PlayerManager::SubMaxHP(const int numToSub)
+{
+    if (!GetMaxHPChangeBool()) return;
+
+    uiHeart_->RemoveHeart(numToSub);
+    maxHP_ -= numToSub;
+    if (maxHP_ <= 0) maxHP_ = 1;
+    if (HP_ > maxHP_) HP_ = maxHP_;
+}
+
+void PlayerManager::SetMaxHPChangeBool(const bool allow)
+{
+    allowMaxHPChange_ = allow;
+}
+
+bool PlayerManager::GetMaxHPChangeBool() const
+{
+    return allowMaxHPChange_;
 }
 
 void PlayerManager::SetHP(const int newHP)
@@ -93,7 +121,7 @@ void PlayerManager::AddHP(const int HP)
             SetHP(GetHP() + HP);
         }
     }
-    uiHeart_->Heal(HP);
+    for (int i = 0; i < HP; i++) uiHeart_->Heal();
 }
 
 void PlayerManager::SubHP(const int HP)
@@ -114,6 +142,7 @@ bool PlayerManager::GetHeal() const
 
 void PlayerManager::SetAtk(const int atk)
 {
+    if (!GetAtkChangeBool()) return;
     atk_ = atk;
 }
 
@@ -122,8 +151,20 @@ int PlayerManager::GetAtk() const
     return atk_;
 }
 
+void PlayerManager::SetAtkChangeBool(const bool allow)
+{
+    allowAtkChange_ = allow;
+}
+
+bool PlayerManager::GetAtkChangeBool() const
+{
+    return allowAtkChange_;
+}
+
 void PlayerManager::SetWallet(const int money)
 {
+    if (!GetWalletChangeBool()) return;
+
     wallet_ = money;
     walletText_ = LP::SetText(std::to_string(wallet_), sf::Vector2f(0, 0), 64);
     LP::SetTextScale(walletText_, 0.1f, 0.1f);
@@ -137,6 +178,7 @@ int PlayerManager::GetWallet() const
 
 void PlayerManager::AddMoney(const int money)
 {
+    if (!GetWalletChangeBool()) return;
     wallet_ += money;
     SetWalletText();
 }
@@ -145,6 +187,16 @@ void PlayerManager::SubMoney(const int money)
 {
     wallet_ -= money;
     SetWalletText();
+}
+
+void PlayerManager::SetWalletChangeBool(const bool allow)
+{
+    allowWalletChange_ = allow;
+}
+
+bool PlayerManager::GetWalletChangeBool() const
+{
+    return allowWalletChange_;
 }
 
 void PlayerManager::SetWalletText()
@@ -159,12 +211,23 @@ int PlayerManager::GetWalletText() const
 
 void PlayerManager::SetPerception(const int perception)
 {
+    if (!GetPerceptionChangeBool()) return;
     perception_ = perception;
 }
 
 int PlayerManager::GetPerception() const
 {
     return perception_;
+}
+
+void PlayerManager::SetPerceptionChangeBool(const bool allow)
+{
+    allowPerceptionChange_ = allow;
+}
+
+bool PlayerManager::GetPerceptionChangeBool() const
+{
+    return allowPerceptionChange_;
 }
 
 void PlayerManager::SetSpecialCooldown(const int newCooldown)

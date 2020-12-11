@@ -77,6 +77,16 @@ void UIHeart::TakeDamage(int amountOfDamage)
     }
 }
 
+void UIHeart::Heal()
+{
+    if (isDamaged_ && !nextHeart_->IsDamaged()) 
+    {
+        isDamaged_ = false;
+        return;
+    }
+    if (numOfHearts_ != heartPosition_) nextHeart_->Heal(); 
+}
+
 void UIHeart::Heal(int amountToHeal)
 {
     if (isDamaged_ && !nextHeart_->IsDamaged()) 
@@ -103,7 +113,19 @@ void UIHeart::AddHeart(int numOfNewHearts)
 
 void UIHeart::RemoveHeart(int numOfHeartsToRemove)
 {
+    numOfHearts_ -= numOfHeartsToRemove;
+    if (numOfHearts_ <= 0) numOfHearts_ = 1;
     
+    if (heartPosition_ >= numOfHearts_)
+    {
+        if (nextHeart_ != nullptr) 
+        {
+            nextHeart_->RemoveHeart(numOfHeartsToRemove);
+            delete nextHeart_;
+            nextHeart_ = nullptr;
+        }
+    }
+    else nextHeart_->RemoveHeart(numOfHeartsToRemove);
 }
 
 int UIHeart::GetNumOfHeart() const

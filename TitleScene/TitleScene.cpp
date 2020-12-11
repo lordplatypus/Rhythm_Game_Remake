@@ -54,6 +54,10 @@ void TitleScene::Init()
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
 
     pm_.FadeFromBlack(position_.x, position_.y);
+
+    //Reset
+    game_->GetPlayerManager()->Init();
+    game_->GetGlobalEnemyManager()->Clear();
 }
 
 void TitleScene::Update(float delta_time, float beat_time)

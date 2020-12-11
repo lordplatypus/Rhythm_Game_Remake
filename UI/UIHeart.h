@@ -14,6 +14,7 @@ public:
     bool IsDamaged();
 
     void TakeDamage(int amountOfDamage);
+    void Heal();
     void Heal(int amountToHeal);
     void AddHeart(int numOfNewHearts);
     void RemoveHeart(int numOfHeartsToRemove);

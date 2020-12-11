@@ -177,6 +177,11 @@ void GameObjectManager::Remove()
 {
     for (auto i = gameObjects_.begin(); i != gameObjects_.end(); )
     {
+        if ((*i)->GetTag() == "Player") 
+        {
+            i++;
+            continue;
+        }
         if ((*i)->IsDead())
         {
             delete *i;

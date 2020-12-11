@@ -11,5 +11,9 @@ ${Game_SOURCE_DIR}/Item/PlayerAtkUp.cpp
 ${Game_SOURCE_DIR}/Item/RemoveEnemyHealingOnFloor.cpp
 ${Game_SOURCE_DIR}/Item/RemoveHealing.cpp
 ${Game_SOURCE_DIR}/Item/IncreaseMoneyDropRate.cpp
+${Game_SOURCE_DIR}/Item/ExcessParts.cpp
+${Game_SOURCE_DIR}/Item/ReroutePower.cpp
+${Game_SOURCE_DIR}/Item/ReserveTank.cpp
+${Game_SOURCE_DIR}/Item/BlindLuck.cpp
 PARENT_SCOPE
 )
