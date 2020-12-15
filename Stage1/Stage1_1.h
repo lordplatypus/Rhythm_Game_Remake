@@ -22,6 +22,9 @@ public:
     void End() override;
 
 private:
+    void RandomEvent();
+
+private:
     GameObjectManager gameObjects_;
     ParticleManager pm_;
     Map* map_ {nullptr};

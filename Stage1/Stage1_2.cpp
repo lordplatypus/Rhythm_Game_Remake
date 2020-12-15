@@ -5,7 +5,12 @@
 #include "../Engine/MP.h"
 #include "../Engine/IP.h"
 #include "../Engine/Math.h"
+//Events
 #include "../Event/DefeatEnemies.h"
+#include "../Event/Spawner.h"
+#include "../Event/FindKeys.h"
+#include "../Event/InvisibleEnemies.h"
+#include "../Event/MortarStrike.h"
 
 Stage1_2::Stage1_2(Game* game) : game_{game}
 {}
@@ -22,7 +27,7 @@ void Stage1_2::Init()
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
         map_ = new Map1_2(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         MP::PlayStageMusic(stage1_2, true);
-        AddGameObject(new DefeatEnemies("Stage1_3", game_->GetCamera(), game_->GetTransitionManager(), lem_));
+        RandomEvent();
     }
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
@@ -84,4 +89,35 @@ void Stage1_2::End()
     delete map_;
     gameObjects_.Clear();
     game_->GetTransitionManager()->Clear();
+}
+
+void Stage1_2::RandomEvent()
+{
+    int randEvent = rand() % 6;
+    const std::string& transitionTo = "Stage1_3";
+    switch (randEvent)
+    {
+        case 0:
+        AddGameObject(new DefeatEnemies(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), lem_));
+        break;
+
+        case 1:
+        AddGameObject(new Spawner(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));
+        break;
+
+        case 2:
+        AddGameObject(new FindKeys(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_));
+        break;
+
+        case 3:
+        AddGameObject(new InvisibleEnemies(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_, lem_));
+        break;
+
+        case 4:
+        AddGameObject(new MortarStrike(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, lem_, &pm_, map_));
+        break;
+
+        default:
+        break;
+    }
 }

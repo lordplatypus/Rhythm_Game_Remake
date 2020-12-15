@@ -19,7 +19,7 @@ MortarStrike::MortarStrike(const std::string& lockTarget, Camera* camera, Transi
 
     PlaceGenerator();
 
-    SetInstructionText("Mortor Strike - Generator: Active");
+    SetInstructionText("Mortor Strike\nGenerator: Active");
 
     Lock();
 }
@@ -54,7 +54,7 @@ void MortarStrike::Update(float delta_time, float beat_time)
 void MortarStrike::EventTrigger()
 {
     generatorDestroyed_ = true;
-    SetInstructionTextString("Mortor Strike - Generator: Inactive");
+    SetInstructionTextString("Mortor Strike\nGenerator: Inactive");
     Unlock();
 }
 

@@ -5,6 +5,7 @@
 #include "../Engine/MP.h"
 #include "../Engine/IP.h"
 #include "../Engine/Math.h"
+//Events
 #include "../Event/DefeatEnemies.h"
 #include "../Event/Spawner.h"
 #include "../Event/FindKeys.h"
@@ -29,15 +30,9 @@ void Stage1_1::Init()
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
         map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
-        //map_ = new MapTest(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetTransitionManager(), &pm_); //TEST
         MP::PlayStageMusic(stage1_1, true);
-        //AddGameObject(new DefeatEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), lem_));
-        //AddGameObject(new Spawner("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));
-        //AddGameObject(new FindKeys("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_));
-        //AddGameObject(new InvisibleEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_, lem_));
-        AddGameObject(new MortarStrike("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, lem_, &pm_, map_));
+        RandomEvent();
     }
-    //AddGameObject(new Roboko(sf::Vector2f(64, 64), this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_, map_)); //TEST
 
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
@@ -99,4 +94,35 @@ void Stage1_1::End()
     delete map_;
     gameObjects_.Clear();
     game_->GetTransitionManager()->Clear();
+}
+
+void Stage1_1::RandomEvent()
+{
+    int randEvent = rand() % 6;
+    const std::string& transitionTo = "Stage1_2";
+    switch (randEvent)
+    {
+        case 0:
+        AddGameObject(new DefeatEnemies(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), lem_));
+        break;
+
+        case 1:
+        AddGameObject(new Spawner(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));
+        break;
+
+        case 2:
+        AddGameObject(new FindKeys(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_));
+        break;
+
+        case 3:
+        AddGameObject(new InvisibleEnemies(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_, lem_));
+        break;
+
+        case 4:
+        AddGameObject(new MortarStrike(transitionTo, game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, lem_, &pm_, map_));
+        break;
+
+        default:
+        break;
+    }
 }

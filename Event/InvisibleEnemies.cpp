@@ -17,7 +17,7 @@ InvisibleEnemies::InvisibleEnemies(const std::string& lockTarget, Camera* camera
     PlaceGenerator();
     lem_->SetTempVisibility(false);
 
-    SetInstructionText("Enemies Are Invisible - Generator: Active");
+    SetInstructionText("Enemies Are Invisible\nGenerator: Active");
 
     Lock();
 }
@@ -37,7 +37,7 @@ void InvisibleEnemies::EventTrigger()
 {
     generatorDestroyed_ = true;
     lem_->SetTempVisibility(true);
-    SetInstructionTextString("Enemies Are Invisible - Generator: Inactive");
+    SetInstructionTextString("Enemies Are Invisible\nGenerator: Inactive");
     Unlock();
 }
 

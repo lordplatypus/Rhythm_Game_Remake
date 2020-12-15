@@ -12,7 +12,7 @@ Spawner::Spawner(const std::string& lockTarget, Camera* camera, TransitionManage
     spawner_ = new Enemy5(scene->FindGameObject(lockTarget, false)->GetPosition(), scene, lem, playerManager, pm, map);
     scene->AddGameObject(spawner_);
 
-    SetInstructionText("Defeat The Spawner: 0");
+    SetInstructionText("Defeat The Spawner: Active");
 
     Lock();
 }
@@ -26,6 +26,6 @@ void Spawner::Update(float delta_time, float beat_time)
     {
         Unlock();
         done_ = true;
-        SetInstructionTextString("Defeat The Spawner: Cleared");
+        SetInstructionTextString("Defeat The Spawner: Inactive");
     }
 }
