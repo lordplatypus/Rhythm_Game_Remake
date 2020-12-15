@@ -28,21 +28,21 @@ void BPMScene::Init()
     for (auto i : menuText_) LP::SetTextOriginCenter(i); //set the origin to the center (テクストの原点を設定する)
 
     //Duplicate the music titles (text) from the MP class
-    musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Necro_Funk_the_Around", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Adjust", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Southern_Arena", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Nothing Can Stop Us Now", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Fight For Your Life", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Amaryllis", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Ayahuasca", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Ceramic Summer", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("La Tropica", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("moonshade_", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Reconfig", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Necro_Funk_the_Around", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Adjust", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Southern_Arena", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Nothing Can Stop Us Now", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Fight For Your Life", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Amaryllis", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Ayahuasca", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Ceramic Summer", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("La Tropica", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("moonshade_", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Reconfig", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("Gain Therapy", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Nec Minus Ultra", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Il Vento D'oro", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Nec Minus Ultra", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Il Vento D'oro", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("LAZZULI LUVS", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("DESCENDING AIR CURRENT", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("DETROIT BEAT", sf::Vector2f(256, 256), 16));
@@ -52,7 +52,7 @@ void BPMScene::Init()
 
     //Verticle menu setup ()
     menu_ = new UIVerticalMenu(sf::Vector2f(275, 183), menuText_.size(), menuText_, 3, 1, 32);
-    musicMenu_ = new UIVerticalMenu(sf::Vector2f(803, 183), musicTitles_.size(), musicTitles_, 5, 2, 32);
+    musicMenu_ = new UIVerticalMenu(sf::Vector2f(803, 183), musicTitles_.size(), musicTitles_, 3, 1, 32);
     musicMenu_->SetDisplay(false);
 
     //Set up the rest of the text used (残るテクストを設定する)

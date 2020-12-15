@@ -26,21 +26,21 @@ void MusicSelect::Init()
     stageNames_.push_back(LP::SetText("Return to Lobby", sf::Vector2f(32, 128), 16));
     for (auto i : stageNames_) LP::SetTextOriginCenter(i);
 
-    musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Necro_Funk_the_Around", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Adjust", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Southern_Arena", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Nothing Can Stop Us Now", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Fight For Your Life", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Amaryllis", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Ayahuasca", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Ceramic Summer", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("La Tropica", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("moonshade_", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Reconfig", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Necro_Funk_the_Around", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Adjust", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Southern_Arena", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Nothing Can Stop Us Now", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Fight For Your Life", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Amaryllis", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Ayahuasca", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Ceramic Summer", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("La Tropica", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("moonshade_", sf::Vector2f(256, 256), 16));
+    // musicTitles_.push_back(LP::SetText("Reconfig", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("Gain Therapy", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Nec Minus Ultra", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Il Vento D'oro", sf::Vector2f(256, 256), 16));
+    //musicTitles_.push_back(LP::SetText("Nec Minus Ultra", sf::Vector2f(256, 256), 16));
+    //musicTitles_.push_back(LP::SetText("Il Vento D'oro", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("LAZZULI LUVS", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("DESCENDING AIR CURRENT", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("DETROIT BEAT", sf::Vector2f(256, 256), 16));
@@ -50,7 +50,7 @@ void MusicSelect::Init()
 
     //Verticle menu setup ()
     stageMenu_ = new UIVerticalMenu(sf::Vector2f(276, 360), stageNames_.size(), stageNames_, 3, 1, 32);
-    musicMenu_ = new UIVerticalMenu(sf::Vector2f(804, 360), musicTitles_.size(), musicTitles_, 7, 3, 32);
+    musicMenu_ = new UIVerticalMenu(sf::Vector2f(804, 360), musicTitles_.size(), musicTitles_, 3, 1, 32);
     musicMenu_->SetDisplay(false);
 
     //Background

@@ -139,6 +139,7 @@ void MultiRoomMap::SetRooms(int numOfRooms)
                 if (currentRoom->GetRoomArea().intersects(rooms_[i]->GetRoomArea())) 
                 {
                     done = false;
+                    prevRoom = rooms_[rand() % (rooms_.size() - 1)];
                     currentRoom->SetRoomPosition(prevRoom->GetRoomPosition());
                 }
             }

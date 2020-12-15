@@ -14,5 +14,5 @@ Map1_3::Map1_3(Scene *scene, Camera* camera, PlayerManager* playerManager, Local
     transitionManager_ = transitionManager;
     particleManager_ = particleManager;
 
-    CreateMapWithRooms(9, "Lobby");
+    CreateMapWithRooms(9, "Title");
 }
