@@ -104,3 +104,6 @@ void Event::End()
 {
     LP::DeleteText(instructionText_);
 }
+
+void Event::EventTrigger()
+{}

@@ -30,7 +30,8 @@ LobbyMap::LobbyMap(Scene *scene, Camera* camera, PlayerManager* playerManager, T
     MenuText.push_back(LP::SetText("Music\nSelect", sf::Vector2f(CellSize * 7, CellSize * 2), 16));
     MenuText.push_back(LP::SetText("BPM\nCheck", sf::Vector2f(CellSize * 9, CellSize * 2), 16));
     MenuText.push_back(LP::SetText("Class\nSelect", sf::Vector2f(CellSize * 7, CellSize * 4), 16));
-    for (auto i : MenuText) LP::SetTextScale(i, .1f, .1f);
+    MenuText.push_back(LP::SetText("Items", sf::Vector2f(CellSize * 9, CellSize * 4), 16));
+    for (auto i : MenuText) LP::SetTextScale(i, .2f, .2f);
 }
 
 LobbyMap::~LobbyMap()

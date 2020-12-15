@@ -17,15 +17,14 @@ BlindLuck::BlindLuck(sf::Vector2f position, PlayerManager* playerManager, Partic
     SetPerception(32);
     arrow_ = new UIArrow(pm_, position_, HP_);
 
-    sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    LP::SetRectangleColor(sprite_, 255, 0, 0, 255);
-    text_ = LP::SetText("Start At Square 1 But With Some Extra Parts: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
+    sprite_ = LP::SetSprite(item_sunglassese_texture, position_);
+    text_ = LP::SetText("Limited View But Money Drops More Fequent: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
     LP::SetTextScale(text_, 0.1f, 0.1f);
 }
 
 BlindLuck::~BlindLuck()
 {
-    LP::DeleteRectangle(sprite_);
+    LP::DeleteSprite(sprite_);
     LP::DeleteText(text_);
 }
 

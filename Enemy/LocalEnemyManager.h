@@ -11,7 +11,7 @@ public:
     ~LocalEnemyManager();
 
     //Individual - affects only the individual
-    EnemyData* Add(int hp, int maxhp, int damage, int range, bool heal, int moneyDropRate);
+    EnemyData* Add(int hp, int maxhp, int damage, int range, bool heal, int moneyDropRate, bool visibility);
     EnemyData* GetData(const int ID);
     std::list<EnemyData*> GetEnemyData();
     void SetHP(const int ID, const int hp);
@@ -26,6 +26,8 @@ public:
     bool GetHeal(const int ID);
     void SetMoneyDropRate(const int ID, const int moneyDropRate);
     int GetMoneyDropRate(const int ID);
+    void SetVisibility(const int ID, const bool visible);
+    bool GetVisibility(const int ID);
 
     //local only for the current scene
     void SetTempAtkModifier(const int atkModifier);
@@ -40,6 +42,8 @@ public:
     bool GetTempHealModifier() const;
     void SetTempMoneyModifier(const bool moneyDropRate);
     bool GetTempMoneyModifier() const;
+    void SetTempVisibility(const bool visible);
+    bool GetTempVisibility() const;
 
     void EnemiesTakeDamage(const int damage);
 
@@ -50,6 +54,7 @@ public:
     int GetRangeModifier() const;
     bool GetHealModifier() const;
     int GetMoneyModifier() const;
+    bool GetVisibilityModifier() const;
 
     //Enemy Count
     int GetEnemyCount() const;
@@ -72,6 +77,7 @@ private:
     int tempRangeModifier_{0};
     bool tempHealModifier_{true};
     int tempMoneyDropRate_{0};
+    bool tempVisibility_{true};
 
     int deathCount_{0};
 };

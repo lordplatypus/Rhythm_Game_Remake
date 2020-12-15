@@ -26,7 +26,7 @@ Enemy3::Enemy3(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     numOfBeatsBetweenAttacks_ = 4;
     flip_ = false;
 
-    ed_ = lem_->Add(HP_, HP_, 1, 64, true, 1);
+    ed_ = lem_->Add(HP_, HP_, 1, 64, true, 1, false);
 
     enemySprite_ = LP::SetSprite(surveillance_texture, 32, 32, 4, 2);
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 4 / 2;
@@ -99,8 +99,11 @@ void Enemy3::Update(float delta_time, float beat_time)
 
 void Enemy3::Draw()
 {
-    LP::SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
-    LP::DrawSprite(enemySprite_[animCount_], velocity_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer())
+    {
+        LP::SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
+        LP::DrawSprite(enemySprite_[animCount_], velocity_);
+    }
 }
 
 void Enemy3::DelayedDraw()

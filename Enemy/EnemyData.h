@@ -4,7 +4,7 @@
 struct EnemyData
 {
     EnemyData() = default;
-    EnemyData(int ID, int hp, int maxhp, int atk, int range, bool heal, int moneyDropRate);
+    EnemyData(int ID, int hp, int maxhp, int atk, int range, bool heal, int moneyDropRate, bool visibility);
 
     int ID_{0};
     int hp_{0};
@@ -13,6 +13,7 @@ struct EnemyData
     int range_{0};
     bool heal_{true};
     int moneyDropRate_{1};
+    bool visibility_{false};
 };
 
 #endif

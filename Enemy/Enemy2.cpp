@@ -23,7 +23,7 @@ Enemy2::Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     // SetTop(0);
     // SetBottom(imageHeight_);
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
     enemy2Rect_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
     LP::SetRectangleColor(enemy2Rect_, 0, 0, 255, 255);
@@ -90,7 +90,7 @@ void Enemy2::Update(float delta_time, float beat_time)
 
 void Enemy2::Draw()
 {
-    LP::DrawRectangle(enemy2Rect_, velocity_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemy2Rect_, velocity_);
 }
 
 void Enemy2::DelayedDraw()

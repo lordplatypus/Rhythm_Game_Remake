@@ -53,12 +53,14 @@ float Enemy::GetPerception() const
 
 void Enemy::SetInRangeOfPlayer(const bool inRangeOfPlayer)
 {
-    inRangeOfPlayer_ = inRangeOfPlayer;
+    //inRangeOfPlayer_ = inRangeOfPlayer;
+    ed_->visibility_ = inRangeOfPlayer;
 }
 
 bool Enemy::GetInRangeOfPlayer() const
 {
-    return inRangeOfPlayer_;
+    //return inRangeOfPlayer_;
+    return ed_->visibility_;
 }
 
 void Enemy::DropMoney()

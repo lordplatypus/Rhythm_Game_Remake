@@ -13,8 +13,10 @@ StartingItemMap::StartingItemMap(Scene *scene, Camera* camera, PlayerManager* pl
     transitionManager_ = transitionManager;
     particleManager_ = particleManager;
 
-    SetMapArea(20, 20);
-
-    LoadTilesFromCSC("./Resources/Map/StartingItemRoom/StartingItemRoom_Main.csv");
-    LoadObjectsFromCSC("./Resources/Map/StartingItemRoom/StartingItemRoom_Object.csv");
+    // SetMapArea(20, 20);
+    // LoadTilesFromCSC("./Resources/Map/StartingItemRoom/StartingItemRoom_Main.csv");
+    // LoadObjectsFromCSC("./Resources/Map/StartingItemRoom/StartingItemRoom_Object.csv");
+    SetMapArea(19, 20);
+    LoadTilesFromCSC("./Resources/Map/ItemShowcase/Item_Showcase_Main.csv");
+    LoadObjectsFromCSC("./Resources/Map/ItemShowcase/Item_Showcase_Object.csv");
 }

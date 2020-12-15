@@ -56,6 +56,7 @@ enum
     surveillance_texture,
     ghost_texture,
     crawler_texture,
+    target_texture,
 
     //Item
     part_screw_texture,
@@ -67,6 +68,11 @@ enum
     item_maxHP_texture,
     item_range_texture,
     item_special_cooldown_texture,
+    item_sunglassese_texture,
+    item_reserve_tank_texture,
+    item_emp_texture,
+    item_taser_texture,
+    item_horseshoe_texture,
 };
 
 enum

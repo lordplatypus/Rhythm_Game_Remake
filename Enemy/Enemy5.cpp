@@ -28,7 +28,7 @@ Enemy5::Enemy5(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     numOfBeatsBetweenAttacks_ = 4;
     flip_ = false;
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
     enemyRectangle_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
     LP::SetRectangleColor(enemyRectangle_, 0, 255, 0, 255);
@@ -76,7 +76,7 @@ void Enemy5::Update(float delta_time, float beat_time)
 
 void Enemy5::Draw()
 {
-    LP::DrawRectangle(enemyRectangle_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemyRectangle_);
 }
 
 void Enemy5::DelayedDraw()

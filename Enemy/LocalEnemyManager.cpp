@@ -8,10 +8,10 @@ LocalEnemyManager::~LocalEnemyManager()
     Clear();
 }
 
-EnemyData* LocalEnemyManager::Add(int hp, int maxhp, int damage, int range, bool heal, int moneyDropRate)
+EnemyData* LocalEnemyManager::Add(int hp, int maxhp, int damage, int range, bool heal, int moneyDropRate, bool visibility)
 {
     ID_++;
-    EnemyData* temp = new EnemyData(ID_, hp, maxhp, damage, range, heal, moneyDropRate);
+    EnemyData* temp = new EnemyData(ID_, hp, maxhp, damage, range, heal, moneyDropRate, visibility);
     ed_.push_back(temp);
     return temp;
 }
@@ -90,6 +90,16 @@ int LocalEnemyManager::GetMoneyDropRate(const int ID)
     return GetData(ID)->moneyDropRate_;
 }
 
+void LocalEnemyManager::SetVisibility(const int ID, const bool visible)
+{
+    GetData(ID)->visibility_ = visible;
+}
+
+bool LocalEnemyManager::GetVisibility(const int ID)
+{
+    return GetData(ID)->visibility_;
+}
+
 
 //Local - applied only to existing enemies
 
@@ -152,6 +162,16 @@ bool LocalEnemyManager::GetTempMoneyModifier() const
     return tempMoneyDropRate_;
 }
 
+void LocalEnemyManager::SetTempVisibility(const bool visible)
+{
+    tempVisibility_ = visible;
+}
+
+bool LocalEnemyManager::GetTempVisibility() const
+{
+    return tempVisibility_;
+}
+
 void LocalEnemyManager::EnemiesTakeDamage(const int damage)
 {
 }
@@ -189,6 +209,11 @@ bool LocalEnemyManager::GetHealModifier() const
 int LocalEnemyManager::GetMoneyModifier() const
 {
     return GetTempMoneyModifier() + gem_->GetMoneyModifer();
+}
+
+bool LocalEnemyManager::GetVisibilityModifier() const
+{
+    return GetTempVisibility();
 }
 
 

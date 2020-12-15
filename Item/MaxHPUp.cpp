@@ -10,7 +10,7 @@ MaxHPUp::MaxHPUp(sf::Vector2f position, PlayerManager* playerManager, ParticleMa
     tag_ = "Item";
     name_ = "MaxHP";
     HP_ = 1;
-    priceTag_ = 69;
+    priceTag_ = 200;
     imageWidth_ = 32;
     imageHeight_ = 32;
     // SetLeft(0);

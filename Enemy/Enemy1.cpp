@@ -24,7 +24,7 @@ Enemy1::Enemy1(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     // SetTop(0);
     // SetBottom(imageHeight_);
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
     enemySprite_ = LP::SetSprite(companion_texture, 32, 32, 8, 1);
     for (auto i : enemySprite_)
@@ -54,7 +54,7 @@ void Enemy1::Update(float delta_time, float beat_time)
 
 void Enemy1::Draw()
 {
-    LP::DrawSprite(enemySprite_[animCount_], position_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawSprite(enemySprite_[animCount_], position_);
 }
 
 void Enemy1::DelayedDraw()

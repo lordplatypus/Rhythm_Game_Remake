@@ -27,7 +27,7 @@ Enemy6::Enemy6(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     numOfBeatsBetweenAttacks_ = 2;
     flip_ = false;
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 0);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 0, false);
 
     enemySprite_ = LP::SetSprite(crawler_texture, 32, 32, 6, 2);
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 4 / 2;
@@ -100,8 +100,11 @@ void Enemy6::Update(float delta_time, float beat_time)
 
 void Enemy6::Draw()
 {
-    LP::SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
-    LP::DrawSprite(enemySprite_[animCount_], velocity_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) 
+    {
+        LP::SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
+        LP::DrawSprite(enemySprite_[animCount_], velocity_);
+    }
 }
 
 void Enemy6::DelayedDraw()

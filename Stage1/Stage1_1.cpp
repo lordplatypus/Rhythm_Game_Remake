@@ -8,6 +8,8 @@
 #include "../Event/DefeatEnemies.h"
 #include "../Event/Spawner.h"
 #include "../Event/FindKeys.h"
+#include "../Event/InvisibleEnemies.h"
+#include "../Event/MortarStrike.h"
 
 //TEST
 #include "MapTest.h"
@@ -31,7 +33,9 @@ void Stage1_1::Init()
         MP::PlayStageMusic(stage1_1, true);
         //AddGameObject(new DefeatEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), lem_));
         //AddGameObject(new Spawner("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), this, lem_, game_->GetPlayerManager(), &pm_, map_));
-        AddGameObject(new FindKeys("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_));
+        //AddGameObject(new FindKeys("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_));
+        //AddGameObject(new InvisibleEnemies("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, &pm_, map_, lem_));
+        AddGameObject(new MortarStrike("Stage1_2", game_->GetCamera(), game_->GetTransitionManager(), game_->GetPlayerManager(), this, lem_, &pm_, map_));
     }
     //AddGameObject(new Roboko(sf::Vector2f(64, 64), this, game_->GetCamera(), game_->GetPlayerManager(), game_->GetTransitionManager(), &pm_, map_)); //TEST
 

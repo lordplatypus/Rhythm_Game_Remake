@@ -26,6 +26,9 @@ private:
     void Fadeout();
     void Display();
 
+public:
+    virtual void EventTrigger();
+
 private:
     enum State{Setup_, Type_, Fadeout_, Display_};
     State state_{Setup_};
