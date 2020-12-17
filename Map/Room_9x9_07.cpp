@@ -1,8 +1,8 @@
-#include "Room1.h"
+#include "Room_9x9_07.h"
 
-Room1::Room1(sf::Vector2i position, bool blockRandSpawn, bool playerRoom)
+Room_9x9_07::Room_9x9_07(sf::Vector2i position, bool blockRandSpawn, bool playerRoom)
 {
-    roomDataLocation_ = "./Resources/Map/Room/Factory_Room_01.csv";
+    roomDataLocation_ = "./Resources/Map/Room/Factory_Room_9x9_07.csv";
     position_ = position;
     roomWidth_ = 9;
     roomHeight_ = 9;
@@ -11,8 +11,6 @@ Room1::Room1(sf::Vector2i position, bool blockRandSpawn, bool playerRoom)
 
     SetRoomArea(position_.x, position_.y, roomWidth_, roomHeight_);
     
-    SetHallPoint(sf::Vector2i(0, 4)); //left anchor
-    SetHallPoint(sf::Vector2i(4, 0)); //top anchor
     SetHallPoint(sf::Vector2i(8, 4)); //right anchor
     SetHallPoint(sf::Vector2i(4, 8)); //bottom anchor
 

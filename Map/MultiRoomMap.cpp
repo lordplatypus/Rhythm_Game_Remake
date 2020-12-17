@@ -1,9 +1,20 @@
 #include "MultiRoomMap.h"
 //Rooms
-#include "../Map/Room1.h"
-#include "../Map/Room2.h"
-#include "../Map/Room3.h"
 #include "../Map/Junkyard.h"
+#include "../Map/Room_9x9_01.h"
+#include "../Map/Room_9x9_02.h"
+#include "../Map/Room_9x9_03.h"
+#include "../Map/Room_9x9_04.h"
+#include "../Map/Room_9x9_05.h"
+#include "../Map/Room_9x9_06.h"
+#include "../Map/Room_9x9_07.h"
+#include "../Map/Room_9x9_08.h"
+#include "../Map/Room_9x15_01.h"
+#include "../Map/Room_9x15_02.h"
+#include "../Map/Room_9x18_01.h"
+#include "../Map/Room_9x18_02.h"
+#include "../Map/Room_15x9_01.h"
+#include "../Map/Room_18x9_01.h"
 
 MultiRoomMap::MultiRoomMap()
 {}
@@ -139,6 +150,7 @@ void MultiRoomMap::SetRooms(int numOfRooms)
                 if (currentRoom->GetRoomArea().intersects(rooms_[i]->GetRoomArea())) 
                 {
                     done = false;
+                    prevRoom = rooms_[rand() % (rooms_.size() - 1)];
                     currentRoom->SetRoomPosition(prevRoom->GetRoomPosition());
                 }
             }
@@ -153,45 +165,83 @@ Room* MultiRoomMap::SetGetRandRoom(sf::Vector2i position, int roomBuildOrderNum,
 
     if (roomBuildOrderNum == 0)
     {
-        room = new Room1(position, true, true);
+        room = new Room_9x9_01(position, true, true);
         rooms_.push_back(room);
         return room;
     }
 
-    bool done = false;
-    int failsafe = 0;
-    while (!done)
+    int randRoom = rand() % 15;
+    switch (randRoom)
     {
-        failsafe++;
-        if (failsafe >= 100) 
+        case 0:
+        if (roomBuildOrderNum != 0 && roomBuildOrderNum != maxRoomNum - 1) 
         {
-            room = new Room1(position);
-            rooms_.push_back(room);
-            return room;
-        } 
+            room = new Room_9x9_01(position);
+            break;
+        }
+        room = new Junkyard(position);
+        break;
 
-        int randRoom = rand() % 4;
-        if (randRoom == 0) 
-        {
-            room = new Room1(position);
-            done = true;
-        }
-        else if (randRoom == 1) 
-        {
-            room = new Room2(position);
-            done = true;
-        }
-        else if (randRoom == 2) 
-        {
-            room = new Room3(position);
-            done = true;
-        }
-        else if (randRoom == 3 && roomBuildOrderNum != 0 && roomBuildOrderNum != maxRoomNum - 1) 
-        {
-            room = new Junkyard(position);
-            done = true;
-        }
+        case 1:
+        room = new Room_9x9_01(position);
+        break;
+
+        case 2:
+        room = new Room_9x9_02(position);
+        break;
+
+        case 3:
+        room = new Room_9x9_03(position);
+        break;
+
+        case 4:
+        room = new Room_9x9_04(position);
+        break;
+
+        case 5:
+        room = new Room_9x9_05(position);
+        break;
+
+        case 6:
+        room = new Room_9x9_06(position);
+        break;
+
+        case 7:
+        room = new Room_9x9_07(position);
+        break;
+
+        case 8:
+        room = new Room_9x9_08(position);
+        break;
+
+        case 9:
+        room = new Room_9x15_01(position);
+        break;
+
+        case 10:
+        room = new Room_9x15_02(position);
+        break;
+
+        case 11:
+        room = new Room_9x18_01(position);
+        break;
+
+        case 12:
+        room = new Room_9x18_02(position);
+        break;
+
+        case 13:
+        room = new Room_15x9_01(position);
+        break;
+
+        case 14:
+        room = new Room_18x9_01(position);
+        break;
+
+        default:
+        break;
     }
+
     rooms_.push_back(room);
     return room;
 }

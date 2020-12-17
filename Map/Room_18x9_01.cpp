@@ -1,8 +1,8 @@
-#include "Room2.h"
+#include "Room_18x9_01.h"
 
-Room2::Room2(sf::Vector2i position, bool blockRandSpawn, bool playerRoom)
+Room_18x9_01::Room_18x9_01(sf::Vector2i position, bool blockRandSpawn, bool playerRoom)
 {
-    roomDataLocation_ = "./Resources/Map/Room/Factory_Room_02.csv";
+    roomDataLocation_ = "./Resources/Map/Room/Factory_Room_18x9_01.csv";
     position_ = position;
     roomWidth_ = 18;
     roomHeight_ = 9;
