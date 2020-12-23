@@ -32,16 +32,16 @@ void ReserveTank::Update(float delta_time, float beat_time)
     SparkleRandom(delta_time);
 }
 
-void ReserveTank::Draw()
+void ReserveTank::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(sprite_);
 }
 
-void ReserveTank::DelayedDraw()
+void ReserveTank::DelayedDraw(const sf::RenderWindow& render_window)
 {
     if (ifSeesPlayer_) 
     {
-        arrow_->Draw();
+        arrow_->Draw(render_window);
         LP::DrawText(text_);
     }
 }

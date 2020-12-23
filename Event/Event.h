@@ -9,7 +9,7 @@ class Event : public GameObject
 public:
     Event();
     ~Event() override;
-    void DelayedDraw() override;
+    void DelayedDraw(const sf::RenderWindow& render_window) override;
 
     void Lock();
     void Unlock();

@@ -36,16 +36,16 @@ void Heal1::Update(float delta_time, float beat_time)
     SparkleRandom(delta_time);
 }
 
-void Heal1::Draw()
+void Heal1::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(sprite_);
 }
 
-void Heal1::DelayedDraw()
+void Heal1::DelayedDraw(const sf::RenderWindow& render_window)
 {
     if (ifSeesPlayer_) 
     {
-        arrow_->Draw();
+        arrow_->Draw(render_window);
         LP::DrawText(text_);
     }
 }

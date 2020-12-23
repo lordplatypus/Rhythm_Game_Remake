@@ -9,7 +9,7 @@ public:
     UIArrow(ParticleManager* pm, sf::Vector2f position, int numOfArrows, int arrowPosition = 0);
     ~UIArrow();
     void Update(float delta_time, float beat_time);
-    void Draw() const;
+    void Draw(const sf::RenderWindow& render_window) const;
 
     void UpdatePosition(const sf::Vector2f position);
     int GetCurrentArrow() const;

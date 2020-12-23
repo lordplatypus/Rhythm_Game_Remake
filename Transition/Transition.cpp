@@ -38,7 +38,7 @@ void Transition::Update(float delta_time, float beat_time)
     }
 }
 
-void Transition::Draw()
+void Transition::Draw(const sf::RenderWindow& render_window)
 {
     //if (name_ == "JunkYard") LP::DrawRectangle(sprite_);
 }

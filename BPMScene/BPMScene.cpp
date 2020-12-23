@@ -333,7 +333,7 @@ void BPMScene::SaveBPMForSelectedSong()
     state = Menu;
 }
 
-void BPMScene::Draw()
+void BPMScene::Draw(const sf::RenderWindow& render_window)
 {
     //Draw Background
     LP::DrawSprite(background);
@@ -392,8 +392,8 @@ void BPMScene::Draw()
     if (alpha > 0) LP::DrawText(savedText); //draw 'saved' text when visible
 
     //Draw UI
-    menu_->Draw();
-    musicMenu_->Draw();
+    menu_->Draw(render_window);
+    musicMenu_->Draw(render_window);
 }
 
 void BPMScene::AddGameObject(GameObject* gameObject)

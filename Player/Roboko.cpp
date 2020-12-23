@@ -51,7 +51,7 @@ void Roboko::Update(float delta_time, float beat_time)
     }
 }
 
-void Roboko::Draw()
+void Roboko::Draw(const sf::RenderWindow& render_window)
 {
     if (!IsDead())
     {
@@ -60,11 +60,11 @@ void Roboko::Draw()
     }
 }
 
-void Roboko::DelayedDraw()
+void Roboko::DelayedDraw(const sf::RenderWindow& render_window)
 {
     if (!IsDead())
     {
-        playerManager_->GetHPUI()->Draw();
+        playerManager_->GetHPUI()->Draw(render_window);
         LP::DrawText(playerManager_->GetWalletText());
     }
 }

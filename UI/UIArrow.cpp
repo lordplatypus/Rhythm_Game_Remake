@@ -52,14 +52,14 @@ void UIArrow::Update(float delta_time, float beat_time)
     HPBarManager();
 }
 
-void UIArrow::Draw() const
+void UIArrow::Draw(const sf::RenderWindow& render_window) const
 {
     if (isVisible_)
     {
         if (isDamaged_) LP::DrawSprite(greyArrow_, position_);
         else LP::DrawSprite(arrow_, position_);
     }
-    if (numOfArrows_ != arrowPosition_) nextArrow_->Draw();
+    if (numOfArrows_ != arrowPosition_) nextArrow_->Draw(render_window);
 }
 
 int UIArrow::GetCurrentArrow() const

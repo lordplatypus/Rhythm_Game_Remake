@@ -52,14 +52,14 @@ void Enemy1::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(position_);
 }
 
-void Enemy1::Draw()
+void Enemy1::Draw(const sf::RenderWindow& render_window)
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawSprite(enemySprite_[animCount_], position_);
 }
 
-void Enemy1::DelayedDraw()
+void Enemy1::DelayedDraw(const sf::RenderWindow& render_window)
 {
-    if (GetInRangeOfPlayer()) arrow_->Draw();
+    if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }
 
 void Enemy1::ReactOnCollision(GameObject& other)

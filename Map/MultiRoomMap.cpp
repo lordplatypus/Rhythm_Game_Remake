@@ -24,11 +24,11 @@ MultiRoomMap::~MultiRoomMap()
     for (auto room : rooms_) delete room;
 }
 
-void MultiRoomMap::Draw()
+void MultiRoomMap::Draw(const sf::RenderWindow& render_window)
 {
     for (auto i : rooms_)
     {
-        i->Draw();
+        i->Draw(render_window);
     }
 }
 
@@ -48,6 +48,7 @@ bool MultiRoomMap::IsWall(sf::Vector2f worldCoordinate)
     {
         if (i->GetRoomArea().contains(sf::Vector2i(worldCoordinate.x / CellSize, worldCoordinate.y / CellSize))) return i->IsWall(sf::Vector2i(worldCoordinate.x, worldCoordinate.y)); 
     }
+    return true;
 }
 
 void MultiRoomMap::CreateMapWithRooms(int numOfRooms, const std::string& transitionTo)

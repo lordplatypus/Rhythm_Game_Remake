@@ -52,7 +52,7 @@ void Mortar::Update(float delta_time, float beat_time)
     LP::SetSpriteScale(sprite_, scale_, scale_);
 }
 
-void Mortar::Draw()
+void Mortar::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(sprite_);
 }

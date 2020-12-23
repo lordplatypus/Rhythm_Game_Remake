@@ -112,9 +112,9 @@ void TitleScene::AnimationHandle(float delta_time, float beat_time)
     }
 }
 
-void TitleScene::Draw()
+void TitleScene::Draw(const sf::RenderWindow& render_window)
 {
-    map_->Draw();
+    map_->Draw(render_window);
 
     LP::DrawSprite(playerSprite_[animCount_], velocity_); //The smaller moving char
     LP::DrawSprite(playerSprite2_[animCount_], sf::Vector2f(game_->GetCamera()->GetCameraRightEdge() - 64, game_->GetCamera()->GetCameraBottomEdge() - 64));
@@ -122,14 +122,16 @@ void TitleScene::Draw()
 
     LP::DrawText(infoText);
 
-    pm_.Draw();
+    pm_.Draw(render_window);
 }
 
 void TitleScene::AddGameObject(GameObject* gameObject)
 {}
 
 GameObject* TitleScene::FindGameObject(const std::string& string, const bool byTag, const bool byID)
-{}
+{
+    return nullptr;
+}
 
 void TitleScene::ChangeGameObjectOrder(const std::string& name, const std::string& newPos)
 {}

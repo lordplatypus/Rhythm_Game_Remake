@@ -16,7 +16,7 @@ public:
     //Update Game
     void Update(float delta_time, float beat_time);
     //Draw Game
-    void Draw();
+    void Draw(const sf::RenderWindow& render_window);
     //Add a Scene to the scene map
     void AddScene(const std::string& name, Scene* scene);
     //Switch to a different scene

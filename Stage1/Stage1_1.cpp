@@ -59,12 +59,12 @@ void Stage1_1::Update(float delta_time, float beat_time)
     }
 }
 
-void Stage1_1::Draw()
+void Stage1_1::Draw(const sf::RenderWindow& render_window)
 {
-    map_->Draw();
-    gameObjects_.Draw();
-    gameObjects_.DelayedDraw();
-    pm_.Draw();
+    map_->Draw(render_window);
+    gameObjects_.Draw(render_window);
+    gameObjects_.DelayedDraw(render_window);
+    pm_.Draw(render_window);
 }
 
 void Stage1_1::AddGameObject(GameObject* gameObject)

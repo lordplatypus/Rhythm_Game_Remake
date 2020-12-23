@@ -9,7 +9,7 @@ public:
     UIHeart(Camera* camera, int numOfHearts, int heartPosition = 0);
     ~UIHeart();
     void Update(float delta_time, float beat_time);
-    void Draw() const;
+    void Draw(const sf::RenderWindow& render_window) const;
 
     bool IsDamaged();
 

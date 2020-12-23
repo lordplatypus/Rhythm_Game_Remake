@@ -32,14 +32,19 @@ Map::Map()
 Map::~Map()
 {}
 
-void Map::Draw()
+void Map::Draw(const sf::RenderWindow& render_window)
 {}
 
 std::vector<sf::IntRect> Map::GetMapArea() const
-{}
+{
+    std::vector<sf::IntRect> null;
+    return null;
+}
 
 bool Map::IsWall(sf::Vector2f worldCoordinate)
-{}
+{
+    return false;
+}
 
 void Map::PlaceObjectsUsingObjectMap(std::vector<std::vector<int> > objectMap)
 {

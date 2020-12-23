@@ -8,7 +8,7 @@ class MultiRoomMap : public Map
 public:
     MultiRoomMap();
     ~MultiRoomMap();
-    virtual void Draw() override;
+    virtual void Draw(const sf::RenderWindow& render_window) override;
     std::vector<sf::IntRect> GetMapArea() const override;
     virtual bool IsWall(sf::Vector2f worldCoordinate) override;
     virtual void CreateMapWithRooms(int numOfRooms, const std::string& transitionTo);

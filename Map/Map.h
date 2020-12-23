@@ -15,7 +15,7 @@ class Map
 public:
     Map();
     virtual ~Map();
-    virtual void Draw();
+    virtual void Draw(const sf::RenderWindow& render_window);
     virtual std::vector<sf::IntRect> GetMapArea() const;
     virtual bool IsWall(sf::Vector2f worldCoordinate);
 

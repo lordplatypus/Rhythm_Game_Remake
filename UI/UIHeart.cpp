@@ -44,7 +44,7 @@ void UIHeart::Update(float delta_time, float beat_time)
     if (numOfHearts_ != heartPosition_) nextHeart_->Update(delta_time, beat_time);
 }
 
-void UIHeart::Draw() const
+void UIHeart::Draw(const sf::RenderWindow& render_window) const
 {
     if (isDamaged_)
     {
@@ -56,7 +56,7 @@ void UIHeart::Draw() const
         if (isSmall_) LP::DrawSprite(heartSmall_, position_);
         else LP::DrawSprite(heart_, position_);
     }
-    if (numOfHearts_ != heartPosition_) nextHeart_->Draw();
+    if (numOfHearts_ != heartPosition_) nextHeart_->Draw(render_window);
 }
 
 bool UIHeart::IsDamaged()
@@ -151,6 +151,8 @@ int UIHeart::GetDamage(int count) const
     if (isDamaged_) count++;
     else return count;
     if (numOfHearts_ != heartPosition_) nextHeart_->GetDamage(count);
+
+    return 0;
 }
 
 void UIHeart::SetDamage(const int damage)

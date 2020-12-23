@@ -33,16 +33,16 @@ void ReroutePower::Update(float delta_time, float beat_time)
     SparkleRandom(delta_time);
 }
 
-void ReroutePower::Draw()
+void ReroutePower::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(sprite_);
 }
 
-void ReroutePower::DelayedDraw()
+void ReroutePower::DelayedDraw(const sf::RenderWindow& render_window)
 {
     if (ifSeesPlayer_) 
     {
-        arrow_->Draw();
+        arrow_->Draw(render_window);
         LP::DrawText(text_);
     }
 }

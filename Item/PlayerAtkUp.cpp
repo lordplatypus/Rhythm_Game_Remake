@@ -33,16 +33,16 @@ void PlayerAtkUp::Update(float delta_time, float beat_time)
     SparkleRandom(delta_time);
 }
 
-void PlayerAtkUp::Draw()
+void PlayerAtkUp::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(sprite_);
 }
 
-void PlayerAtkUp::DelayedDraw()
+void PlayerAtkUp::DelayedDraw(const sf::RenderWindow& render_window)
 {
     if (ifSeesPlayer_) 
     {
-        arrow_->Draw();
+        arrow_->Draw(render_window);
         LP::DrawText(text_);
     }
 }

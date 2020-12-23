@@ -36,16 +36,16 @@ void MaxHPUp::Update(float delta_time, float beat_time)
     SparkleRandom(delta_time);
 }
 
-void MaxHPUp::Draw()
+void MaxHPUp::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(sprite_);
 }
 
-void MaxHPUp::DelayedDraw()
+void MaxHPUp::DelayedDraw(const sf::RenderWindow& render_window)
 {
     if (ifSeesPlayer_) 
     {
-        arrow_->Draw();
+        arrow_->Draw(render_window);
         LP::DrawText(text_);
     }
 }

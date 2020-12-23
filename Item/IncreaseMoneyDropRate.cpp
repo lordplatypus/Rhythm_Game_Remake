@@ -33,16 +33,16 @@ void IncreaseMoneyDropRate::Update(float delta_time, float beat_time)
     SparkleRandom(delta_time);
 }
 
-void IncreaseMoneyDropRate::Draw()
+void IncreaseMoneyDropRate::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(sprite_);
 }
 
-void IncreaseMoneyDropRate::DelayedDraw()
+void IncreaseMoneyDropRate::DelayedDraw(const sf::RenderWindow& render_window)
 {
     if (ifSeesPlayer_) 
     {
-        arrow_->Draw();
+        arrow_->Draw(render_window);
         LP::DrawText(text_);
     }
 }

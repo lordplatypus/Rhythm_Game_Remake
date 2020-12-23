@@ -136,20 +136,22 @@ void MusicSelect::MusicMenu()
 }
 
 
-void MusicSelect::Draw()
+void MusicSelect::Draw(const sf::RenderWindow& render_window)
 {
     LP::DrawSprite(background);
     LP::DrawText(instructionText);
     //Draw UI
-    stageMenu_->Draw();
-    musicMenu_->Draw();
+    stageMenu_->Draw(render_window);
+    musicMenu_->Draw(render_window);
 }
 
 void MusicSelect::AddGameObject(GameObject* gameObject)
 {}
 
 GameObject* MusicSelect::FindGameObject(const std::string& string, const bool byTag, const bool byID)
-{}
+{
+    return nullptr;
+}
 
 void MusicSelect::ChangeGameObjectOrder(const std::string& name, const std::string& newPos)
 {}

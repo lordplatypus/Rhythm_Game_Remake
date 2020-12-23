@@ -1,5 +1,6 @@
 #ifndef PARTICLE_MANAGER_H_
 #define PARTICLE_MANAGER_H_
+
 #include <vector>
 #include "Particle.h"
 
@@ -9,7 +10,7 @@ public:
     ParticleManager();
     ~ParticleManager();
     void Update(float delta_time);
-    void Draw() const;
+    void Draw(const sf::RenderWindow& render_window) const;
     
     void Explosion(float x, float y);
     void SquareExplosion(float x, float y);

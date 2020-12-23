@@ -13,7 +13,7 @@ SingleRoomMap::~SingleRoomMap()
     LP::DeleteTileMap(tileMapDetails_);
 }
 
-void SingleRoomMap::Draw()
+void SingleRoomMap::Draw(const sf::RenderWindow& render_window)
 {
     //for (auto i : tileMapKeys_) LP::DrawSprite(i);
     LP::DrawTileMap(tileMap_);

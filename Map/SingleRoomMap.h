@@ -7,7 +7,7 @@ class SingleRoomMap : public Map
 public:
     SingleRoomMap();
     ~SingleRoomMap();
-    virtual void Draw() override;
+    virtual void Draw(const sf::RenderWindow& render_window) override;
     void SetMapArea(int width, int height);
     std::vector<sf::IntRect> GetMapArea() const override;
     virtual bool IsWall(sf::Vector2f worldCoordinate) override;

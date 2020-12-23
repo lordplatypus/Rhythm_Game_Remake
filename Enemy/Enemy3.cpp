@@ -97,7 +97,7 @@ void Enemy3::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(velocity_);
 }
 
-void Enemy3::Draw()
+void Enemy3::Draw(const sf::RenderWindow& render_window)
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer())
     {
@@ -106,9 +106,9 @@ void Enemy3::Draw()
     }
 }
 
-void Enemy3::DelayedDraw()
+void Enemy3::DelayedDraw(const sf::RenderWindow& render_window)
 {
-    if (GetInRangeOfPlayer()) arrow_->Draw();
+    if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }
 
 void Enemy3::ReactOnCollision(GameObject& other)

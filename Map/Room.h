@@ -8,7 +8,7 @@ class Room
 public:
     Room();
     ~Room();
-    void Draw();
+    void Draw(const sf::RenderWindow& render_window);
 
 
     //Setup

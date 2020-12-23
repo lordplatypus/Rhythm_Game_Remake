@@ -49,14 +49,14 @@ void UIVerticalMenu::Update(float delta_time, float beat_time)
     
 }
 
-void UIVerticalMenu::Draw() const
+void UIVerticalMenu::Draw(const sf::RenderWindow& render_window) const
 {
     if (display_ == false) return;
 
     if (menuPosition_ >= numOfText_ - numAboveSelected_) LP::DrawText(textKey_);
     if (menuPosition_ <= numToDisplay_ - 1 - numAboveSelected_) LP::DrawText(textKey_);
 
-    if (numOfText_ != textPosition_) nextText_->Draw();
+    if (numOfText_ != textPosition_) nextText_->Draw(render_window);
 }
 
 void UIVerticalMenu::ScrollUp()

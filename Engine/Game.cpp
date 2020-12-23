@@ -49,9 +49,9 @@ void Game::Update(float delta_time, float beat_time)
     IP::Reset();
 }
 
-void Game::Draw()
+void Game::Draw(const sf::RenderWindow& render_window)
 {
-    scene_->Draw();
+    scene_->Draw(render_window);
 }
 
 void Game::AddScene(const std::string& name, Scene* scene)

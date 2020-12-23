@@ -29,19 +29,19 @@ void GameObjectManager::DelayedUpdate(float delta_time, float beat_time)
     }
 }
 
-void GameObjectManager::Draw() const
+void GameObjectManager::Draw(const sf::RenderWindow& render_window) const
 {
     for (auto gameObject : gameObjects_)
     {
-        gameObject->Draw();
+        gameObject->Draw(render_window);
     }
 }
 
-void GameObjectManager::DelayedDraw() const
+void GameObjectManager::DelayedDraw(const sf::RenderWindow& render_window) const
 {
     for (auto gameObject : gameObjects_)
     {
-        gameObject->DelayedDraw();
+        gameObject->DelayedDraw(render_window);
     }
 }
 

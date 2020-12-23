@@ -1,5 +1,6 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
+#include <SFML/Graphics/RenderWindow.hpp>
 
 class Particle
 {
@@ -8,7 +9,7 @@ public:
         float startScale, float endScale, int red, int green, int blue, int startAlpha, int endAlpha, float progressSpeed = 1.0f);
     ~Particle();
     void Update(float delta_time);
-    void Draw() const;
+    void Draw(const sf::RenderWindow& render_window) const;
     bool IsDead() const;
 
 private:  

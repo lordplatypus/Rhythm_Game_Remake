@@ -8,7 +8,7 @@ public:
     UIVerticalMenu(sf::Vector2f position, int numOfText, std::vector<int> textIDs, int numToDisplay, int numAboveSelected, int textSpacing, int textPosition = 0);
     ~UIVerticalMenu();
     void Update(float delta_time, float beat_time);
-    void Draw() const;
+    void Draw(const sf::RenderWindow& render_window) const;
 
     void ScrollUp();
     void ScrollDown();

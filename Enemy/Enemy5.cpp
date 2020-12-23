@@ -74,14 +74,14 @@ void Enemy5::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(position_);
 }
 
-void Enemy5::Draw()
+void Enemy5::Draw(const sf::RenderWindow& render_window)
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemyRectangle_);
 }
 
-void Enemy5::DelayedDraw()
+void Enemy5::DelayedDraw(const sf::RenderWindow& render_window)
 {
-    if (GetInRangeOfPlayer()) arrow_->Draw();
+    if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }
 
 void Enemy5::ReactOnCollision(GameObject& other)

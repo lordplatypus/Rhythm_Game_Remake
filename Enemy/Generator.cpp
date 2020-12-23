@@ -51,14 +51,14 @@ void Generator::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(position_);
 }
 
-void Generator::Draw()
+void Generator::Draw(const sf::RenderWindow& render_window)
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(sprite_, position_);
 }
 
-void Generator::DelayedDraw()
+void Generator::DelayedDraw(const sf::RenderWindow& render_window)
 {
-    if (GetInRangeOfPlayer()) arrow_->Draw();
+    if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }
 
 void Generator::Kill()

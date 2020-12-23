@@ -8,8 +8,8 @@ public:
     Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, PlayerManager* playerManager, ParticleManager* pm, Map* map);
     ~Enemy2() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw() override;
-    void DelayedDraw() override;
+    void Draw(const sf::RenderWindow& render_window) override;
+    void DelayedDraw(const sf::RenderWindow& render_window) override;
 
 private:
     void CheckMoveLocation();

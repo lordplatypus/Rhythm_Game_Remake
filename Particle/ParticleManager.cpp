@@ -30,11 +30,11 @@ void ParticleManager::Update(float delta_time)
     }
 }
 
-void ParticleManager::Draw() const
+void ParticleManager::Draw(const sf::RenderWindow& render_window) const
 {
     for (auto i : particles)
     {
-        if (!i->IsDead()) i->Draw();
+        if (!i->IsDead()) i->Draw(render_window);
     }
 }
 

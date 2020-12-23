@@ -16,9 +16,9 @@ public:
     //Update - to be calculated right after Update 
     virtual void DelayedUpdate(float delta_time, float beat_time);
     //Draw
-    virtual void Draw();
+    virtual void Draw(const sf::RenderWindow& render_window);
     //Draw - to be drawn on screen after objects drawn in "Draw" - helpful for UI
-    virtual void DelayedDraw();
+    virtual void DelayedDraw(const sf::RenderWindow& render_window);
 
     //This is called when colliding with another gameobject, write reaction logic here
     virtual void ReactOnCollision(GameObject& other);

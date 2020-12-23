@@ -38,14 +38,14 @@ void Money::Update(float delta_time, float beat_time)
     SparkleRandom(delta_time);
 }
 
-void Money::Draw()
+void Money::Draw(const sf::RenderWindow& render_window)
 {
     for (auto i : sprites_) LP::DrawSprite(i);
 }
 
-void Money::DelayedDraw()
+void Money::DelayedDraw(const sf::RenderWindow& render_window)
 {
-    if (ifSeesPlayer_) arrow_->Draw();
+    if (ifSeesPlayer_) arrow_->Draw(render_window);
 }
 
 void Money::Effect()

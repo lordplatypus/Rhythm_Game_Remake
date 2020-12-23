@@ -52,7 +52,7 @@ void Particle::Update(float delta_time)
     LP::SetSpriteColor(imageHandle, red, green, blue, alpha);
 }
 
-void Particle::Draw() const
+void Particle::Draw(const sf::RenderWindow& render_window) const
 {
     if (isDead) return;
 

@@ -8,7 +8,7 @@ class SceneNull : public Scene
 public:
     virtual void Init() override {}
     virtual void Update(float delta_time, float beat_time) override {}
-    virtual void Draw() override {}
+    virtual void Draw(const sf::RenderWindow& render_window) override {}
     virtual void AddGameObject(GameObject* gameObject) override {}
     virtual GameObject* FindGameObject(const std::string& string, const bool byTag = true, const bool byID = false) override {return nullptr;}
     virtual void ChangeGameObjectOrder(const std::string& name, const std::string& newPos) override {}

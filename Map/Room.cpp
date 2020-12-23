@@ -11,7 +11,7 @@ Room::~Room()
     End();
 }
 
-void Room::Draw()
+void Room::Draw(const sf::RenderWindow& render_window)
 {
     // for (int i = 0; i < tileMapKeys_.size(); i++)
     // {

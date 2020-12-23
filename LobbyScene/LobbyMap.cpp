@@ -49,7 +49,7 @@ LobbyMap::~LobbyMap()
     LP::DeleteTileMap(tileMapDetails_);
 }
 
-void LobbyMap::Draw()
+void LobbyMap::Draw(const sf::RenderWindow& render_window)
 {
     // for (int i = 0; i < tileMapKeys_.size(); i++)
     // {

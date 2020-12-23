@@ -2,7 +2,6 @@
 #include "DeltaTime.h"
 #include "Camera.h"
 #include "Game.h"
-#include "LP.h"
 #include "MP.h"
 
 int main()
@@ -38,9 +37,8 @@ int main()
         }
         game.Update(deltaTime.GetDeltaTime(), MP::BeatTime());
         window.setView(*camera.GetCamera());
-        game.Draw(); //objects are added to the draw maps
         window.clear();
-        LP::Draw(&window); //actually draw objects
+        game.Draw(window); //actually draw objects
         window.display();
     }
     return EXIT_SUCCESS;

@@ -40,12 +40,12 @@ void StartingItemScene::Update(float delta_time, float beat_time)
     }
 }
 
-void StartingItemScene::Draw()
+void StartingItemScene::Draw(const sf::RenderWindow& render_window)
 {
-    map_->Draw();
-    gameObjects_.Draw();
-    gameObjects_.DelayedDraw();
-    pm_.Draw();
+    map_->Draw(render_window);
+    gameObjects_.Draw(render_window);
+    gameObjects_.DelayedDraw(render_window);
+    pm_.Draw(render_window);
 }
 
 void StartingItemScene::AddGameObject(GameObject* gameObject)
