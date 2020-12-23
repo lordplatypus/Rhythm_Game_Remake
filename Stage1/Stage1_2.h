@@ -14,7 +14,7 @@ public:
     ~Stage1_2() override;
     virtual void Init() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw(const sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) override;
     void AddGameObject(GameObject* gameObject) override;
     GameObject* FindGameObject(const std::string& string, const bool byTag = true, const bool byID = false) override;
     void ChangeGameObjectOrder(const std::string& name, const std::string& newPos) override;

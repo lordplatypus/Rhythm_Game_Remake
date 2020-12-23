@@ -16,9 +16,9 @@ public:
     //Update - to be calculated right after Update 
     virtual void DelayedUpdate(float delta_time, float beat_time);
     //Draw
-    virtual void Draw(const sf::RenderWindow& render_window);
+    virtual void Draw(sf::RenderWindow& render_window);
     //Draw - to be drawn on screen after objects drawn in "Draw" - helpful for UI
-    virtual void DelayedDraw(const sf::RenderWindow& render_window);
+    virtual void DelayedDraw(sf::RenderWindow& render_window);
 
     //This is called when colliding with another gameobject, write reaction logic here
     virtual void ReactOnCollision(GameObject& other);
@@ -113,7 +113,7 @@ protected:
     sf::Vector2f position_{0.0f, 0.0f}; //gameobjects position
     sf::Vector2f velocity_{0.0f, 0.0f}; //gameobjects velocity
     bool isDead_{false}; //"Death" flag
-    int sprite_{0}; //Used to store sprite ID - Used for drawing/editing sprite
+    sf::Sprite sprite_; //Used to store sprite ID - Used for drawing/editing sprite
     int imageWidth_{0}; //sprite width - Set up in the constructor
     int imageHeight_{0}; //sprite height - Set up in the constructor
     std::string tag_{""}; //gameobject tag - Set up in the constructor

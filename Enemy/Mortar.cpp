@@ -18,7 +18,7 @@ Mortar::Mortar(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Part
     ed_ = lem_->Add(0, 0, 1, 0, false, 0, true);
 
     sprite_ = LP::SetSprite(target_texture, position_);
-    LP::SetSpriteScale(sprite_, scale_, scale_);
+    sprite_.setScale(scale_, scale_);
     LP::SetSpriteOriginCenter(sprite_);
 
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
@@ -28,7 +28,6 @@ Mortar::Mortar(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Part
 
 Mortar::~Mortar()
 {
-    LP::DeleteSprite(sprite_);
 }
 
 void Mortar::Update(float delta_time, float beat_time)
@@ -49,12 +48,12 @@ void Mortar::Update(float delta_time, float beat_time)
     }
 
     scale_ = Math::Lerp(scale_, endingScale_, 5 * delta_time);
-    LP::SetSpriteScale(sprite_, scale_, scale_);
+    sprite_.setScale(scale_, scale_);
 }
 
-void Mortar::Draw(const sf::RenderWindow& render_window)
+void Mortar::Draw(sf::RenderWindow& render_window)
 {
-    LP::DrawSprite(sprite_);
+    render_window.draw(sprite_);
 }
 
 void Mortar::Kill()

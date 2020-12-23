@@ -52,7 +52,7 @@ void TestScene::Update(float delta_time, float beat_time)
     }
 }
 
-void TestScene::Draw(const sf::RenderWindow& render_window)
+void TestScene::Draw(sf::RenderWindow& render_window)
 {
     map_->Draw(render_window);
     gameObjects_.Draw(render_window);

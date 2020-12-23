@@ -17,33 +17,7 @@ ReserveTank::ReserveTank(sf::Vector2f position, PlayerManager* playerManager, Pa
     arrow_ = new UIArrow(pm_, position_, HP_);
 
     sprite_ = LP::SetSprite(item_reserve_tank_texture, position_);
-    text_ = LP::SetText("Double HP, Can't Heal: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
-    LP::SetTextScale(text_, 0.1f, 0.1f);
-}
-
-ReserveTank::~ReserveTank()
-{
-    LP::DeleteSprite(sprite_);
-    LP::DeleteText(text_);
-}
-
-void ReserveTank::Update(float delta_time, float beat_time)
-{
-    SparkleRandom(delta_time);
-}
-
-void ReserveTank::Draw(const sf::RenderWindow& render_window)
-{
-    LP::DrawSprite(sprite_);
-}
-
-void ReserveTank::DelayedDraw(const sf::RenderWindow& render_window)
-{
-    if (ifSeesPlayer_) 
-    {
-        arrow_->Draw(render_window);
-        LP::DrawText(text_);
-    }
+    text_ = LP::SetText("Double HP, Can't Heal: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32, sf::Vector2f(0.1f, 0.1f));
 }
 
 void ReserveTank::Effect()

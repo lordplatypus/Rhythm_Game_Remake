@@ -18,33 +18,7 @@ RemoveEnemyHealingOnFloor::RemoveEnemyHealingOnFloor(sf::Vector2f position, Play
     arrow_ = new UIArrow(pm_, position_, HP_);
 
     sprite_ = LP::SetSprite(item_taser_texture, position_);
-    text_ = LP::SetText("Removes Enemy Healing On This Floor: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
-    LP::SetTextScale(text_, 0.1f, 0.1f);
-}
-
-RemoveEnemyHealingOnFloor::~RemoveEnemyHealingOnFloor()
-{
-    LP::DeleteSprite(sprite_);
-    LP::DeleteText(text_);
-}
-
-void RemoveEnemyHealingOnFloor::Update(float delta_time, float beat_time)
-{
-    SparkleRandom(delta_time);
-}
-
-void RemoveEnemyHealingOnFloor::Draw(const sf::RenderWindow& render_window)
-{
-    LP::DrawSprite(sprite_);
-}
-
-void RemoveEnemyHealingOnFloor::DelayedDraw(const sf::RenderWindow& render_window)
-{
-    if (ifSeesPlayer_) 
-    {
-        arrow_->Draw(render_window);
-        LP::DrawText(text_);
-    }
+    text_ = LP::SetText("Removes Enemy Healing On This Floor: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32, sf::Vector2f(0.1f, 0.1f));
 }
 
 void RemoveEnemyHealingOnFloor::Effect()

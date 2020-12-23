@@ -8,8 +8,8 @@ public:
     Money(sf::Vector2f position, PlayerManager* playerManager, ParticleManager* pm);
     ~Money() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw(const sf::RenderWindow& render_window) override;
-    void DelayedDraw(const sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) override;
+    void DelayedDraw(sf::RenderWindow& render_window) override;
     
 private:
     void Effect();
@@ -17,7 +17,7 @@ private:
 
 private:
     int value_{0};
-    std::vector<int> sprites_;
+    std::vector<sf::Sprite> sprites_;
 };
 
 #endif

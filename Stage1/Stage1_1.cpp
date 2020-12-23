@@ -59,7 +59,7 @@ void Stage1_1::Update(float delta_time, float beat_time)
     }
 }
 
-void Stage1_1::Draw(const sf::RenderWindow& render_window)
+void Stage1_1::Draw(sf::RenderWindow& render_window)
 {
     map_->Draw(render_window);
     gameObjects_.Draw(render_window);

@@ -9,8 +9,8 @@ public:
     Enemy1(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, PlayerManager* playerManager, ParticleManager* pm, Map* map);
     ~Enemy1() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw(const sf::RenderWindow& render_window) override;
-    void DelayedDraw(const sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) override;
+    void DelayedDraw(sf::RenderWindow& render_window) override;
 
 private:
     void ReactOnCollision(GameObject& other) override;

@@ -12,8 +12,8 @@ public:
     Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManager* playerManager, TransitionManager* transitionManager, ParticleManager* particleManager, Map* map);
     ~Roboko() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw(const sf::RenderWindow& render_window) override;
-    void DelayedDraw(const sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) override;
+    void DelayedDraw(sf::RenderWindow& render_window) override;
     void ReactOnCollision(GameObject& other) override;
     void ReactInRange(GameObject& other) override;
     void ReactNotInRange(GameObject& other) override;
@@ -35,7 +35,7 @@ private:
     ParticleManager* pm_{nullptr};
 
     //sprite
-    std::vector<int> sprites_;
+    std::vector<sf::Sprite> sprites_;
 
     //Animation
     enum State {Normal, AttackLeft, AttackRight, AttackDown, AttackUp, Damage, CannonRise, CannonPowerUp, CannonShoot, CannonCoolDown};

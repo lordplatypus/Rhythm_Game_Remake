@@ -54,7 +54,7 @@ void MusicSelect::Init()
     musicMenu_->SetDisplay(false);
 
     //Background
-    background = LP::SetSprite(music_select_scene_texture, sf::Vector2f(0, 0));
+    background = LP::SetSprite(music_select_scene_texture);
 }
 
 void MusicSelect::Update(float delta_time, float beat_time)
@@ -136,10 +136,10 @@ void MusicSelect::MusicMenu()
 }
 
 
-void MusicSelect::Draw(const sf::RenderWindow& render_window)
+void MusicSelect::Draw(sf::RenderWindow& render_window)
 {
-    LP::DrawSprite(background);
-    LP::DrawText(instructionText);
+    render_window.draw(background);
+    render_window.draw(instructionText);
     //Draw UI
     stageMenu_->Draw(render_window);
     musicMenu_->Draw(render_window);
@@ -166,21 +166,10 @@ void MusicSelect::End()
     selectedMusic = 0;
     selectedStage = 0;
 
-    LP::DeleteText(instructionText);
-    for (auto i : stageNames_)
-    {
-        LP::DeleteText(i);
-    }
     stageNames_.clear();
 
     //delete music titles text ()
-    for (auto i : musicTitles_)
-    {
-        LP::DeleteText(i);
-    }
     musicTitles_.clear();
-
-    LP::DeleteSprite(background);
 
     delete stageMenu_;
     delete musicMenu_;

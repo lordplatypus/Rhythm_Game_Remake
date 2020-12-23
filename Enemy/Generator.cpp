@@ -23,7 +23,7 @@ Generator::Generator(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
-    sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
+    //sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
 
     // enemySprite_ = LP::SetSprite(companion_texture, 32, 32, 8, 1);
     // for (auto i : enemySprite_)
@@ -41,7 +41,7 @@ Generator::~Generator()
     // {
     //     LP::DeleteSprite(i);
     // }
-    LP::DeleteRectangle(sprite_);
+   // LP::DeleteRectangle(sprite_);
 }
 
 void Generator::Update(float delta_time, float beat_time)
@@ -51,12 +51,12 @@ void Generator::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(position_);
 }
 
-void Generator::Draw(const sf::RenderWindow& render_window)
+void Generator::Draw(sf::RenderWindow& render_window)
 {
-    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(sprite_, position_);
+    //if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(sprite_, position_);
 }
 
-void Generator::DelayedDraw(const sf::RenderWindow& render_window)
+void Generator::DelayedDraw(sf::RenderWindow& render_window)
 {
     if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }

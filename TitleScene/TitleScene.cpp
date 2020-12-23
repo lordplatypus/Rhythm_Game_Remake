@@ -1,6 +1,7 @@
 #include <iostream>
 #include "TitleScene.h"
 #include "TitleMap.h"
+#include "../Assets/Assets.h"
 #include "../Assets/ID.h"
 #include "../Engine/LP.h"
 #include "../Engine/MP.h"
@@ -19,15 +20,15 @@ void TitleScene::Init()
     map_ = new TitleMap(this);
     //set camera size
     game_->GetCamera()->SetCameraViewSize(360.0f, 240.0f);
-    //play music (lobby)
-    //mp_->PlayMusicForStage(LobbyStage, true);
-    //MP::PlayMusic(Gain_Therapy, true);
+    //play music
     MP::PlayStageMusic(title_scene, true);
     //set up ranom
     srand(time(NULL));
     //get the last selected char    
-    playerSprite_ = LP::SetSprite(roboko_texture, 32, 32, 6, 1);
-    playerSprite2_ = LP::SetSprite(roboko_texture, 32, 32, 6, 1);
+    // playerSprite_ = LP::SetSprite(roboko_texture, 32, 32, 6, 1);
+    // playerSprite2_ = LP::SetSprite(roboko_texture, 32, 32, 6, 1);
+    playerSprite_ = LP::SetMultiFrameSprite(roboko_texture, 32, 32, 6, 1);
+    playerSprite2_ = LP::SetMultiFrameSprite(roboko_texture, 32, 32, 6, 1);
     framesInOneAnimCycle = 5;
     endingFrame_ = 5;
 
@@ -35,20 +36,25 @@ void TitleScene::Init()
     for (auto i : playerSprite_)
     {
         //LP::SetSpriteScale(i, .5f, .5f);
-        LP::SetSpriteOrigin(i, sf::Vector2f(0.0f, 8));
+        // LP::SetSpriteOrigin(i, sf::Vector2f(0.0f, 8));
+        // LP::SetSpriteHorizontalFlip(i, true);
+        i.setOrigin(sf::Vector2f(0.0f, 8));
         LP::SetSpriteHorizontalFlip(i, true);
     }
     for (auto i : playerSprite2_)
     {
-        LP::SetSpriteScale(i, 2.0f, 2.0f);
+        //LP::SetSpriteScale(i, 2.0f, 2.0f);
+        i.setScale(2.0f, 2.0f);
     }
     //set char position
     position_ = sf::Vector2f(13 * CellSize, 4 * CellSize);
     //create text
-    infoText = LP::SetText("Title Scene\nPress Z to Start", sf::Vector2f(32, 64), 32);
-    LP::SetTextScale(infoText, .1f, .1f);
+    // infoText = LP::SetText("Title Scene\nPress Z to Start", sf::Vector2f(32, 64), 32);
+    // LP::SetTextScale(infoText, .1f, .1f);
+    infoText_ = LP::SetText("Title Scene\nPress Z to Start", sf::Vector2f(32, 64), 32, sf::Vector2f(0.1f, 0.1f));
     //create background picture
-    background = LP::SetSprite(title_scene_texture, sf::Vector2f(0, 0));
+    background_ = LP::SetSprite(title_scene_texture);
+    //background = LP::SetSprite(title_scene_texture, sf::Vector2f(0, 0));
     //set up timing for animations
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 10;
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
@@ -77,7 +83,11 @@ void TitleScene::Update(float delta_time, float beat_time)
     velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
     game_->GetCamera()->SetTarget(velocity_ + sf::Vector2f(8, 8));
 
-    LP::SetTextPosition(infoText, sf::Vector2f(game_->GetCamera()->GetCameraLeftEdge() + 10, game_->GetCamera()->GetCameraTopEdge() + 10));
+    //LP::SetTextPosition(infoText, sf::Vector2f(game_->GetCamera()->GetCameraLeftEdge() + 10, game_->GetCamera()->GetCameraTopEdge() + 10));
+    playerSprite_[animCount_].setPosition(velocity_);
+    playerSprite2_[animCount_].setPosition(sf::Vector2f(game_->GetCamera()->GetCameraRightEdge() - 64, game_->GetCamera()->GetCameraBottomEdge() - 64));
+    background_.setPosition(sf::Vector2f(game_->GetCamera()->GetCameraLeftEdge(), game_->GetCamera()->GetCameraTopEdge()));
+    infoText_.setPosition(sf::Vector2f(game_->GetCamera()->GetCameraLeftEdge() + 10, game_->GetCamera()->GetCameraTopEdge() + 10));
 
     pm_.Update(delta_time);
 
@@ -112,15 +122,18 @@ void TitleScene::AnimationHandle(float delta_time, float beat_time)
     }
 }
 
-void TitleScene::Draw(const sf::RenderWindow& render_window)
+void TitleScene::Draw(sf::RenderWindow& render_window)
 {
     map_->Draw(render_window);
 
-    LP::DrawSprite(playerSprite_[animCount_], velocity_); //The smaller moving char
-    LP::DrawSprite(playerSprite2_[animCount_], sf::Vector2f(game_->GetCamera()->GetCameraRightEdge() - 64, game_->GetCamera()->GetCameraBottomEdge() - 64));
-    LP::DrawSprite(background, sf::Vector2f(game_->GetCamera()->GetCameraLeftEdge(), game_->GetCamera()->GetCameraTopEdge()));
-
-    LP::DrawText(infoText);
+    // LP::DrawSprite(playerSprite_[animCount_], velocity_); //The smaller moving char
+    // LP::DrawSprite(playerSprite2_[animCount_], sf::Vector2f(game_->GetCamera()->GetCameraRightEdge() - 64, game_->GetCamera()->GetCameraBottomEdge() - 64));
+    // LP::DrawSprite(background, sf::Vector2f(game_->GetCamera()->GetCameraLeftEdge(), game_->GetCamera()->GetCameraTopEdge()));
+    // LP::DrawText(infoText);
+    render_window.draw(playerSprite_[animCount_]);
+    render_window.draw(playerSprite2_[animCount_]);
+    render_window.draw(background_);
+    render_window.draw(infoText_);
 
     pm_.Draw(render_window);
 }
@@ -143,11 +156,8 @@ void TitleScene::ChangeScene(const std::string& sceneName)
 
 void TitleScene::End()
 {
-    LP::DeleteText(infoText);
-    LP::DeleteSprite(background);
-    for (auto i : playerSprite_) LP::DeleteSprite(i);
-    for (auto i : playerSprite2_) LP::DeleteSprite(i);
     playerSprite_.clear();
+    playerSprite2_.clear();
     pm_.Clear();
     delete map_;
 }

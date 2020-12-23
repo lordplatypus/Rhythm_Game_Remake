@@ -1,23 +1,23 @@
 #include <iostream>
-#include "LoadAssets.h"
+#include "Assets.h"
 #include "ID.h"
-#include "../Engine/LP.h"
 #include "../Engine/MP.h"
+#include "../Engine/LP.h"
 
-LoadAssets::LoadAssets()
+Assets::Assets()
 {}
 
-LoadAssets::~LoadAssets()
+Assets::~Assets()
 {}
 
-void LoadAssets::Load()
+void Assets::Load()
 {
     LoadImage();
     LoadSound();
     LoadStageMusic();
 }
 
-void LoadAssets::LoadImage()
+void Assets::LoadImage()
 {
     // LP::SetFont("Path to Font");
     // LP::SetTexture(Texture Key, "Path to texture", texture width, texture height);
@@ -93,7 +93,7 @@ void LoadAssets::LoadImage()
     LP::SetTexture(item_horseshoe_texture, "./Resources/Images/Item/Item_Horseshoe.png", 32, 32);
 }
 
-void LoadAssets::LoadSound()
+void Assets::LoadSound()
 {
     // MP::SetMusic(Music Key, "Path to music");
     // MP::SetSound(Sound Key, "Path to sound clip");
@@ -119,7 +119,7 @@ void LoadAssets::LoadSound()
     MP::SetMusic(across_battle_result, "./Resources/Audio/24 across battle result.ogg");
 }
 
-void LoadAssets::LoadStageMusic()
+void Assets::LoadStageMusic()
 {
     MP::SetStageMusic(title_scene, Gain_Therapy);
     MP::SetStageMusic(lobby_scene, Gain_Therapy);

@@ -11,13 +11,13 @@ Room::~Room()
     End();
 }
 
-void Room::Draw(const sf::RenderWindow& render_window)
+void Room::Draw(sf::RenderWindow& render_window)
 {
     // for (int i = 0; i < tileMapKeys_.size(); i++)
     // {
     //     LP::DrawSprite(tileMapKeys_[i]);
     // }
-    LP::DrawTileMap(roomTileMap_);
+    render_window.draw(roomTileMap_);
 }
 
 void Room::SetRoomArea(int left, int top, int width, int height)
@@ -278,6 +278,4 @@ bool Room::IsWall(sf::Vector2i worldCoordinate)
 
 void Room::End()
 {
-    //for (auto i : tileMapKeys_) LP::DeleteSprite(i);
-    LP::DeleteTileMap(roomTileMap_);
 }

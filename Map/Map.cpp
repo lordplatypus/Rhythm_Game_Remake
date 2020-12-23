@@ -32,7 +32,7 @@ Map::Map()
 Map::~Map()
 {}
 
-void Map::Draw(const sf::RenderWindow& render_window)
+void Map::Draw(sf::RenderWindow& render_window)
 {}
 
 std::vector<sf::IntRect> Map::GetMapArea() const

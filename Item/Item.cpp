@@ -4,7 +4,28 @@ Item::Item()
 {}
 
 Item::~Item()
-{}
+{
+    delete arrow_;
+}
+
+void Item::Update(float delta_time, float beat_time)
+{
+    SparkleRandom(delta_time);
+}
+
+void Item::Draw(sf::RenderWindow& render_window)
+{
+    render_window.draw(sprite_);
+}
+
+void Item::DelayedDraw(sf::RenderWindow& render_window)
+{
+    if (ifSeesPlayer_) 
+    {
+        arrow_->Draw(render_window);
+        render_window.draw(text_);
+    }
+}
 
 int Item::GetPriceTag() const
 {

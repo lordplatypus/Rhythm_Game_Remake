@@ -9,9 +9,9 @@ Event::~Event()
     End();
 }
 
-void Event::DelayedDraw(const sf::RenderWindow& render_window)
+void Event::DelayedDraw(sf::RenderWindow& render_window)
 {
-    LP::DrawText(instructionText_);
+    render_window.draw(instructionText_);
 }
 
 void Event::Lock()
@@ -31,7 +31,7 @@ void Event::SetInstructionText(const std::string& text)
 
 void Event::SetInstructionTextString(const std::string& text)
 {
-    LP::SetTextString(instructionText_, text);
+    instructionText_.setString(text);
 }
 
 void Event::DisplayInstructionsText(float delta_time)
@@ -58,51 +58,49 @@ void Event::DisplayInstructionsText(float delta_time)
 
 void Event::Setup()
 {
-    instructionText_ = LP::SetText("", camera_->GetCameraCenter(), 32);
+    instructionText_ = LP::SetText("", camera_->GetCameraCenter(), 32, sf::Vector2f(0.3f, 0.3f));
     LP::SetTextOriginCenter(instructionText_);
-    LP::SetTextScale(instructionText_, 0.3f, 0.3f);
     state_ = Type_;
 }
 
 void Event::Type()
 {
-    LP::SetTextPosition(instructionText_, sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraCenter().y - 32));
+    instructionText_.setPosition(sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraCenter().y - 32));
     if (timer_ <= 0.0f)
     {
         timer_ = 0.1f;
         displayString_ += string_[count_];
         count_++;
         if (count_ == string_.size()) state_ = Fadeout_;
-        LP::SetTextString(instructionText_, displayString_);
+        instructionText_.setString(displayString_);
         LP::SetTextOriginCenter(instructionText_);
     }
 }
 
 void Event::Fadeout()
 {
-    LP::SetTextPosition(instructionText_, sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraCenter().y - 32));
+    instructionText_.setPosition(sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraCenter().y - 32));
     if (timer_ <= 0.0f)
     {
         timer_ = 0.1f;
         alpha_ -= 10;
-        LP::SetTextColor(instructionText_, 255, 255, 255, alpha_);
+        instructionText_.setFillColor(sf::Color(255, 255, 255, alpha_));
         if (alpha_ <= 0) 
         {
             state_ = Display_;
-            LP::SetTextScale(instructionText_, 0.1f, 0.1f);
-            LP::SetTextOrigin(instructionText_, sf::Vector2f(0.0f, 0.0f));
+            instructionText_.setScale(0.1f, 0.1f);
+            instructionText_.setOrigin(sf::Vector2f(0.0f, 0.0f));
         }
     }
 }
 
 void Event::Display()
 {
-    LP::SetTextPosition(instructionText_, sf::Vector2f(camera_->GetCameraLeftEdge() + 32, camera_->GetCameraTopEdge() + 32));
+    instructionText_.setPosition(sf::Vector2f(camera_->GetCameraLeftEdge() + 32, camera_->GetCameraTopEdge() + 32));
 }
 
 void Event::End()
 {
-    LP::DeleteText(instructionText_);
 }
 
 void Event::EventTrigger()

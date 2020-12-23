@@ -40,7 +40,7 @@ void StartingItemScene::Update(float delta_time, float beat_time)
     }
 }
 
-void StartingItemScene::Draw(const sf::RenderWindow& render_window)
+void StartingItemScene::Draw(sf::RenderWindow& render_window)
 {
     map_->Draw(render_window);
     gameObjects_.Draw(render_window);

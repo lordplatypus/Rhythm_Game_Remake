@@ -8,16 +8,13 @@ SingleRoomMap::SingleRoomMap()
 
 SingleRoomMap::~SingleRoomMap()
 {
-    //for (auto i : tileMapKeys_) LP::DeleteSprite(i);
-    LP::DeleteTileMap(tileMap_);
-    LP::DeleteTileMap(tileMapDetails_);
 }
 
-void SingleRoomMap::Draw(const sf::RenderWindow& render_window)
+void SingleRoomMap::Draw(sf::RenderWindow& render_window)
 {
     //for (auto i : tileMapKeys_) LP::DrawSprite(i);
-    LP::DrawTileMap(tileMap_);
-    LP::DrawTileMap(tileMapDetails_);
+    render_window.draw(tileMap_);
+    render_window.draw(tileMapDetails_);
 }
 
 void SingleRoomMap::SetMapArea(int width, int height)

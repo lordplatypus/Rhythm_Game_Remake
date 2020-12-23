@@ -15,9 +15,9 @@ public:
     //Delayed Update
     void DelayedUpdate(float delta_time, float beat_time);
     //Draw all gameobjects in the list
-    void Draw(const sf::RenderWindow& render_window) const;
+    void Draw(sf::RenderWindow& render_window) const;
     //Delayed Draw
-    void DelayedDraw(const sf::RenderWindow& render_window) const;
+    void DelayedDraw(sf::RenderWindow& render_window) const;
     //Checks ONLY collision between gameobjects
     void Collision();
     //Checks collision between gameobjects but starts from the last created object

@@ -19,7 +19,7 @@ static SceneNull nullScene;
 
 Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
 {
-    loadAssets_.Load();
+    assets_.Load();
     MP::ImportBPM();
     playerManager_ = new PlayerManager(camera_);
 
@@ -49,7 +49,7 @@ void Game::Update(float delta_time, float beat_time)
     IP::Reset();
 }
 
-void Game::Draw(const sf::RenderWindow& render_window)
+void Game::Draw(sf::RenderWindow& render_window)
 {
     scene_->Draw(render_window);
 }

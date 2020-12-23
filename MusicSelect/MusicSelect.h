@@ -12,7 +12,7 @@ public:
     ~MusicSelect() override;
     virtual void Init() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw(const sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) override;
     void AddGameObject(GameObject* gameObject) override;
     GameObject* FindGameObject(const std::string& string, const bool byTag = true, const bool byID = false) override;
     void ChangeGameObjectOrder(const std::string& name, const std::string& newPos) override;
@@ -28,14 +28,14 @@ private:
     State state = Stage;
 
     //Background
-    int background{0};
+    sf::Sprite background;
 
     int selectedStage = 0;
     int selectedMusic = 0;
 
-    int instructionText;
-    std::vector<int> stageNames_;
-    std::vector<int> musicTitles_;
+    sf::Text instructionText;
+    std::vector<sf::Text> stageNames_;
+    std::vector<sf::Text> musicTitles_;
     UIVerticalMenu* stageMenu_{nullptr};
     UIVerticalMenu* musicMenu_{nullptr};
 

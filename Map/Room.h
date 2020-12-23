@@ -2,13 +2,14 @@
 #define ROOM_H_
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "TileMap.h"
 
 class Room
 {
 public:
     Room();
     ~Room();
-    void Draw(const sf::RenderWindow& render_window);
+    void Draw(sf::RenderWindow& render_window);
 
 
     //Setup
@@ -78,7 +79,7 @@ protected:
     std::vector<sf::Vector2i> hallPoints_;
 
     //std::vector<int> tileMapKeys_;
-    int roomTileMap_{0};
+    TileMap roomTileMap_;
 
     //Bools
     bool playerRoom_{false};

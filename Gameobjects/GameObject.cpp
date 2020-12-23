@@ -10,10 +10,10 @@ void GameObject::Update(float delta_time, float beat_time)
 void GameObject::DelayedUpdate(float delta_time, float beat_time)
 {}
 
-void GameObject::Draw(const sf::RenderWindow& render_window)
+void GameObject::Draw(sf::RenderWindow& render_window)
 {}
 
-void GameObject::DelayedDraw(const sf::RenderWindow& render_window)
+void GameObject::DelayedDraw(sf::RenderWindow& render_window)
 {}
 
 void GameObject::ReactOnCollision(GameObject& other)

@@ -37,7 +37,7 @@ public:
     void SetWalletChangeBool(const bool allow);
     bool GetWalletChangeBool() const;
     void SetWalletText();
-    int GetWalletText() const;
+    sf::Text GetWalletText() const;
     void SetPerception(const int newPerception);
     int GetPerception() const;
     void SetPerceptionChangeBool(const bool allow);
@@ -56,7 +56,7 @@ private:
 
     //Player Parameters
     int wallet_{0};
-    int walletText_{0};
+    sf::Text walletText_;
     int perception_{0};
     UIHeart* uiHeart_{nullptr};
     int HP_{0};

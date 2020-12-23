@@ -9,7 +9,7 @@ class Event : public GameObject
 public:
     Event();
     ~Event() override;
-    void DelayedDraw(const sf::RenderWindow& render_window) override;
+    void DelayedDraw(sf::RenderWindow& render_window) override;
 
     void Lock();
     void Unlock();
@@ -40,7 +40,7 @@ private:
 
 protected:
     std::string target_{""};
-    int instructionText_{0};
+    sf::Text instructionText_;
 
     Camera* camera_{nullptr};
     TransitionManager* transitionManager_{nullptr};

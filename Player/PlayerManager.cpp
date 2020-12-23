@@ -166,8 +166,7 @@ void PlayerManager::SetWallet(const int money)
     if (!GetWalletChangeBool()) return;
 
     wallet_ = money;
-    walletText_ = LP::SetText(std::to_string(wallet_), sf::Vector2f(0, 0), 64);
-    LP::SetTextScale(walletText_, 0.1f, 0.1f);
+    walletText_ = LP::SetText(std::to_string(wallet_), sf::Vector2f(0, 0), 64, sf::Vector2f(0.1f, 0.1f));
     LP::SetTextOriginCenter(walletText_);
 }
 
@@ -201,10 +200,10 @@ bool PlayerManager::GetWalletChangeBool() const
 
 void PlayerManager::SetWalletText()
 {
-    LP::SetTextString(walletText_, std::to_string(wallet_));
+    walletText_.setString(std::to_string(wallet_));
 }
 
-int PlayerManager::GetWalletText() const
+sf::Text PlayerManager::GetWalletText() const
 {
     return walletText_;
 }
@@ -263,7 +262,6 @@ void PlayerManager::SubKillToCount()
 void PlayerManager::Reset()
 {
     wallet_ = 0;
-    LP::DeleteText(walletText_);
     perception_ = 0;
     delete uiHeart_;
     HP_ = 0;

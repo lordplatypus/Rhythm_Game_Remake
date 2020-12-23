@@ -10,6 +10,9 @@ class Item : public GameObject
 public:
     Item();
     ~Item();
+    void Update(float delta_time, float beat_time) override;
+    void Draw(sf::RenderWindow& render_window) override;
+    void DelayedDraw(sf::RenderWindow& render_window) override;
     virtual void Effect() = 0;
     int GetPriceTag() const;
     void SparkleRandom(float delta_time);
@@ -29,12 +32,11 @@ protected:
     PlayerManager* playerManager_{nullptr};
     ParticleManager* pm_{nullptr};
 
-    int sprite_{0};
     int priceTag_{0};
     bool ifSeesPlayer_{false};
     int HP_{0};
 
-    int text_{0};
+    sf::Text text_;
 };
 
 #endif

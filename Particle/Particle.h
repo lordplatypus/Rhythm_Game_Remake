@@ -1,15 +1,15 @@
 #ifndef PARTICLE_H_
 #define PARTICLE_H_
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics.hpp>
 
 class Particle
 {
 public:
-    Particle(int imageHandle, float x, float y, float vx, float vy, float damp, float lifespan, float forceX, float forceY, float angle, float angularVelocity, 
+    Particle(sf::Sprite sprite, float x, float y, float vx, float vy, float damp, float lifespan, float forceX, float forceY, float angle, float angularVelocity, 
         float startScale, float endScale, int red, int green, int blue, int startAlpha, int endAlpha, float progressSpeed = 1.0f);
     ~Particle();
     void Update(float delta_time);
-    void Draw(const sf::RenderWindow& render_window) const;
+    void Draw(sf::RenderWindow& render_window) const;
     bool IsDead() const;
 
 private:  
@@ -18,7 +18,7 @@ private:
     float y; //y coordinate(y座標)
     float lifespan = 0; //how long the particle will last(パーティクルの寿命)
     float age = 0; //current age of particle(パーティクルの歳)
-    int imageHandle; //ID for particle sprite(パーティクルのID)
+    sf::Sprite sprite; //ID for particle sprite(パーティクルのID)
     float scale = 1.f; //particle scale(拡大率)
     float startScale = 1.f; //particle starting scale(開始の拡大率)
     float endScale = 1.f; //particle ending scale(終了の拡大率)

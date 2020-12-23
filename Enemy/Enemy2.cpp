@@ -25,8 +25,8 @@ Enemy2::Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
-    enemy2Rect_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    LP::SetRectangleColor(enemy2Rect_, 0, 0, 255, 255);
+    // enemy2Rect_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
+    // LP::SetRectangleColor(enemy2Rect_, 0, 0, 255, 255);
 
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
 
@@ -88,12 +88,12 @@ void Enemy2::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(velocity_);
 }
 
-void Enemy2::Draw(const sf::RenderWindow& render_window)
+void Enemy2::Draw(sf::RenderWindow& render_window)
 {
-    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemy2Rect_, velocity_);
+    //if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemy2Rect_, velocity_);
 }
 
-void Enemy2::DelayedDraw(const sf::RenderWindow& render_window)
+void Enemy2::DelayedDraw(sf::RenderWindow& render_window)
 {
     if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }

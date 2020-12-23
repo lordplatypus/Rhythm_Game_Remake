@@ -13,7 +13,7 @@ public:
     ~TitleScene() override;
     virtual void Init() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw(const sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) override;
     void AddGameObject(GameObject* gameObject) override;
     GameObject* FindGameObject(const std::string& string, const bool byTag = true, const bool byID = false) override;
     void ChangeGameObjectOrder(const std::string& name, const std::string& newPos) override;
@@ -29,16 +29,20 @@ private:
     Map* map_{nullptr};
     ParticleManager pm_;
 
-    int infoText;
-    int background;
+    //int infoText;
+    //int background;
+    sf::Text infoText_;
+    sf::Sprite background_;
 
     //Char
     //animation
     enum State {Normal, Damage};
     State state_ {Normal};
     bool flip_ {false};
-    std::vector<int> playerSprite_;
-    std::vector<int> playerSprite2_;
+    // std::vector<int> playerSprite_;
+    // std::vector<int> playerSprite2_;
+    std::vector<sf::Sprite> playerSprite_;
+    std::vector<sf::Sprite> playerSprite2_;
     int animCount_ = 0;
     float timeInbetweenFrames_;
     bool oncePerBeat = false;

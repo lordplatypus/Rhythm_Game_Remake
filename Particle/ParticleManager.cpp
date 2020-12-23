@@ -1,4 +1,5 @@
 #include "ParticleManager.h"
+#include <SFML/Graphics.hpp>
 #include "../Engine/LP.h"
 #include "../Engine/Math.h"
 #include "../Assets/ID.h"
@@ -30,7 +31,7 @@ void ParticleManager::Update(float delta_time)
     }
 }
 
-void ParticleManager::Draw(const sf::RenderWindow& render_window) const
+void ParticleManager::Draw(sf::RenderWindow& render_window) const
 {
     for (auto i : particles)
     {
@@ -42,7 +43,7 @@ void ParticleManager::Explosion(float x_, float y_)
 {
     for (int i = 0; i < 50; i++)
     {
-        int key = LP::SetSprite(smoke_texture, sf::Vector2f(x_, y_));
+        sf::Sprite key = LP::SetSprite(smoke_texture, sf::Vector2f(x_, y_));
         LP::SetSpriteOriginCenter(key);
         float lifespan = (rand() % 5 + 5) / 10.0f;
         float angle = (rand() % 360) * (M_PI / 180);
@@ -57,7 +58,7 @@ void ParticleManager::Explosion(float x_, float y_)
 
     for (int i = 0; i < 100; i++)
     {
-        int key = LP::SetSprite(fire_texture, sf::Vector2f(x_, y_));
+        sf::Sprite key = LP::SetSprite(fire_texture, sf::Vector2f(x_, y_));
         LP::SetSpriteOriginCenter(key);
         float lifespan = (rand() % 5 + 1) / 10.0f;
         float angle = (rand() % 360) * (M_PI / 180);
@@ -90,20 +91,20 @@ void ParticleManager::SquareExplosion(float x_, float y_)
 
 void ParticleManager::WhiteOut(float x_, float y_)
 {
-    int key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
+    sf::Sprite key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
     particles.push_back(new Particle(key, x_, y_, 0, 0, 1, .5f, 0, 0, 0, 0, 1, 1, 255, 255, 255, 255, 0));
 }
 
 void ParticleManager::FadeToBlack(float x_, float y_)
 {
-    int key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
+    sf::Sprite key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
     LP::SetSpriteOriginCenter(key);
     particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 2.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 255, 2.0f));
 }
 
 void ParticleManager::FadeFromBlack(float x_, float y_)
 {
-    int key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
+    sf::Sprite key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
     LP::SetSpriteOriginCenter(key);
     particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 1.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 255, 0));
 }
@@ -112,7 +113,7 @@ void ParticleManager::SmokeScreen(float x_, float y_)
 {
     for (int i = 0; i < 100; i++)
     {
-        int key = LP::SetSprite(smoke_texture, sf::Vector2f(x_, y_));
+        sf::Sprite key = LP::SetSprite(smoke_texture, sf::Vector2f(x_, y_));
         LP::SetSpriteOriginCenter(key);
         float lifespan = (rand() % 10) / 10.0f;
         float vx = rand() % 200 - 100;
@@ -158,7 +159,7 @@ void ParticleManager::EnemyDeath(float x_, float y_)
             break;
         }
 
-        int key = LP::SetSprite(square_texture, sf::Vector2f(x_, y_));
+        sf::Sprite key = LP::SetSprite(square_texture, sf::Vector2f(x_, y_));
         LP::SetSpriteOriginCenter(key);
         float lifespan = (rand() % 3 + 1);
         float angle = (rand() % 360) * (M_PI / 180);
@@ -171,7 +172,7 @@ void ParticleManager::EnemyDeath(float x_, float y_)
 
 void ParticleManager::Sparkle(float x_, float y_)
 {
-    int sparkleKey = LP::SetSprite(sparkle_texture, sf::Vector2f(x_, y_));
+    sf::Sprite sparkleKey = LP::SetSprite(sparkle_texture, sf::Vector2f(x_, y_));
     LP::SetSpriteOriginCenter(sparkleKey);
     float lifespan = (float)(rand() % 5 + 2) / 10.0f;
     particles.push_back(new Particle(sparkleKey, x_, y_, 0, 0, 1, lifespan, 0, 0, 0, 0, .05f, .1f, 255, 255, 255, 255, 255));

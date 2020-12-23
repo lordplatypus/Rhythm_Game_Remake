@@ -24,7 +24,7 @@ MultiRoomMap::~MultiRoomMap()
     for (auto room : rooms_) delete room;
 }
 
-void MultiRoomMap::Draw(const sf::RenderWindow& render_window)
+void MultiRoomMap::Draw(sf::RenderWindow& render_window)
 {
     for (auto i : rooms_)
     {
