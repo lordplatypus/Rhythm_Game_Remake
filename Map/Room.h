@@ -77,7 +77,8 @@ protected:
     
     std::vector<sf::Vector2i> hallPoints_;
 
-    std::vector<int> tileMapKeys_;
+    //std::vector<int> tileMapKeys_;
+    int roomTileMap_{0};
 
     //Bools
     bool playerRoom_{false};

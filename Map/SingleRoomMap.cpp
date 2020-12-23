@@ -8,12 +8,16 @@ SingleRoomMap::SingleRoomMap()
 
 SingleRoomMap::~SingleRoomMap()
 {
-    for (auto i : tileMapKeys_) LP::DeleteSprite(i);
+    //for (auto i : tileMapKeys_) LP::DeleteSprite(i);
+    LP::DeleteTileMap(tileMap_);
+    LP::DeleteTileMap(tileMapDetails_);
 }
 
 void SingleRoomMap::Draw()
 {
-    for (auto i : tileMapKeys_) LP::DrawSprite(i);
+    //for (auto i : tileMapKeys_) LP::DrawSprite(i);
+    LP::DrawTileMap(tileMap_);
+    LP::DrawTileMap(tileMapDetails_);
 }
 
 void SingleRoomMap::SetMapArea(int width, int height)
@@ -53,6 +57,9 @@ int SingleRoomMap::GetLocation(sf::Vector2f worldCoordinate)
 
 void SingleRoomMap::LoadTilesFromCSC(const std::string& CSCFilePath)
 {
+    //std::vector<int> tileMap;
+    int tilemap[mapWidth_ * mapHeight_];
+
     std::ifstream mapData(CSCFilePath);
     char dummy;
 
@@ -61,22 +68,23 @@ void SingleRoomMap::LoadTilesFromCSC(const std::string& CSCFilePath)
         for (int x = 0; x < mapWidth_; x++)
         {
             mapData >> map_[x][y];
+            tilemap[x + y * mapWidth_] = map_[x][y];
             if (x < mapWidth_ - 1) 
             {
                 mapData >> dummy;
             }
-            if (map_[x][y] != -1) 
-            {
-                tileMapKeys_.push_back(LP::SetSprite(tile_map, sf::Vector2f(x*CellSize, y*CellSize), CellSize, CellSize, map_[x][y]));
-            }
         }
     }
-
     mapData.close();
+
+    tileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), tilemap, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
 }
 
 void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
 {
+    //std::vector<int> tileMap;
+    int tilemap[mapWidth_ * mapHeight_];
+
     std::ifstream detailData(CSCFilePath);
     int value;
     char dummy;
@@ -86,18 +94,16 @@ void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
         for (int x = 0; x < mapWidth_; x++)
         {
             detailData >> value;
+            tilemap[x + y * mapWidth_] = value;
             if (x < mapWidth_ - 1) 
             {
                 detailData >> dummy;
             }
-            if (value != -1) 
-            {
-                tileMapKeys_.push_back(LP::SetSprite(tile_map_details, sf::Vector2f(x*CellSize, y*CellSize), CellSize, CellSize, value));
-            }
         }
     }
-
     detailData.close();
+
+    tileMapDetails_ = LP::SetTileMap(tile_map_details, sf::Vector2u(32, 32), tilemap, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
 }
 
 void SingleRoomMap::LoadObjectsFromCSC(const std::string& CSCFilePath)

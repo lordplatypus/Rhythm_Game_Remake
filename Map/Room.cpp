@@ -13,10 +13,11 @@ Room::~Room()
 
 void Room::Draw()
 {
-    for (int i = 0; i < tileMapKeys_.size(); i++)
-    {
-        LP::DrawSprite(tileMapKeys_[i]);
-    }
+    // for (int i = 0; i < tileMapKeys_.size(); i++)
+    // {
+    //     LP::DrawSprite(tileMapKeys_[i]);
+    // }
+    LP::DrawTileMap(roomTileMap_);
 }
 
 void Room::SetRoomArea(int left, int top, int width, int height)
@@ -164,13 +165,16 @@ void Room::SetStairRand(int transitionLocID)
 
 void Room::SetTiles()
 {
+    int tilemap[roomWidth_ * roomHeight_];
     for (int y = 0; y < roomHeight_; y++)
     {
         for (int x = 0; x < roomWidth_; x++)
         {
-            tileMapKeys_.push_back(LP::SetSprite(tile_map, sf::Vector2f((x + position_.x) * CellSize, (y + position_.y) * CellSize), CellSize, CellSize, roomMap_[x][y]));
+            //tileMapKeys_.push_back(LP::SetSprite(tile_map, sf::Vector2f((x + position_.x) * CellSize, (y + position_.y) * CellSize), CellSize, CellSize, roomMap_[x][y]));
+            tilemap[x + y * roomWidth_] = roomMap_[x][y];
         }
     }
+    roomTileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), tilemap, sf::Vector2f(position_.x * CellSize, position_.y * CellSize), roomWidth_, roomHeight_);
 }
 
 void Room::SetRoomObjectMap(const std::string& roomObjectDataLocation)
@@ -274,5 +278,6 @@ bool Room::IsWall(sf::Vector2i worldCoordinate)
 
 void Room::End()
 {
-    for (auto i : tileMapKeys_) LP::DeleteSprite(i);
+    //for (auto i : tileMapKeys_) LP::DeleteSprite(i);
+    LP::DeleteTileMap(roomTileMap_);
 }

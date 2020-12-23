@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <queue>
+#include "../Map/TileMap.h"
+#include <list>
 
 class LP
 {
@@ -50,6 +52,9 @@ public:
     static void SetTextScale(const int key, const float scaleX, const float scaleY);
     static void DrawText(const int key);
     static void DrawText(const int key, const std::string& text);
+    //Drawing TileMap
+    static int SetTileMap(const int textureKey, sf::Vector2u tileSize, const int* map, sf::Vector2f position, int width, int height);
+    static void DrawTileMap(const int key);
     //Draw
     static void Draw(sf::RenderWindow *window);
     //Delete
@@ -58,6 +63,7 @@ public:
     static void DeleteTexture(int key);
     static void DeleteSprite(int key);
     static void DeleteText(int key);
+    static void DeleteTileMap(int key);
     static void DeleteAll();
 
 private:
@@ -70,6 +76,8 @@ private:
     static std::unordered_map<int, sf::Sprite> spriteMap;
     static sf::Font font;
     static std::unordered_map<int, sf::Text> textMap;
+
+    static std::unordered_map<int, TileMap> tileMap;
 };
 
 #endif

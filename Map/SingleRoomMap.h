@@ -20,7 +20,9 @@ public:
 protected:
     std::vector<std::vector<int> > map_;
     std::vector<std::vector<int> > objectMap_;
-    std::vector<int> tileMapKeys_;
+    //std::vector<int> tileMapKeys_;
+    int tileMap_{0};
+    int tileMapDetails_{0};
 };
 
 #endif

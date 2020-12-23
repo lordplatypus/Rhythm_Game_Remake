@@ -1,5 +1,6 @@
 set(SOURCES
 ${SOURCES}
+${Game_SOURCE_DIR}/Map/TileMap.cpp
 ${Game_SOURCE_DIR}/Map/Map.cpp
 ${Game_SOURCE_DIR}/Map/SingleRoomMap.cpp
 ${Game_SOURCE_DIR}/Map/MultiRoomMap.cpp

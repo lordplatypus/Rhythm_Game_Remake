@@ -9,6 +9,8 @@ std::unordered_map<int, sf::Sprite> LP::spriteMap;
 sf::Font LP::font;
 std::unordered_map<int, sf::Text> LP::textMap;
 
+std::unordered_map<int, TileMap> LP::tileMap;
+
 LP::LP(){}
 
 LP::~LP(){}
@@ -260,6 +262,25 @@ void LP::DrawText(const int key, const std::string& text)
 }
 
 
+//Drawing TileMap
+
+int LP::SetTileMap(const int textureKey, sf::Vector2u tileSize, const int* map, sf::Vector2f position, int width, int height)
+{
+    key++;
+    tileMap[key].Load(textureMap[textureKey], tileSize, map, position, width, height);
+    return key;
+
+    // TileMap* temp;
+    // temp->Load(tilesetTexture, tileSize, map, position, width, height);
+    // tileMap.push_back(temp);
+}
+
+void LP::DrawTileMap(const int key)
+{
+    thingsToDraw.push(key);
+}
+
+
 //Draw
 void LP::Draw(sf::RenderWindow *window)
 {
@@ -283,6 +304,10 @@ void LP::Draw(sf::RenderWindow *window)
             else if (textMap.find(thingsToDraw.front()) != textMap.end())
             {
                 window->draw(textMap[thingsToDraw.front()]);
+            }
+            else if (tileMap.find(thingsToDraw.front()) != tileMap.end())
+            {
+                window->draw(tileMap[thingsToDraw.front()]);
             }
             thingsToDraw.pop(); //remove the key from the list
         }
@@ -314,6 +339,11 @@ void LP::DeleteSprite(int key)
 void LP::DeleteText(int key)
 {
     textMap.erase(key);
+}
+
+void LP::DeleteTileMap(int key)
+{   
+    tileMap.erase(key);
 }
 
 void LP::DeleteAll()

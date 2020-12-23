@@ -36,24 +36,27 @@ LobbyMap::LobbyMap(Scene *scene, Camera* camera, PlayerManager* playerManager, T
 
 LobbyMap::~LobbyMap()
 {
-    int tileMapKeysLength = tileMapKeys_.size();
-    for (int i = 0; i < tileMapKeysLength; i++)
-    {
-        LP::DeleteSprite(tileMapKeys_[i]);
-    }
+    // int tileMapKeysLength = tileMapKeys_.size();
+    // for (int i = 0; i < tileMapKeysLength; i++)
+    // {
+    //     LP::DeleteSprite(tileMapKeys_[i]);
+    // }
     for (auto i : MenuText)
     {
         LP::DeleteText(i);
     }
+    LP::DeleteTileMap(tileMap_);
+    LP::DeleteTileMap(tileMapDetails_);
 }
 
 void LobbyMap::Draw()
 {
-    for (int i = 0; i < tileMapKeys_.size(); i++)
-    {
-        LP::DrawSprite(tileMapKeys_[i]);
-    }
-
+    // for (int i = 0; i < tileMapKeys_.size(); i++)
+    // {
+    //     LP::DrawSprite(tileMapKeys_[i]);
+    // }
+    LP::DrawTileMap(tileMap_);
+    LP::DrawTileMap(tileMapDetails_);
     for (int i = 0; i < MenuText.size(); i++)
     {
         LP::DrawText(MenuText[i]);
