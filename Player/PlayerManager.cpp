@@ -167,7 +167,7 @@ void PlayerManager::SetWallet(const int money)
 
     wallet_ = money;
     walletText_ = LP::SetText(std::to_string(wallet_), sf::Vector2f(0, 0), 64, sf::Vector2f(0.1f, 0.1f));
-    LP::SetTextOriginCenter(walletText_);
+    LP::SetTextOriginCenter(&walletText_);
 }
 
 int PlayerManager::GetWallet() const
@@ -203,9 +203,9 @@ void PlayerManager::SetWalletText()
     walletText_.setString(std::to_string(wallet_));
 }
 
-sf::Text PlayerManager::GetWalletText() const
+sf::Text* PlayerManager::GetWalletText()
 {
-    return walletText_;
+    return &walletText_;
 }
 
 void PlayerManager::SetPerception(const int perception)

@@ -24,7 +24,7 @@ void MusicSelect::Init()
     stageNames_.push_back(LP::SetText("Stage1_2 Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Stage1_3 Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Return to Lobby", sf::Vector2f(32, 128), 16));
-    for (auto i : stageNames_) LP::SetTextOriginCenter(i);
+    for (int i = 0; i < stageNames_.size(); i++) LP::SetTextOriginCenter(&stageNames_[i]);
 
     musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("Necro_Funk_the_Around", sf::Vector2f(256, 256), 16));
@@ -46,7 +46,7 @@ void MusicSelect::Init()
     musicTitles_.push_back(LP::SetText("DETROIT BEAT", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("New Gear", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("across battle result", sf::Vector2f(256, 256), 16));
-    for (auto i : musicTitles_) LP::SetTextOriginCenter(i); 
+    for (int i = 0; i < musicTitles_.size(); i++) LP::SetTextOriginCenter(&musicTitles_[i]);
 
     //Verticle menu setup ()
     stageMenu_ = new UIVerticalMenu(sf::Vector2f(276, 360), stageNames_.size(), stageNames_, 3, 1, 32);

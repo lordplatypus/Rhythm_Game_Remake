@@ -59,7 +59,7 @@ void Event::DisplayInstructionsText(float delta_time)
 void Event::Setup()
 {
     instructionText_ = LP::SetText("", camera_->GetCameraCenter(), 32, sf::Vector2f(0.3f, 0.3f));
-    LP::SetTextOriginCenter(instructionText_);
+    LP::SetTextOriginCenter(&instructionText_);
     state_ = Type_;
 }
 
@@ -73,7 +73,7 @@ void Event::Type()
         count_++;
         if (count_ == string_.size()) state_ = Fadeout_;
         instructionText_.setString(displayString_);
-        LP::SetTextOriginCenter(instructionText_);
+        LP::SetTextOriginCenter(&instructionText_);
     }
 }
 

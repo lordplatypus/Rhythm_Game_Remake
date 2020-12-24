@@ -19,9 +19,9 @@ Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManage
     //SetPerception(64);
 
     sprites_ = LP::SetMultiFrameSprite(roboko_texture, 32, 32, 8, 9);
-    for (auto i : sprites_)
+    for (int i = 0; i < sprites_.size(); i++)
     {
-        i.setOrigin(sf::Vector2f(0.0f, imageHeight_ / 4));
+        sprites_[i].setOrigin(sf::Vector2f(0.0f, imageHeight_ / 4));
     }
     
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
@@ -43,7 +43,7 @@ void Roboko::Update(float delta_time, float beat_time)
         AnimationHandle(delta_time, beat_time);
         velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
         playerManager_->GetHPUI()->Update(delta_time, beat_time);
-        playerManager_->GetWalletText().setPosition(sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraBottomEdge() - 16));
+        playerManager_->GetWalletText()->setPosition(sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraBottomEdge() - 16));
         sprites_[animCount_].setPosition(velocity_);
     }
 }
@@ -52,7 +52,7 @@ void Roboko::Draw(sf::RenderWindow& render_window)
 {
     if (!IsDead())
     {
-        LP::SetSpriteHorizontalFlip(sprites_[animCount_], flip_);
+        LP::SetSpriteHorizontalFlip(&sprites_[animCount_], flip_);
         render_window.draw(sprites_[animCount_]);
     }
 }
@@ -62,7 +62,7 @@ void Roboko::DelayedDraw(sf::RenderWindow& render_window)
     if (!IsDead())
     {
         playerManager_->GetHPUI()->Draw(render_window);
-        render_window.draw(playerManager_->GetWalletText());
+        render_window.draw(*playerManager_->GetWalletText());
     }
 }
 

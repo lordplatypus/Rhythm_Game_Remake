@@ -99,7 +99,9 @@ void GameObject::SetInRangeOfPlayer(const bool inRangeOfPlayer)
 {}
 
 bool GameObject::GetInRangeOfPlayer() const
-{}
+{
+    return false;
+}
 
 bool GameObject::GetActive() const
 {

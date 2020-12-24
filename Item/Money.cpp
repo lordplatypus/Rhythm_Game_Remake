@@ -77,6 +77,6 @@ void Money::SpriteSetUp()
         }
         sf::Vector2f spritePosition{position_.x + rand() % 32, position_.y + rand() % 32};
         sprites_.push_back(LP::SetSprite(textureID, spritePosition));
-        LP::SetSpriteOriginCenter(sprites_[i]);
+        LP::SetSpriteOriginCenter(&sprites_[i]);
     }
 }

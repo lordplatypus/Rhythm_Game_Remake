@@ -37,7 +37,7 @@ public:
     void SetWalletChangeBool(const bool allow);
     bool GetWalletChangeBool() const;
     void SetWalletText();
-    sf::Text GetWalletText() const;
+    sf::Text* GetWalletText();
     void SetPerception(const int newPerception);
     int GetPerception() const;
     void SetPerceptionChangeBool(const bool allow);

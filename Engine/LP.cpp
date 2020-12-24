@@ -45,23 +45,23 @@ std::vector<sf::Sprite> LP::SetMultiFrameSprite(const int textureKey, const int 
     return spriteArray;
 }
 
-void LP::SetSpriteHorizontalFlip(sf::Sprite sprite, const bool flip)
+void LP::SetSpriteHorizontalFlip(sf::Sprite* sprite, const bool flip)
 {
-    if (flip && sprite.getScale().x > 0)
+    if (flip && sprite->getScale().x > 0)
     {
-        sprite.scale(-1.0f, 1.0f);
-        sprite.setOrigin(sprite.getLocalBounds().width, sprite.getOrigin().y);
+        sprite->scale(-1.0f, 1.0f);
+        sprite->setOrigin(sprite->getLocalBounds().width, sprite->getOrigin().y);
     }
-    else if (!flip && sprite.getScale().x < 0)
+    else if (!flip && sprite->getScale().x < 0)
     {
-        sprite.scale(-1.0f, 1.0f);
-        sprite.setOrigin(0, sprite.getOrigin().y);
+        sprite->scale(-1.0f, 1.0f);
+        sprite->setOrigin(0, sprite->getOrigin().y);
     }
 }
 
-void LP::SetSpriteOriginCenter(sf::Sprite sprite)
+void LP::SetSpriteOriginCenter(sf::Sprite* sprite)
 {
-    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
+    sprite->setOrigin(sprite->getLocalBounds().width / 2, sprite->getLocalBounds().height / 2);
 }
 
 
@@ -83,9 +83,9 @@ sf::Text LP::SetText(const std::string& string, const sf::Vector2f& position, co
     return text;
 }
 
-void LP::SetTextOriginCenter(sf::Text text)
+void LP::SetTextOriginCenter(sf::Text* text)
 {
-    text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
+    text->setOrigin(text->getLocalBounds().width / 2, text->getLocalBounds().height / 2);
 }
 
 

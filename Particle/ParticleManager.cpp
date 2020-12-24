@@ -44,7 +44,7 @@ void ParticleManager::Explosion(float x_, float y_)
     for (int i = 0; i < 50; i++)
     {
         sf::Sprite key = LP::SetSprite(smoke_texture, sf::Vector2f(x_, y_));
-        LP::SetSpriteOriginCenter(key);
+        LP::SetSpriteOriginCenter(&key);
         float lifespan = (rand() % 5 + 5) / 10.0f;
         float angle = (rand() % 360) * (M_PI / 180);
         float speed = rand() % 50 + 30;
@@ -59,7 +59,7 @@ void ParticleManager::Explosion(float x_, float y_)
     for (int i = 0; i < 100; i++)
     {
         sf::Sprite key = LP::SetSprite(fire_texture, sf::Vector2f(x_, y_));
-        LP::SetSpriteOriginCenter(key);
+        LP::SetSpriteOriginCenter(&key);
         float lifespan = (rand() % 5 + 1) / 10.0f;
         float angle = (rand() % 360) * (M_PI / 180);
         float speed = rand() % 50 + 30;
@@ -98,14 +98,14 @@ void ParticleManager::WhiteOut(float x_, float y_)
 void ParticleManager::FadeToBlack(float x_, float y_)
 {
     sf::Sprite key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
-    LP::SetSpriteOriginCenter(key);
+    LP::SetSpriteOriginCenter(&key);
     particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 2.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 255, 2.0f));
 }
 
 void ParticleManager::FadeFromBlack(float x_, float y_)
 {
     sf::Sprite key = LP::SetSprite(white_texture, sf::Vector2f(x_, y_));
-    LP::SetSpriteOriginCenter(key);
+    LP::SetSpriteOriginCenter(&key);
     particles.push_back(new Particle(key, x_, y_, 0, 0, 1, 1.0f, 0, 0, 0, 0, 1, 1, 0, 0, 0, 255, 0));
 }
 
@@ -114,7 +114,7 @@ void ParticleManager::SmokeScreen(float x_, float y_)
     for (int i = 0; i < 100; i++)
     {
         sf::Sprite key = LP::SetSprite(smoke_texture, sf::Vector2f(x_, y_));
-        LP::SetSpriteOriginCenter(key);
+        LP::SetSpriteOriginCenter(&key);
         float lifespan = (rand() % 10) / 10.0f;
         float vx = rand() % 200 - 100;
         float vy = -(rand() % 200);
@@ -160,7 +160,7 @@ void ParticleManager::EnemyDeath(float x_, float y_)
         }
 
         sf::Sprite key = LP::SetSprite(square_texture, sf::Vector2f(x_, y_));
-        LP::SetSpriteOriginCenter(key);
+        LP::SetSpriteOriginCenter(&key);
         float lifespan = (rand() % 3 + 1);
         float angle = (rand() % 360) * (M_PI / 180);
         float speed = rand() % 100;
@@ -173,7 +173,7 @@ void ParticleManager::EnemyDeath(float x_, float y_)
 void ParticleManager::Sparkle(float x_, float y_)
 {
     sf::Sprite sparkleKey = LP::SetSprite(sparkle_texture, sf::Vector2f(x_, y_));
-    LP::SetSpriteOriginCenter(sparkleKey);
+    LP::SetSpriteOriginCenter(&sparkleKey);
     float lifespan = (float)(rand() % 5 + 2) / 10.0f;
     particles.push_back(new Particle(sparkleKey, x_, y_, 0, 0, 1, lifespan, 0, 0, 0, 0, .05f, .1f, 255, 255, 255, 255, 255));
 }

@@ -25,7 +25,7 @@ void BPMScene::Init()
     menuText_.push_back(LP::SetText("Start Playback", sf::Vector2f(256, 256), 16));
     menuText_.push_back(LP::SetText("Save Changes", sf::Vector2f(256, 256), 16));
     menuText_.push_back(LP::SetText("Quit", sf::Vector2f(256, 256), 16));
-    for (auto i : menuText_) LP::SetTextOriginCenter(i); //set the origin to the center (テクストの原点を設定する)
+    for (int i = 0; i < menuText_.size(); i++) LP::SetTextOriginCenter(&menuText_[i]); //set the origin to the center (テクストの原点を設定する)
 
     //Duplicate the music titles (text) from the MP class
     musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
@@ -48,7 +48,7 @@ void BPMScene::Init()
     musicTitles_.push_back(LP::SetText("DETROIT BEAT", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("New Gear", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("across battle result", sf::Vector2f(256, 256), 16));
-    for (auto i : musicTitles_) LP::SetTextOriginCenter(i); 
+    for (int i = 0; i < musicTitles_.size(); i++) LP::SetTextOriginCenter(&musicTitles_[i]);
 
     //Verticle menu setup ()
     menu_ = new UIVerticalMenu(sf::Vector2f(275, 183), menuText_.size(), menuText_, 3, 1, 32);
@@ -58,7 +58,7 @@ void BPMScene::Init()
     //Set up the rest of the text used (残るテクストを設定する)
     setupInstructions = LP::SetText("Z to start,\n\nDown to time beats,\n\nX to return", sf::Vector2f(584+16, 88+16), 16);
     savedText = LP::SetText("Saved", sf::Vector2f(803, 183), 16);
-    LP::SetTextOriginCenter(savedText);
+    LP::SetTextOriginCenter(&savedText);
     displayMusicTitle = LP::SetText("Music Title: NA", sf::Vector2f(96, 448), 16);
     displayBeatsPerMin = LP::SetText("Beats Per Min: NA", sf::Vector2f(96, 480), 16);
     //secPerBeat = MP::GetBPMForSelectedMusic(musicID);
@@ -71,16 +71,16 @@ void BPMScene::Init()
 
     //setup sprites used for timing (スプライトを設定する)
     heartSprite = LP::SetMultiFrameSprite(hearts_texture, 16, 16, 2, 1, sf::Vector2f(705, 535)); //heart sprite (ハートのスプライト)
-    for (auto i : heartSprite) 
+    for (int i = 0; i < heartSprite.size(); i++) 
     {
-        i.setScale(8.0f, 8.0f); //set heart sprite scale ()
-        LP::SetSpriteOriginCenter(i);
+        heartSprite[i].setScale(8.0f, 8.0f); //set heart sprite scale ()
+        LP::SetSpriteOriginCenter(&heartSprite[i]);
     }
     playerSprite = LP::SetMultiFrameSprite(roboko_texture, 32, 32, 6, 1, sf::Vector2f(901, 535)); //char sprite (キャラクターのスプライト)
-    for (auto i : playerSprite) 
+    for (int i = 0; i < playerSprite.size(); i++) 
     {
-        i.setScale(6.0f, 6.0f); //set char sprite scale ()
-        LP::SetSpriteOriginCenter(i);
+        playerSprite[i].setScale(6.0f, 6.0f); //set char sprite scale ()
+        LP::SetSpriteOriginCenter(&playerSprite[i]);
     }
 
     //Import data into "MusicSPBMap"

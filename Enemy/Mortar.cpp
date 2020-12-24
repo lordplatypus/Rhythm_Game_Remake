@@ -19,7 +19,7 @@ Mortar::Mortar(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Part
 
     sprite_ = LP::SetSprite(target_texture, position_);
     sprite_.setScale(scale_, scale_);
-    LP::SetSpriteOriginCenter(sprite_);
+    LP::SetSpriteOriginCenter(&sprite_);
 
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
 

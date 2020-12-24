@@ -10,10 +10,10 @@ UIHeart::UIHeart(Camera* camera, int numOfHearts, int heartPosition) : camera_{c
     heartSmall_ = LP::SetSprite(heart_small_texture);
     greyHeart_ = LP::SetSprite(grey_heart_texture);
     greyHeartSmall_ = LP::SetSprite(grey_heart_small_texture);
-    LP::SetSpriteOriginCenter(heart_);
-    LP::SetSpriteOriginCenter(heartSmall_);
-    LP::SetSpriteOriginCenter(greyHeart_);
-    LP::SetSpriteOriginCenter(greyHeartSmall_);
+    LP::SetSpriteOriginCenter(&heart_);
+    LP::SetSpriteOriginCenter(&heartSmall_);
+    LP::SetSpriteOriginCenter(&greyHeart_);
+    LP::SetSpriteOriginCenter(&greyHeartSmall_);
     numOfHearts_ = numOfHearts;
     heartPosition_ = heartPosition + 1;
     if (heartPosition_ != numOfHearts_)

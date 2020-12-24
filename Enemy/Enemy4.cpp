@@ -139,7 +139,7 @@ void Enemy4::Draw(sf::RenderWindow& render_window)
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer())
     {
-        LP::SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
+        LP::SetSpriteHorizontalFlip(&enemySprite_[animCount_], flip_);
         render_window.draw(enemySprite_[animCount_]);
     }
 }

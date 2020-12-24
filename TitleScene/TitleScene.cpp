@@ -32,15 +32,25 @@ void TitleScene::Init()
     framesInOneAnimCycle = 5;
     endingFrame_ = 5;
 
-    //set sprite origin and scale
-    for (auto i : playerSprite_)
+    for (int i = 0; i < playerSprite_.size(); i++)
     {
-        //LP::SetSpriteScale(i, .5f, .5f);
-        // LP::SetSpriteOrigin(i, sf::Vector2f(0.0f, 8));
-        // LP::SetSpriteHorizontalFlip(i, true);
-        i.setOrigin(sf::Vector2f(0.0f, 8));
-        LP::SetSpriteHorizontalFlip(i, true);
+        playerSprite_[i].setOrigin(sf::Vector2f(0.0f, 8.0f));
+        // playerSprite_[i].scale(-1.0f, 1.0f);
+        // playerSprite_[i].setOrigin(playerSprite_[i].getLocalBounds().width, playerSprite_[i].getOrigin().y);
+        LP::SetSpriteHorizontalFlip(&playerSprite_[i], true);
+
+        playerSprite2_[i].scale(2.0f, 2.0f);
     }
+
+    //set sprite origin and scale
+    // for (auto i : playerSprite_)
+    // {
+    //     //LP::SetSpriteScale(i, .5f, .5f);
+    //     // LP::SetSpriteOrigin(i, sf::Vector2f(0.0f, 8));
+    //     // LP::SetSpriteHorizontalFlip(i, true);
+    //     i.setOrigin(sf::Vector2f(0.0f, 8.0f));
+    //     LP::SetSpriteHorizontalFlip(i, true);
+    // }
     for (auto i : playerSprite2_)
     {
         //LP::SetSpriteScale(i, 2.0f, 2.0f);
