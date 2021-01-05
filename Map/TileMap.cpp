@@ -1,6 +1,6 @@
 #include "TileMap.h"
 
-bool TileMap::Load(const sf::Texture& tilesetTexture, sf::Vector2u tileSize, const int* map, sf::Vector2f position, int width, int height)
+bool TileMap::Load(const sf::Texture& tilesetTexture, sf::Vector2u tileSize, const std::vector<std::vector<int>> map, sf::Vector2f position, int width, int height)
 {
     texture_ = tilesetTexture;
 
@@ -11,7 +11,8 @@ bool TileMap::Load(const sf::Texture& tilesetTexture, sf::Vector2u tileSize, con
     {
         for (int y = 0; y < height; y++)
         {
-            int tileNumber = map[x + y * width];
+            //int tileNumber = map[x + y * width];
+            int tileNumber = map[x][y];
             if (tileNumber == -1) continue;
 
             int tu = tileNumber % (texture_.getSize().x / tileSize.x);

@@ -43,8 +43,8 @@ void StartingItemScene::Update(float delta_time, float beat_time)
 void StartingItemScene::Draw(sf::RenderWindow& render_window)
 {
     map_->Draw(render_window);
-    gameObjects_.Draw(render_window);
-    gameObjects_.DelayedDraw(render_window);
+    gameObjects_.Draw(render_window, game_->GetCamera());
+    gameObjects_.DelayedDraw(render_window, game_->GetCamera());
     pm_.Draw(render_window);
 }
 

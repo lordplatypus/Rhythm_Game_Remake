@@ -30,6 +30,7 @@ Money::Money(sf::Vector2f position, PlayerManager* playerManager, ParticleManage
 Money::~Money()
 {
     sprites_.clear();
+    //delete arrow_;
 }
 
 void Money::Update(float delta_time, float beat_time)
@@ -44,7 +45,8 @@ void Money::Draw(sf::RenderWindow& render_window)
 
 void Money::DelayedDraw(sf::RenderWindow& render_window)
 {
-    if (ifSeesPlayer_) arrow_->Draw(render_window);
+    if (ifSeesPlayer_) 
+        arrow_->Draw(render_window);
 }
 
 void Money::Effect()

@@ -40,6 +40,11 @@ sf::IntRect Room::GetRoomArea() const
     return roomArea_;
 }
 
+sf::IntRect Room::GetRoomAreaWorldCoordinates() const
+{
+    return sf::IntRect(sf::IntRect(roomArea_.left * CellSize, roomArea_.top * CellSize, roomArea_.width * CellSize, roomArea_.height * CellSize));
+}
+
 void Room::SetRoomPosition(sf::Vector2i position)
 {
     position_ = position;
@@ -165,16 +170,7 @@ void Room::SetStairRand(int transitionLocID)
 
 void Room::SetTiles()
 {
-    int tilemap[roomWidth_ * roomHeight_];
-    for (int y = 0; y < roomHeight_; y++)
-    {
-        for (int x = 0; x < roomWidth_; x++)
-        {
-            //tileMapKeys_.push_back(LP::SetSprite(tile_map, sf::Vector2f((x + position_.x) * CellSize, (y + position_.y) * CellSize), CellSize, CellSize, roomMap_[x][y]));
-            tilemap[x + y * roomWidth_] = roomMap_[x][y];
-        }
-    }
-    roomTileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), tilemap, sf::Vector2f(position_.x * CellSize, position_.y * CellSize), roomWidth_, roomHeight_);
+    roomTileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), roomMap_, sf::Vector2f(position_.x * CellSize, position_.y * CellSize), roomWidth_, roomHeight_);
 }
 
 void Room::SetRoomObjectMap(const std::string& roomObjectDataLocation)

@@ -90,7 +90,7 @@ void LP::SetTextOriginCenter(sf::Text* text)
 
 
 //TILEMAP
-TileMap LP::SetTileMap(const int textureKey, sf::Vector2u tileSize, const int* map, sf::Vector2f position, int width, int height)
+TileMap LP::SetTileMap(const int textureKey, sf::Vector2u tileSize, const std::vector<std::vector<int>> map, sf::Vector2f position, int width, int height)
 {
     TileMap temp;
     temp.Load(textureMap_[textureKey], tileSize, map, position, width, height);

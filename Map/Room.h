@@ -17,6 +17,7 @@ public:
     void SetRoomArea(int left, int top, int width, int height);
     void SetRoomArea(sf::IntRect area);
     sf::IntRect GetRoomArea() const;
+    sf::IntRect GetRoomAreaWorldCoordinates() const;
     void SetRoomPosition(sf::Vector2i position);
     sf::Vector2i GetRoomPosition() const;
 

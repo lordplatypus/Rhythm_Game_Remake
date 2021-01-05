@@ -28,7 +28,8 @@ void MultiRoomMap::Draw(sf::RenderWindow& render_window)
 {
     for (auto i : rooms_)
     {
-        i->Draw(render_window);
+        if (camera_->GetCameraRect().intersects(i->GetRoomAreaWorldCoordinates()))
+            i->Draw(render_window);
     }
 }
 

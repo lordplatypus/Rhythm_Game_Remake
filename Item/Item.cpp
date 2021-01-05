@@ -45,7 +45,7 @@ void Item::SparkleRandom(float delta_time)
 void Item::Kill()
 {
     isDead_ = true;
-    delete arrow_;
+    //delete arrow_;
 }
 
 void Item::TakeDamage(const int damage)

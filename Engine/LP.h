@@ -20,7 +20,7 @@ public:
     static sf::Text SetText(const std::string& string, const sf::Vector2f& position = sf::Vector2f(0.0f, 0.0f), const int textSize = 32, const sf::Vector2f& scale = sf::Vector2f(1.0f, 1.0f));
     static void SetTextOriginCenter(sf::Text* text);
     //TileMap
-    static TileMap SetTileMap(const int textureKey, sf::Vector2u tileSize, const int* map, sf::Vector2f position, int width, int height);
+    static TileMap SetTileMap(const int textureKey, sf::Vector2u tileSize, const std::vector<std::vector<int>> map, sf::Vector2f position, int width, int height);
 
 private:
     static std::unordered_map<int, sf::Texture> textureMap_;

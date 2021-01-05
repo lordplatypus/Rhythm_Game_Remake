@@ -54,9 +54,6 @@ int SingleRoomMap::GetLocation(sf::Vector2f worldCoordinate)
 
 void SingleRoomMap::LoadTilesFromCSC(const std::string& CSCFilePath)
 {
-    //std::vector<int> tileMap;
-    int tilemap[mapWidth_ * mapHeight_];
-
     std::ifstream mapData(CSCFilePath);
     char dummy;
 
@@ -65,7 +62,6 @@ void SingleRoomMap::LoadTilesFromCSC(const std::string& CSCFilePath)
         for (int x = 0; x < mapWidth_; x++)
         {
             mapData >> map_[x][y];
-            tilemap[x + y * mapWidth_] = map_[x][y];
             if (x < mapWidth_ - 1) 
             {
                 mapData >> dummy;
@@ -74,13 +70,14 @@ void SingleRoomMap::LoadTilesFromCSC(const std::string& CSCFilePath)
     }
     mapData.close();
 
-    tileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), tilemap, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
+    tileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), map_, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
 }
 
 void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
 {
-    //std::vector<int> tileMap;
-    int tilemap[mapWidth_ * mapHeight_];
+    std::vector<std::vector<int>> details;
+    std::vector<int> resize(mapHeight_);
+    details.resize(mapWidth_, resize);
 
     std::ifstream detailData(CSCFilePath);
     int value;
@@ -90,8 +87,7 @@ void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
     {
         for (int x = 0; x < mapWidth_; x++)
         {
-            detailData >> value;
-            tilemap[x + y * mapWidth_] = value;
+            detailData >> details[x][y];
             if (x < mapWidth_ - 1) 
             {
                 detailData >> dummy;
@@ -100,7 +96,7 @@ void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
     }
     detailData.close();
 
-    tileMapDetails_ = LP::SetTileMap(tile_map_details, sf::Vector2u(32, 32), tilemap, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
+    tileMapDetails_ = LP::SetTileMap(tile_map_details, sf::Vector2u(32, 32), details, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
 }
 
 void SingleRoomMap::LoadObjectsFromCSC(const std::string& CSCFilePath)

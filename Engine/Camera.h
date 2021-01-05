@@ -12,6 +12,7 @@ public:
     void SetCameraViewSize(float width, float height);
     void SetCameraViewSize(sf::Vector2f size);
     void SetCameraViewSize(sf::FloatRect area);
+    sf::IntRect GetCameraRect();
     sf::Vector2f GetCameraCenter();
     sf::Vector2f GetCameraViewSize();
     float GetCameraRightEdge();

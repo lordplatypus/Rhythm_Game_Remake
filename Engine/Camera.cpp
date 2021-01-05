@@ -33,6 +33,12 @@ void Camera::SetCameraViewSize(sf::FloatRect area)
     mainCamera.reset(area);
 }
 
+sf::IntRect Camera::GetCameraRect()
+{
+    sf::IntRect test(GetCameraLeftEdge(), GetCameraTopEdge(), GetCameraViewSize().x, GetCameraViewSize().y);
+    return test;
+}
+
 sf::Vector2f Camera::GetCameraCenter()
 {
     return mainCamera.getCenter();
