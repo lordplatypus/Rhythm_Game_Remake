@@ -21,7 +21,7 @@ MP::~MP()
 
 //Music
 
-int MP::SetMusic(const int key, const std::string& filePath)
+void MP::SetMusic(const int key, const std::string& filePath)
 {
     musicMap_[key].openFromFile(filePath);
 }
@@ -153,7 +153,7 @@ void MP::PlayStageMusic(const int stageID, const bool loop)
 
 //Sound Effects
 
-int MP::SetSound(const int key, const std::string& filePath)
+void MP::SetSound(const int key, const std::string& filePath)
 {
     bufferMap_[key].loadFromFile(filePath);
     soundMap_[key].setBuffer(bufferMap_[key]);

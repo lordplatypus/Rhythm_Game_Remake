@@ -16,9 +16,9 @@ public:
     //Update - to be calculated right after Update 
     virtual void DelayedUpdate(float delta_time, float beat_time);
     //Draw
-    virtual void Draw(sf::RenderWindow& render_window);
+    virtual void Draw(sf::RenderWindow& render_window) const;
     //Draw - to be drawn on screen after objects drawn in "Draw" - helpful for UI
-    virtual void DelayedDraw(sf::RenderWindow& render_window);
+    virtual void DelayedDraw(sf::RenderWindow& render_window) const;
 
     //This is called when colliding with another gameobject, write reaction logic here
     virtual void ReactOnCollision(GameObject& other);
@@ -63,6 +63,11 @@ public:
 
     //Damage
     virtual void TakeDamage(const int damage);
+
+
+    //Sprite
+    void SetSpriteHorizontalFlip(sf::Sprite& sprite, const bool flip);
+    void SetSpriteOriginCenter(sf::Sprite& sprite);
 
 
     //Data

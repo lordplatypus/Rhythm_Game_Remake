@@ -10,7 +10,7 @@ public:
     Transition(TransitionManager* tm, const std::string& transitionTo, const sf::Vector2f position, const bool locked, Scene* scene, ParticleManager* particleManager);
     virtual ~Transition();
     void Update(float delta_time, float beat_time) override;
-    void Draw(sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) const override;
     void ReactOnCollision(GameObject& other) override;
 
 private:

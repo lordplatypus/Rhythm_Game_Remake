@@ -11,8 +11,8 @@ public:
     Item();
     ~Item();
     void Update(float delta_time, float beat_time) override;
-    void Draw(sf::RenderWindow& render_window) override;
-    void DelayedDraw(sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) const override;
+    void DelayedDraw(sf::RenderWindow& render_window) const override;
     virtual void Effect() = 0;
     int GetPriceTag() const;
     void SparkleRandom(float delta_time);

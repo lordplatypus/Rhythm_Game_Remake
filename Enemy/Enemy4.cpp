@@ -130,21 +130,21 @@ void Enemy4::Update(float delta_time, float beat_time)
 
     velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
     enemySprite_[animCount_].setPosition(velocity_);
+    SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
 
     arrow_->Update(delta_time, beat_time);
     arrow_->UpdatePosition(velocity_);
 }
 
-void Enemy4::Draw(sf::RenderWindow& render_window)
+void Enemy4::Draw(sf::RenderWindow& render_window) const
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer())
     {
-        LP::SetSpriteHorizontalFlip(&enemySprite_[animCount_], flip_);
         render_window.draw(enemySprite_[animCount_]);
     }
 }
 
-void Enemy4::DelayedDraw(sf::RenderWindow& render_window)
+void Enemy4::DelayedDraw(sf::RenderWindow& render_window) const
 {
     if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }

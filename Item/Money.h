@@ -7,9 +7,8 @@ class Money : public Item
 public:
     Money(sf::Vector2f position, PlayerManager* playerManager, ParticleManager* pm);
     ~Money() override;
-    void Update(float delta_time, float beat_time) override;
-    void Draw(sf::RenderWindow& render_window) override;
-    void DelayedDraw(sf::RenderWindow& render_window) override;
+    void Draw(sf::RenderWindow& render_window) const override;
+    void DelayedDraw(sf::RenderWindow& render_window) const override;
     
 private:
     void Effect();

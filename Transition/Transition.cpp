@@ -32,7 +32,7 @@ void Transition::Update(float delta_time, float beat_time)
     }
 }
 
-void Transition::Draw(sf::RenderWindow& render_window)
+void Transition::Draw(sf::RenderWindow& render_window) const
 {
 }
 

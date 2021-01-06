@@ -9,7 +9,7 @@ Event::~Event()
     End();
 }
 
-void Event::DelayedDraw(sf::RenderWindow& render_window)
+void Event::DelayedDraw(sf::RenderWindow& render_window) const
 {
     render_window.draw(instructionText_);
 }

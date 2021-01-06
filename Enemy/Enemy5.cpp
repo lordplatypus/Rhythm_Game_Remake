@@ -73,12 +73,12 @@ void Enemy5::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(position_);
 }
 
-void Enemy5::Draw(sf::RenderWindow& render_window)
+void Enemy5::Draw(sf::RenderWindow& render_window) const
 {
     //if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemyRectangle_);
 }
 
-void Enemy5::DelayedDraw(sf::RenderWindow& render_window)
+void Enemy5::DelayedDraw(sf::RenderWindow& render_window) const
 {
     if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }

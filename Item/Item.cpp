@@ -11,14 +11,16 @@ Item::~Item()
 void Item::Update(float delta_time, float beat_time)
 {
     SparkleRandom(delta_time);
+    arrow_->Update(delta_time, beat_time);
+    arrow_->UpdatePosition(position_);
 }
 
-void Item::Draw(sf::RenderWindow& render_window)
+void Item::Draw(sf::RenderWindow& render_window) const
 {
     render_window.draw(sprite_);
 }
 
-void Item::DelayedDraw(sf::RenderWindow& render_window)
+void Item::DelayedDraw(sf::RenderWindow& render_window) const
 {
     if (ifSeesPlayer_) 
     {

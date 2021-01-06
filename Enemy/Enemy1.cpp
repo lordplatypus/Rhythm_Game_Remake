@@ -49,12 +49,12 @@ void Enemy1::Update(float delta_time, float beat_time)
     enemySprite_[animCount_].setPosition(position_);
 }
 
-void Enemy1::Draw(sf::RenderWindow& render_window)
+void Enemy1::Draw(sf::RenderWindow& render_window) const
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemySprite_[animCount_]);
 }
 
-void Enemy1::DelayedDraw(sf::RenderWindow& render_window)
+void Enemy1::DelayedDraw(sf::RenderWindow& render_window) const
 {
     if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }

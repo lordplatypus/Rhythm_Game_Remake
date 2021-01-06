@@ -10,10 +10,10 @@ void GameObject::Update(float delta_time, float beat_time)
 void GameObject::DelayedUpdate(float delta_time, float beat_time)
 {}
 
-void GameObject::Draw(sf::RenderWindow& render_window)
+void GameObject::Draw(sf::RenderWindow& render_window) const
 {}
 
-void GameObject::DelayedDraw(sf::RenderWindow& render_window)
+void GameObject::DelayedDraw(sf::RenderWindow& render_window) const
 {}
 
 void GameObject::ReactOnCollision(GameObject& other)
@@ -119,6 +119,26 @@ void GameObject::TakeDamage(const int damage)
 void GameObject::Kill()
 {
     isDead_ = true;
+}
+
+//SPRITE
+void GameObject::SetSpriteHorizontalFlip(sf::Sprite& sprite, const bool flip)
+{
+    if (flip && sprite.getScale().x > 0)
+    {
+        sprite.scale(-1.0f, 1.0f);
+        sprite.setOrigin(sprite.getLocalBounds().width, sprite.getOrigin().y);
+    }
+    else if (!flip && sprite.getScale().x < 0)
+    {
+        sprite.scale(-1.0f, 1.0f);
+        sprite.setOrigin(0, sprite.getOrigin().y);
+    }
+}
+
+void GameObject::SetSpriteOriginCenter(sf::Sprite& sprite)
+{
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
 }
 
 

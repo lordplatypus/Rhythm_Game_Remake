@@ -51,7 +51,7 @@ void Mortar::Update(float delta_time, float beat_time)
     sprite_.setScale(scale_, scale_);
 }
 
-void Mortar::Draw(sf::RenderWindow& render_window)
+void Mortar::Draw(sf::RenderWindow& render_window) const
 {
     render_window.draw(sprite_);
 }

@@ -33,17 +33,12 @@ Money::~Money()
     //delete arrow_;
 }
 
-void Money::Update(float delta_time, float beat_time)
-{
-    SparkleRandom(delta_time);
-}
-
-void Money::Draw(sf::RenderWindow& render_window)
+void Money::Draw(sf::RenderWindow& render_window) const
 {
     for (auto i : sprites_) render_window.draw(i);
 }
 
-void Money::DelayedDraw(sf::RenderWindow& render_window)
+void Money::DelayedDraw(sf::RenderWindow& render_window) const
 {
     if (ifSeesPlayer_) 
         arrow_->Draw(render_window);
