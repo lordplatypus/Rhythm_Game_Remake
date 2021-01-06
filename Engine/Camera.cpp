@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-Camera::Camera() 
+Camera::Camera(sf::RenderWindow* render_window) : window_{render_window}
 {
     //mainCamera.reset(sf::FloatRect(0.f, 0.f, 1080.f, 720.f));
     //mainCamera.setSize();
@@ -16,21 +16,26 @@ sf::View* Camera::GetCamera()
 void Camera::SetTarget(sf::Vector2f position)
 {
     mainCamera.setCenter(position);
+    window_->setView(mainCamera);
 }
 
 void Camera::SetCameraViewSize(float width, float height)
 {
     mainCamera.setSize(width, height);
+    window_->setView(mainCamera);
 }
 
 void Camera::SetCameraViewSize(sf::Vector2f size)
 {
     mainCamera.setSize(size);
+    window_->setView(mainCamera);
 }
 
-void Camera::SetCameraViewSize(sf::FloatRect area)
+void Camera::SetCameraViewSize(const sf::FloatRect& area)
 {
-    mainCamera.reset(area);
+    //mainCamera.reset(area);
+    mainCamera.setViewport(area);
+    window_->setView(mainCamera);
 }
 
 sf::IntRect Camera::GetCameraRect()
