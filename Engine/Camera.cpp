@@ -1,16 +1,12 @@
 #include "Camera.h"
 
-Camera::Camera(sf::RenderWindow* render_window) : window_{render_window}
-{
-    //mainCamera.reset(sf::FloatRect(0.f, 0.f, 1080.f, 720.f));
-    //mainCamera.setSize();
-}
+Camera::Camera(sf::RenderWindow* render_window) : window_{render_window} {}
 
 Camera::~Camera() {}
 
-sf::View* Camera::GetCamera()
+const sf::View& Camera::GetCamera()
 {
-    return &mainCamera;
+    return mainCamera;
 }
 
 void Camera::SetTarget(sf::Vector2f position)
@@ -38,38 +34,38 @@ void Camera::SetCameraViewSize(const sf::FloatRect& area)
     window_->setView(mainCamera);
 }
 
-sf::IntRect Camera::GetCameraRect()
+sf::IntRect Camera::GetCameraRect() const
 {
     sf::IntRect test(GetCameraLeftEdge(), GetCameraTopEdge(), GetCameraViewSize().x, GetCameraViewSize().y);
     return test;
 }
 
-sf::Vector2f Camera::GetCameraCenter()
+const sf::Vector2f& Camera::GetCameraCenter() const
 {
     return mainCamera.getCenter();
 }
 
-sf::Vector2f Camera::GetCameraViewSize()
+const sf::Vector2f& Camera::GetCameraViewSize() const
 {
     return mainCamera.getSize();
 }
 
-float Camera::GetCameraRightEdge()
+float Camera::GetCameraRightEdge() const
 {
     return GetCameraCenter().x + (GetCameraViewSize().x / 2);
 }
 
-float Camera::GetCameraLeftEdge()
+float Camera::GetCameraLeftEdge() const
 {
     return GetCameraCenter().x - (GetCameraViewSize().x / 2);
 }
 
-float Camera::GetCameraTopEdge()
+float Camera::GetCameraTopEdge() const
 {
     return GetCameraCenter().y - (GetCameraViewSize().y / 2);
 }
 
-float Camera::GetCameraBottomEdge()
+float Camera::GetCameraBottomEdge() const
 {
     return GetCameraCenter().y + (GetCameraViewSize().y / 2);
 }

@@ -13,7 +13,7 @@ int main()
     Camera camera{&window};
     camera.SetCameraViewSize(window.getSize().x, window.getSize().y);
     camera.SetTarget(sf::Vector2f(camera.GetCameraViewSize().x/2, camera.GetCameraViewSize().y/2));
-    window.setView(*camera.GetCamera());
+    window.setView(camera.GetCamera());
     Game game{&camera};
 
     while (isRunning)
@@ -51,7 +51,6 @@ int main()
             }
         }
         game.Update(deltaTime.GetDeltaTime(), MP::BeatTime());
-        //window.setView(*camera.GetCamera());
         window.clear();
         game.Draw(window); //actually draw objects
         window.display();
