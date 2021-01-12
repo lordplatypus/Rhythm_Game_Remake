@@ -15,13 +15,13 @@ public:
 
 private:
     void SetRooms(int numOfRooms);
-    Room* SetGetRandRoom(sf::Vector2i position, int roomBuildOrderNum, int maxRoomNum);
+    RoomData* SetGetRandRoom(sf::Vector2i position, int roomBuildOrderNum, int maxRoomNum);
     void SetHalls();
-    void SetTransition(const std::string& transitionTo);
     void BuildMapBlueprint();
 
 private:
     std::vector<Room*> rooms_;
+    std::string transitionTo_{""};
 };
 
 #endif

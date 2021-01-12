@@ -3,23 +3,31 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "TileMap.h"
+#include "RoomData.h"
 
 class Room
 {
 public:
-    Room();
+    Room(RoomData* roomData);
     ~Room();
     void Draw(sf::RenderWindow& render_window);
 
 
-    //Setup
+    //Data
 
-    void SetRoomArea(int left, int top, int width, int height);
-    void SetRoomArea(sf::IntRect area);
-    sf::IntRect GetRoomArea() const;
+    RoomData* GetRoomData() const;
+    const std::string& GetRoomDataLocation() const;
+    const sf::IntRect& GetRoomArea() const;
     sf::IntRect GetRoomAreaWorldCoordinates() const;
-    void SetRoomPosition(sf::Vector2i position);
     sf::Vector2i GetRoomPosition() const;
+    sf::Vector2i GetRoomPositionWorldCoordinates() const;
+    sf::Vector2i GetRoomSize() const;
+    const std::vector<sf::Vector2i>& GetHallPoints() const;
+    const int GetEnemyCount() const;
+    const int GetTransitionID() const;
+    const bool PlayerRoom() const;
+    const bool StairRoom() const;
+    const bool BlockRandSpawn() const;
 
 
     //Map blueprint
@@ -34,9 +42,9 @@ public:
 
     //Details
 
-    void SetHallPoints(std::vector<sf::Vector2i> hallPoints);
-    void SetHallPoint(sf::Vector2i hallPoint);
-    std::vector<sf::Vector2i> GetHallPoints() const;
+    // void SetHallPoints(std::vector<sf::Vector2i> hallPoints);
+    // void SetHallPoint(sf::Vector2i hallPoint);
+    // std::vector<sf::Vector2i> GetHallPoints() const;
     void SetStair(sf::Vector2i stairPosition, int transitionLocID);
     void SetStairRand(int transitionLocID);
 
@@ -68,24 +76,26 @@ public:
 protected:
     const int CellSize{32};
 
-    std::string roomDataLocation_{""};
+    //std::string roomDataLocation_{""};
 
     std::vector<std::vector<int>> roomMap_;
     std::vector<std::vector<int>> roomObjectMap_;
-    sf::Vector2i position_{0, 0};
-    int roomWidth_{0};
-    int roomHeight_{0};
-    sf::IntRect roomArea_{0, 0, 0, 0};
+    // sf::Vector2i position_{0, 0};
+    // int roomWidth_{0};
+    // int roomHeight_{0};
+    // sf::IntRect roomArea_{0, 0, 0, 0};
     
-    std::vector<sf::Vector2i> hallPoints_;
+    //std::vector<sf::Vector2i> hallPoints_;
 
     //std::vector<int> tileMapKeys_;
     TileMap roomTileMap_;
 
     //Bools
-    bool playerRoom_{false};
-    bool stairRoom_{false};
-    bool blockRandSpawn_{false};
+    // bool playerRoom_{false};
+    // bool stairRoom_{false};
+    // bool blockRandSpawn_{false};
+
+    RoomData* roomData_{nullptr};
 };
 
 #endif
