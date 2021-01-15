@@ -3,14 +3,9 @@
 #include "../Engine/LP.h"
 #include "../Assets/ID.h"
 
-Room::Room(RoomData* roomData) : roomData_{roomData}
-{
-    SetRoomMap();
-
-    if (PlayerRoom()) SetPlayerRand();
-    if (StairRoom()) SetStairRand(GetTransitionID());
-    if (!BlockRandSpawn()) SetEnemiesRand(GetEnemyCount());
-}
+Room::Room(const std::string& name, const sf::IntRect& roomArea, const std::vector<sf::Vector2i>& hallPoints) :
+           name_{name}, roomArea_{roomArea}, hallPoints_{hallPoints}
+{}
 
 Room::~Room()
 {
@@ -19,85 +14,102 @@ Room::~Room()
 
 void Room::Draw(sf::RenderWindow& render_window)
 {
-    // for (int i = 0; i < tileMapKeys_.size(); i++)
-    // {
-    //     LP::DrawSprite(tileMapKeys_[i]);
-    // }
     render_window.draw(roomTileMap_);
 }
 
-RoomData* Room::GetRoomData() const
-{
-    return roomData_;
-}
 
-const std::string& Room::GetRoomDataLocation() const
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Get Data
+////////////////////////////////////////////////////////////////////////////////////////////////////
+const std::string& Room::GetRoomName() const
 {
-    return roomData_->roomDataLocation_;
+    return name_;
 }
 
 const sf::IntRect& Room::GetRoomArea() const
 {
-    return roomData_->roomArea_;
+    return roomArea_;
 }
 
 sf::IntRect Room::GetRoomAreaWorldCoordinates() const
 {
-    return sf::IntRect(roomData_->roomArea_.left * CellSize, roomData_->roomArea_.top * CellSize, roomData_->roomArea_.width * CellSize, roomData_->roomArea_.height * CellSize);
+    return sf::IntRect(roomArea_.left * CellSize, roomArea_.top * CellSize, roomArea_.width * CellSize, roomArea_.height * CellSize);
 }
 
 sf::Vector2i Room::GetRoomPosition() const
 {
-    return roomData_->GetPosition();
+    return sf::Vector2i(roomArea_.left, roomArea_.top);
 }
 
 sf::Vector2i Room::GetRoomPositionWorldCoordinates() const
 {
-    return sf::Vector2i(roomData_->GetPosition().x * CellSize, roomData_->GetPosition().y * CellSize);
+    return GetRoomPosition() * CellSize;
 }
 
 sf::Vector2i Room::GetRoomSize() const
 {
-    return roomData_->GetSize();
+    return sf::Vector2i(roomArea_.width, roomArea_.height);
 }
 
 const std::vector<sf::Vector2i>& Room::GetHallPoints() const
 {
-    return roomData_->hallPoints_;
+    return hallPoints_;
 }
 
-const int Room::GetEnemyCount() const
+// const int Room::GetEnemyCount() const
+// {
+//     return enemyCount_;
+// }
+
+// const int Room::GetTransitionID() const
+// {
+//     return transitionID_;
+// }
+
+// const bool Room::PlayerRoom() const
+// {
+//     return playerRoom_;
+// }
+
+// const bool Room::StairRoom() const
+// {
+//     return stairRoom_;
+// }
+
+// const bool Room::BlockRandSpawn() const
+// {
+//     return blockRandSpawn_;
+// }
+
+std::vector<std::vector<int>> Room::GetRoomMap() const
 {
-    return roomData_->enemyCount_;
+    return roomMap_;
 }
 
-const int Room::GetTransitionID() const
+std::vector<std::vector<int>> Room::GetRoomObjectMap() const
 {
-    return roomData_->transitionID_;
+    return roomObjectMap_;
 }
 
-const bool Room::PlayerRoom() const
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 1: Set Room Position
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void Room::SetRoomPosition(const sf::Vector2i& position)
 {
-    return roomData_->playerRoom_;
+    roomArea_.left = position.x;
+    roomArea_.top = position.y;
 }
 
-const bool Room::StairRoom() const
-{
-    return roomData_->stairRoom_;
-}
 
-const bool Room::BlockRandSpawn() const
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 2: set up maps (tilemap and object map) - includes building hallways between rooms
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void Room::SetRoomTileMap(const std::string& roomDataLocation)
 {
-    return roomData_->blockRandSpawn_;
-}
+    std::vector<int> resize(GetRoomArea().height);
+    roomMap_.resize(GetRoomArea().width, resize);
 
-void Room::SetRoomMap()
-{
-    SetRoomMap(GetRoomDataLocation());
-}
-
-void Room::SetRoomMap(const std::string& roomDataLocation)
-{
     std::ifstream mapData(roomDataLocation);
     char dummy;
     for (int y = 0; y < GetRoomSize().y; y++)
@@ -156,60 +168,15 @@ void Room::CreateDownHall(sf::Vector2i position)
     roomMap_[position.x + 2][position.y] = 3;
 }
 
-std::vector<std::vector<int>> Room::GetRoomMap() const
-{
-    return roomMap_;
-}
 
-// void Room::SetHallPoints(std::vector<sf::Vector2i> hallPoints)
-// {
-//     roomData_->hallPoints_ = hallPoints;
-// }
-
-// void Room::SetHallPoint(sf::Vector2i hallPoint)
-// {
-//     roomData_->hallPoints_.push_back(hallPoint);
-// }
-
-// std::vector<sf::Vector2i> Room::GetHallPoints() const
-// {
-//     return roomData_->hallPoints_;
-// }
-
-void Room::SetStair(sf::Vector2i stairPosition, int transitionLocID)
-{
-    roomMap_[stairPosition.x][stairPosition.y] = 40;
-    roomObjectMap_[stairPosition.x][stairPosition.y] = transitionLocID;
-
-}
-
-void Room::SetStairRand(int transitionLocID)
-{
-    bool done = false;
-    int failsafe = 0;
-    while (!done)
-    {
-        failsafe++;
-        if (failsafe >= 100) return;
-
-        int x = (rand() % (GetRoomSize().x - 3)) + 1;
-        int y = (rand() % (GetRoomSize().y - 4)) + 2;
-        if (roomMap_[x][y] > 40) 
-        {
-            done = true;
-            roomMap_[x][y] = 40;
-            roomObjectMap_[x][y] = transitionLocID;
-        }
-    }
-}
-
-void Room::SetTiles()
-{
-    roomTileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), roomMap_, sf::Vector2f(GetRoomPosition().x * CellSize, GetRoomPosition().y * CellSize), GetRoomSize().x, GetRoomSize().y);
-}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 3: Set up object map - not "physically" placing down objects, just inputing ID's
+////////////////////////////////////////////////////////////////////////////////////////////////////
 void Room::SetRoomObjectMap(const std::string& roomObjectDataLocation)
 {
+    std::vector<int> resize(GetRoomArea().height);
+    roomObjectMap_.resize(GetRoomArea().width, resize);
+
     std::ifstream mapData(roomObjectDataLocation);
     char dummy;
     for (int y = 0; y < GetRoomSize().y; y++)
@@ -230,6 +197,9 @@ void Room::SetRoomObjectMap(const std::string& roomObjectDataLocation)
 
 void Room::SetRoomObjectMapNull()
 {
+    std::vector<int> resize(GetRoomArea().height);
+    roomObjectMap_.resize(GetRoomArea().width, resize);
+
     for (int y = 0; y < GetRoomSize().y; y++)
     {
         for (int x = 0; x < GetRoomSize().x; x++)
@@ -263,10 +233,35 @@ void Room::SetPlayerRand()
     }
 }
 
+void Room::SetStair(sf::Vector2i stairPosition, int transitionLocID)
+{
+    roomMap_[stairPosition.x][stairPosition.y] = 40;
+    roomObjectMap_[stairPosition.x][stairPosition.y] = transitionLocID;
+
+}
+
+void Room::SetStairRand(int transitionLocID)
+{
+    bool done = false;
+    int failsafe = 0;
+    while (!done)
+    {
+        failsafe++;
+        if (failsafe >= 100) return;
+
+        int x = (rand() % (GetRoomSize().x - 3)) + 1;
+        int y = (rand() % (GetRoomSize().y - 4)) + 2;
+        if (roomMap_[x][y] > 40) 
+        {
+            done = true;
+            roomMap_[x][y] = 40;
+            roomObjectMap_[x][y] = transitionLocID;
+        }
+    }
+}
+
 void Room::SetEnemiesRand(int numOfEnemies)
 {
-    if (roomData_->blockRandSpawn_) return;
-
     int done = 0;
     int failsafe = 0;
     while (done < numOfEnemies)
@@ -284,11 +279,19 @@ void Room::SetEnemiesRand(int numOfEnemies)
     }
 }
 
-std::vector<std::vector<int>> Room::GetRoomObjectMap() const
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 4: Create Tilemap sprite
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void Room::SetTileMapSprite()
 {
-    return roomObjectMap_;
+    roomTileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), roomMap_, sf::Vector2f(GetRoomPosition().x * CellSize, GetRoomPosition().y * CellSize), GetRoomSize().x, GetRoomSize().y);
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//For collision calcs
+////////////////////////////////////////////////////////////////////////////////////////////////////
 int Room::GetLocation(sf::Vector2i worldCoordinate)
 {
     int mapX = worldCoordinate.x  / CellSize - GetRoomPosition().x;
@@ -307,7 +310,10 @@ bool Room::IsWall(sf::Vector2i worldCoordinate)
     else return true;
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//End
+////////////////////////////////////////////////////////////////////////////////////////////////////
 void Room::End()
 {
-    delete roomData_;
 }

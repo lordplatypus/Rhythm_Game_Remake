@@ -1,5 +1,4 @@
 #include "Stage1_1.h"
-#include "Map1_1.h"
 #include "../Assets/ID.h"
 #include "../Engine/LP.h"
 #include "../Engine/MP.h"
@@ -13,8 +12,8 @@
 #include "../Event/MortarStrike.h"
 
 //TEST
-#include "MapTest.h"
 #include "../Player/Roboko.h"
+#include "../Map/MultiRoomMap.h"
 
 Stage1_1::Stage1_1(Game* game) : game_{game}
 {}
@@ -29,7 +28,8 @@ void Stage1_1::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
+        //map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
+        map_ = new MultiRoomMap(5, "Stage1_2", this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         MP::PlayStageMusic(stage1_1, true);
         RandomEvent();
     }
