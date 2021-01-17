@@ -1,4 +1,5 @@
 #include "Stage1_1.h"
+#include "../Map/MultiRoomMap.h"
 #include "../Assets/ID.h"
 #include "../Engine/LP.h"
 #include "../Engine/MP.h"
@@ -10,10 +11,6 @@
 #include "../Event/FindKeys.h"
 #include "../Event/InvisibleEnemies.h"
 #include "../Event/MortarStrike.h"
-
-//TEST
-#include "../Player/Roboko.h"
-#include "../Map/MultiRoomMap.h"
 
 Stage1_1::Stage1_1(Game* game) : game_{game}
 {}

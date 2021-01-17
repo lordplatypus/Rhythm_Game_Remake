@@ -90,10 +90,6 @@ public:
     GameObject& operator = (const GameObject& other) = delete;
 
 private:
-    int left_{0}; //Left edge of the hitbox
-    int right_{0}; //Right edge of the hitbox
-    int top_{0}; //Top edge of the hitbox
-    int bottom_{0}; //Bottom edge of the hitbox
     sf::Vector2f prevPosition_{0.0f, 0.0f}; //store prev position
     float perception_{0.0f};
     bool isActive_{true}; //included in collision calculations?
