@@ -9,6 +9,7 @@
 #include "../Enemy/Enemy4.h"
 #include "../Enemy/Enemy5.h"
 #include "../Enemy/Enemy6.h"
+#include "../Enemy/Enemy7.h"
 //Item
 #include "../Item/Money.h"
 #include "../Item/MaxHPUp.h"
@@ -104,6 +105,10 @@ void Map::PlaceEnemy(int num, sf::Vector2f position)
 
         case 6:
         scene_->AddGameObject(new Enemy6(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
+        break;
+
+        case 7:
+        scene_->AddGameObject(new Enemy7(position, scene_, localEnemyManager_, playerManager_, particleManager_, this));
         break;
 
         default:

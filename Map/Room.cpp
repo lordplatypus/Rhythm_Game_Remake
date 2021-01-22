@@ -274,7 +274,8 @@ void Room::SetEnemiesRand(int numOfEnemies)
         if (roomMap_[x][y] > 40 && roomObjectMap_[x][y] == -1) 
         {
             done++;
-            roomObjectMap_[x][y] = rand() % 4 + 1;
+            roomObjectMap_[x][y] = rand() % 5 + 1;
+            if (roomObjectMap_[x][y] == 5) roomObjectMap_[x][y] = 7;
         }
     }
 }

@@ -75,6 +75,8 @@ void Assets::LoadImage()
     LP::SetTexture(ghost_texture, "./Resources/Images/Enemy/Enemy_Robot_Ghost.png", 128, 64);
     LP::SetTexture(crawler_texture, "./Resources/Images/Enemy/Enemy_Robot_Crawler.png", 192, 64);
     LP::SetTexture(target_texture, "./Resources/Images/Enemy/Target.png", 32, 32);
+    LP::SetTexture(artillery_texture, "./Resources/Images/Enemy/Enemy7.png", 128, 160);
+    LP::SetTexture(bullet_casing_texture, "./Resources/Images/Enemy/Bullet_Casing.png", 16, 24);
 
     //Item(アイテム)
     LP::SetTexture(part_screw_texture, "./Resources/Images/Item/Part_Screw.png", 7, 7);
@@ -91,6 +93,7 @@ void Assets::LoadImage()
     LP::SetTexture(item_emp_texture, "./Resources/Images/Item/Item_EMP.png", 32, 32);
     LP::SetTexture(item_taser_texture, "./Resources/Images/Item/Item_Taser.png", 32, 32);
     LP::SetTexture(item_horseshoe_texture, "./Resources/Images/Item/Item_Horseshoe.png", 32, 32);
+    LP::SetTexture(item_key_texture, "./Resources/Images/Item/Key.png", 32, 32);
 }
 
 void Assets::LoadSound()

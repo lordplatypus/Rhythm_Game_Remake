@@ -10,7 +10,9 @@ ${Game_SOURCE_DIR}/Enemy/Enemy3.cpp
 ${Game_SOURCE_DIR}/Enemy/Enemy4.cpp
 ${Game_SOURCE_DIR}/Enemy/Enemy5.cpp
 ${Game_SOURCE_DIR}/Enemy/Enemy6.cpp
+${Game_SOURCE_DIR}/Enemy/Enemy7.cpp
 ${Game_SOURCE_DIR}/Enemy/Generator.cpp
 ${Game_SOURCE_DIR}/Enemy/Mortar.cpp
+${Game_SOURCE_DIR}/Enemy/BulletCasing.cpp
 PARENT_SCOPE
 )
