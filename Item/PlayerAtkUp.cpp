@@ -16,9 +16,15 @@ PlayerAtkUp::PlayerAtkUp(sf::Vector2f position, PlayerManager* playerManager, Pa
     SetPerception(32);
     arrow_ = new UIArrow(pm_, position_, HP_);
 
-    // sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    // LP::SetRectangleColor(sprite_, 255, 0, 0, 255);
+    rect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
+    rect_.setPosition(position_);
+    rect_.setFillColor(sf::Color::Yellow);
     text_ = LP::SetText("Increase Player Atk Damage By 1: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32, sf::Vector2f(0.1f, 0.1f));
+}
+
+void PlayerAtkUp::Draw(sf::RenderWindow& render_window) const
+{
+    render_window.draw(rect_);
 }
 
 void PlayerAtkUp::Effect()

@@ -6,9 +6,13 @@ class PlayerAtkUp : public Item
 {
 public:
     PlayerAtkUp(sf::Vector2f position, PlayerManager* playerManager, ParticleManager* pm);
+    void Draw(sf::RenderWindow& render_window) const override;
 
 private:
     void Effect() override;
+
+private:
+    sf::RectangleShape rect_;
 };
 
 #endif
