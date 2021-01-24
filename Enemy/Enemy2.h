@@ -16,6 +16,8 @@ private:
     void ReactOnCollision(GameObject& other) override;
 
 private:
+    sf::RectangleShape enemyrect_;
+
     int enemy2Rect_{0};
     bool hasMoved_{true};
     bool movedDown_{false};

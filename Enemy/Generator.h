@@ -19,6 +19,7 @@ private:
 
 private:
     //Event* event_{nullptr};
+    sf::RectangleShape enemyrect_;
 };
 
 #endif

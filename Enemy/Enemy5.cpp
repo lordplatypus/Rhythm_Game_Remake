@@ -30,6 +30,10 @@ Enemy5::Enemy5(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
+    enemyrect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
+    enemyrect_.setPosition(position_);
+    enemyrect_.setFillColor(sf::Color::Green);
+
     // enemyRectangle_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
     // LP::SetRectangleColor(enemyRectangle_, 0, 255, 0, 255);
     StorePosition();
@@ -76,6 +80,7 @@ void Enemy5::Update(float delta_time, float beat_time)
 void Enemy5::Draw(sf::RenderWindow& render_window) const
 {
     //if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemyRectangle_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemyrect_);
 }
 
 void Enemy5::DelayedDraw(sf::RenderWindow& render_window) const

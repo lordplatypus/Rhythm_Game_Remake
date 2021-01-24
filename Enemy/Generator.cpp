@@ -32,6 +32,10 @@ Generator::Generator(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem
     // }
     // timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 8.0f;
 
+    enemyrect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
+    enemyrect_.setPosition(position_);
+    enemyrect_.setFillColor(sf::Color::Red);
+
     arrow_ = new UIArrow(pm_, position_, HP_);
 }
 
@@ -53,7 +57,7 @@ void Generator::Update(float delta_time, float beat_time)
 
 void Generator::Draw(sf::RenderWindow& render_window) const
 {
-    //if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(sprite_, position_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemyrect_);
 }
 
 void Generator::DelayedDraw(sf::RenderWindow& render_window) const
