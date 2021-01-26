@@ -1,23 +1,23 @@
 #include <iostream>
-#include "LoadAssets.h"
+#include "Assets.h"
 #include "ID.h"
-#include "../Engine/LP.h"
 #include "../Engine/MP.h"
+#include "../Engine/LP.h"
 
-LoadAssets::LoadAssets()
+Assets::Assets()
 {}
 
-LoadAssets::~LoadAssets()
+Assets::~Assets()
 {}
 
-void LoadAssets::Load()
+void Assets::Load()
 {
     LoadImage();
     LoadSound();
     LoadStageMusic();
 }
 
-void LoadAssets::LoadImage()
+void Assets::LoadImage()
 {
     // LP::SetFont("Path to Font");
     // LP::SetTexture(Texture Key, "Path to texture", texture width, texture height);
@@ -75,6 +75,8 @@ void LoadAssets::LoadImage()
     LP::SetTexture(ghost_texture, "./Resources/Images/Enemy/Enemy_Robot_Ghost.png", 128, 64);
     LP::SetTexture(crawler_texture, "./Resources/Images/Enemy/Enemy_Robot_Crawler.png", 192, 64);
     LP::SetTexture(target_texture, "./Resources/Images/Enemy/Target.png", 32, 32);
+    LP::SetTexture(artillery_texture, "./Resources/Images/Enemy/Enemy7.png", 128, 160);
+    LP::SetTexture(bullet_casing_texture, "./Resources/Images/Enemy/Bullet_Casing.png", 16, 24);
 
     //Item(アイテム)
     LP::SetTexture(part_screw_texture, "./Resources/Images/Item/Part_Screw.png", 7, 7);
@@ -91,9 +93,10 @@ void LoadAssets::LoadImage()
     LP::SetTexture(item_emp_texture, "./Resources/Images/Item/Item_EMP.png", 32, 32);
     LP::SetTexture(item_taser_texture, "./Resources/Images/Item/Item_Taser.png", 32, 32);
     LP::SetTexture(item_horseshoe_texture, "./Resources/Images/Item/Item_Horseshoe.png", 32, 32);
+    LP::SetTexture(item_key_texture, "./Resources/Images/Item/Key.png", 32, 32);
 }
 
-void LoadAssets::LoadSound()
+void Assets::LoadSound()
 {
     // MP::SetMusic(Remember_Passion_Beat, "./Resources/Audio/Remember Passion Beat.ogg");
     // MP::SetMusic(Necro_funk_the_around, "./Resources/Audio/Necro funk the around.ogg");
@@ -117,7 +120,7 @@ void LoadAssets::LoadSound()
     MP::SetMusic(across_battle_result, "./Resources/Audio/24 across battle result.ogg");
 }
 
-void LoadAssets::LoadStageMusic()
+void Assets::LoadStageMusic()
 {
     MP::SetStageMusic(title_scene, Gain_Therapy);
     MP::SetStageMusic(lobby_scene, Gain_Therapy);

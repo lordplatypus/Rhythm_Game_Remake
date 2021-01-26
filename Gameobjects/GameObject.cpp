@@ -10,10 +10,10 @@ void GameObject::Update(float delta_time, float beat_time)
 void GameObject::DelayedUpdate(float delta_time, float beat_time)
 {}
 
-void GameObject::Draw()
+void GameObject::Draw(sf::RenderWindow& render_window) const
 {}
 
-void GameObject::DelayedDraw()
+void GameObject::DelayedDraw(sf::RenderWindow& render_window) const
 {}
 
 void GameObject::ReactOnCollision(GameObject& other)
@@ -33,57 +33,6 @@ void GameObject::StorePosition()
     prevPosition_ = position_;
 }
 
-// int GameObject::GetLeft() const
-// {
-//     return GetPosition().x + left_;
-// }
-
-// void GameObject::SetLeft(const int left)
-// {
-//     left_ = left;
-// }
-
-// int GameObject::GetRight() const
-// {
-//     return GetPosition().x + right_;
-// }
-
-// void GameObject::SetRight(const int right)
-// {
-//     right_ = right;
-// }
-
-// int GameObject::GetTop() const
-// {
-//     return GetPosition().y + top_;
-// }
-
-// void GameObject::SetTop(const int top)
-// {
-//     top_ = top;
-// }
-
-// int GameObject::GetBottom() const
-// {
-//     return GetPosition().y + bottom_;
-// }
-
-// void GameObject::SetBottom(const int bottom)
-// {
-//     bottom_ = bottom;
-// }
-
-// const std::vector<sf::Vector2f> GameObject::GetHitBox()
-// {
-//     return std::vector<sf::Vector2f>
-//     {
-//         sf::Vector2f(GetLeft(), GetTop()), 
-//         sf::Vector2f(GetRight(), GetTop()), 
-//         sf::Vector2f(GetLeft(), GetBottom()), 
-//         sf::Vector2f(GetRight(), GetBottom())
-//     };
-// }
-
 sf::IntRect GameObject::GetHitBox() const
 {
     return sf::IntRect(position_.x, position_.y, imageWidth_, imageHeight_);
@@ -96,16 +45,6 @@ sf::IntRect GameObject::GetPerceptionHitBox() const
 
 bool GameObject::IsCollision(GameObject& other)
 {
-    // std::vector<sf::Vector2f> otherHitBox = other.GetHitBox();
-    // for (int i = 0; i < otherHitBox.size(); i++)
-    // {
-    //     if (otherHitBox[i].x > GetLeft() && otherHitBox[i].x < GetRight() && otherHitBox[i].y > GetTop() && otherHitBox[i].y < GetBottom())
-    //     {
-    //         return true;
-    //     }
-    // }
-    // if (position_ == other.GetPosition()) return true;
-    // return false;
     return GetHitBox().intersects(other.GetHitBox());
 }
 
@@ -133,15 +72,6 @@ void GameObject::OnMissedOneWayCollision(GameObject& other)
 
 bool GameObject::Perception(GameObject& other)
 {
-    // std::vector<sf::Vector2f> otherHitBox = other.GetHitBox();
-    // for (int i = 0; i < otherHitBox.size(); i++)
-    // {
-    //     if (otherHitBox[i].x > GetLeft() - GetPerception() && otherHitBox[i].x < GetRight() + GetPerception() && otherHitBox[i].y > GetTop() - GetPerception() && otherHitBox[i].y < GetBottom() + GetPerception())
-    //     {
-    //         return true;
-    //     }
-    // }
-    // return false;
     return GetPerceptionHitBox().intersects(other.GetHitBox());
 }
 
@@ -169,7 +99,9 @@ void GameObject::SetInRangeOfPlayer(const bool inRangeOfPlayer)
 {}
 
 bool GameObject::GetInRangeOfPlayer() const
-{}
+{
+    return false;
+}
 
 bool GameObject::GetActive() const
 {
@@ -187,6 +119,26 @@ void GameObject::TakeDamage(const int damage)
 void GameObject::Kill()
 {
     isDead_ = true;
+}
+
+//SPRITE
+void GameObject::SetSpriteHorizontalFlip(sf::Sprite& sprite, const bool flip)
+{
+    if (flip && sprite.getScale().x > 0)
+    {
+        sprite.scale(-1.0f, 1.0f);
+        sprite.setOrigin(sprite.getLocalBounds().width, sprite.getOrigin().y);
+    }
+    else if (!flip && sprite.getScale().x < 0)
+    {
+        sprite.scale(-1.0f, 1.0f);
+        sprite.setOrigin(0, sprite.getOrigin().y);
+    }
+}
+
+void GameObject::SetSpriteOriginCenter(sf::Sprite& sprite)
+{
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
 }
 
 

@@ -29,7 +29,7 @@ Enemy6::Enemy6(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 0, false);
 
-    enemySprite_ = LP::SetSprite(crawler_texture, 32, 32, 6, 2);
+    enemySprite_ = LP::SetMultiFrameSprite(crawler_texture, 32, 32, 6, 2);
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 4 / 2;
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
 
@@ -40,10 +40,6 @@ Enemy6::Enemy6(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
 
 Enemy6::~Enemy6()
 {
-    for (auto i : enemySprite_)
-    {
-        LP::DeleteSprite(i);
-    }
 }
 
 void Enemy6::Update(float delta_time, float beat_time)
@@ -93,23 +89,24 @@ void Enemy6::Update(float delta_time, float beat_time)
     AnimationHandle(delta_time, beat_time);
 
     velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
+    enemySprite_[animCount_].setPosition(velocity_);
+    SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
 
     arrow_->Update(delta_time, beat_time);
     arrow_->UpdatePosition(velocity_);
 }
 
-void Enemy6::Draw()
+void Enemy6::Draw(sf::RenderWindow& render_window) const
 {
     if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) 
     {
-        LP::SetSpriteHorizontalFlip(enemySprite_[animCount_], flip_);
-        LP::DrawSprite(enemySprite_[animCount_], velocity_);
+        render_window.draw(enemySprite_[animCount_]);
     }
 }
 
-void Enemy6::DelayedDraw()
+void Enemy6::DelayedDraw(sf::RenderWindow& render_window) const
 {
-    if (GetInRangeOfPlayer()) arrow_->Draw();
+    if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }
 
 void Enemy6::ReactOnCollision(GameObject& other)

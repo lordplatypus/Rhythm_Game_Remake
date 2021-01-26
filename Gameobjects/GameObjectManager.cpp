@@ -29,19 +29,20 @@ void GameObjectManager::DelayedUpdate(float delta_time, float beat_time)
     }
 }
 
-void GameObjectManager::Draw() const
+void GameObjectManager::Draw(sf::RenderWindow& render_window, Camera* camera) const
 {
     for (auto gameObject : gameObjects_)
     {
-        gameObject->Draw();
+        if (gameObject->GetHitBox().intersects(camera->GetCameraRect()))
+            gameObject->Draw(render_window);
     }
 }
 
-void GameObjectManager::DelayedDraw() const
+void GameObjectManager::DelayedDraw(sf::RenderWindow& render_window, Camera* camera) const
 {
     for (auto gameObject : gameObjects_)
     {
-        gameObject->DelayedDraw();
+        gameObject->DelayedDraw(render_window);
     }
 }
 

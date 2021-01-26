@@ -25,7 +25,7 @@ void BPMScene::Init()
     menuText_.push_back(LP::SetText("Start Playback", sf::Vector2f(256, 256), 16));
     menuText_.push_back(LP::SetText("Save Changes", sf::Vector2f(256, 256), 16));
     menuText_.push_back(LP::SetText("Quit", sf::Vector2f(256, 256), 16));
-    for (auto i : menuText_) LP::SetTextOriginCenter(i); //set the origin to the center (テクストの原点を設定する)
+    for (int i = 0; i < menuText_.size(); i++) LP::SetTextOriginCenter(&menuText_[i]); //set the origin to the center (テクストの原点を設定する)
 
     //Duplicate the music titles (text) from the MP class
     // musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
@@ -48,7 +48,7 @@ void BPMScene::Init()
     musicTitles_.push_back(LP::SetText("DETROIT BEAT", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("New Gear", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("across battle result", sf::Vector2f(256, 256), 16));
-    for (auto i : musicTitles_) LP::SetTextOriginCenter(i); 
+    for (int i = 0; i < musicTitles_.size(); i++) LP::SetTextOriginCenter(&musicTitles_[i]);
 
     //Verticle menu setup ()
     menu_ = new UIVerticalMenu(sf::Vector2f(275, 183), menuText_.size(), menuText_, 3, 1, 32);
@@ -58,7 +58,7 @@ void BPMScene::Init()
     //Set up the rest of the text used (残るテクストを設定する)
     setupInstructions = LP::SetText("Z to start,\n\nDown to time beats,\n\nX to return", sf::Vector2f(584+16, 88+16), 16);
     savedText = LP::SetText("Saved", sf::Vector2f(803, 183), 16);
-    LP::SetTextOriginCenter(savedText);
+    LP::SetTextOriginCenter(&savedText);
     displayMusicTitle = LP::SetText("Music Title: NA", sf::Vector2f(96, 448), 16);
     displayBeatsPerMin = LP::SetText("Beats Per Min: NA", sf::Vector2f(96, 480), 16);
     //secPerBeat = MP::GetBPMForSelectedMusic(musicID);
@@ -70,17 +70,17 @@ void BPMScene::Init()
     background = LP::SetSprite(bps_scene_texture, sf::Vector2f(0, 0));
 
     //setup sprites used for timing (スプライトを設定する)
-    heartSprite = LP::SetSprite(hearts_texture, 16, 16, 2, 1); //heart sprite (ハートのスプライト)
-    for (auto i : heartSprite) 
+    heartSprite = LP::SetMultiFrameSprite(hearts_texture, 16, 16, 2, 1, sf::Vector2f(705, 535)); //heart sprite (ハートのスプライト)
+    for (int i = 0; i < heartSprite.size(); i++) 
     {
-        LP::SetSpriteScale(i, 8, 8); //set heart sprite scale ()
-        LP::SetSpriteOriginCenter(i);
+        heartSprite[i].setScale(8.0f, 8.0f); //set heart sprite scale ()
+        LP::SetSpriteOriginCenter(&heartSprite[i]);
     }
-    playerSprite = LP::SetSprite(roboko_texture, 32, 32, 6, 1); //char sprite (キャラクターのスプライト)
-    for (auto i : playerSprite) 
+    playerSprite = LP::SetMultiFrameSprite(roboko_texture, 32, 32, 6, 1, sf::Vector2f(901, 535)); //char sprite (キャラクターのスプライト)
+    for (int i = 0; i < playerSprite.size(); i++) 
     {
-        LP::SetSpriteScale(i, 6, 6); //set char sprite scale ()
-        LP::SetSpriteOriginCenter(i);
+        playerSprite[i].setScale(6.0f, 6.0f); //set char sprite scale ()
+        LP::SetSpriteOriginCenter(&playerSprite[i]);
     }
 
     //Import data into "MusicSPBMap"
@@ -132,7 +132,7 @@ void BPMScene::Update(float delta_time, float beat_time)
     if (alpha > 0) 
     {
         alpha -= 200 * delta_time;
-        LP::SetTextColor(savedText, 255, 255, 255, alpha);
+        savedText.setFillColor(sf::Color(255, 255, 255, alpha));
     }
     else alpha = 0;
 
@@ -190,10 +190,10 @@ void BPMScene::MusicSelectMenu()
         selectedMusicID = musicID;
 
         //LP::SetTextString(displayMusicTitle, MP::GetMusicTitle(selectedMusicID));
-        LP::SetTextString(displayBeatsPerMin, "Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
-        LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
-        LP::SetTextString(displayBeatTimer, "Beat Time: 0");
-        LP::SetTextString(displayBeatCount, "Beat Count: 0");
+        displayBeatsPerMin.setString("Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
+        displaySecPerBeat.setString("Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
+        displayBeatTimer.setString("Beat Time: 0");
+        displayBeatCount.setString("Beat Count: 0");
 
         state = Menu;
         musicMenu_->SetDisplay(false);
@@ -243,12 +243,15 @@ void BPMScene::BPMSetUp()
             {
                 beatsPerMin = round(60 / musicSPBMap[musicID]);
                 secPerBeat = musicSPBMap[musicID];
-                LP::SetTextString(displayBeatsPerMin, "Beats Per Min: " + std::to_string((int)beatsPerMin));
-                LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(secPerBeat));
+                displayBeatsPerMin.setString("Beats Per Min: " + std::to_string((int)beatsPerMin));
+                displaySecPerBeat.setString("Beats Per Sec: " + std::to_string(secPerBeat));
             }
         }
         count++; //for beat count
     }
+
+    displayBeatTimer.setString("Beat Time: " + std::to_string(beatTimer));
+    displayBeatCount.setString("Beat Count: " + std::to_string(count));
 
     if (IP::PressX())
     {
@@ -265,8 +268,8 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         secPerBeat = musicSPBMap[musicID];
         beatsPerMin = (int)round(60 / musicSPBMap[musicID]);
         timeInbetweenFrames = musicSPBMap[musicID] / 10;
-        LP::SetTextString(displayBeatsPerMin, "Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
-        LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
+        displayBeatsPerMin.setString("Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
+        displaySecPerBeat.setString("Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
     }
     if (IP::PressDown())
     {
@@ -274,8 +277,8 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         secPerBeat = musicSPBMap[musicID];
         beatsPerMin = (int)round(60 / musicSPBMap[musicID]);
         timeInbetweenFrames = musicSPBMap[musicID] / 10;
-        LP::SetTextString(displayBeatsPerMin, "Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
-        LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
+        displayBeatsPerMin.setString("Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
+        displaySecPerBeat.setString("Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
     }
 
     if (firstTime)
@@ -286,8 +289,8 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         animCount = 0;
         count = 0;
         timeInbetweenFrames = secPerBeat / 10;
-        LP::SetTextString(displayBeatsPerMin, "Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
-        LP::SetTextString(displaySecPerBeat, "Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
+        displayBeatsPerMin.setString("Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
+        displaySecPerBeat.setString("Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
         firstTime = false;
     }
 
@@ -313,11 +316,14 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         timer = 0;
     }
 
+    displayBeatTimer.setString("Beat Time: " + std::to_string(beatTimer));
+    displayBeatCount.setString("Beat Count: " + std::to_string(count));
+
     if (IP::PressX())
     {
         count = 0;
-        LP::SetTextString(displayBeatTimer, "Beat Time: 0");
-        LP::SetTextString(displayBeatCount, "Beat Count: 0");
+        displayBeatTimer.setString("Beat Time: 0");
+        displayBeatCount.setString("Beat Count: 0");
         firstTime = true;
         state = Menu;
     }
@@ -333,74 +339,76 @@ void BPMScene::SaveBPMForSelectedSong()
     state = Menu;
 }
 
-void BPMScene::Draw()
+void BPMScene::Draw(sf::RenderWindow& render_window)
 {
     //Draw Background
-    LP::DrawSprite(background);
+    render_window.draw(background);
 
     //Draw different things at different states
     if (state == Menu)
     {
-        LP::DrawText(displayMusicTitle);
-        LP::DrawText(displayBeatsPerMin);
-        LP::DrawText(displaySecPerBeat);
-        LP::DrawText(displayBeatTimer);
-        LP::DrawText(displayBeatCount);
+        render_window.draw(displayMusicTitle);
+        render_window.draw(displayBeatsPerMin);
+        render_window.draw(displaySecPerBeat);
+        render_window.draw(displayBeatTimer);
+        render_window.draw(displayBeatCount);
 
-        LP::DrawSprite(playerSprite[0], sf::Vector2f(901, 535));
-        LP::DrawSprite(heartSprite[0], sf::Vector2f(705, 535));
+        render_window.draw(playerSprite[0]);
+        render_window.draw(heartSprite[0]);
     }
 
     else if (state == MusicSelect)
     {
-        LP::DrawText(displayMusicTitle);
-        LP::DrawText(displayBeatsPerMin);
-        LP::DrawText(displaySecPerBeat);
-        LP::DrawText(displayBeatTimer);
-        LP::DrawText(displayBeatCount);
+        render_window.draw(displayMusicTitle);
+        render_window.draw(displayBeatsPerMin);
+        render_window.draw(displaySecPerBeat);
+        render_window.draw(displayBeatTimer);
+        render_window.draw(displayBeatCount);
 
-        LP::DrawSprite(playerSprite[0], sf::Vector2f(901, 535));
-        LP::DrawSprite(heartSprite[0], sf::Vector2f(705, 535));
+        render_window.draw(playerSprite[0]);
+        render_window.draw(heartSprite[0]);
     }
 
     else if (state == SetUp)
     {
-        LP::DrawText(setupInstructions);
-        LP::DrawText(displayMusicTitle);
-        LP::DrawText(displayBeatsPerMin);
-        LP::DrawText(displaySecPerBeat);
-        LP::DrawText(displayBeatTimer, "Beat Time: " + std::to_string(beatTimer));
-        LP::DrawText(displayBeatCount, "Beat Count: " + std::to_string(count));
-        LP::DrawSprite(playerSprite[0], sf::Vector2f(901, 535));
-        LP::DrawSprite(heartSprite[0], sf::Vector2f(705, 535));
+        render_window.draw(setupInstructions);
+        render_window.draw(displayMusicTitle);
+        render_window.draw(displayBeatsPerMin);
+        render_window.draw(displaySecPerBeat);
+        render_window.draw(displayBeatTimer);
+        render_window.draw(displayBeatCount);
+        render_window.draw(playerSprite[0]);
+        render_window.draw(heartSprite[0]);
     }
 
     else if (state == PlayBack)
     {
-        LP::DrawText(displayMusicTitle);
-        LP::DrawText(displayBeatsPerMin);
-        LP::DrawText(displaySecPerBeat);
-        LP::DrawText(displayBeatTimer, "Beat Time: " + std::to_string(beatTimer));
-        LP::DrawText(displayBeatCount, "Beat Count: " + std::to_string(count));
-        LP::DrawSprite(playerSprite[animCount], sf::Vector2f(901, 535));
-        LP::DrawSprite(heartSprite[heartCount], sf::Vector2f(705, 535));
+        render_window.draw(displayMusicTitle);
+        render_window.draw(displayBeatsPerMin);
+        render_window.draw(displaySecPerBeat);
+        render_window.draw(displayBeatTimer);
+        render_window.draw(displayBeatCount);
+        render_window.draw(playerSprite[animCount]);
+        render_window.draw(heartSprite[heartCount]);
     }
 
     else if (state == Save)
     {}
 
-    if (alpha > 0) LP::DrawText(savedText); //draw 'saved' text when visible
+    if (alpha > 0) render_window.draw(savedText); //draw 'saved' text when visible
 
     //Draw UI
-    menu_->Draw();
-    musicMenu_->Draw();
+    menu_->Draw(render_window);
+    musicMenu_->Draw(render_window);
 }
 
 void BPMScene::AddGameObject(GameObject* gameObject)
 {}
 
 GameObject* BPMScene::FindGameObject(const std::string& string, const bool byTag, const bool byID)
-{}
+{
+    return nullptr;
+}
 
 void BPMScene::ChangeGameObjectOrder(const std::string& name, const std::string& newPos)
 {}
@@ -416,41 +424,18 @@ void BPMScene::End()
     musicID = 0;
 
     //delete main menu text (マインメニューテクストを削除する)
-    for (auto i : menuText_)
-    {
-        LP::DeleteText(i);
-    }
     menuText_.clear();
 
     //delete music titles text ()
-    for (auto i : musicTitles_)
-    {
-        LP::DeleteText(i);
-    }
     musicTitles_.clear();
 
     //delete other text (他のテクストを削除する)
-    LP::DeleteText(setupInstructions);
-    LP::DeleteText(displayBeatCount);
-    LP::DeleteText(displayBeatsPerMin);
-    LP::DeleteText(displaySecPerBeat);
-    LP::DeleteText(savedText);
 
     //delete heart sprite (ハートのスパライトを削除する)
-    for(auto i : heartSprite)
-    {
-        LP::DeleteSprite(i);
-    }
     heartSprite.clear();
 
     //delete char sprite (キャラクターのスパライトを削除する)
-    for(auto i : playerSprite)
-    {
-        LP::DeleteSprite(i);
-    }
     playerSprite.clear();
-
-    LP::DeleteSprite(background);
 
     delete menu_;
     delete musicMenu_;

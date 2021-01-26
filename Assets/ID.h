@@ -57,6 +57,8 @@ enum
     ghost_texture,
     crawler_texture,
     target_texture,
+    artillery_texture,
+    bullet_casing_texture,
 
     //Item
     part_screw_texture,
@@ -73,6 +75,7 @@ enum
     item_emp_texture,
     item_taser_texture,
     item_horseshoe_texture,
+    item_key_texture,
 };
 
 enum

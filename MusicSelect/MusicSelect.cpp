@@ -24,7 +24,7 @@ void MusicSelect::Init()
     stageNames_.push_back(LP::SetText("Stage1_2 Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Stage1_3 Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Return to Lobby", sf::Vector2f(32, 128), 16));
-    for (auto i : stageNames_) LP::SetTextOriginCenter(i);
+    for (int i = 0; i < stageNames_.size(); i++) LP::SetTextOriginCenter(&stageNames_[i]);
 
     // musicTitles_.push_back(LP::SetText("Remember_Passion_Beat", sf::Vector2f(256, 256), 16));
     // musicTitles_.push_back(LP::SetText("Necro_Funk_the_Around", sf::Vector2f(256, 256), 16));
@@ -46,7 +46,7 @@ void MusicSelect::Init()
     musicTitles_.push_back(LP::SetText("DETROIT BEAT", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("New Gear", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("across battle result", sf::Vector2f(256, 256), 16));
-    for (auto i : musicTitles_) LP::SetTextOriginCenter(i); 
+    for (int i = 0; i < musicTitles_.size(); i++) LP::SetTextOriginCenter(&musicTitles_[i]);
 
     //Verticle menu setup ()
     stageMenu_ = new UIVerticalMenu(sf::Vector2f(276, 360), stageNames_.size(), stageNames_, 3, 1, 32);
@@ -54,7 +54,7 @@ void MusicSelect::Init()
     musicMenu_->SetDisplay(false);
 
     //Background
-    background = LP::SetSprite(music_select_scene_texture, sf::Vector2f(0, 0));
+    background = LP::SetSprite(music_select_scene_texture);
 }
 
 void MusicSelect::Update(float delta_time, float beat_time)
@@ -136,20 +136,22 @@ void MusicSelect::MusicMenu()
 }
 
 
-void MusicSelect::Draw()
+void MusicSelect::Draw(sf::RenderWindow& render_window)
 {
-    LP::DrawSprite(background);
-    LP::DrawText(instructionText);
+    render_window.draw(background);
+    render_window.draw(instructionText);
     //Draw UI
-    stageMenu_->Draw();
-    musicMenu_->Draw();
+    stageMenu_->Draw(render_window);
+    musicMenu_->Draw(render_window);
 }
 
 void MusicSelect::AddGameObject(GameObject* gameObject)
 {}
 
 GameObject* MusicSelect::FindGameObject(const std::string& string, const bool byTag, const bool byID)
-{}
+{
+    return nullptr;
+}
 
 void MusicSelect::ChangeGameObjectOrder(const std::string& name, const std::string& newPos)
 {}
@@ -164,21 +166,10 @@ void MusicSelect::End()
     selectedMusic = 0;
     selectedStage = 0;
 
-    LP::DeleteText(instructionText);
-    for (auto i : stageNames_)
-    {
-        LP::DeleteText(i);
-    }
     stageNames_.clear();
 
     //delete music titles text ()
-    for (auto i : musicTitles_)
-    {
-        LP::DeleteText(i);
-    }
     musicTitles_.clear();
-
-    LP::DeleteSprite(background);
 
     delete stageMenu_;
     delete musicMenu_;

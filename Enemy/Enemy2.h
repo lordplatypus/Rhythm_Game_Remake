@@ -8,14 +8,16 @@ public:
     Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, PlayerManager* playerManager, ParticleManager* pm, Map* map);
     ~Enemy2() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw() override;
-    void DelayedDraw() override;
+    void Draw(sf::RenderWindow& render_window) const override;
+    void DelayedDraw(sf::RenderWindow& render_window) const override;
 
 private:
     void CheckMoveLocation();
     void ReactOnCollision(GameObject& other) override;
 
 private:
+    sf::RectangleShape enemyrect_;
+
     int enemy2Rect_{0};
     bool hasMoved_{true};
     bool movedDown_{false};

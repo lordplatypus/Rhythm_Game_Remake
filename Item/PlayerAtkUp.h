@@ -6,13 +6,13 @@ class PlayerAtkUp : public Item
 {
 public:
     PlayerAtkUp(sf::Vector2f position, PlayerManager* playerManager, ParticleManager* pm);
-    ~PlayerAtkUp() override;
-    void Update(float delta_time, float beat_time) override;
-    void Draw() override;
-    void DelayedDraw() override;
+    void Draw(sf::RenderWindow& render_window) const override;
 
 private:
     void Effect() override;
+
+private:
+    sf::RectangleShape rect_;
 };
 
 #endif

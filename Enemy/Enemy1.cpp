@@ -26,10 +26,10 @@ Enemy1::Enemy1(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
-    enemySprite_ = LP::SetSprite(companion_texture, 32, 32, 8, 1);
+    enemySprite_ = LP::SetMultiFrameSprite(companion_texture, 32, 32, 8, 1);
     for (auto i : enemySprite_)
     {
-        LP::SetSpriteOrigin(i, Vector2f(6,6));
+        i.setOrigin(Vector2f(6,6));
     }
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 8.0f;
 
@@ -39,10 +39,6 @@ Enemy1::Enemy1(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
 
 Enemy1::~Enemy1()
 {
-    for (auto i : enemySprite_)
-    {
-        LP::DeleteSprite(i);
-    }
 }
 
 void Enemy1::Update(float delta_time, float beat_time)
@@ -50,16 +46,17 @@ void Enemy1::Update(float delta_time, float beat_time)
     AnimationHandle(delta_time, beat_time);
     arrow_->Update(delta_time, beat_time);
     arrow_->UpdatePosition(position_);
+    enemySprite_[animCount_].setPosition(position_);
 }
 
-void Enemy1::Draw()
+void Enemy1::Draw(sf::RenderWindow& render_window) const
 {
-    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawSprite(enemySprite_[animCount_], position_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemySprite_[animCount_]);
 }
 
-void Enemy1::DelayedDraw()
+void Enemy1::DelayedDraw(sf::RenderWindow& render_window) const
 {
-    if (GetInRangeOfPlayer()) arrow_->Draw();
+    if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }
 
 void Enemy1::ReactOnCollision(GameObject& other)

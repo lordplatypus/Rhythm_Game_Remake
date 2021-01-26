@@ -9,8 +9,8 @@ public:
     ParticleManager();
     ~ParticleManager();
     void Update(float delta_time);
-    void Draw() const;
-    
+    void Draw(sf::RenderWindow& render_window) const;
+
     void Explosion(float x, float y);
     void SquareExplosion(float x, float y);
     void WhiteOut(float x, float y);

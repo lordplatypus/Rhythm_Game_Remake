@@ -11,12 +11,6 @@ Transition::Transition(TransitionManager* tm, const std::string& transitionTo, c
     imageHeight_ = 32;
 
     tm_->Add(name_, locked);
-
-    // if (name_ == "JunkYard")
-    // {
-    //     sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    //     LP::SetRectangleColor(sprite_, 255, 0, 255, 255);
-    // }
 }
 
 Transition::~Transition()
@@ -38,9 +32,8 @@ void Transition::Update(float delta_time, float beat_time)
     }
 }
 
-void Transition::Draw()
+void Transition::Draw(sf::RenderWindow& render_window) const
 {
-    //if (name_ == "JunkYard") LP::DrawRectangle(sprite_);
 }
 
 void Transition::ReactOnCollision(GameObject& other)

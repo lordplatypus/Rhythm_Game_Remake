@@ -2,7 +2,7 @@
 #define GAME_H_
 #include <unordered_map>
 #include "../Scene/Scene.h"
-#include "../Assets/LoadAssets.h"
+#include "../Assets/Assets.h"
 #include "Camera.h"
 #include "../Player/PlayerManager.h"
 #include "../Enemy/GlobalEnemyManager.h"
@@ -16,7 +16,7 @@ public:
     //Update Game
     void Update(float delta_time, float beat_time);
     //Draw Game
-    void Draw();
+    void Draw(sf::RenderWindow& render_window);
     //Add a Scene to the scene map
     void AddScene(const std::string& name, Scene* scene);
     //Switch to a different scene
@@ -43,7 +43,7 @@ private:
     GlobalEnemyManager gem_;
     TransitionManager transitionManager_;
     //load assets
-    LoadAssets loadAssets_;
+    Assets assets_;
 
     //Win status
     bool win_{false};

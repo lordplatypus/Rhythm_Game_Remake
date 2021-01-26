@@ -17,35 +17,15 @@ ExcessParts::ExcessParts(sf::Vector2f position, PlayerManager* playerManager, Pa
     SetPerception(32);
     arrow_ = new UIArrow(pm_, position_, HP_);
 
-    sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    LP::SetRectangleColor(sprite_, 255, 0, 0, 255);
-    text_ = LP::SetText("Start At Square 1 But With Some Extra Parts: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
-    LP::SetTextScale(text_, 0.1f, 0.1f);
+    rect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
+    rect_.setPosition(position_);
+    rect_.setFillColor(sf::Color::Cyan);
+    text_ = LP::SetText("Start At Square 1 But With Some Extra Parts: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32, sf::Vector2f(0.1f, 0.1f));
 }
 
-ExcessParts::~ExcessParts()
+void ExcessParts::Draw(sf::RenderWindow& render_window) const
 {
-    LP::DeleteRectangle(sprite_);
-    LP::DeleteText(text_);
-}
-
-void ExcessParts::Update(float delta_time, float beat_time)
-{
-    SparkleRandom(delta_time);
-}
-
-void ExcessParts::Draw()
-{
-    LP::DrawSprite(sprite_);
-}
-
-void ExcessParts::DelayedDraw()
-{
-    if (ifSeesPlayer_) 
-    {
-        arrow_->Draw();
-        LP::DrawText(text_);
-    }
+    render_window.draw(rect_);
 }
 
 void ExcessParts::Effect()

@@ -1,12 +1,9 @@
 set(SOURCES
 ${SOURCES}
+${Game_SOURCE_DIR}/Map/TileMap.cpp
 ${Game_SOURCE_DIR}/Map/Map.cpp
 ${Game_SOURCE_DIR}/Map/SingleRoomMap.cpp
 ${Game_SOURCE_DIR}/Map/MultiRoomMap.cpp
 ${Game_SOURCE_DIR}/Map/Room.cpp
-${Game_SOURCE_DIR}/Map/Room1.cpp
-${Game_SOURCE_DIR}/Map/Room2.cpp
-${Game_SOURCE_DIR}/Map/Room3.cpp
-${Game_SOURCE_DIR}/Map/Junkyard.cpp
 PARENT_SCOPE
 )

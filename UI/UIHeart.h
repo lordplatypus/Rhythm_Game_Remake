@@ -9,7 +9,7 @@ public:
     UIHeart(Camera* camera, int numOfHearts, int heartPosition = 0);
     ~UIHeart();
     void Update(float delta_time, float beat_time);
-    void Draw() const;
+    void Draw(sf::RenderWindow& render_window) const;
 
     bool IsDamaged();
 
@@ -34,10 +34,10 @@ private:
     int heartPosition_{0};
 
     //images
-    int heart_;
-    int heartSmall_;
-    int greyHeart_;
-    int greyHeartSmall_;
+    sf::Sprite heart_;
+    sf::Sprite heartSmall_;
+    sf::Sprite greyHeart_;
+    sf::Sprite greyHeartSmall_;
 
     //Animation
     bool isSmall_{false};

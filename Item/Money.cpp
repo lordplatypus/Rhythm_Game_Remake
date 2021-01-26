@@ -29,23 +29,19 @@ Money::Money(sf::Vector2f position, PlayerManager* playerManager, ParticleManage
 
 Money::~Money()
 {
-    for (auto i : sprites_) LP::DeleteSprite(i);
     sprites_.clear();
+    //delete arrow_;
 }
 
-void Money::Update(float delta_time, float beat_time)
+void Money::Draw(sf::RenderWindow& render_window) const
 {
-    SparkleRandom(delta_time);
+    for (auto i : sprites_) render_window.draw(i);
 }
 
-void Money::Draw()
+void Money::DelayedDraw(sf::RenderWindow& render_window) const
 {
-    for (auto i : sprites_) LP::DrawSprite(i);
-}
-
-void Money::DelayedDraw()
-{
-    if (ifSeesPlayer_) arrow_->Draw();
+    if (ifSeesPlayer_) 
+        arrow_->Draw(render_window);
 }
 
 void Money::Effect()
@@ -78,6 +74,6 @@ void Money::SpriteSetUp()
         }
         sf::Vector2f spritePosition{position_.x + rand() % 32, position_.y + rand() % 32};
         sprites_.push_back(LP::SetSprite(textureID, spritePosition));
-        LP::SetSpriteOriginCenter(sprites_[i]);
+        LP::SetSpriteOriginCenter(&sprites_[i]);
     }
 }

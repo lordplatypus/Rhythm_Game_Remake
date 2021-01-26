@@ -38,7 +38,7 @@ protected:
     const int CellSize{32};
 
     //must be set within each enemy class
-    std::vector<int> enemySprite_;
+    std::vector<sf::Sprite> enemySprite_;
     //must be set within the enemy_ constructor
     int numOfBeatsBetweenAttacks_{0};
     int beatCount_{0};

@@ -10,10 +10,10 @@ UIHeart::UIHeart(Camera* camera, int numOfHearts, int heartPosition) : camera_{c
     heartSmall_ = LP::SetSprite(heart_small_texture);
     greyHeart_ = LP::SetSprite(grey_heart_texture);
     greyHeartSmall_ = LP::SetSprite(grey_heart_small_texture);
-    LP::SetSpriteOrigin(heart_, sf::Vector2f(8, 8));
-    LP::SetSpriteOrigin(heartSmall_, sf::Vector2f(8, 8));
-    LP::SetSpriteOrigin(greyHeart_, sf::Vector2f(8, 8));
-    LP::SetSpriteOrigin(greyHeartSmall_, sf::Vector2f(8, 8));
+    LP::SetSpriteOriginCenter(&heart_);
+    LP::SetSpriteOriginCenter(&heartSmall_);
+    LP::SetSpriteOriginCenter(&greyHeart_);
+    LP::SetSpriteOriginCenter(&greyHeartSmall_);
     numOfHearts_ = numOfHearts;
     heartPosition_ = heartPosition + 1;
     if (heartPosition_ != numOfHearts_)
@@ -24,10 +24,6 @@ UIHeart::UIHeart(Camera* camera, int numOfHearts, int heartPosition) : camera_{c
 
 UIHeart::~UIHeart()
 {
-    LP::DeleteSprite(heart_);
-    LP::DeleteSprite(heartSmall_);
-    LP::DeleteSprite(greyHeart_);
-    LP::DeleteSprite(greyHeartSmall_);
     delete nextHeart_;
 }
 
@@ -38,25 +34,32 @@ void UIHeart::Update(float delta_time, float beat_time)
     if (beat_time < (bpm_ / (numOfHearts_+ 1)) * heartPosition_)
     {
         isSmall_ = true;
+        heartSmall_.setPosition(position_);
+        greyHeartSmall_.setPosition(position_);
     }
-    else isSmall_ = false;
+    else 
+    {
+        isSmall_ = false;
+        heart_.setPosition(position_);
+        greyHeart_.setPosition(position_);
+    }
 
     if (numOfHearts_ != heartPosition_) nextHeart_->Update(delta_time, beat_time);
 }
 
-void UIHeart::Draw() const
+void UIHeart::Draw(sf::RenderWindow& render_window) const
 {
     if (isDamaged_)
     {
-        if (isSmall_) LP::DrawSprite(greyHeartSmall_, position_);
-        else LP::DrawSprite(greyHeart_, position_);
+        if (isSmall_) render_window.draw(greyHeartSmall_);
+        else render_window.draw(greyHeart_);
     }
     else
     {
-        if (isSmall_) LP::DrawSprite(heartSmall_, position_);
-        else LP::DrawSprite(heart_, position_);
+        if (isSmall_) render_window.draw(heartSmall_);
+        else render_window.draw(heart_);
     }
-    if (numOfHearts_ != heartPosition_) nextHeart_->Draw();
+    if (numOfHearts_ != heartPosition_) nextHeart_->Draw(render_window);
 }
 
 bool UIHeart::IsDamaged()
@@ -151,6 +154,8 @@ int UIHeart::GetDamage(int count) const
     if (isDamaged_) count++;
     else return count;
     if (numOfHearts_ != heartPosition_) nextHeart_->GetDamage(count);
+
+    return 0;
 }
 
 void UIHeart::SetDamage(const int damage)

@@ -14,7 +14,7 @@ public:
     //Scene Update
     virtual void Update(float delta_time, float beat_time) = 0;
     //Scene Draw
-    virtual void Draw() = 0;
+    virtual void Draw(sf::RenderWindow& render_window) = 0;
     //Add gameobject to the list of gameobjects
     virtual void AddGameObject(GameObject* gameObject) = 0;
     //Find an object by either ID, Tag, or Name

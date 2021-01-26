@@ -24,38 +24,41 @@ LobbyMap::LobbyMap(Scene *scene, Camera* camera, PlayerManager* playerManager, T
     //DetailMap();
     //PlaceObjects();
 
-    MenuText.push_back(LP::SetText("Tutorial", sf::Vector2f(CellSize * 1, CellSize * 2), 16));
-    MenuText.push_back(LP::SetText("Stage 1", sf::Vector2f(CellSize * 3, CellSize * 2), 16));
-    MenuText.push_back(LP::SetText("Test Map", sf::Vector2f(CellSize * 3, CellSize * 6), 16));
-    MenuText.push_back(LP::SetText("Music\nSelect", sf::Vector2f(CellSize * 7, CellSize * 2), 16));
-    MenuText.push_back(LP::SetText("BPM\nCheck", sf::Vector2f(CellSize * 9, CellSize * 2), 16));
-    MenuText.push_back(LP::SetText("Class\nSelect", sf::Vector2f(CellSize * 7, CellSize * 4), 16));
-    MenuText.push_back(LP::SetText("Items", sf::Vector2f(CellSize * 9, CellSize * 4), 16));
-    for (auto i : MenuText) LP::SetTextScale(i, .2f, .2f);
+    MenuText.push_back(LP::SetText("Tutorial", sf::Vector2f(CellSize * 1, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));
+    MenuText.push_back(LP::SetText("Stage 1", sf::Vector2f(CellSize * 3, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));
+    MenuText.push_back(LP::SetText("Test Map", sf::Vector2f(CellSize * 3, CellSize * 6), 16, sf::Vector2f(0.2f, 0.2f)));
+    MenuText.push_back(LP::SetText("Music\nSelect", sf::Vector2f(CellSize * 7, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));
+    MenuText.push_back(LP::SetText("BPM\nCheck", sf::Vector2f(CellSize * 9, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));
+    MenuText.push_back(LP::SetText("Class\nSelect", sf::Vector2f(CellSize * 7, CellSize * 4), 16, sf::Vector2f(0.2f, 0.2f)));
+    MenuText.push_back(LP::SetText("Items", sf::Vector2f(CellSize * 9, CellSize * 4), 16, sf::Vector2f(0.2f, 0.2f)));
 }
 
 LobbyMap::~LobbyMap()
 {
-    int tileMapKeysLength = tileMapKeys_.size();
-    for (int i = 0; i < tileMapKeysLength; i++)
-    {
-        LP::DeleteSprite(tileMapKeys_[i]);
-    }
-    for (auto i : MenuText)
-    {
-        LP::DeleteText(i);
-    }
+    // int tileMapKeysLength = tileMapKeys_.size();
+    // for (int i = 0; i < tileMapKeysLength; i++)
+    // {
+    //     LP::DeleteSprite(tileMapKeys_[i]);
+    // }
+    // for (auto i : MenuText)
+    // {
+    //     LP::DeleteText(i);
+    // }
+    // LP::DeleteTileMap(tileMap_);
+    // LP::DeleteTileMap(tileMapDetails_);
+    MenuText.clear();
 }
 
-void LobbyMap::Draw()
+void LobbyMap::Draw(sf::RenderWindow& render_window)
 {
-    for (int i = 0; i < tileMapKeys_.size(); i++)
-    {
-        LP::DrawSprite(tileMapKeys_[i]);
-    }
-
+    // for (int i = 0; i < tileMapKeys_.size(); i++)
+    // {
+    //     LP::DrawSprite(tileMapKeys_[i]);
+    // }
+    render_window.draw(tileMap_);
+    render_window.draw(tileMapDetails_);
     for (int i = 0; i < MenuText.size(); i++)
     {
-        LP::DrawText(MenuText[i]);
+        render_window.draw(MenuText[i]);
     }
 }

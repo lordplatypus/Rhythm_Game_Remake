@@ -1,23 +1,37 @@
 #include "MultiRoomMap.h"
-//Rooms
-#include "../Map/Room1.h"
-#include "../Map/Room2.h"
-#include "../Map/Room3.h"
-#include "../Map/Junkyard.h"
 
-MultiRoomMap::MultiRoomMap()
-{}
+MultiRoomMap::MultiRoomMap(const int numOfRooms, const std::string& transitionTo, Scene *scene, Camera* camera, PlayerManager* playerManager, LocalEnemyManager* localEnemyManager,  GlobalEnemyManager* globalEnemyManager,TransitionManager* transitionManager, ParticleManager* particleManager)
+{
+    numOfRooms_ = numOfRooms;
+    transitionTo_ = transitionTo;
+
+    scene_ = scene;
+    camera_ = camera;
+    playerManager_ = playerManager;
+    localEnemyManager_ = localEnemyManager;
+    globalEnemyManager_ = globalEnemyManager;
+    transitionManager_ = transitionManager;
+    particleManager_ = particleManager;
+
+    SetRoomPositions(numOfRooms_); //put rooms into position
+    SetRoomTileMap(); //generate room maps
+    SetRoomHalls(); //generate halls between rooms
+    SetRoomObjectMap(); //generate room object maps
+    SetRoomObjects(); //place objects in rooms
+    SetRoomTileMapSprite(); //create tilemap sprites for each room
+}
 
 MultiRoomMap::~MultiRoomMap()
 {
     for (auto room : rooms_) delete room;
 }
 
-void MultiRoomMap::Draw()
+void MultiRoomMap::Draw(sf::RenderWindow& render_window)
 {
     for (auto i : rooms_)
     {
-        i->Draw();
+        if (camera_->GetCameraRect().intersects(i->GetRoomAreaWorldCoordinates()))
+            i->Draw(render_window);
     }
 }
 
@@ -37,49 +51,35 @@ bool MultiRoomMap::IsWall(sf::Vector2f worldCoordinate)
     {
         if (i->GetRoomArea().contains(sf::Vector2i(worldCoordinate.x / CellSize, worldCoordinate.y / CellSize))) return i->IsWall(sf::Vector2i(worldCoordinate.x, worldCoordinate.y)); 
     }
+    return true;
 }
 
-void MultiRoomMap::CreateMapWithRooms(int numOfRooms, const std::string& transitionTo)
-{
-    SetRooms(numOfRooms);
-    SetHalls();
-    SetTransition(transitionTo);
-    BuildMapBlueprint();
-}
 
-void MultiRoomMap::SetRooms(int numOfRooms)
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 1: Place rooms in sensable positions (rooms don't collide / hallways can be placed between rooms)
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void MultiRoomMap::SetRoomPositions(int numOfRooms)
 {
-    sf::Vector2i currentPosition(0, 0);
-    //Room* prevRoom = new Room1(currentPosition);
-    //rooms_.push_back(prevRoom);
-    Room* prevRoom = SetGetRandRoom(currentPosition, 0, numOfRooms);
-
-    //prevRoom->SetPlayerRand();
+    sf::Vector2i currentPosition(0, 0); //starting position is always (0, 0)
+    Room* prevRoom = GetRandRoom(currentPosition, 0, numOfRooms); //create first room
+    rooms_.push_back(prevRoom);
 
     for (int i = 1; i < numOfRooms; i++)
     {
-        int temp = rand() % 4;
-        // Room* currentRoom = nullptr;
-        // if (temp == 0) currentRoom = new Room1(currentPosition);
-        // else if (temp == 1) currentRoom = new Room2(currentPosition);
-        // else if (temp == 2) currentRoom = new Room3(currentPosition);
-        // else currentRoom = new Junkyard(currentPosition);
-        // rooms_.push_back(currentRoom);
-        Room* currentRoom = SetGetRandRoom(currentPosition, i, numOfRooms);
+        Room* currentRoom = GetRandRoom(currentPosition, i, numOfRooms);
         bool done = false;
         int changeRoom = 0;
         while (!done)
         {
+            currentPosition = prevRoom->GetRoomPosition();
+
             changeRoom++;
             if (changeRoom >= 10)
-            {
+            {//if the program fails to place a room 10 times, try a different room
                 changeRoom = 0;
-                rooms_.pop_back();
-                currentRoom = SetGetRandRoom(currentPosition, i, numOfRooms);
+                delete currentRoom;
+                currentRoom = GetRandRoom(currentPosition, i, numOfRooms);
             }
-
-            currentPosition = sf::Vector2i(prevRoom->GetRoomArea().left, prevRoom->GetRoomArea().top);
-            //sf::Vector2i prevRoomHallPoint = prevRoom->GetHallPoints()[rand() % prevRoom->GetHallPoints().size()];
 
             sf::Vector2i hallPoint = prevRoom->GetHallPoints()[rand() % prevRoom->GetHallPoints().size()] + prevRoom->GetRoomPosition();
 
@@ -136,7 +136,7 @@ void MultiRoomMap::SetRooms(int numOfRooms)
             currentRoom->SetRoomPosition(currentPosition);
             for (int i = 0; i < rooms_.size() - 1; i++)
             {
-                if (currentRoom->GetRoomArea().intersects(rooms_[i]->GetRoomArea())) 
+                if (currentRoom->GetRoomArea().intersects(rooms_[i]->GetRoomArea()) || currentRoom->GetRoomPosition() == rooms_[i]->GetRoomPosition())
                 {
                     done = false;
                     prevRoom = rooms_[rand() % (rooms_.size() - 1)];
@@ -144,60 +144,219 @@ void MultiRoomMap::SetRooms(int numOfRooms)
                 }
             }
         }
-        prevRoom = currentRoom;
+        //Succeded in placing a room
+        rooms_.push_back(currentRoom); //add the new room to the vector of rooms
+        prevRoom = currentRoom; //set up the new starting position for the next room
     }
 }
 
-Room* MultiRoomMap::SetGetRandRoom(sf::Vector2i position, int roomBuildOrderNum, int maxRoomNum)
+Room* MultiRoomMap::GetRandRoom(sf::Vector2i position, int roomBuildOrderNum, int maxRoomNum)
 {
     Room* room;
+    std::string roomName = "";
+    sf::IntRect roomArea;
+    std::vector<sf::Vector2i> hallPoints;
 
     if (roomBuildOrderNum == 0)
     {
-        room = new Room1(position, true, true);
-        rooms_.push_back(room);
+        roomName = "Factory_Room_9x9_01";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 0)); //top anchor
+        hallPoints.push_back(sf::Vector2i(8, 4)); //right anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        room = new Room(roomName, roomArea, hallPoints);
         return room;
     }
 
-    bool done = false;
-    int failsafe = 0;
-    while (!done)
+    int randRoom = rand() % 15;
+    switch (randRoom)
     {
-        failsafe++;
-        if (failsafe >= 100) 
+        case 0:
+        if (roomBuildOrderNum != 0 && roomBuildOrderNum != maxRoomNum - 1) 
         {
-            room = new Room1(position);
-            rooms_.push_back(room);
-            return room;
-        } 
+            roomName = "Factory_Room_Junkyard";
+            roomArea = sf::IntRect(position.x, position.y, 9, 14);
+            hallPoints.push_back(sf::Vector2i(0, 9)); //left anchor
+            hallPoints.push_back(sf::Vector2i(4, 13)); //top anchor
+            hallPoints.push_back(sf::Vector2i(8, 9)); //right anchor
+            break;
+        }
+        roomName = "Factory_Room_9x9_01";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 0)); //top anchor
+        hallPoints.push_back(sf::Vector2i(8, 4)); //right anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        break;
 
-        int randRoom = rand() % 4;
-        if (randRoom == 0) 
-        {
-            room = new Room1(position);
-            done = true;
-        }
-        else if (randRoom == 1) 
-        {
-            room = new Room2(position);
-            done = true;
-        }
-        else if (randRoom == 2) 
-        {
-            room = new Room3(position);
-            done = true;
-        }
-        else if (randRoom == 3 && roomBuildOrderNum != 0 && roomBuildOrderNum != maxRoomNum - 1) 
-        {
-            room = new Junkyard(position);
-            done = true;
-        }
+        case 1:
+        roomName = "Factory_Room_9x9_01";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 0)); //top anchor
+        hallPoints.push_back(sf::Vector2i(8, 4)); //right anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        break;
+
+        case 2:
+        roomName = "Factory_Room_9x9_02";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        break;
+
+        case 3:
+        roomName = "Factory_Room_9x9_03";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 0)); //top anchor
+        hallPoints.push_back(sf::Vector2i(8, 4)); //right anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        break;
+
+        case 4:
+        roomName = "Factory_Room_9x9_04";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 0)); //top anchor
+        hallPoints.push_back(sf::Vector2i(8, 4)); //right anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        break;
+
+        case 5:
+        roomName = "Factory_Room_9x9_05";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 0)); //top anchor
+        break;
+
+        case 6:
+        roomName = "Factory_Room_9x9_06";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(4, 0)); //top anchor
+        hallPoints.push_back(sf::Vector2i(8, 4)); //right anchor
+        break;
+
+        case 7:
+        roomName = "Factory_Room_9x9_07";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(8, 4)); //right anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        break;
+
+        case 8:
+        roomName = "Factory_Room_9x9_08";
+        roomArea = sf::IntRect(position.x, position.y, 9, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //left anchor
+        hallPoints.push_back(sf::Vector2i(4, 8)); //bottom anchor
+        break;
+
+        case 9:
+        roomName = "Factory_Room_9x15_01";
+        roomArea = sf::IntRect(position.x, position.y, 9, 15);
+        hallPoints.push_back(sf::Vector2i(0, 4));
+        hallPoints.push_back(sf::Vector2i(0, 7));
+        hallPoints.push_back(sf::Vector2i(0, 11));
+        hallPoints.push_back(sf::Vector2i(4, 0));
+        hallPoints.push_back(sf::Vector2i(8, 4));
+        hallPoints.push_back(sf::Vector2i(8, 7));
+        hallPoints.push_back(sf::Vector2i(8, 11));
+        hallPoints.push_back(sf::Vector2i(4, 14));
+        break;
+
+        case 10:
+        roomName = "Factory_Room_9x15_02";
+        roomArea = sf::IntRect(position.x, position.y, 9, 15);
+        hallPoints.push_back(sf::Vector2i(0, 7));
+        hallPoints.push_back(sf::Vector2i(4, 0));
+        hallPoints.push_back(sf::Vector2i(8, 7));
+        hallPoints.push_back(sf::Vector2i(4, 14));
+        break;
+
+        case 11:
+        roomName = "Factory_Room_9x18_01";
+        roomArea = sf::IntRect(position.x, position.y, 9, 18);
+        hallPoints.push_back(sf::Vector2i(4, 0)); //N
+        hallPoints.push_back(sf::Vector2i(0, 4)); //W
+        hallPoints.push_back(sf::Vector2i(0, 13)); //W
+        hallPoints.push_back(sf::Vector2i(4, 17)); //S
+        hallPoints.push_back(sf::Vector2i(8, 4)); //E
+        hallPoints.push_back(sf::Vector2i(8, 13)); //E
+        break;
+
+        case 12:
+        roomName = "Factory_Room_9x18_02";
+        roomArea = sf::IntRect(position.x, position.y, 9, 18);
+        hallPoints.push_back(sf::Vector2i(0, 4)); //W
+        hallPoints.push_back(sf::Vector2i(0, 13)); //W
+        hallPoints.push_back(sf::Vector2i(4, 17)); //S
+        hallPoints.push_back(sf::Vector2i(8, 4)); //E
+        hallPoints.push_back(sf::Vector2i(8, 13)); //E
+        break;
+
+        case 13:
+        roomName = "Factory_Room_15x9_01";
+        roomArea = sf::IntRect(position.x, position.y, 15, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4));
+        hallPoints.push_back(sf::Vector2i(4, 0));
+        hallPoints.push_back(sf::Vector2i(7, 0));
+        hallPoints.push_back(sf::Vector2i(10, 0));
+        hallPoints.push_back(sf::Vector2i(4, 0));
+        hallPoints.push_back(sf::Vector2i(14, 4));
+        hallPoints.push_back(sf::Vector2i(4, 8));
+        hallPoints.push_back(sf::Vector2i(7, 8));
+        hallPoints.push_back(sf::Vector2i(10, 8));
+        break;
+
+        case 14:
+        roomName = "Factory_Room_18x9_01";
+        roomArea = sf::IntRect(position.x, position.y, 18, 9);
+        hallPoints.push_back(sf::Vector2i(0, 4));
+        hallPoints.push_back(sf::Vector2i(4, 0));
+        hallPoints.push_back(sf::Vector2i(13, 0));
+        hallPoints.push_back(sf::Vector2i(17, 4));
+        hallPoints.push_back(sf::Vector2i(4, 8));
+        hallPoints.push_back(sf::Vector2i(13, 8));
+        break;
+
+        default:
+        break;
     }
-    rooms_.push_back(room);
+
+    room = new Room(roomName, roomArea, hallPoints);
+    
     return room;
 }
 
-void MultiRoomMap::SetHalls()
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 2: Generate room maps - includes hallway generation
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void MultiRoomMap::SetRoomTileMap()
+{
+    for (auto room : rooms_)
+    {
+        std::string roomName = room->GetRoomName();
+        if (roomName == "Factory_Room_9x9_01") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_01.csv");
+        else if (roomName == "Factory_Room_9x9_02") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_02.csv");
+        else if (roomName == "Factory_Room_9x9_03") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_03.csv");
+        else if (roomName == "Factory_Room_9x9_04") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_04.csv");
+        else if (roomName == "Factory_Room_9x9_05") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_05.csv");
+        else if (roomName == "Factory_Room_9x9_06") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_06.csv");
+        else if (roomName == "Factory_Room_9x9_07") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_07.csv");
+        else if (roomName == "Factory_Room_9x9_08") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x9_08.csv");
+        else if (roomName == "Factory_Room_9x15_01") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x15_01.csv");
+        else if (roomName == "Factory_Room_9x15_02") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x15_02.csv");
+        else if (roomName == "Factory_Room_9x18_01") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x18_01.csv");
+        else if (roomName == "Factory_Room_9x18_02") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_9x18_02.csv");
+        else if (roomName == "Factory_Room_15x9_01") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_15x9_01.csv");
+        else if (roomName == "Factory_Room_18x9_01") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_18x9_01.csv");
+        else if (roomName == "Factory_Room_Junkyard") room->SetRoomTileMap("./Resources/Map/Room/Factory_Room_Junkyard.csv");
+    }
+}
+
+void MultiRoomMap::SetRoomHalls()
 {
     for (auto i = rooms_.begin(); i != rooms_.end(); i++)
     {
@@ -236,17 +395,81 @@ void MultiRoomMap::SetHalls()
 }
 
 
-//MOVE TO ROOM.H
-void MultiRoomMap::SetTransition(const std::string& transitionTo)
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 3: Place objects in rooms
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void MultiRoomMap::SetRoomObjectMap()
 {
-    rooms_.back()->SetStairRand(transitionManager_->GetSceneID(transitionTo));
+    int count = 0;
+    for (auto room : rooms_)
+    {
+        room->SetRoomObjectMapNull(); //initial setup
+
+        if (count == 0) 
+        {//The first will generate the player
+            room->SetPlayerRand();
+            count++;
+            continue; //skip enemy generation, etc.
+        }
+        else if (count == numOfRooms_ - 1) room->SetStairRand(transitionManager_->GetSceneID(transitionTo_)); //last room will generate the staircase
+
+        std::string roomName = room->GetRoomName();
+
+        if (roomName != "Factory_Room_Junkyard") room->SetEnemiesRand(rand() % 5); //generate enemies
+
+        if (roomName == "Factory_Room_Junkyard")
+        {//special rules for junkyard room
+            std::vector<int> placedItems;
+            std::vector<sf::Vector2i> itemPositions
+            {
+                sf::Vector2i(2, 7),
+                sf::Vector2i(4, 7),
+                sf::Vector2i(6, 7)
+            };
+
+            for (int i = 0; i < 3; i++)
+            {
+                bool done = false;
+                int failsafe = 0;
+                while(!done)
+                {
+                    done = true;
+                    int randItemID = rand() % 8 + 101; //pick random item
+                    for (auto i : placedItems)
+                    {//checks for duplicate items
+                        if (i == randItemID) done = false;
+                    }
+                    if (done)
+                    {//if not duplicate add ID to object map
+                        room->SetObject(itemPositions[i], randItemID);
+                        placedItems.push_back(randItemID);
+                    }
+
+                    failsafe++; //if for some reason the above code fails 100 times, break out of loop
+                    if (failsafe >= 100) done = true;
+                }
+            }
+        }
+        count++;
+    }
 }
 
-void MultiRoomMap::BuildMapBlueprint()
+void MultiRoomMap::SetRoomObjects()
 {
     for (auto i : rooms_)
     {
-        i->SetTiles();
         PlaceObjectsInRoom(i->GetRoomArea(), i->GetRoomObjectMap());
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//Step 4: Create tilemap sprites
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void MultiRoomMap::SetRoomTileMapSprite()
+{
+    for (auto i : rooms_)
+    {
+        i->SetTileMapSprite();
     }
 }

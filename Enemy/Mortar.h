@@ -11,7 +11,7 @@ public:
     Mortar(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, ParticleManager* pm);
     ~Mortar();
     void Update(float delta_time, float beat_time) override;
-    void Draw() override;
+    void Draw(sf::RenderWindow& render_window) const override;
     void Kill() override;
 
 private:

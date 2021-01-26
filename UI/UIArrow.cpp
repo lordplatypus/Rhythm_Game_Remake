@@ -17,8 +17,6 @@ UIArrow::UIArrow(ParticleManager* pm, sf::Vector2f position, int numOfArrows, in
 
 UIArrow::~UIArrow()
 {
-    LP::DeleteSprite(arrow_);
-    LP::DeleteSprite(greyArrow_);
     delete nextArrow_;
 }
 
@@ -52,14 +50,14 @@ void UIArrow::Update(float delta_time, float beat_time)
     HPBarManager();
 }
 
-void UIArrow::Draw() const
+void UIArrow::Draw(sf::RenderWindow& render_window) const
 {
     if (isVisible_)
     {
-        if (isDamaged_) LP::DrawSprite(greyArrow_, position_);
-        else LP::DrawSprite(arrow_, position_);
+        if (isDamaged_) render_window.draw(greyArrow_);
+        else render_window.draw(arrow_);
     }
-    if (numOfArrows_ != arrowPosition_) nextArrow_->Draw();
+    if (numOfArrows_ != arrowPosition_) nextArrow_->Draw(render_window);
 }
 
 int UIArrow::GetCurrentArrow() const
@@ -77,6 +75,9 @@ void UIArrow::UpdatePosition(const sf::Vector2f position)
     float x = 0.0f;
     if (arrowPosition_ != 1 && arrowPosition_ % 4 == 0) x = position_.x - 8 * 3;
     else x = position_.x + 8;
+    arrow_.setPosition(position_);
+    greyArrow_.setPosition(position_);
+
     if (numOfArrows_ != arrowPosition_) nextArrow_->UpdatePosition(sf::Vector2f(x, position_.y));
 }
 
@@ -116,16 +117,16 @@ void UIArrow::HPBarManager(bool currentHPBar, bool nextHPBar, bool hiddenHPBar)
 
     if (currentHPBar)
     {
-        LP::SetSpriteScale(arrow_, 1.0f, 1.0f);
-        LP::SetSpriteColor(arrow_, 255, 255, 255, 255);
-        LP::SetSpriteOrigin(arrow_, sf::Vector2f(0.0f, -2.0f));
+        arrow_.setScale(1.0f, 1.0f);
+        arrow_.setColor(sf::Color(255, 255, 255, 255));
+        arrow_.setOrigin(sf::Vector2f(0.0f, -2.0f));
         isVisible_ = true;
     }
     else if (nextHPBar) 
     {
-        LP::SetSpriteScale(arrow_, 0.5f, 0.5f);
-        LP::SetSpriteColor(arrow_, 255, 255, 255, 127);
-        LP::SetSpriteOrigin(arrow_, sf::Vector2f(0.0f, -0.0f));
+        arrow_.setScale(0.5f, 0.5f);
+        arrow_.setColor(sf::Color(255, 255, 255, 127));
+        arrow_.setOrigin(sf::Vector2f(0.0f, -0.0f));
         isVisible_ = true;
     }
     else if (hiddenHPBar)

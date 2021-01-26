@@ -21,33 +21,7 @@ ReduceCooldown::ReduceCooldown(sf::Vector2f position, PlayerManager* playerManag
     arrow_ = new UIArrow(pm_, position_, HP_);
 
     sprite_ = LP::SetSprite(item_special_cooldown_texture, position_);
-    text_ = LP::SetText("Cooldown -1: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32);
-    LP::SetTextScale(text_, 0.1f, 0.1f);
-}
-
-ReduceCooldown::~ReduceCooldown()
-{
-    LP::DeleteSprite(sprite_);
-    LP::DeleteText(text_);
-}
-
-void ReduceCooldown::Update(float delta_time, float beat_time)
-{
-    SparkleRandom(delta_time);
-}
-
-void ReduceCooldown::Draw()
-{
-    LP::DrawSprite(sprite_);
-}
-
-void ReduceCooldown::DelayedDraw()
-{
-    if (ifSeesPlayer_) 
-    {
-        arrow_->Draw();
-        LP::DrawText(text_);
-    }
+    text_ = LP::SetText("Cooldown -1: " + std::to_string(priceTag_), sf::Vector2f(position_.x, position_.y - 4), 32, sf::Vector2f(0.1f, 0.1f));
 }
 
 void ReduceCooldown::Effect()

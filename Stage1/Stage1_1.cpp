@@ -1,5 +1,5 @@
 #include "Stage1_1.h"
-#include "Map1_1.h"
+#include "../Map/MultiRoomMap.h"
 #include "../Assets/ID.h"
 #include "../Engine/LP.h"
 #include "../Engine/MP.h"
@@ -11,10 +11,6 @@
 #include "../Event/FindKeys.h"
 #include "../Event/InvisibleEnemies.h"
 #include "../Event/MortarStrike.h"
-
-//TEST
-#include "MapTest.h"
-#include "../Player/Roboko.h"
 
 Stage1_1::Stage1_1(Game* game) : game_{game}
 {}
@@ -29,7 +25,8 @@ void Stage1_1::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
+        //map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
+        map_ = new MultiRoomMap(5, "Stage1_2", this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         MP::PlayStageMusic(stage1_1, true);
         RandomEvent();
     }
@@ -59,12 +56,12 @@ void Stage1_1::Update(float delta_time, float beat_time)
     }
 }
 
-void Stage1_1::Draw()
+void Stage1_1::Draw(sf::RenderWindow& render_window)
 {
-    map_->Draw();
-    gameObjects_.Draw();
-    gameObjects_.DelayedDraw();
-    pm_.Draw();
+    map_->Draw(render_window);
+    gameObjects_.Draw(render_window, game_->GetCamera());
+    gameObjects_.DelayedDraw(render_window, game_->GetCamera());
+    pm_.Draw(render_window);
 }
 
 void Stage1_1::AddGameObject(GameObject* gameObject)

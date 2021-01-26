@@ -10,8 +10,8 @@ public:
     Generator(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, PlayerManager* playerManager, ParticleManager* pm, Map* map);
     ~Generator() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw() override;
-    void DelayedDraw() override;
+    void Draw(sf::RenderWindow& render_window) const override;
+    void DelayedDraw(sf::RenderWindow& render_window) const override;
     void Kill() override;
 
 private:
@@ -19,6 +19,7 @@ private:
 
 private:
     //Event* event_{nullptr};
+    sf::RectangleShape enemyrect_;
 };
 
 #endif

@@ -8,7 +8,7 @@ public:
     MP();
     ~MP();
     //Music
-    static int SetMusic(const int key, const std::string& filePath);
+    static void SetMusic(const int key, const std::string& filePath);
     static sf::Music* GetMusic(const int key);
     static void PlayMusic(const int key, const bool loop = false);
     static void PauseMusic(const int key);
@@ -31,7 +31,7 @@ public:
     static void PlayStageMusic(const int stageID, const bool loop = false);
 
     //Sound Effects
-    static int SetSound(const int key, const std::string& filePath);
+    static void SetSound(const int key, const std::string& filePath);
     static void PlaySound(const int key, const bool loop = false);
     static void PauseSound(const int key);
     static void StopSound(const int key);

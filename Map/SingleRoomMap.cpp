@@ -8,12 +8,13 @@ SingleRoomMap::SingleRoomMap()
 
 SingleRoomMap::~SingleRoomMap()
 {
-    for (auto i : tileMapKeys_) LP::DeleteSprite(i);
 }
 
-void SingleRoomMap::Draw()
+void SingleRoomMap::Draw(sf::RenderWindow& render_window)
 {
-    for (auto i : tileMapKeys_) LP::DrawSprite(i);
+    //for (auto i : tileMapKeys_) LP::DrawSprite(i);
+    render_window.draw(tileMap_);
+    render_window.draw(tileMapDetails_);
 }
 
 void SingleRoomMap::SetMapArea(int width, int height)
@@ -65,18 +66,19 @@ void SingleRoomMap::LoadTilesFromCSC(const std::string& CSCFilePath)
             {
                 mapData >> dummy;
             }
-            if (map_[x][y] != -1) 
-            {
-                tileMapKeys_.push_back(LP::SetSprite(tile_map, sf::Vector2f(x*CellSize, y*CellSize), CellSize, CellSize, map_[x][y]));
-            }
         }
     }
-
     mapData.close();
+
+    tileMap_ = LP::SetTileMap(tile_map, sf::Vector2u(32, 32), map_, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
 }
 
 void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
 {
+    std::vector<std::vector<int>> details;
+    std::vector<int> resize(mapHeight_);
+    details.resize(mapWidth_, resize);
+
     std::ifstream detailData(CSCFilePath);
     int value;
     char dummy;
@@ -85,19 +87,16 @@ void SingleRoomMap::LoadDetailsFromCSC(const std::string& CSCFilePath)
     {
         for (int x = 0; x < mapWidth_; x++)
         {
-            detailData >> value;
+            detailData >> details[x][y];
             if (x < mapWidth_ - 1) 
             {
                 detailData >> dummy;
             }
-            if (value != -1) 
-            {
-                tileMapKeys_.push_back(LP::SetSprite(tile_map_details, sf::Vector2f(x*CellSize, y*CellSize), CellSize, CellSize, value));
-            }
         }
     }
-
     detailData.close();
+
+    tileMapDetails_ = LP::SetTileMap(tile_map_details, sf::Vector2u(32, 32), details, sf::Vector2f(0.0f, 0.0f), mapWidth_, mapHeight_);
 }
 
 void SingleRoomMap::LoadObjectsFromCSC(const std::string& CSCFilePath)

@@ -17,34 +17,8 @@ Key::Key(sf::Vector2f position, PlayerManager* playerManager, ParticleManager* p
     SetPerception(32);
     arrow_ = new UIArrow(pm_, position_, HP_);
 
-    //sprite_ = LP::SetSprite(item_heal_texture, position_);
-    sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    LP::SetRectangleColor(sprite_, 100, 100, 0, 255);
-}
-
-Key::~Key()
-{
-    //LP::DeleteSprite(sprite_);
-    LP::DeleteRectangle(sprite_);
-}
-
-void Key::Update(float delta_time, float beat_time)
-{
-    SparkleRandom(delta_time);
-}
-
-void Key::Draw()
-{
-    LP::DrawSprite(sprite_);
-}
-
-void Key::DelayedDraw()
-{
-    if (ifSeesPlayer_) 
-    {
-        arrow_->Draw();
-        LP::DrawText(text_);
-    }
+    sprite_ = LP::SetSprite(item_key_texture, position_);
+    sprite_.setColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
 }
 
 void Key::Effect()

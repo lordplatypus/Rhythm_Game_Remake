@@ -13,7 +13,7 @@ public:
     ~BPMScene() override;
     void Init() override;
     void Update(float delta_time, float beat_time) override;
-    void Draw() override;
+    void Draw(sf::RenderWindow& render_window) override;
     void AddGameObject(GameObject* gameObject) override;
     GameObject* FindGameObject(const std::string& string, const bool byTag = true, const bool byID = false) override;
     void ChangeGameObjectOrder(const std::string& name, const std::string& newPos) override;
@@ -30,24 +30,24 @@ private:
 
 private:
     //Background
-    int background;
+    sf::Sprite background;
 
     //enum for states
     enum State {Menu, MusicSelect, SetUp, PlayBack, Save};
     State state = Menu;
 
     //Menu Text
-    std::vector<int> menuText_;
-    std::vector<int> musicTitles_;
+    std::vector<sf::Text> menuText_;
+    std::vector<sf::Text> musicTitles_;
     int selectedOption = 0;
-    int setupInstructions;
+    sf::Text setupInstructions;
     //int playbackInstructions;
-    int savedText;
-    int displayMusicTitle;
-    int displayBeatsPerMin;
-    int displaySecPerBeat;
-    int displayBeatTimer;
-    int displayBeatCount;
+    sf::Text savedText;
+    sf::Text displayMusicTitle;
+    sf::Text displayBeatsPerMin;
+    sf::Text displaySecPerBeat;
+    sf::Text displayBeatTimer;
+    sf::Text displayBeatCount;
     float alpha{0};
     UIVerticalMenu* menu_{nullptr};
     UIVerticalMenu* musicMenu_{nullptr};
@@ -67,8 +67,8 @@ private:
     std::unordered_map<int, float> musicSPBMap;
 
     //Play Back
-    std::vector<int> playerSprite;
-    std::vector<int> heartSprite;
+    std::vector<sf::Sprite> playerSprite;
+    std::vector<sf::Sprite> heartSprite;
 
     //for Player
     float timer{0};

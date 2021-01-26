@@ -23,7 +23,7 @@ Generator::Generator(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
-    sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
+    //sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
 
     // enemySprite_ = LP::SetSprite(companion_texture, 32, 32, 8, 1);
     // for (auto i : enemySprite_)
@@ -31,6 +31,10 @@ Generator::Generator(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem
     //     LP::SetSpriteOrigin(i, Vector2f(6,6));
     // }
     // timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 8.0f;
+
+    enemyrect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
+    enemyrect_.setPosition(position_);
+    enemyrect_.setFillColor(sf::Color::Red);
 
     arrow_ = new UIArrow(pm_, position_, HP_);
 }
@@ -41,7 +45,7 @@ Generator::~Generator()
     // {
     //     LP::DeleteSprite(i);
     // }
-    LP::DeleteRectangle(sprite_);
+   // LP::DeleteRectangle(sprite_);
 }
 
 void Generator::Update(float delta_time, float beat_time)
@@ -51,14 +55,14 @@ void Generator::Update(float delta_time, float beat_time)
     arrow_->UpdatePosition(position_);
 }
 
-void Generator::Draw()
+void Generator::Draw(sf::RenderWindow& render_window) const
 {
-    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(sprite_, position_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemyrect_);
 }
 
-void Generator::DelayedDraw()
+void Generator::DelayedDraw(sf::RenderWindow& render_window) const
 {
-    if (GetInRangeOfPlayer()) arrow_->Draw();
+    if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
 }
 
 void Generator::Kill()

@@ -16,9 +16,9 @@ public:
     //Update - to be calculated right after Update 
     virtual void DelayedUpdate(float delta_time, float beat_time);
     //Draw
-    virtual void Draw();
+    virtual void Draw(sf::RenderWindow& render_window) const;
     //Draw - to be drawn on screen after objects drawn in "Draw" - helpful for UI
-    virtual void DelayedDraw();
+    virtual void DelayedDraw(sf::RenderWindow& render_window) const;
 
     //This is called when colliding with another gameobject, write reaction logic here
     virtual void ReactOnCollision(GameObject& other);
@@ -30,21 +30,6 @@ public:
     virtual void Kill();
 
     //Hitbox
-    // //Left edge of the hitbox
-    // int GetLeft() const;
-    // void SetLeft(const int left);
-    // //Right edge of the hitbox
-    // int GetRight() const;
-    // void SetRight(const int right);
-    // //Top edge of the hitbox
-    // int GetTop() const;
-    // void SetTop(const int top);
-    // //Bottom edge of the hitbox
-    // int GetBottom() const;
-    // void SetBottom(const int bottom);
-    // //Return a vector of points that make up the hitbox
-    // const std::vector<sf::Vector2f> GetHitBox();
-
     sf::IntRect GetHitBox() const;
     sf::IntRect GetPerceptionHitBox() const;
 
@@ -80,6 +65,11 @@ public:
     virtual void TakeDamage(const int damage);
 
 
+    //Sprite
+    void SetSpriteHorizontalFlip(sf::Sprite& sprite, const bool flip);
+    void SetSpriteOriginCenter(sf::Sprite& sprite);
+
+
     //Data
     //Store position
     void StorePosition();
@@ -100,10 +90,6 @@ public:
     GameObject& operator = (const GameObject& other) = delete;
 
 private:
-    int left_{0}; //Left edge of the hitbox
-    int right_{0}; //Right edge of the hitbox
-    int top_{0}; //Top edge of the hitbox
-    int bottom_{0}; //Bottom edge of the hitbox
     sf::Vector2f prevPosition_{0.0f, 0.0f}; //store prev position
     float perception_{0.0f};
     bool isActive_{true}; //included in collision calculations?
@@ -113,7 +99,7 @@ protected:
     sf::Vector2f position_{0.0f, 0.0f}; //gameobjects position
     sf::Vector2f velocity_{0.0f, 0.0f}; //gameobjects velocity
     bool isDead_{false}; //"Death" flag
-    int sprite_{0}; //Used to store sprite ID - Used for drawing/editing sprite
+    sf::Sprite sprite_; //Used to store sprite ID - Used for drawing/editing sprite
     int imageWidth_{0}; //sprite width - Set up in the constructor
     int imageHeight_{0}; //sprite height - Set up in the constructor
     std::string tag_{""}; //gameobject tag - Set up in the constructor
