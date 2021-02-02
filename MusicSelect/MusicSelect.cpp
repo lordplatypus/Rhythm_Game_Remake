@@ -19,7 +19,7 @@ void MusicSelect::Init()
 
     stageNames_.push_back(LP::SetText("Title Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Lobby Music", sf::Vector2f(32, 128), 16));
-    stageNames_.push_back(LP::SetText("Test Map Music", sf::Vector2f(32, 128), 16));
+    //stageNames_.push_back(LP::SetText("Test Map Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Stage1_1 Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Stage1_2 Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Stage1_3 Music", sf::Vector2f(32, 128), 16));
@@ -38,7 +38,7 @@ void MusicSelect::Init()
     // musicTitles_.push_back(LP::SetText("La Tropica", sf::Vector2f(256, 256), 16));
     // musicTitles_.push_back(LP::SetText("moonshade_", sf::Vector2f(256, 256), 16));
     // musicTitles_.push_back(LP::SetText("Reconfig", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Gain Therapy", sf::Vector2f(256, 256), 16));
+    //musicTitles_.push_back(LP::SetText("Gain Therapy", sf::Vector2f(256, 256), 16));
     //musicTitles_.push_back(LP::SetText("Nec Minus Ultra", sf::Vector2f(256, 256), 16));
     //musicTitles_.push_back(LP::SetText("Il Vento D'oro", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("LAZZULI LUVS", sf::Vector2f(256, 256), 16));

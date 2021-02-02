@@ -93,7 +93,7 @@ enum
     // La_Tropica,
     // moonshade_,
     // Reconfig,
-    Gain_Therapy,
+    //Gain_Therapy,
     // Nec_Minus_Ultra,
     // Il_vento_doro_eurobeat,
     LAZZULI_LUVS,

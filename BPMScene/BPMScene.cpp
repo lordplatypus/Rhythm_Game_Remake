@@ -40,7 +40,7 @@ void BPMScene::Init()
     // musicTitles_.push_back(LP::SetText("La Tropica", sf::Vector2f(256, 256), 16));
     // musicTitles_.push_back(LP::SetText("moonshade_", sf::Vector2f(256, 256), 16));
     // musicTitles_.push_back(LP::SetText("Reconfig", sf::Vector2f(256, 256), 16));
-    musicTitles_.push_back(LP::SetText("Gain Therapy", sf::Vector2f(256, 256), 16));
+    //musicTitles_.push_back(LP::SetText("Gain Therapy", sf::Vector2f(256, 256), 16));
     // musicTitles_.push_back(LP::SetText("Nec Minus Ultra", sf::Vector2f(256, 256), 16));
     // musicTitles_.push_back(LP::SetText("Il Vento D'oro", sf::Vector2f(256, 256), 16));
     musicTitles_.push_back(LP::SetText("LAZZULI LUVS", sf::Vector2f(256, 256), 16));

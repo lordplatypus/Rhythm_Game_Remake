@@ -111,7 +111,7 @@ void Assets::LoadSound()
     // MP::SetMusic(La_Tropica, "./Resources/Audio/La Tropica.ogg");
     // MP::SetMusic(moonshade_, "./Resources/Audio/moonshade_.flac");
     // MP::SetMusic(Reconfig, "./Resources/Audio/Reconfig.ogg");
-    MP::SetMusic(Gain_Therapy, "./Resources/Audio/Gain Therapy Edit.ogg");
+    //MP::SetMusic(Gain_Therapy, "./Resources/Audio/Gain Therapy Edit.ogg");
     // MP::SetMusic(Nec_Minus_Ultra, "./Resources/Audio/Nec Minus Ultra.ogg");
     // MP::SetMusic(Il_vento_doro_eurobeat, "./Resources/Audio/Il vento d'oro eurobeat remix.wav");
     MP::SetMusic(LAZZULI_LUVS, "./Resources/Audio/02 LAZZULI LUVS_no vocal.ogg");
@@ -123,10 +123,10 @@ void Assets::LoadSound()
 
 void Assets::LoadStageMusic()
 {
-    MP::SetStageMusic(title_scene, Gain_Therapy);
-    MP::SetStageMusic(lobby_scene, Gain_Therapy);
-    MP::SetStageMusic(test_scene, Gain_Therapy);
-    MP::SetStageMusic(stage1_1, Gain_Therapy);
-    MP::SetStageMusic(stage1_2, Gain_Therapy);
-    MP::SetStageMusic(stage1_3, Gain_Therapy);
+    MP::SetStageMusic(title_scene, DETROIT_BEAT);
+    MP::SetStageMusic(lobby_scene, DETROIT_BEAT);
+    MP::SetStageMusic(test_scene, DETROIT_BEAT);
+    MP::SetStageMusic(stage1_1, DETROIT_BEAT);
+    MP::SetStageMusic(stage1_2, DETROIT_BEAT);
+    MP::SetStageMusic(stage1_3, DETROIT_BEAT);
 }
