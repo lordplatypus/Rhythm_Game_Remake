@@ -16,6 +16,7 @@ public:
 
 private:
     void ReactOnCollision(GameObject& other) override;
+    void AnimationHandle(float delta_time, float beat_time) override;
 
 private:
     //Event* event_{nullptr};

@@ -10,7 +10,7 @@ Heal1::Heal1(sf::Vector2f position, PlayerManager* playerManager, ParticleManage
     tag_ = "Item";
     name_ = "Heal";
     HP_ = 1;
-    priceTag_ = 100;
+    priceTag_ = 20;
     imageWidth_ = 32;
     imageHeight_ = 32;
     // SetLeft(0);

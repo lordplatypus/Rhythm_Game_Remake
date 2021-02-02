@@ -11,7 +11,7 @@ RemoveEnemyHealingOnFloor::RemoveEnemyHealingOnFloor(sf::Vector2f position, Play
     tag_ = "Item";
     name_ = "RemoveEnemyHealingOnFloor";
     HP_ = 1;
-    priceTag_ = 50;
+    priceTag_ = 20;
     imageWidth_ = 32;
     imageHeight_ = 32;
     SetPerception(32);

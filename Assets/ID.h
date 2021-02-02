@@ -59,6 +59,7 @@ enum
     target_texture,
     artillery_texture,
     bullet_casing_texture,
+    generator_texture,
 
     //Item
     part_screw_texture,

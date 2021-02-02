@@ -77,6 +77,7 @@ void Assets::LoadImage()
     LP::SetTexture(target_texture, "./Resources/Images/Enemy/Target.png", 32, 32);
     LP::SetTexture(artillery_texture, "./Resources/Images/Enemy/Enemy7.png", 128, 160);
     LP::SetTexture(bullet_casing_texture, "./Resources/Images/Enemy/Bullet_Casing.png", 16, 24);
+    LP::SetTexture(generator_texture, "./Resources/Images/Enemy/Generator.png", 192, 32);
 
     //Item(アイテム)
     LP::SetTexture(part_screw_texture, "./Resources/Images/Item/Part_Screw.png", 7, 7);

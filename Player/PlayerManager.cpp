@@ -33,7 +33,7 @@ void PlayerManager::Init()
     SetHPUI();
     SetAtk(1);
     SetPerception(64);
-    SetWallet(1000);
+    SetWallet(0);
     SetSpecialCooldown(5);
 }
 
@@ -166,7 +166,7 @@ void PlayerManager::SetWallet(const int money)
     if (!GetWalletChangeBool()) return;
 
     wallet_ = money;
-    walletText_ = LP::SetText(std::to_string(wallet_), sf::Vector2f(0, 0), 64, sf::Vector2f(0.1f, 0.1f));
+    walletText_ = LP::SetText("Parts: " + std::to_string(wallet_), sf::Vector2f(0, 0), 64, sf::Vector2f(0.1f, 0.1f));
     LP::SetTextOriginCenter(&walletText_);
 }
 
@@ -200,7 +200,8 @@ bool PlayerManager::GetWalletChangeBool() const
 
 void PlayerManager::SetWalletText()
 {
-    walletText_.setString(std::to_string(wallet_));
+    walletText_.setString("Parts: " + std::to_string(wallet_));
+    LP::SetTextOriginCenter(&walletText_);
 }
 
 sf::Text* PlayerManager::GetWalletText()
