@@ -59,6 +59,9 @@ private:
     int prevAttackInput{-1};
     int cooldownBase{5};//stores the current num of destroyed enemies so that cooldown can be calculated
     //int cooldown{5};//num needed to use special again
+
+    //Death Text
+    sf::Text deathText_;
 };
 
 #endif

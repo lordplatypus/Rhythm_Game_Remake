@@ -23,6 +23,12 @@ Roboko::Roboko(sf::Vector2f position, Scene *scene, Camera* camera, PlayerManage
     {
         sprites_[i].setOrigin(sf::Vector2f(0.0f, imageHeight_ / 4));
     }
+
+    deathText_ = LP::SetText("Press X to return to the Title", sf::Vector2f(0.0f, 0.0f), 32, sf::Vector2f(0.2f, 0.2f));
+    deathText_.setOutlineThickness(5);
+    deathText_.setOutlineColor(sf::Color::Black);
+    deathText_.setFillColor(sf::Color(150, 150, 150));
+    LP::SetTextOriginCenter(&deathText_);
     
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 10;
@@ -64,6 +70,7 @@ void Roboko::DelayedDraw(sf::RenderWindow& render_window) const
         playerManager_->GetHPUI()->Draw(render_window);
         render_window.draw(*playerManager_->GetWalletText());
     }
+    else render_window.draw(deathText_);
 }
 
 void Roboko::InputHandle(float delta_time, float beat_time)
@@ -307,7 +314,11 @@ void Roboko::TakeDamage(const int damage)
     if (IsDead()) return;
     pm_->WhiteOut(position_.x - 540, position_.y - 360);
     playerManager_->SubHP(damage);
-    if (playerManager_->GetHP() <= 0) Kill();
+    if (playerManager_->GetHP() <= 0) 
+    {
+        deathText_.setPosition(camera_->GetCameraCenter());
+        Kill();
+    }
 }
 
 void Roboko::CheckMoveLocation()

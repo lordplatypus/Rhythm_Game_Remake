@@ -26,7 +26,7 @@ Enemy3::Enemy3(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     numOfBeatsBetweenAttacks_ = 4;
     flip_ = false;
 
-    ed_ = lem_->Add(HP_, HP_, 1, 64, true, 1, false);
+    ed_ = lem_->Add(HP_, HP_, 1, 64, true, 3, false);
 
     enemySprite_ = LP::SetMultiFrameSprite(surveillance_texture, 32, 32, 4, 2);
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 4 / 2;
