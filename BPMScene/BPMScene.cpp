@@ -83,6 +83,9 @@ void BPMScene::Init()
         LP::SetSpriteOriginCenter(&playerSprite[i]);
     }
 
+    //transition
+    transitionTo_ = "";
+
     //Import data into "MusicSPBMap"
     ImportBPM();
 }
@@ -140,6 +143,8 @@ void BPMScene::Update(float delta_time, float beat_time)
     menu_->Update(delta_time, beat_time);
     musicMenu_->Update(delta_time, beat_time);
 
+    if (transitionTo_ != "") game_->ChangeScene(transitionTo_);
+
     if (IP::PressX()) game_->ChangeScene("Lobby");
 }
 
@@ -167,7 +172,7 @@ void BPMScene::MainMenu()
         if (selectedOption == 1) state = SetUp;
         if (selectedOption == 2) state = PlayBack;
         if (selectedOption == 3) state = Save;
-        if (selectedOption == 4) game_->ChangeScene("Lobby");
+        if (selectedOption == 4) transitionTo_ = "Lobby";
     }
 }
 
@@ -190,6 +195,7 @@ void BPMScene::MusicSelectMenu()
         selectedMusicID = musicID;
 
         //LP::SetTextString(displayMusicTitle, MP::GetMusicTitle(selectedMusicID));
+        displayMusicTitle.setString(musicTitles_[selectedMusicID].getString());
         displayBeatsPerMin.setString("Beats Per Min: " + std::to_string((int)round(60 / musicSPBMap[musicID])));
         displaySecPerBeat.setString("Beats Per Sec: " + std::to_string(musicSPBMap[selectedMusicID]));
         displayBeatTimer.setString("Beat Time: 0");

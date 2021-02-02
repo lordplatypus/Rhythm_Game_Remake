@@ -21,7 +21,7 @@ Enemy7::Enemy7(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     imageWidth_ = 32;
     imageHeight_ = 32;
 
-    ed_ = lem_->Add(HP_, HP_, 1, CellSize*3, true, 1, false);
+    ed_ = lem_->Add(HP_, HP_, 1, CellSize*7, true, 1, false);
 
     enemySprite_ = LP::SetMultiFrameSprite(artillery_texture, 32, 32, 4, 5);
     timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 10.0f;
@@ -41,7 +41,7 @@ void Enemy7::Update(float delta_time, float beat_time)
         if (!hasMoved_) 
         {
             StorePosition();
-            if (state_ == Rest)
+            if (state_ == Active)
             {
                 beatCount_++;
                 if (beatCount_ == 3 && !scene_->FindGameObject("Player")->IsDead())
@@ -63,7 +63,7 @@ void Enemy7::Update(float delta_time, float beat_time)
             {
                 FireMortar();
                 //Add smoke particle effect here
-                state_ = Rest;
+                state_ = Active;
             }
             else if (state_ == Retreat)
             {
@@ -166,13 +166,14 @@ void Enemy7::ReactInRange(GameObject& other)
 {
     if (other.GetTag() == "Player") 
     {
-        state_ = Retreat;
+        if (sf::IntRect(position_.x - CellSize*3, position_.y - CellSize*3, imageWidth_ + CellSize*3*2, imageHeight_ + CellSize*3*2).intersects(other.GetHitBox())) state_ = Retreat;
+        else if (state_ != Angery && state_ != Fire) state_ = Active;
     }
 }
 
 void Enemy7::ReactNotInRange(GameObject& other)
 {
-    if (other.GetTag() == "Player" && state_ == Retreat) 
+    if (other.GetTag() == "Player") 
     {
         state_ = Rest;
     }
@@ -184,7 +185,7 @@ void Enemy7::AnimationHandle(float delta_time, float beat_time)
 
     if (beat_time <= timeInbetweenFrames_) 
     {
-        if (state_ == Rest || state_ == Retreat) 
+        if (state_ == Rest || state_ == Active || state_ == Retreat) 
         {
             animCount_ = 0;
             endFrame_ = 3;

@@ -10,7 +10,7 @@ PlayerAtkUp::PlayerAtkUp(sf::Vector2f position, PlayerManager* playerManager, Pa
     tag_ = "Item";
     name_ = "PlayerAtkUp";
     HP_ = 1;
-    priceTag_ = 300;
+    priceTag_ = 80;
     imageWidth_ = 32;
     imageHeight_ = 32;
     SetPerception(32);

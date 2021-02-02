@@ -55,6 +55,9 @@ void MusicSelect::Init()
 
     //Background
     background = LP::SetSprite(music_select_scene_texture);
+
+    //Transition
+    transitionTo_ = "";
 }
 
 void MusicSelect::Update(float delta_time, float beat_time)

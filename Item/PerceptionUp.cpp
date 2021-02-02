@@ -10,7 +10,7 @@ PerceptionUp::PerceptionUp(sf::Vector2f position, PlayerManager* playerManager, 
     tag_ = "Item";
     name_ = "Perception";
     HP_ = 1;
-    priceTag_ = 200;
+    priceTag_ = 100;
     imageWidth_ = 32;
     imageHeight_ = 32;
     // SetLeft(0);

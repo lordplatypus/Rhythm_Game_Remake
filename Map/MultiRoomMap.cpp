@@ -134,7 +134,7 @@ void MultiRoomMap::SetRoomPositions(int numOfRooms)
             if (!done) continue;
 
             currentRoom->SetRoomPosition(currentPosition);
-            for (int i = 0; i < rooms_.size() - 1; i++)
+            for (int i = 0; i < rooms_.size(); i++)
             {
                 if (currentRoom->GetRoomArea().intersects(rooms_[i]->GetRoomArea()) || currentRoom->GetRoomPosition() == rooms_[i]->GetRoomPosition())
                 {

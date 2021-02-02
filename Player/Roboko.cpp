@@ -43,7 +43,7 @@ void Roboko::Update(float delta_time, float beat_time)
         AnimationHandle(delta_time, beat_time);
         velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
         playerManager_->GetHPUI()->Update(delta_time, beat_time);
-        playerManager_->GetWalletText()->setPosition(sf::Vector2f(camera_->GetCameraCenter().x, camera_->GetCameraBottomEdge() - 16));
+        playerManager_->GetWalletText()->setPosition(sf::Vector2f(camera_->GetCameraCenter().x + 8, camera_->GetCameraBottomEdge() - 16)); //offset text scale with x + 8
         sprites_[animCount_].setPosition(velocity_);
         SetSpriteHorizontalFlip(sprites_[animCount_], flip_);
     }

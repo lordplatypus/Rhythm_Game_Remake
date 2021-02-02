@@ -11,7 +11,7 @@ IncreaseMoneyDropRate::IncreaseMoneyDropRate(sf::Vector2f position, PlayerManage
     tag_ = "Item";
     name_ = "IncreaseMoneyDropRate";
     HP_ = 1;
-    priceTag_ = 300;
+    priceTag_ = 50;
     imageWidth_ = 32;
     imageHeight_ = 32;
     SetPerception(32);

@@ -11,7 +11,7 @@ RemoveHealing::RemoveHealing(sf::Vector2f position, PlayerManager* playerManager
     tag_ = "Item";
     name_ = "RemoveHealing";
     HP_ = 1;
-    priceTag_ = 500;
+    priceTag_ = 100;
     imageWidth_ = 32;
     imageHeight_ = 32;
     SetPerception(32);

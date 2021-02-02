@@ -128,8 +128,11 @@ void Map::PlaceItem(int num, sf::Vector2f position)
         scene_->AddGameObject(new MaxHPUp(position, playerManager_, particleManager_));
         break;
 
+        // case 102:
+        // scene_->AddGameObject(new ReduceCooldown(position, playerManager_, particleManager_));
+        // break;
         case 102:
-        scene_->AddGameObject(new ReduceCooldown(position, playerManager_, particleManager_));
+        scene_->AddGameObject(new Heal1(position, playerManager_, particleManager_));
         break;
 
         case 103:

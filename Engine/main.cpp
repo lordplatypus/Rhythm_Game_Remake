@@ -7,7 +7,7 @@
 int main()
 {
     bool isRunning = true;//bool for main game loop
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Game"); //game window
+    sf::RenderWindow window(sf::VideoMode(1440, 960), "Game"); //game window
 
     DeltaTime deltaTime;
     Camera camera{&window};

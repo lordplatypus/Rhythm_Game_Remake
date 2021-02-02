@@ -82,6 +82,9 @@ private:
     bool firstTime = true;
 
     Game* game_ {nullptr};
+
+    //transition
+    std::string transitionTo_{""};
 };
 
 #endif

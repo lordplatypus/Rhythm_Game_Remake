@@ -23,18 +23,20 @@ Generator::Generator(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
-    //sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
+    // sprite_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
 
     // enemySprite_ = LP::SetSprite(companion_texture, 32, 32, 8, 1);
     // for (auto i : enemySprite_)
     // {
     //     LP::SetSpriteOrigin(i, Vector2f(6,6));
     // }
-    // timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 8.0f;
 
-    enemyrect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
-    enemyrect_.setPosition(position_);
-    enemyrect_.setFillColor(sf::Color::Red);
+    enemySprite_ = LP::SetMultiFrameSprite(generator_texture, 32, 32, 6, 1);
+    timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 8.0f;
+
+    enemyrect_.setSize(sf::Vector2f(26, 25));
+    enemyrect_.setPosition(position_ + sf::Vector2f(3.0f, 3.0f));
+    enemyrect_.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
 
     arrow_ = new UIArrow(pm_, position_, HP_);
 }
@@ -53,11 +55,16 @@ void Generator::Update(float delta_time, float beat_time)
     AnimationHandle(delta_time, beat_time);
     arrow_->Update(delta_time, beat_time);
     arrow_->UpdatePosition(position_);
+    enemySprite_[animCount_].setPosition(position_);
 }
 
 void Generator::Draw(sf::RenderWindow& render_window) const
 {
-    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemyrect_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) 
+    {
+        render_window.draw(enemyrect_);
+        render_window.draw(enemySprite_[animCount_]);
+    }
 }
 
 void Generator::DelayedDraw(sf::RenderWindow& render_window) const
@@ -74,4 +81,15 @@ void Generator::Kill()
 void Generator::ReactOnCollision(GameObject& other)
 {
     
+}
+
+void Generator::AnimationHandle(float delta_time, float beat_time)
+{   
+    timer_ += delta_time;
+    if (beat_time <= timeInbetweenFrames_) animCount_ = 0;     
+    else if (animCount_ != 5 && timer_ >= timeInbetweenFrames_) 
+    {
+        animCount_++;
+        timer_ = 0;
+    }
 }
