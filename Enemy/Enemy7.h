@@ -35,7 +35,7 @@ private:
     sf::Vector2f move3_;
     sf::Vector2f move4_;
 
-    enum State{Rest, Angery, Fire, Retreat};
+    enum State{Rest, Active, Angery, Fire, Retreat};
     State state_ = Rest;
 
     bool hasMoved_{true};
