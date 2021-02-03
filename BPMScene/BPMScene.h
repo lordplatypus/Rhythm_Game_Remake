@@ -40,7 +40,7 @@ private:
     std::vector<sf::Text> menuText_;
     std::vector<sf::Text> musicTitles_;
     int selectedOption = 0;
-    sf::Text setupInstructions;
+    sf::Text instructions;
     //int playbackInstructions;
     sf::Text savedText;
     sf::Text displayMusicTitle;

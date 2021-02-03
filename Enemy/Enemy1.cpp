@@ -24,7 +24,7 @@ Enemy1::Enemy1(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     // SetTop(0);
     // SetBottom(imageHeight_);
 
-    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
+    ed_ = lem_->Add(HP_, HP_, 1, 0, true, 3, false);
 
     enemySprite_ = LP::SetMultiFrameSprite(companion_texture, 32, 32, 8, 1);
     for (auto i : enemySprite_)
