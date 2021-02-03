@@ -56,8 +56,8 @@ void BPMScene::Init()
     musicMenu_->SetDisplay(false);
 
     //Set up the rest of the text used (残るテクストを設定する)
-    setupInstructions = LP::SetText("Z to start,\n\nDown to time beats,\n\nX to return", sf::Vector2f(584+16, 88+16), 16);
-    savedText = LP::SetText("Saved", sf::Vector2f(803, 183), 16);
+    instructions = LP::SetText("Use Up and Down to\n\n   cycle through options\n\nZ to select an option,\n\nX to return to lobby", sf::Vector2f(584+32, 88), 16);
+    savedText = LP::SetText("Saved", game_->GetCamera()->GetCameraCenter(), 32);
     LP::SetTextOriginCenter(&savedText);
     displayMusicTitle = LP::SetText("Music Title: NA", sf::Vector2f(96, 448), 16);
     displayBeatsPerMin = LP::SetText("Beats Per Min: NA", sf::Vector2f(96, 480), 16);
@@ -169,8 +169,16 @@ void BPMScene::MainMenu()
             state = MusicSelect;
             musicMenu_->SetDisplay(true);
         }
-        if (selectedOption == 1) state = SetUp;
-        if (selectedOption == 2) state = PlayBack;
+        if (selectedOption == 1) 
+        {
+            state = SetUp;
+            instructions.setString("Z to start,\n\nDown to time beats,\n\nX to return");
+        }
+        if (selectedOption == 2) 
+        {
+            state = PlayBack;
+            instructions.setString("Use Up and Down\n\n   to tweak the BPM,\n\nX to return");
+        }
         if (selectedOption == 3) state = Save;
         if (selectedOption == 4) transitionTo_ = "Lobby";
     }
@@ -201,12 +209,15 @@ void BPMScene::MusicSelectMenu()
         displayBeatTimer.setString("Beat Time: 0");
         displayBeatCount.setString("Beat Count: 0");
 
+        instructions.setString("Use Up and Down\n\n   to cycle through options,\n\nZ to select an option,\n\nX to return to lobby");
+
         state = Menu;
         musicMenu_->SetDisplay(false);
     }
     if (IP::PressX())
     {
         musicID = selectedMusicID;
+        instructions.setString("Use Up and Down\n\n   to cycle through options,\n\nZ to select an option,\n\nX to return to lobby");
         state = Menu;
         musicMenu_->SetDisplay(false);
     }
@@ -263,6 +274,7 @@ void BPMScene::BPMSetUp()
     {
         firstTime = true;
         state = Menu;
+        instructions.setString("Use Up and Down\n\n   to cycle through options,\n\nZ to select an option,\n\nX to return to lobby");
     }
 }
 
@@ -332,6 +344,7 @@ void BPMScene::MusicPlayBack(float delta_time, float beat_time)
         displayBeatCount.setString("Beat Count: 0");
         firstTime = true;
         state = Menu;
+        instructions.setString("Use Up and Down\n\n   to cycle through options,\n\nZ to select an option,\n\nX to return to lobby");
     }
 }
 
@@ -353,6 +366,7 @@ void BPMScene::Draw(sf::RenderWindow& render_window)
     //Draw different things at different states
     if (state == Menu)
     {
+        render_window.draw(instructions);
         render_window.draw(displayMusicTitle);
         render_window.draw(displayBeatsPerMin);
         render_window.draw(displaySecPerBeat);
@@ -377,7 +391,7 @@ void BPMScene::Draw(sf::RenderWindow& render_window)
 
     else if (state == SetUp)
     {
-        render_window.draw(setupInstructions);
+        render_window.draw(instructions);
         render_window.draw(displayMusicTitle);
         render_window.draw(displayBeatsPerMin);
         render_window.draw(displaySecPerBeat);
@@ -389,6 +403,7 @@ void BPMScene::Draw(sf::RenderWindow& render_window)
 
     else if (state == PlayBack)
     {
+        render_window.draw(instructions);
         render_window.draw(displayMusicTitle);
         render_window.draw(displayBeatsPerMin);
         render_window.draw(displaySecPerBeat);
