@@ -105,10 +105,6 @@ void TitleScene::Update(float delta_time, float beat_time)
     {
         game_->ChangeScene("Lobby");
     }
-    if (IP::PressX())
-    {
-        game_->ChangeScene("BPM");
-    }
 }
 
 void TitleScene::MovementHandle()

@@ -25,7 +25,7 @@ void Stage1_1::Init()
     else
     {
         lem_ = new LocalEnemyManager(game_->GetGlobalEnemyManager());
-        //map_ = new Map1_1(this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
+        //map_ = new MultiRoomMap(9, "Title", this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         map_ = new MultiRoomMap(5, "Stage1_2", this, game_->GetCamera(), game_->GetPlayerManager(), lem_, game_->GetGlobalEnemyManager(), game_->GetTransitionManager(), &pm_);
         MP::PlayStageMusic(stage1_1, true);
         RandomEvent();
@@ -96,7 +96,9 @@ void Stage1_1::End()
 void Stage1_1::RandomEvent()
 {
     int randEvent = rand() % 6;
+    //int randEvent = 1;
     const std::string& transitionTo = "Stage1_2";
+    //const std::string& transitionTo = "Title";
     switch (randEvent)
     {
         case 0:

@@ -107,7 +107,7 @@ enum
 {
     title_scene,
     lobby_scene,
-    test_scene,
+    //test_scene,
     stage1_1,
     stage1_2,
     stage1_3

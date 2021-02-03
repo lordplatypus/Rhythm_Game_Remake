@@ -61,7 +61,7 @@ void GlobalEnemyManager::SetMoneyModifier(const int moneyDropRate)
 
 int GlobalEnemyManager::GetMoneyModifer() const
 {
-    return moneyDropRate_;
+    return moneyDropRate_ + 2;
 }
 
 void GlobalEnemyManager::Clear()

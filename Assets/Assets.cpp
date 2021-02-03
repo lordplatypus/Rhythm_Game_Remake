@@ -125,7 +125,7 @@ void Assets::LoadStageMusic()
 {
     MP::SetStageMusic(title_scene, DETROIT_BEAT);
     MP::SetStageMusic(lobby_scene, DETROIT_BEAT);
-    MP::SetStageMusic(test_scene, DETROIT_BEAT);
+    //MP::SetStageMusic(test_scene, DETROIT_BEAT);
     MP::SetStageMusic(stage1_1, DETROIT_BEAT);
     MP::SetStageMusic(stage1_2, DETROIT_BEAT);
     MP::SetStageMusic(stage1_3, DETROIT_BEAT);

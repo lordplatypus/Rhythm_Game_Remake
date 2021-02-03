@@ -160,13 +160,14 @@ void Enemy7::ReactOnCollision(GameObject& other)
     {
         other.TakeDamage(ed_->atk_ + lem_->GetAtkModifier());
     }
+    position_ = GetPrevPosition();
 }
 
 void Enemy7::ReactInRange(GameObject& other)
 {
     if (other.GetTag() == "Player") 
     {
-        if (sf::IntRect(position_.x - CellSize*3, position_.y - CellSize*3, imageWidth_ + CellSize*3*2, imageHeight_ + CellSize*3*2).intersects(other.GetHitBox())) state_ = Retreat;
+        if (sf::IntRect(position_.x - CellSize*2, position_.y - CellSize*2, imageWidth_ + CellSize*2*2, imageHeight_ + CellSize*2*2).intersects(other.GetHitBox())) state_ = Retreat;
         else if (state_ != Angery && state_ != Fire) state_ = Active;
     }
 }
