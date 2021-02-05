@@ -60,6 +60,9 @@ enum
     artillery_texture,
     bullet_casing_texture,
     generator_texture,
+    tower_texture,
+    minecart_texture,
+    rail_texture,
 
     //Item
     part_screw_texture,

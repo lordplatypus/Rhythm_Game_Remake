@@ -3,6 +3,7 @@
 #include "../Engine/LP.h"
 #include "../Engine/MP.h"
 #include "../Engine/Math.h"
+#include "../Assets/ID.h"
 
 Enemy2::Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, PlayerManager* playerManager, ParticleManager* pm, Map* map)
 {
@@ -18,22 +19,18 @@ Enemy2::Enemy2(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     name_ = "2";
     imageWidth_ = 32;
     imageHeight_ = 32;
-    // SetLeft(0);
-    // SetRight(imageWidth_);
-    // SetTop(0);
-    // SetBottom(imageHeight_);
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
-    // enemy2Rect_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    // LP::SetRectangleColor(enemy2Rect_, 0, 0, 255, 255);
-    enemyrect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
-    enemyrect_.setPosition(position_);
-    enemyrect_.setFillColor(sf::Color::Blue);
+    enemySprite_ = LP::SetMultiFrameSprite(minecart_texture, 32, 32, 5, 4);
+    timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 8.0f;
 
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
 
     arrow_ = new UIArrow(pm_, position_, HP_);
+
+    //rails_.push_back(LP::SetSprite(rail_texture, position_));
+    //if (!map_->IsWall(position_ + sf::Vector2f(0.0f, 32.0f))) rails_.push_back(LP::SetSprite(rail_texture, position_ + sf::Vector2f(0.0f, 32.0f)));
 }
 
 Enemy2::~Enemy2()
@@ -85,23 +82,75 @@ void Enemy2::Update(float delta_time, float beat_time)
     }
     else hasMoved_ = false;
 
+    AnimationHandle(delta_time, beat_time);
+
     velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
 
     arrow_->Update(delta_time, beat_time);
     arrow_->UpdatePosition(velocity_);
-    enemyrect_.setPosition(velocity_);
+    enemySprite_[animCount_].setPosition(velocity_);
 }
 
 void Enemy2::Draw(sf::RenderWindow& render_window) const
 {
     //if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemy2Rect_, velocity_);
-    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) 
-        render_window.draw(enemyrect_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer())
+    {
+        for(auto i : rails_) render_window.draw(i);
+        render_window.draw(enemySprite_[animCount_]);
+    } 
 }
 
 void Enemy2::DelayedDraw(sf::RenderWindow& render_window) const
 {
     if (GetInRangeOfPlayer()) arrow_->Draw(render_window);
+}
+
+void Enemy2::AnimationHandle(float delta_time, float beat_time)
+{   
+    timer_ += delta_time;
+    if (movedDown_)
+    {
+        if (beatCount_ == 1)
+        {
+            if (beat_time <= timeInbetweenFrames_) animCount_ = 5;     
+            else if (animCount_ != 9 && timer_ >= timeInbetweenFrames_) 
+            {
+                animCount_++;
+                timer_ = 0;
+            }
+        }
+        else
+        {
+            if (beat_time <= timeInbetweenFrames_) animCount_ = 0;     
+            else if (animCount_ != 4 && timer_ >= timeInbetweenFrames_) 
+            {
+                animCount_++;
+                timer_ = 0;
+            }
+        }
+    }
+    else
+    {
+        if (beatCount_ == 1)
+        {
+            if (beat_time <= timeInbetweenFrames_) animCount_ = 15;     
+            else if (animCount_ != 19 && timer_ >= timeInbetweenFrames_) 
+            {
+                animCount_++;
+                timer_ = 0;
+            }
+        }
+        else
+        {
+            if (beat_time <= timeInbetweenFrames_) animCount_ = 10;     
+            else if (animCount_ != 14 && timer_ >= timeInbetweenFrames_) 
+            {
+                animCount_++;
+                timer_ = 0;
+            }
+        }
+    }
 }
 
 void Enemy2::CheckMoveLocation()

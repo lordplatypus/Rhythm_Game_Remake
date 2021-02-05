@@ -21,23 +21,18 @@ Enemy5::Enemy5(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
     name_ = "5";
     imageWidth_ = 32;
     imageHeight_ = 32;
-    // SetLeft(0);
-    // SetRight(imageWidth_);
-    // SetTop(0);
-    // SetBottom(imageHeight_);
-    numOfBeatsBetweenAttacks_ = 4;
+    numOfBeatsBetweenAttacks_ = 3;
+    beatCount_ = 2;
+    animCount_ = 6;
     flip_ = false;
 
     ed_ = lem_->Add(HP_, HP_, 1, 0, true, 1, false);
 
-    enemyrect_.setSize(sf::Vector2f(imageWidth_, imageHeight_));
-    enemyrect_.setPosition(position_);
-    enemyrect_.setFillColor(sf::Color::Green);
+    enemySprite_ = LP::SetMultiFrameSprite(tower_texture, 32, 64, 8, 1);
+    for (int i = 0; i < enemySprite_.size(); i++) enemySprite_[i].setOrigin(sf::Vector2f(0.0f, 32.0f));
 
-    // enemyRectangle_ = LP::SetRectangle(position_, imageWidth_, imageHeight_);
-    // LP::SetRectangleColor(enemyRectangle_, 0, 255, 0, 255);
     StorePosition();
-    //timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 4 / 2;
+    timeInbetweenFrames_ = MP::GetBPM(MP::GetPlayingMusic()) / 8.0f;
     windowOfInput_ = MP::GetBPM(MP::GetPlayingMusic()) / 2;
 
     arrow_ = new UIArrow(pm_, position_, HP_);
@@ -45,31 +40,28 @@ Enemy5::Enemy5(sf::Vector2f position, Scene *scene, LocalEnemyManager* lem, Play
 
 Enemy5::~Enemy5()
 {
-    // for (auto i : enemySprite_)
-    // {
-    //     LP::DeleteSprite(i);
-    // }
-
 }
 
 void Enemy5::Update(float delta_time, float beat_time)
 {
     if (beat_time <= windowOfInput_)
     {
-        if (!hasMoved_) 
+        if (state_ == Angry && !hasMoved_) 
         {
-            beatCount_++;
-        }
-        if (state_ == Angry && beatCount_ >= numOfBeatsBetweenAttacks_)
-        {
-            beatCount_ = 0;
-            SpawnPawn();
+            if (beatCount_ < numOfBeatsBetweenAttacks_) beatCount_++;
+            else
+            {
+                beatCount_ = 0;
+                if (!scene_->FindGameObject("Player")->IsDead()) SpawnPawn();
+                pm_->SmokeScreen(position_.x + 16, position_.y + 16);
+            }
         }
         hasMoved_ = true;
     }
     else hasMoved_ = false;
 
-    //AnimationHandle(delta_time, beat_time);
+    AnimationHandle(delta_time, beat_time);
+    enemySprite_[animCount_].setPosition(position_);
 
     //velocity_ = Math::Lerp(velocity_, position_, 10 * delta_time);
 
@@ -79,8 +71,7 @@ void Enemy5::Update(float delta_time, float beat_time)
 
 void Enemy5::Draw(sf::RenderWindow& render_window) const
 {
-    //if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) LP::DrawRectangle(enemyRectangle_);
-    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemyrect_);
+    if (lem_->GetVisibilityModifier() || GetInRangeOfPlayer()) render_window.draw(enemySprite_[animCount_]);
 }
 
 void Enemy5::DelayedDraw(sf::RenderWindow& render_window) const
@@ -123,7 +114,35 @@ void Enemy5::TakeDamage(const int damage)
 }
 
 void Enemy5::AnimationHandle(float delta_time, float beat_time)
-{}
+{
+    timer_ += delta_time;
+    if (beatCount_ == 3)
+    {
+        animCount_ = 7;
+    }
+    else if (beatCount_ == 2)
+    {
+        if (beat_time <= timeInbetweenFrames_) animCount_ = 4;     
+        else if (animCount_ != 6 && timer_ >= timeInbetweenFrames_) 
+        {
+            animCount_++;
+            timer_ = 0;
+        }
+    }
+    else if (beatCount_ == 1)
+    {
+        if (beat_time <= timeInbetweenFrames_) animCount_ = 1;     
+        else if (animCount_ != 3 && timer_ >= timeInbetweenFrames_) 
+        {
+            animCount_++;
+            timer_ = 0;
+        }
+    }
+    else if (beatCount_ == 0)
+    {
+        animCount_ = 0;
+    }
+}
 
 void Enemy5::CheckMoveLocation()
 {

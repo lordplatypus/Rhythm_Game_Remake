@@ -78,6 +78,9 @@ void Assets::LoadImage()
     LP::SetTexture(artillery_texture, "./Resources/Images/Enemy/Enemy7.png", 128, 160);
     LP::SetTexture(bullet_casing_texture, "./Resources/Images/Enemy/Bullet_Casing.png", 16, 24);
     LP::SetTexture(generator_texture, "./Resources/Images/Enemy/Generator.png", 192, 32);
+    LP::SetTexture(tower_texture, "./Resources/Images/Enemy/Tower.png", 256, 64);
+    LP::SetTexture(minecart_texture, "./Resources/Images/Enemy/Minecart.png", 160, 128);
+    LP::SetTexture(rail_texture, "./Resources/Images/Enemy/Rail.png", 32, 32);
 
     //Item(アイテム)
     LP::SetTexture(part_screw_texture, "./Resources/Images/Item/Part_Screw.png", 7, 7);
