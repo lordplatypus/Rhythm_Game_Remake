@@ -7,7 +7,7 @@
 class FindKeys : public Event
 {
 public:
-    FindKeys(const std::string& lockTarget, Camera* camera, TransitionManager* transitionManager, PlayerManager* playerManager, Scene* scene, ParticleManager* pm, Map* map);
+    FindKeys(const std::string& lockTarget, Camera* camera, TransitionManager* transitionManager, PlayerManager* playerManager, Scene* scene, ParticleManager* pm, Map* map, bool setKey = false, sf::Vector2f keyPosition = sf::Vector2f(0.0f, 0.0f));
     void Update(float delta_time, float beat_time) override;
     void PickUpKey();
 

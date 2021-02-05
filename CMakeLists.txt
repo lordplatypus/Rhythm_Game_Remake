@@ -37,6 +37,7 @@ add_subdirectory(StartingItemScene)
 add_subdirectory(TestScene)
 add_subdirectory(TitleScene)
 add_subdirectory(Transition)
+add_subdirectory(TutorialScene)
 add_subdirectory(UI)
 
 

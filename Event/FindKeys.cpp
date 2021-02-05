@@ -1,7 +1,7 @@
 #include "FindKeys.h"
 #include "../Item/Key.h"
 
-FindKeys::FindKeys(const std::string& lockTarget, Camera* camera, TransitionManager* transitionManager, PlayerManager* playerManager, Scene* scene, ParticleManager* pm, Map* map)
+FindKeys::FindKeys(const std::string& lockTarget, Camera* camera, TransitionManager* transitionManager, PlayerManager* playerManager, Scene* scene, ParticleManager* pm, Map* map, bool setKey, sf::Vector2f keyPosition)
 {
     target_ = lockTarget;
     camera_ = camera;
@@ -14,7 +14,12 @@ FindKeys::FindKeys(const std::string& lockTarget, Camera* camera, TransitionMana
     name_ = "Key";
     position_ = sf::Vector2f(0.0f, 0.0f);
 
-    PlaceKeys();
+    if (!setKey) PlaceKeys();
+    else 
+    {
+        scene_->AddGameObject(new Key(keyPosition, playerManager_, pm_, this));
+        keyCounter_ = 1;
+    }
 
     SetInstructionText("Find The Keys: " + std::to_string(keyCounter_) + " Left");
 
