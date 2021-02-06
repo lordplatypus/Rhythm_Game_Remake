@@ -111,6 +111,7 @@ enum
 {
     title_scene,
     lobby_scene,
+    tutorial,
     //test_scene,
     stage1_1,
     stage1_2,

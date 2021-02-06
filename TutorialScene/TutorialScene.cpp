@@ -21,7 +21,7 @@ void TutorialScene::Init()
     game_->GetCamera()->SetCameraViewSize(360.f, 240.f);
     game_->GetCamera()->SetTarget(gameObjects_.Find("Player")->GetPosition());
     pm_.FadeFromBlack(gameObjects_.Find("Player")->GetPosition().x, gameObjects_.Find("Player")->GetPosition().y);
-    MP::PlayStageMusic(lobby_scene, true);
+    MP::PlayStageMusic(tutorial, true);
     transitionTo_ = "";
 
     AddGameObject(new TutorialTextObject(sf::Vector2f(3*32, 4*32), "All actions must be done on beat\n\nUse the arrow keys to move the character\n\nUse the WASD to attack", this));

@@ -19,6 +19,7 @@ void MusicSelect::Init()
 
     stageNames_.push_back(LP::SetText("Title Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Lobby Music", sf::Vector2f(32, 128), 16));
+    stageNames_.push_back(LP::SetText("Tutorial Music", sf::Vector2f(32, 128), 16));
     //stageNames_.push_back(LP::SetText("Test Map Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Stage1_1 Music", sf::Vector2f(32, 128), 16));
     stageNames_.push_back(LP::SetText("Stage1_2 Music", sf::Vector2f(32, 128), 16));

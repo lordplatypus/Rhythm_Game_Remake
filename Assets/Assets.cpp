@@ -127,10 +127,11 @@ void Assets::LoadSound()
 
 void Assets::LoadStageMusic()
 {
-    MP::SetStageMusic(title_scene, DETROIT_BEAT);
-    MP::SetStageMusic(lobby_scene, DETROIT_BEAT);
+    MP::SetStageMusic(title_scene, DESCENDING_AIR_CURRENT);
+    MP::SetStageMusic(lobby_scene, LAZZULI_LUVS);
+    MP::SetStageMusic(tutorial, DETROIT_BEAT);
     //MP::SetStageMusic(test_scene, DETROIT_BEAT);
     MP::SetStageMusic(stage1_1, DETROIT_BEAT);
-    MP::SetStageMusic(stage1_2, DETROIT_BEAT);
-    MP::SetStageMusic(stage1_3, DETROIT_BEAT);
+    MP::SetStageMusic(stage1_2, New_Gear);
+    MP::SetStageMusic(stage1_3, DESCENDING_AIR_CURRENT);
 }
