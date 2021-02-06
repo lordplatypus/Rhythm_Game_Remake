@@ -24,7 +24,7 @@ LobbyMap::LobbyMap(Scene *scene, Camera* camera, PlayerManager* playerManager, T
     //DetailMap();
     //PlaceObjects();
 
-    //MenuText.push_back(LP::SetText("Tutorial", sf::Vector2f(CellSize * 1, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));
+    MenuText.push_back(LP::SetText("Tutorial", sf::Vector2f(CellSize * 1, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));
     MenuText.push_back(LP::SetText("Stage 1", sf::Vector2f(CellSize * 3, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));
     //MenuText.push_back(LP::SetText("Test Map", sf::Vector2f(CellSize * 3, CellSize * 6), 16, sf::Vector2f(0.2f, 0.2f)));
     MenuText.push_back(LP::SetText("Music\nSelect", sf::Vector2f(CellSize * 7, CellSize * 2), 16, sf::Vector2f(0.2f, 0.2f)));

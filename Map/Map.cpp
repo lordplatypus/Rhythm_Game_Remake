@@ -225,6 +225,10 @@ void Map::PlaceTransition(int num, sf::Vector2f position)
         transitionTo = "Item";
         break;
 
+        case 212:
+        transitionTo = "Tutorial";
+        break;
+
         default:
         transitionTo = "Title";
         break;

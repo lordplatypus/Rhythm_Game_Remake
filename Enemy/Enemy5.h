@@ -20,8 +20,6 @@ private:
     void SpawnPawn();
 
 private:
-    sf::RectangleShape enemyrect_;
-
     enum State{Normal, Angry};
     State state_ = Normal;
 

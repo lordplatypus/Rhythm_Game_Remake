@@ -12,11 +12,13 @@ public:
     void DelayedDraw(sf::RenderWindow& render_window) const override;
 
 private:
+    void AnimationHandle(float delta_time, float beat_time) override;
     void CheckMoveLocation();
     void ReactOnCollision(GameObject& other) override;
 
 private:
-    sf::RectangleShape enemyrect_;
+    //sf::RectangleShape enemyrect_;
+    std::vector<sf::Sprite> rails_;
 
     int enemy2Rect_{0};
     bool hasMoved_{true};

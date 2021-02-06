@@ -14,6 +14,7 @@
 #include "../Stage1/Stage1_1.h"
 #include "../Stage1/Stage1_2.h"
 #include "../Stage1/Stage1_3.h"
+#include "../TutorialScene/TutorialScene.h"
 
 static SceneNull nullScene;
 
@@ -33,6 +34,7 @@ Game::Game(Camera* camera) : scene_{&nullScene}, camera_{camera}
     AddScene("Stage1_1", new Stage1_1(this));
     AddScene("Stage1_2", new Stage1_2(this));
     AddScene("Stage1_3", new Stage1_3(this));
+    AddScene("Tutorial", new TutorialScene(this));
 
     scene_ = scenes_["Title"];
     scene_->Init();

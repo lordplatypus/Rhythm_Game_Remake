@@ -271,7 +271,7 @@ void Roboko::ReactOnCollision(GameObject& other)
         if (transitionManager_->IsLocked(other.GetName())) return;
         stunned = true;
     }
-    else if (other.GetTag() != "Bullet")
+    else if (other.GetTag() != "Bullet" && other.GetTag() != "Text")
     {
         position_ = GetPrevPosition();
         state_ = Damage;

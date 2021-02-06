@@ -94,8 +94,7 @@ void Stage1_3::End()
 
 void Stage1_3::RandomEvent()
 {
-    //int randEvent = rand() % 5;
-    int randEvent = 1;
+    int randEvent = rand() % 6;
     const std::string& transitionTo = "Lobby";
     switch (randEvent)
     {
