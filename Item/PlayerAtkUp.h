@@ -10,9 +10,6 @@ public:
 
 private:
     void Effect() override;
-
-private:
-    sf::RectangleShape rect_;
 };
 
 #endif

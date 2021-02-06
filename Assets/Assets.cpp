@@ -98,6 +98,7 @@ void Assets::LoadImage()
     LP::SetTexture(item_taser_texture, "./Resources/Images/Item/Item_Taser.png", 32, 32);
     LP::SetTexture(item_horseshoe_texture, "./Resources/Images/Item/Item_Horseshoe.png", 32, 32);
     LP::SetTexture(item_key_texture, "./Resources/Images/Item/Key.png", 32, 32);
+    LP::SetTexture(item_spare_parts_texture, "./Resources/Images/Item/SpareParts.png", 32, 32);
 }
 
 void Assets::LoadSound()

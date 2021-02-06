@@ -80,6 +80,7 @@ enum
     item_taser_texture,
     item_horseshoe_texture,
     item_key_texture,
+    item_spare_parts_texture,
 };
 
 enum
