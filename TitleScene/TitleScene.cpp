@@ -61,7 +61,7 @@ void TitleScene::Init()
     //create text
     // infoText = LP::SetText("Title Scene\nPress Z to Start", sf::Vector2f(32, 64), 32);
     // LP::SetTextScale(infoText, .1f, .1f);
-    infoText_ = LP::SetText("Title Scene\n\nPress Z to \nStart Tutorial\n\nPress X to \nEnter the Lobby", sf::Vector2f(32, 64), 32, sf::Vector2f(0.1f, 0.1f));
+    infoText_ = LP::SetText("Music Factory\n\nPress Z to \nStart Tutorial\n\nPress X to \nEnter the Lobby", sf::Vector2f(32, 64), 32, sf::Vector2f(0.1f, 0.1f));
     //create background picture
     background_ = LP::SetSprite(title_scene_texture);
     //background = LP::SetSprite(title_scene_texture, sf::Vector2f(0, 0));

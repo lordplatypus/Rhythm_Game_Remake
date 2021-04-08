@@ -42,11 +42,18 @@ void TutorialScene::Update(float delta_time, float beat_time)
 
     game_->GetCamera()->SetTarget(Math::Lerp(game_->GetCamera()->GetCameraCenter(), gameObjects_.Find("Player")->GetPosition() + sf::Vector2f(8, 8), 10 * delta_time));
 
-    if (transitionTo_ != "") game_->ChangeScene(transitionTo_);
+    if (transitionTo_ != "") 
+    {
+        game_->ChangeScene(transitionTo_);
+        game_->GetPlayerManager()->Init();
+        game_->GetGlobalEnemyManager()->Clear();
+    }
 
     if (IP::PressX())
     {//Return to TitleScene
         game_->ChangeScene("Lobby");
+        game_->GetPlayerManager()->Init();
+        game_->GetGlobalEnemyManager()->Clear();
     }
 }
 
