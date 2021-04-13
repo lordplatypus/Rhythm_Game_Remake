@@ -3,14 +3,36 @@
 A rhythm game that is heavily inspired by "Crypt of the NecroDancer." 
 Made with SFML.
 
-### Prerequisites
+###### Prerequisites
 - cmake(3.18) or higher
 - SFML 2.4 or higher
 
-
-- Update the CMakeLists.txt to use the correct paths
-- Use cmake to generate the make files
-- cd to the folder where the make files were generated
-- use make to build the game
-- move the "Resources" folder to where the game was built
-- run game with ./Game
+###### Build Instructions
+- Clone this repository
+```
+git clone https://github.com/lordplatypus/Rhythm_Game_Remake.git
+```
+- Move to the source
+```
+cd ./Rhythm_Game_Remake
+```
+- Make a build directory and move to it
+```
+mkdir ./build && cd ./build
+```
+- Use cmake to generate the make files into the build folder
+```
+cmake -S ../ -B ./
+```
+- Make
+```
+make
+```
+- Move the "Resources" folder from the source files to the build folder
+```
+mv ../Resources ./
+```
+- Run the Game
+```
+./Game
+```
