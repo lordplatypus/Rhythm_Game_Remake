@@ -5,7 +5,7 @@ Made with SFML.
 
 ###### Game Manual / Tutorial
 - Japanese - [Here](https://drive.google.com/file/d/1BosJBSg2Yh1-72A3vSW_HMLDN2MNpa71/view?usp=sharing)
-- English - In game tutorial availible
+- English - In game tutorial available
 
 ###### Prerequisites
 - cmake(3.18) or higher
