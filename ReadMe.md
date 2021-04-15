@@ -3,6 +3,10 @@
 A rhythm game that is heavily inspired by "Crypt of the NecroDancer." 
 Made with SFML.
 
+###### Game Manual / Tutorial
+- Japanese - [Here](https://drive.google.com/file/d/1BosJBSg2Yh1-72A3vSW_HMLDN2MNpa71/view?usp=sharing)
+- English - In game tutorial availible
+
 ###### Prerequisites
 - cmake(3.18) or higher
 - SFML 2.4 or higher
